@@ -128,21 +128,21 @@ void PMRadiosityEdit::createTopWidgets( )
 
    hl->addStretch( 1 );
 
-   connect( m_pAdcBailout, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAlwaysSample, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pBrightness, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCount, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pErrorBound, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pGrayThreshold, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pLowErrorFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxSample, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMedia, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMinimumReuse, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pNearestCount, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pNormal, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPretraceStart, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPretraceEnd, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRecursionLimit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAdcBailout, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAlwaysSample, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pBrightness, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCount, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pErrorBound, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pGrayThreshold, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pLowErrorFactor, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxSample, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMedia, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMinimumReuse, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pNearestCount, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pNormal, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPretraceStart, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPretraceEnd, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRecursionLimit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMRadiosityEdit::displayObject( PMObject* o )

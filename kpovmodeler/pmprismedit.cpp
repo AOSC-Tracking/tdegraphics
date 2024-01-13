@@ -65,22 +65,22 @@ void PMPrismEdit::createTopWidgets( )
    m_pSweepType->insertItem( i18n( "Conic Sweep" ) );
    hl->addWidget( m_pSweepType );
 
-   connect( m_pSplineType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotTypeChanged( int ) ) );
-   connect( m_pSweepType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotSweepChanged( int ) ) );
+   connect( m_pSplineType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotTypeChanged( int ) ) );
+   connect( m_pSweepType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotSweepChanged( int ) ) );
 
    hl = new TQHBoxLayout( topLayout( ) );
    TQGridLayout* gl = new TQGridLayout( hl, 2, 2 );
    gl->addWidget( new TQLabel( i18n( "Height 1:" ), this ), 0, 0 );
    m_pHeight1 = new PMFloatEdit( this );
    gl->addWidget( m_pHeight1, 0, 1 );
-   connect( m_pHeight1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHeight1, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
    
    gl->addWidget( new TQLabel( i18n( "Height 2:" ), this ), 1, 0 );
    m_pHeight2 = new PMFloatEdit( this );
    gl->addWidget( m_pHeight2, 1, 1 );
-   connect( m_pHeight2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHeight2, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
    hl->addStretch( 1 );
 }
 
@@ -92,8 +92,8 @@ void PMPrismEdit::createBottomWidgets( )
    topLayout( )->addWidget( m_pOpen );
    m_pSturm = new TQCheckBox( i18n( "Sturm" ), this );
    topLayout( )->addWidget( m_pSturm );
-   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pOpen, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pOpen, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
    Base::createBottomWidgets( );
 }
@@ -216,7 +216,7 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
          button = new TQPushButton( m_pEditWidget );
          button->setPixmap( addPrismPixmap );
          m_subPrismAddButtons.append( button );
-         connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddSubPrism( ) ) );
+         connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddSubPrism( ) ) );
          hl->addWidget( button );
          button->show( );
          TQToolTip::add( button, i18n( "Add sub prism" ) );
@@ -224,7 +224,7 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
          button = new TQPushButton( m_pEditWidget );
          button->setPixmap( removePixmap );
          m_subPrismRemoveButtons.append( button );
-         connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveSubPrism( ) ) );
+         connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemoveSubPrism( ) ) );
          hl->addWidget( button );
          button->show( );
          if( sp.size( ) < 2 )
@@ -235,9 +235,9 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
          
          vle = new PMVectorListEdit( "x", "z", m_pEditWidget );
          m_points.append( vle );
-         connect( vle, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-         connect( vle, TQT_SIGNAL( selectionChanged( ) ),
-                  TQT_SLOT( slotSelectionChanged( ) ) );
+         connect( vle, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+         connect( vle, TQ_SIGNAL( selectionChanged( ) ),
+                  TQ_SLOT( slotSelectionChanged( ) ) );
          hl->addWidget( vle, 2 );
          vle->show( );
 
@@ -245,19 +245,19 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
          
          button = new TQPushButton( m_pEditWidget );
          button->setPixmap( SmallIcon( "pmaddpointabove" ) );
-         connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPointAbove( ) ) );
+         connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddPointAbove( ) ) );
          m_addAboveButtons.append( button );
          button->show( );
          vl->addWidget( button );
          button = new TQPushButton( m_pEditWidget );
          button->setPixmap( SmallIcon( "pmaddpoint" ) );
-         connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPointBelow( ) ) );
+         connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddPointBelow( ) ) );
          m_addBelowButtons.append( button );
          button->show( );
          vl->addWidget( button );
          button = new TQPushButton( m_pEditWidget );
          button->setPixmap( SmallIcon( "pmremovepoint" ) );
-         connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemovePoint( ) ) );
+         connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemovePoint( ) ) );
          m_removeButtons.append( button );
          button->show( );
          vl->addWidget( button );
@@ -277,7 +277,7 @@ void PMPrismEdit::createEdits( const TQValueList< TQValueList<PMVector> >& sp )
       button = new TQPushButton( m_pEditWidget );
       button->setPixmap( addPrismPixmap );
       m_subPrismAddButtons.append( button );
-      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddSubPrism( ) ) );
+      connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddSubPrism( ) ) );
       hl->addWidget( button );
       button->show( );
       TQToolTip::add( button, i18n( "Append sub prism" ) );

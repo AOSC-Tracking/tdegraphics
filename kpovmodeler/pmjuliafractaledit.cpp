@@ -105,16 +105,16 @@ void PMJuliaFractalEdit::createTopWidgets( )
    hl->addWidget( m_pSliceDistance );
    hl->addStretch( 1 );
 
-   connect( m_pJuliaParameter, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAlgebraType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotAlgebraTypeSelected( int ) ) );
-   connect( m_pFunctionType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotFunctionTypeSelected( int ) ) );
-   connect( m_pExponents, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxIterations, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPrecision, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSliceNormal, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSliceDistance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );   
+   connect( m_pJuliaParameter, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAlgebraType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotAlgebraTypeSelected( int ) ) );
+   connect( m_pFunctionType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotFunctionTypeSelected( int ) ) );
+   connect( m_pExponents, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxIterations, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPrecision, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSliceNormal, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSliceDistance, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );   
 }
 
 void PMJuliaFractalEdit::displayObject( PMObject* o )

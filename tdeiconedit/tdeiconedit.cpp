@@ -74,53 +74,53 @@ void TDEIconEdit::init()
 
   createGUI();
 
-  connect(this, TQT_SIGNAL(newname(const TQString &)),
-           TQT_SLOT( slotUpdateStatusName(const TQString &)));
+  connect(this, TQ_SIGNAL(newname(const TQString &)),
+           TQ_SLOT( slotUpdateStatusName(const TQString &)));
 
-  connect( icon, TQT_SIGNAL( saved()), TQT_SLOT(slotSaved()));
-  connect( icon, TQT_SIGNAL( loaded(TQImage *)), grid, TQT_SLOT(load(TQImage *)));
-  connect( icon, TQT_SIGNAL(opennewwin(const TQString &)),
-           TQT_SLOT(slotNewWin(const TQString &)));
-  connect(icon, TQT_SIGNAL(newname(const TQString &)),
-           TQT_SLOT( slotUpdateStatusName(const TQString &)));
-  connect(icon, TQT_SIGNAL(newmessage(const TQString &)),
-           TQT_SLOT( slotUpdateStatusMessage(const TQString &)));
-  connect(icon, TQT_SIGNAL(addrecent(const TQString &)),
-           TQT_SLOT( addRecent(const TQString &)));
+  connect( icon, TQ_SIGNAL( saved()), TQ_SLOT(slotSaved()));
+  connect( icon, TQ_SIGNAL( loaded(TQImage *)), grid, TQ_SLOT(load(TQImage *)));
+  connect( icon, TQ_SIGNAL(opennewwin(const TQString &)),
+           TQ_SLOT(slotNewWin(const TQString &)));
+  connect(icon, TQ_SIGNAL(newname(const TQString &)),
+           TQ_SLOT( slotUpdateStatusName(const TQString &)));
+  connect(icon, TQ_SIGNAL(newmessage(const TQString &)),
+           TQ_SLOT( slotUpdateStatusMessage(const TQString &)));
+  connect(icon, TQ_SIGNAL(addrecent(const TQString &)),
+           TQ_SLOT( addRecent(const TQString &)));
 
-  connect( m_paletteToolBar, TQT_SIGNAL( newColor(uint)),
-     grid, TQT_SLOT(setColorSelection(uint)));
+  connect( m_paletteToolBar, TQ_SIGNAL( newColor(uint)),
+     grid, TQ_SLOT(setColorSelection(uint)));
 
-  connect( grid, TQT_SIGNAL( changed(const TQPixmap &) ),
-      m_paletteToolBar, TQT_SLOT( previewChanged(const TQPixmap &) ) );
-  connect( grid, TQT_SIGNAL( addingcolor(uint) ),
-      m_paletteToolBar, TQT_SLOT(addColor(uint)));
-  connect( grid, TQT_SIGNAL( colorschanged(uint, uint*) ),
-      m_paletteToolBar, TQT_SLOT(addColors(uint, uint*)));
+  connect( grid, TQ_SIGNAL( changed(const TQPixmap &) ),
+      m_paletteToolBar, TQ_SLOT( previewChanged(const TQPixmap &) ) );
+  connect( grid, TQ_SIGNAL( addingcolor(uint) ),
+      m_paletteToolBar, TQ_SLOT(addColor(uint)));
+  connect( grid, TQ_SIGNAL( colorschanged(uint, uint*) ),
+      m_paletteToolBar, TQ_SLOT(addColors(uint, uint*)));
 
-  connect(grid, TQT_SIGNAL(sizechanged(int, int)),
-           TQT_SLOT( slotUpdateStatusSize(int, int)));
-  connect(grid, TQT_SIGNAL(poschanged(int, int)),
-           TQT_SLOT( slotUpdateStatusPos(int, int)));
-  connect(grid, TQT_SIGNAL(scalingchanged(int)),
-           TQT_SLOT( slotUpdateStatusScaling(int)));
-  connect(grid, TQT_SIGNAL(scalingchanged(int)),
-           TQT_SLOT( slotUpdateZoom(int)));
-  connect( grid, TQT_SIGNAL( addingcolor(uint) ),
-           TQT_SLOT(slotUpdateStatusColors(uint)));
-  connect(grid, TQT_SIGNAL(colorschanged(uint, uint*)),
-           TQT_SLOT( slotUpdateStatusColors(uint, uint*)));
-  connect(grid, TQT_SIGNAL(newmessage(const TQString &)),
-           TQT_SLOT( slotUpdateStatusMessage(const TQString &)));
-  connect(grid, TQT_SIGNAL(clipboarddata(bool)),
-           TQT_SLOT( slotUpdatePaste(bool)));
-  connect(grid, TQT_SIGNAL(colorSelected(uint)),
-           m_paletteToolBar, TQT_SLOT(currentColorChanged(uint)));
-  connect(grid, TQT_SIGNAL(modifiedchanged(bool)),
-           TQT_SLOT( slotUpdateStatusModified(bool)));
+  connect(grid, TQ_SIGNAL(sizechanged(int, int)),
+           TQ_SLOT( slotUpdateStatusSize(int, int)));
+  connect(grid, TQ_SIGNAL(poschanged(int, int)),
+           TQ_SLOT( slotUpdateStatusPos(int, int)));
+  connect(grid, TQ_SIGNAL(scalingchanged(int)),
+           TQ_SLOT( slotUpdateStatusScaling(int)));
+  connect(grid, TQ_SIGNAL(scalingchanged(int)),
+           TQ_SLOT( slotUpdateZoom(int)));
+  connect( grid, TQ_SIGNAL( addingcolor(uint) ),
+           TQ_SLOT(slotUpdateStatusColors(uint)));
+  connect(grid, TQ_SIGNAL(colorschanged(uint, uint*)),
+           TQ_SLOT( slotUpdateStatusColors(uint, uint*)));
+  connect(grid, TQ_SIGNAL(newmessage(const TQString &)),
+           TQ_SLOT( slotUpdateStatusMessage(const TQString &)));
+  connect(grid, TQ_SIGNAL(clipboarddata(bool)),
+           TQ_SLOT( slotUpdatePaste(bool)));
+  connect(grid, TQ_SIGNAL(colorSelected(uint)),
+           m_paletteToolBar, TQ_SLOT(currentColorChanged(uint)));
+  connect(grid, TQ_SIGNAL(modifiedchanged(bool)),
+           TQ_SLOT( slotUpdateStatusModified(bool)));
   gridview->checkClipboard(); //Not very elegant, but fixes a buglet
 
-  connect(grid, TQT_SIGNAL(selecteddata(bool)), TQT_SLOT( slotUpdateCopy(bool)));
+  connect(grid, TQ_SIGNAL(selecteddata(bool)), TQ_SLOT( slotUpdateCopy(bool)));
 
   kdDebug(4640) << "Updating statusbar" << endl;
   slotUpdateStatusSize(grid->cols(), grid->rows());
@@ -240,43 +240,43 @@ void TDEIconEdit::setupActions()
 
   // File Menu
   action = new TDEAction(i18n("New &Window"), "window-new", cut,
-      this,  TQT_SLOT(slotNewWin()), actionCollection(), "file_new_window");
+      this,  TQ_SLOT(slotNewWin()), actionCollection(), "file_new_window");
   action->setWhatsThis(i18n("New window\n\nOpens a new icon editor window."));
 
-  action = KStdAction::openNew(this, TQT_SLOT(slotNew()), actionCollection());
+  action = KStdAction::openNew(this, TQ_SLOT(slotNew()), actionCollection());
   action->setWhatsThis(i18n("New\n\nCreate a new icon, either from a"
       " template or by specifying the size"));
 
-  action = KStdAction::open(this, TQT_SLOT(slotOpen()), actionCollection());
+  action = KStdAction::open(this, TQ_SLOT(slotOpen()), actionCollection());
   action->setWhatsThis(i18n("Open\n\nOpen an existing icon"));
 
   m_actRecent = KStdAction::openRecent(this,
-      TQT_SLOT(slotOpenRecent(const KURL&)), actionCollection());
+      TQ_SLOT(slotOpenRecent(const KURL&)), actionCollection());
   m_actRecent->setMaxItems(15); // FIXME should be configurable!
   m_actRecent->loadEntries(kapp->config());
 
-  action = KStdAction::save(this, TQT_SLOT(slotSave()), actionCollection());
+  action = KStdAction::save(this, TQ_SLOT(slotSave()), actionCollection());
   action->setWhatsThis(i18n("Save\n\nSave the current icon"));
 
-  KStdAction::saveAs(this, TQT_SLOT(slotSaveAs()), actionCollection());
+  KStdAction::saveAs(this, TQ_SLOT(slotSaveAs()), actionCollection());
 
-  action = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
+  action = KStdAction::print(this, TQ_SLOT(slotPrint()), actionCollection());
   action->setWhatsThis(i18n("Print\n\nOpens a print dialog to let you print"
       " the current icon."));
 
-  KStdAction::close(this, TQT_SLOT(slotClose()), actionCollection());
+  KStdAction::close(this, TQ_SLOT(slotClose()), actionCollection());
 
   // Edit Menu
 
-  m_actCut = KStdAction::cut(this, TQT_SLOT(slotCut()), actionCollection());
+  m_actCut = KStdAction::cut(this, TQ_SLOT(slotCut()), actionCollection());
   m_actCut->setWhatsThis(i18n("Cut\n\nCut the current selection out of the"
       " icon.\n\n(Tip: You can make both rectangular and circular selections)"));
 
-  m_actCopy = KStdAction::copy(this, TQT_SLOT(slotCopy()), actionCollection());
+  m_actCopy = KStdAction::copy(this, TQ_SLOT(slotCopy()), actionCollection());
   m_actCopy->setWhatsThis(i18n("Copy\n\nCopy the current selection out of the"
       " icon.\n\n(Tip: You can make both rectangular and circular selections)"));
 
-  m_actPaste = KStdAction::paste(this, TQT_SLOT(slotPaste()), actionCollection());
+  m_actPaste = KStdAction::paste(this, TQ_SLOT(slotPaste()), actionCollection());
   m_actPaste->setWhatsThis(i18n("Paste\n\n"
        "Paste the contents of the clipboard into the current icon.\n\n"
        "If the contents are larger than the current icon you can paste them"
@@ -285,28 +285,28 @@ void TDEIconEdit::setupActions()
        " if you also want to paste transparency.)"));
 
   m_actPasteNew = new TDEAction( i18n( "Paste as &New" ), cut, grid,
-      TQT_SLOT( editPasteAsNew() ), actionCollection(), "edit_paste_as_new" );
+      TQ_SLOT( editPasteAsNew() ), actionCollection(), "edit_paste_as_new" );
 
-  KStdAction::clear(this, TQT_SLOT(slotClear()), actionCollection());
-  KStdAction::selectAll(this, TQT_SLOT(slotSelectAll()), actionCollection());
+  KStdAction::clear(this, TQ_SLOT(slotClear()), actionCollection());
+  KStdAction::selectAll(this, TQ_SLOT(slotSelectAll()), actionCollection());
 
   action = new TDEAction(i18n("Resi&ze..."), "transform", cut,
-      grid,  TQT_SLOT(editResize()), actionCollection(), "edit_resize");
+      grid,  TQ_SLOT(editResize()), actionCollection(), "edit_resize");
   action->setWhatsThis(i18n("Resize\n\nSmoothly resizes the icon while"
       " trying to preserve the contents"));
 
   action = new TDEAction(i18n("&GrayScale"), "grayscale", cut,
-      grid,  TQT_SLOT(grayScale()), actionCollection(), "edit_grayscale");
+      grid,  TQ_SLOT(grayScale()), actionCollection(), "edit_grayscale");
   action->setWhatsThis(i18n("Gray scale\n\nGray scale the current icon.\n"
       "(Warning: The result is likely to contain colors not in the icon"
       " palette"));
 
   // View Menu
-  m_actZoomIn = KStdAction::zoomIn(this, TQT_SLOT(slotZoomIn()),
+  m_actZoomIn = KStdAction::zoomIn(this, TQ_SLOT(slotZoomIn()),
       actionCollection());
   m_actZoomIn->setWhatsThis(i18n("Zoom in\n\nZoom in by one."));
 
-  m_actZoomOut = KStdAction::zoomOut(this, TQT_SLOT(slotZoomOut()),
+  m_actZoomOut = KStdAction::zoomOut(this, TQ_SLOT(slotZoomOut()),
       actionCollection());
   m_actZoomOut->setWhatsThis(i18n("Zoom out\n\nZoom out by one."));
 
@@ -314,26 +314,26 @@ void TDEIconEdit::setupActions()
       actionCollection(), "view_zoom" );
 
   // xgettext:no-c-format
-  action = new TDEAction( i18n( "100%" ), cut, this, TQT_SLOT( slotZoom1() ),
+  action = new TDEAction( i18n( "100%" ), cut, this, TQ_SLOT( slotZoom1() ),
       actionCollection(), "view_zoom_1" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new TDEAction( i18n( "200%" ), cut, this, TQT_SLOT( slotZoom2() ),
+  action = new TDEAction( i18n( "200%" ), cut, this, TQ_SLOT( slotZoom2() ),
       actionCollection(), "view_zoom_2" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new TDEAction( i18n( "500%" ), cut, this, TQT_SLOT( slotZoom5() ),
+  action = new TDEAction( i18n( "500%" ), cut, this, TQ_SLOT( slotZoom5() ),
       actionCollection(), "view_zoom_5" );
   actMenu->insert( action );
   // xgettext:no-c-format
-  action = new TDEAction( i18n( "1000%" ), cut, this, TQT_SLOT( slotZoom10() ),
+  action = new TDEAction( i18n( "1000%" ), cut, this, TQ_SLOT( slotZoom10() ),
       actionCollection(), "view_zoom_10" );
   actMenu->insert( action );
 
   // Settings Menu
-  KStdAction::keyBindings(this, TQT_SLOT(slotConfigureKeys()),
+  KStdAction::keyBindings(this, TQ_SLOT(slotConfigureKeys()),
       actionCollection());
-  KStdAction::preferences(this, TQT_SLOT(slotConfigureSettings()),
+  KStdAction::preferences(this, TQ_SLOT(slotConfigureSettings()),
       actionCollection());
 
   createStandardStatusBarAction();
@@ -341,7 +341,7 @@ void TDEIconEdit::setupActions()
   TDEToggleAction *toggle;
 
   toggle = new TDEToggleAction( i18n( "Show &Grid" ), "grid",
-      cut, this, TQT_SLOT( slotShowGrid() ), actionCollection(),
+      cut, this, TQ_SLOT( slotShowGrid() ), actionCollection(),
       "options_show_grid" );
   toggle->setCheckedState(i18n("Hide &Grid"));
   toggle->setWhatsThis( i18n( "Show grid\n\nToggles the grid in the icon"
@@ -350,14 +350,14 @@ void TDEIconEdit::setupActions()
 
   // Tools Menu
   toolAction = new TDERadioAction(i18n("Color Picker"), "colorpicker",
-      cut, this, TQT_SLOT(slotToolPointer()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolPointer()), actionCollection(),
       "tool_find_pixel");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Color Picker\n\nThe color of the pixel clicked"
       " on will be the current draw color"));
 
   toolAction = new TDERadioAction(i18n("Freehand"), "paintbrush",
-      cut, this, TQT_SLOT(slotToolFreehand()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolFreehand()), actionCollection(),
       "tool_freehand");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Free hand\n\nDraw non-linear lines"));
@@ -366,64 +366,64 @@ void TDEIconEdit::setupActions()
   grid->setTool(TDEIconEditGrid::Freehand);
 
   toolAction = new TDERadioAction(i18n("Rectangle"), "rectangle",
-      cut, this, TQT_SLOT(slotToolRectangle()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolRectangle()), actionCollection(),
       "tool_rectangle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Rectangle\n\nDraw a rectangle"));
 
   toolAction = new TDERadioAction(i18n("Filled Rectangle"), "filledrectangle",
-      cut, this, TQT_SLOT(slotToolFilledRectangle()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolFilledRectangle()), actionCollection(),
       "tool_filled_rectangle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled rectangle\n\nDraw a filled rectangle"));
 
   toolAction = new TDERadioAction(i18n("Circle"), "circle",
-      cut, this, TQT_SLOT(slotToolCircle()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolCircle()), actionCollection(),
       "tool_circle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Circle\n\nDraw a circle"));
 
   toolAction = new TDERadioAction(i18n("Filled Circle"), "filledcircle",
-      cut, this, TQT_SLOT(slotToolFilledCircle()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolFilledCircle()), actionCollection(),
       "tool_filled_circle");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled circle\n\nDraw a filled circle"));
 
   toolAction = new TDERadioAction(i18n("Ellipse"), "ellipse",
-      cut, this, TQT_SLOT(slotToolEllipse()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolEllipse()), actionCollection(),
       "tool_ellipse");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Ellipse\n\nDraw an ellipse"));
 
   toolAction = new TDERadioAction(i18n("Filled Ellipse"), "filledellipse",
-      cut, this, TQT_SLOT(slotToolFilledEllipse()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolFilledEllipse()), actionCollection(),
       "tool_filled_ellipse");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Filled ellipse\n\nDraw a filled ellipse"));
 
   toolAction = new TDERadioAction(i18n("Spray"), "airbrush",
-      cut, this, TQT_SLOT(slotToolSpray()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolSpray()), actionCollection(),
       "tool_spray");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Spray\n\nDraw scattered pixels in the"
       " current color"));
 
   toolAction = new TDERadioAction(i18n("Flood Fill"), "fill",
-      cut, this, TQT_SLOT(slotToolFlood()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolFlood()), actionCollection(),
       "tool_flood_fill");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Flood fill\n\nFill adjoining pixels with"
       " the same color with the current color"));
 
   toolAction = new TDERadioAction(i18n("Line"), "line",
-      cut, this, TQT_SLOT(slotToolLine()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolLine()), actionCollection(),
       "tool_line");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Line\n\nDraw a straight line vertically,"
       " horizontally or at 45 deg. angles"));
 
   toolAction = new TDERadioAction(i18n("Eraser (Transparent)"), "eraser",
-      cut, this, TQT_SLOT(slotToolEraser()), actionCollection(),
+      cut, this, TQ_SLOT(slotToolEraser()), actionCollection(),
       "tool_eraser");
   toolAction->setExclusiveGroup("toolActions");
   toolAction->setWhatsThis(i18n("Erase\n\nErase pixels. Set the pixels to"
@@ -432,14 +432,14 @@ void TDEIconEdit::setupActions()
       " to use)"));
 
   toolAction = new TDERadioAction(i18n("Rectangular Selection"),
-      "selectrect", cut, this,  TQT_SLOT(slotToolSelectRect()),
+      "selectrect", cut, this,  TQ_SLOT(slotToolSelectRect()),
       actionCollection(), "edit_select_rectangle");
   toolAction->setExclusiveGroup( "toolActions" );
   toolAction->setWhatsThis(i18n("Select\n\nSelect a rectangular section"
       " of the icon using the mouse."));
 
   toolAction = new TDERadioAction(i18n("Circular Selection"),
-      "selectcircle", cut, this,  TQT_SLOT(slotToolSelectCircle()),
+      "selectcircle", cut, this,  TQ_SLOT(slotToolSelectCircle()),
       actionCollection(), "edit_select_circle");
   toolAction->setExclusiveGroup( "toolActions" );
   toolAction->setWhatsThis(i18n("Select\n\nSelect a circular section of the"

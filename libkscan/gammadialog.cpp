@@ -41,13 +41,13 @@ GammaDialog::GammaDialog( TQWidget *parent ) :
 
     /* This connect is for recalculating the table every time a new
      * Bright., Contrast or Gamma-Value is set */
-    connect( gt, TQT_SIGNAL(tableChanged()), gt, TQT_SLOT(getTable()));
+    connect( gt, TQ_SIGNAL(tableChanged()), gt, TQ_SLOT(getTable()));
 
     gtDisp = new DispGamma( page );
     gtDisp->setValueRef( gt->getArrayPtr() );
     gtDisp->resize( 280, 280 );
 
-    connect( gt, TQT_SIGNAL(tableChanged()), gtDisp, TQT_SLOT( repaint()));
+    connect( gt, TQ_SIGNAL(tableChanged()), gtDisp, TQ_SLOT( repaint()));
 
     // setCaption( i18n( "Gamma Table" ));
 
@@ -67,17 +67,17 @@ GammaDialog::GammaDialog( TQWidget *parent ) :
     wBright   = new KScanSlider ( page, i18n("Brightness"), -50.0, 50.0 );
     TQ_CHECK_PTR(wBright);
     wBright->slSetSlider( 0 );
-    connect( wBright, TQT_SIGNAL(valueChanged(int)), gt, TQT_SLOT(setBrightness(int)));
+    connect( wBright, TQ_SIGNAL(valueChanged(int)), gt, TQ_SLOT(setBrightness(int)));
 
     wContrast = new KScanSlider ( page, i18n("Contrast") , -50.0, 50.0 );
     TQ_CHECK_PTR(wContrast);
     wContrast->slSetSlider( 0 );
-    connect( wContrast, TQT_SIGNAL(valueChanged(int)), gt, TQT_SLOT(setContrast(int)));
+    connect( wContrast, TQ_SIGNAL(valueChanged(int)), gt, TQ_SLOT(setContrast(int)));
 
     wGamma    = new KScanSlider ( page, i18n("Gamma"),  30.0, 300.0 );
     TQ_CHECK_PTR(wGamma);
     wGamma->slSetSlider(100);
-    connect( wGamma, TQT_SIGNAL(valueChanged(int)), gt, TQT_SLOT(setGamma(int)));
+    connect( wGamma, TQ_SIGNAL(valueChanged(int)), gt, TQ_SLOT(setGamma(int)));
 
     /* and add the Sliders */
     lvSliders->addWidget( wBright,   1 );

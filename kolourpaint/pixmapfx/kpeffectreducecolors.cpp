@@ -361,16 +361,16 @@ kpEffectReduceColorsWidget::kpEffectReduceColorsWidget (bool actOnSelection,
     lay->addWidget (m_24BitRadioButton);
 
 
-    connect (m_blackAndWhiteRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SIGNAL (settingsChanged ()));
-    connect (m_blackAndWhiteDitheredRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SIGNAL (settingsChanged ()));
-    connect (m_8BitRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SIGNAL (settingsChanged ()));
-    connect (m_8BitDitheredRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SIGNAL (settingsChanged ()));
-    connect (m_24BitRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SIGNAL (settingsChanged ()));
+    connect (m_blackAndWhiteRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SIGNAL (settingsChanged ()));
+    connect (m_blackAndWhiteDitheredRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SIGNAL (settingsChanged ()));
+    connect (m_8BitRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SIGNAL (settingsChanged ()));
+    connect (m_8BitDitheredRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SIGNAL (settingsChanged ()));
+    connect (m_24BitRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SIGNAL (settingsChanged ()));
 }
 
 kpEffectReduceColorsWidget::~kpEffectReduceColorsWidget ()

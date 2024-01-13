@@ -53,8 +53,8 @@ void PMLatheEdit::createTopWidgets( )
    hl->addWidget( m_pSplineType );
    hl->addStretch( 1 );
 
-   connect( m_pSplineType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotTypeChanged( int ) ) );
+   connect( m_pSplineType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotTypeChanged( int ) ) );
 }
 
 void PMLatheEdit::createBottomWidgets( )
@@ -62,9 +62,9 @@ void PMLatheEdit::createBottomWidgets( )
    topLayout( )->addWidget( new TQLabel( i18n( "Spline points:" ), this ) );
    
    m_pPoints = new PMVectorListEdit( "u", "v", this );
-   connect( m_pPoints, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPoints, TQT_SIGNAL( selectionChanged( ) ),
-            TQT_SLOT( slotSelectionChanged( ) ) );
+   connect( m_pPoints, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPoints, TQ_SIGNAL( selectionChanged( ) ),
+            TQ_SLOT( slotSelectionChanged( ) ) );
    TQHBoxLayout* hl = new TQHBoxLayout( topLayout( ) );
    hl->addWidget( m_pPoints, 2 );
 
@@ -74,9 +74,9 @@ void PMLatheEdit::createBottomWidgets( )
    m_pAddBelow->setPixmap( SmallIcon( "pmaddpoint" ) );
    m_pRemove = new TQPushButton( this );
    m_pRemove->setPixmap( SmallIcon( "pmremovepoint" ) );
-   connect( m_pAddAbove, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPointAbove( ) ) );
-   connect( m_pAddBelow, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPointBelow( ) ) );
-   connect( m_pRemove, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemovePoint( ) ) );
+   connect( m_pAddAbove, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddPointAbove( ) ) );
+   connect( m_pAddBelow, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddPointBelow( ) ) );
+   connect( m_pRemove, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemovePoint( ) ) );
 
    TQVBoxLayout* bl = new TQVBoxLayout( hl );
    bl->addWidget( m_pAddAbove );
@@ -86,7 +86,7 @@ void PMLatheEdit::createBottomWidgets( )
 
    m_pSturm = new TQCheckBox( i18n( "Sturm" ), this );
    topLayout( )->addWidget( m_pSturm );
-   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
    Base::createBottomWidgets( );
 }

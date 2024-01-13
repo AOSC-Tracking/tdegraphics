@@ -48,8 +48,8 @@ void PMDetailObjectEdit::createTopWidgets( )
    layout->addWidget( m_pLocalDetailLevel );
    layout->addStretch( );
 
-   connect( m_pGlobalDetail, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotGlobalDetailClicked( ) ) );
-   connect( m_pLocalDetailLevel, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pGlobalDetail, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotGlobalDetailClicked( ) ) );
+   connect( m_pLocalDetailLevel, TQ_SIGNAL( activated( int ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMDetailObjectEdit::displayObject( PMObject* o )

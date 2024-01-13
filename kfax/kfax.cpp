@@ -213,12 +213,12 @@ TopLevel::TopLevel (TQWidget *, const char *name)
 
   vsb = new TQScrollBar( TQt::Vertical,faxqtwin,"scrollBar" );
   vsb->hide();
-  connect( vsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollVert(int)) );
+  connect( vsb, TQ_SIGNAL(valueChanged(int)), TQ_SLOT(scrollVert(int)) );
 
   // Create a Horizontal scroll bar
 
   hsb = new TQScrollBar( TQt::Horizontal,faxqtwin,"scrollBar" );
-  connect( hsb, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(scrollHorz(int)) );
+  connect( hsb, TQ_SIGNAL(valueChanged(int)), TQ_SLOT(scrollHorz(int)) );
   hsb->hide();
 
   setCentralWidget(faxqtwin);
@@ -236,43 +236,43 @@ TopLevel::~TopLevel()
 void TopLevel::setupMenuBar()
 {
   // File menu
-  KStdAction::open( this, TQT_SLOT( faxOpen() ), actionCollection() );
-  actRecent =  KStdAction::openRecent( this, TQT_SLOT( faxOpen( const KURL & ) ),
+  KStdAction::open( this, TQ_SLOT( faxOpen() ), actionCollection() );
+  actRecent =  KStdAction::openRecent( this, TQ_SLOT( faxOpen( const KURL & ) ),
           actionCollection() );
-  actSave = KStdAction::save( this, TQT_SLOT( faxSave() ), actionCollection() );
-  actSaveAs = KStdAction::saveAs( this, TQT_SLOT( faxSaveAs() ),
+  actSave = KStdAction::save( this, TQ_SLOT( faxSave() ), actionCollection() );
+  actSaveAs = KStdAction::saveAs( this, TQ_SLOT( faxSaveAs() ),
           actionCollection() );
-  actPrint = KStdAction::print( this, TQT_SLOT( print() ), actionCollection() );
-  KStdAction::quit( this, TQT_SLOT( close() ), actionCollection() );
+  actPrint = KStdAction::print( this, TQ_SLOT( print() ), actionCollection() );
+  KStdAction::quit( this, TQ_SLOT( close() ), actionCollection() );
   actAdd = new TDEAction( i18n( "A&dd..." ), "document-new", TDEShortcut(), this,
-      TQT_SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
+      TQ_SLOT( faxAdd() ), actionCollection(), "file_add_fax" );
 
   actRecent->setMaxItems( 5 );
 
   // View Menu
-  actSize = KStdAction::actualSize( this, TQT_SLOT( actualSize() ),
+  actSize = KStdAction::actualSize( this, TQ_SLOT( actualSize() ),
       actionCollection() );
-  actZoomIn = KStdAction::zoomIn( this, TQT_SLOT( zoomin() ), actionCollection() );
-  actZoomOut = KStdAction::zoomOut( this, TQT_SLOT( zoomout() ),
+  actZoomIn = KStdAction::zoomIn( this, TQ_SLOT( zoomin() ), actionCollection() );
+  actZoomOut = KStdAction::zoomOut( this, TQ_SLOT( zoomout() ),
       actionCollection() );
 
   actRotate = new TDEAction( i18n( "&Rotate Page" ), "rotate", TDEShortcut(), this,
-      TQT_SLOT( rotatePage() ), actionCollection(), "view_rotate" );
+      TQ_SLOT( rotatePage() ), actionCollection(), "view_rotate" );
   actMirror = new TDEAction( i18n( "Mirror Page" ), TDEShortcut(), this,
-      TQT_SLOT( mirrorPage() ), actionCollection(), "view_mirror" );
+      TQ_SLOT( mirrorPage() ), actionCollection(), "view_mirror" );
   actFlip = new TDEAction( i18n( "&Flip Page" ), TDEShortcut(), this,
-      TQT_SLOT( flipPage() ), actionCollection(), "view_flip" );
+      TQ_SLOT( flipPage() ), actionCollection(), "view_flip" );
 
   // Go menu
-  actNext = KStdAction::next( this, TQT_SLOT( nextPage() ), actionCollection() );
-  actPrev = KStdAction::prior( this, TQT_SLOT( prevPage() ), actionCollection() );
-  actFirst = KStdAction::firstPage( this, TQT_SLOT( firstPage() ),
+  actNext = KStdAction::next( this, TQ_SLOT( nextPage() ), actionCollection() );
+  actPrev = KStdAction::prior( this, TQ_SLOT( prevPage() ), actionCollection() );
+  actFirst = KStdAction::firstPage( this, TQ_SLOT( firstPage() ),
       actionCollection() );
-  actLast = KStdAction::lastPage( this, TQT_SLOT( lastPage() ),
+  actLast = KStdAction::lastPage( this, TQ_SLOT( lastPage() ),
       actionCollection() );
 
   // Settings menu
-  KStdAction::preferences( this, TQT_SLOT( faxoptions() ), actionCollection() );
+  KStdAction::preferences( this, TQ_SLOT( faxoptions() ), actionCollection() );
 }
 
 void TopLevel::setupStatusBar()

@@ -191,8 +191,8 @@ int main (int argc, char *argv [])
 
 
     // TQt says this is necessary but I don't think it is...
-    TQObject::connect (&app, TQT_SIGNAL (lastWindowClosed ()),
-                      &app, TQT_SLOT (quit ()));
+    TQObject::connect (&app, TQ_SIGNAL (lastWindowClosed ()),
+                      &app, TQ_SLOT (quit ()));
 
 
     if (app.isRestored ())

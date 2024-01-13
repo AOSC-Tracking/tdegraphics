@@ -54,9 +54,9 @@ void PMTorusEdit::createTopWidgets( )
    topLayout( )->addWidget( m_pSturm );
 
 
-   connect( m_pMinorRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMajorRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMinorRadius, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMajorRadius, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMTorusEdit::displayObject( PMObject* o )

@@ -162,13 +162,13 @@ void kpToolPreviewDialog::createPreviewGroupBox ()
 
     m_previewPixmapLabel = new kpResizeSignallingLabel (m_previewGroupBox);
     m_previewPixmapLabel->setMinimumSize (150, 110);
-    connect (m_previewPixmapLabel, TQT_SIGNAL (resized ()),
-             this, TQT_SLOT (updatePreview ()));
+    connect (m_previewPixmapLabel, TQ_SIGNAL (resized ()),
+             this, TQ_SLOT (updatePreview ()));
 
     TQPushButton *updatePushButton = new TQPushButton (i18n ("&Update"),
                                                      m_previewGroupBox);
-    connect (updatePushButton, TQT_SIGNAL (clicked ()),
-             this, TQT_SLOT (slotUpdateWithWaitCursor ()));
+    connect (updatePushButton, TQ_SIGNAL (clicked ()),
+             this, TQ_SLOT (slotUpdateWithWaitCursor ()));
 
 
     TQVBoxLayout *previewLayout = new TQVBoxLayout (m_previewGroupBox,

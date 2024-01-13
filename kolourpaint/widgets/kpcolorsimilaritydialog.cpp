@@ -69,8 +69,8 @@ kpColorSimilarityDialog::kpColorSimilarityDialog (kpMainWindow *mainWindow,
     cubeLayout->addWidget (updatePushButton, 0/*stretch*/, TQt::AlignHCenter);
 
 
-    connect (updatePushButton, TQT_SIGNAL (clicked ()),
-             this, TQT_SLOT (slotColorSimilarityValueChanged ()));
+    connect (updatePushButton, TQ_SIGNAL (clicked ()),
+             this, TQ_SLOT (slotColorSimilarityValueChanged ()));
 
 
     TQGroupBox *inputGroupBox = new TQGroupBox (i18n ("RGB Color Cube Distance"), baseWidget);
@@ -86,8 +86,8 @@ kpColorSimilarityDialog::kpColorSimilarityDialog (kpMainWindow *mainWindow,
     inputLayout->addWidget (m_colorSimilarityInput);
 
 
-    connect (m_colorSimilarityInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (slotColorSimilarityValueChanged ()));
+    connect (m_colorSimilarityInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (slotColorSimilarityValueChanged ()));
 
 
     TQVBoxLayout *baseLayout = new TQVBoxLayout (baseWidget, 0/*margin*/, spacingHint () * 2);

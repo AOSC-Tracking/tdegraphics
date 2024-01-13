@@ -77,14 +77,14 @@ dviRenderer::dviRenderer(TQWidget *par)
   // initialize the dvi machinery
   dviFile                = 0;
 
-  connect(&font_pool, TQT_SIGNAL( setStatusBarText( const TQString& ) ), this, TQT_SIGNAL( setStatusBarText( const TQString& ) ) );
+  connect(&font_pool, TQ_SIGNAL( setStatusBarText( const TQString& ) ), this, TQ_SIGNAL( setStatusBarText( const TQString& ) ) );
 
   parentWidget = par;
   shrinkfactor = 3;
   current_page = 0;
   resolutionInDPI = 0.0;
 
-  connect( &clearStatusBarTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(clearStatusBar()) );
+  connect( &clearStatusBarTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(clearStatusBar()) );
 
   currentlyDrawnPage = 0;
   editorCommand         = "";
@@ -103,7 +103,7 @@ dviRenderer::dviRenderer(TQWidget *par)
 
   PS_interface           = new ghostscript_interface();
   // pass status bar messages through
-  connect(PS_interface, TQT_SIGNAL( setStatusBarText( const TQString& ) ), this, TQT_SIGNAL( setStatusBarText( const TQString& ) ) );
+  connect(PS_interface, TQ_SIGNAL( setStatusBarText( const TQString& ) ), this, TQ_SIGNAL( setStatusBarText( const TQString& ) ) );
 }
 
 
@@ -225,7 +225,7 @@ void dviRenderer::drawPage(double resolution, RenderedDocumentPage *page)
       dviFile->sourceSpecialMarker = false;
       // Show the dialog as soon as event processing is finished, and
       // the program is idle
-      TQTimer::singleShot( 0, this, TQT_SLOT(showThatSourceInformationIsPresent()) );
+      TQTimer::singleShot( 0, this, TQ_SLOT(showThatSourceInformationIsPresent()) );
     }
   }
   
@@ -767,8 +767,8 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
   // henceforth dimiss the output of the older programm. "If it
   // hasn't failed until now, we don't care."
   if (proc != 0) {
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQ_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQ_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
     proc = 0;
   }
   
@@ -778,9 +778,9 @@ void dviRenderer::handleSRCLink(const TQString &linkText, TQMouseEvent *e, Docum
     kdError(4300) << "Could not allocate ShellProcess for the editor command." << endl;
     return;
   }
-  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(editorCommand_terminated(TDEProcess *)));
+  tqApp->connect(proc, TQ_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQ_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQ_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQ_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQ_SIGNAL(processExited(TDEProcess *)), this, TQ_SLOT(editorCommand_terminated(TDEProcess *)));
   // Merge the editor-specific editor message here.
   export_errorString = i18n("<qt>The external program<br><br><tt><strong>%1</strong></tt><br/><br/>which was used to call the editor "
 			    "for inverse search, reported an error. You might wish to look at the <strong>document info "

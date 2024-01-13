@@ -76,10 +76,10 @@ void PMListPatternEdit::createTopWidgets( )
    layout->addStretch( 1 );
 
    /* connect all signals to slots/signals */
-   connect( m_pBrickSize, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotComboChanged( int ) ) );
-   connect( m_pMortar, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDepth, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pBrickSize, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pTypeCombo, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotComboChanged( int ) ) );
+   connect( m_pMortar, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDepth, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMListPatternEdit::displayObject( PMObject* o )

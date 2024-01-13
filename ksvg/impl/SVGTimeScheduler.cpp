@@ -50,7 +50,7 @@ const TQTimer *SVGTimer::qtimer() const
 
 void SVGTimer::start(TQObject *receiver, const char *member)
 {
-	TQObject::connect(m_timer, TQT_SIGNAL(timeout()), receiver, member);
+	TQObject::connect(m_timer, TQ_SIGNAL(timeout()), receiver, member);
 	m_timer->start(m_ms, m_singleShot);
 }
 
@@ -165,7 +165,7 @@ void SVGTimeScheduler::startAnimations()
 	{
 		SVGTimer *svgTimer = *it;
 		if(svgTimer && !svgTimer->isActive())
-			svgTimer->start(this, TQT_SLOT(slotTimerNotify()));
+			svgTimer->start(this, TQ_SLOT(slotTimerNotify()));
 	}
 }
 
@@ -174,7 +174,7 @@ void SVGTimeScheduler::toggleAnimations()
 	if(m_intervalTimer->isActive())
 		m_intervalTimer->stop();
 	else
-		m_intervalTimer->start(this, TQT_SLOT(slotTimerNotify()));
+		m_intervalTimer->start(this, TQ_SLOT(slotTimerNotify()));
 }
 
 bool SVGTimeScheduler::animationsPaused() const
@@ -223,7 +223,7 @@ void SVGTimeScheduler::slotTimerNotify()
 	// by the previous call, and now all connections to the interval timer
 	// are created and now we just need to fire that timer (Niko)
 	if(svgTimer != m_intervalTimer && !m_intervalTimer->isActive())
-		m_intervalTimer->start(this, TQT_SLOT(slotTimerNotify()));
+		m_intervalTimer->start(this, TQ_SLOT(slotTimerNotify()));
 }
 
 float SVGTimeScheduler::elapsed() const

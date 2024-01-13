@@ -70,7 +70,7 @@ PMLibraryObjectSearch::PMLibraryObjectSearch( TQWidget* parent ) :
    vl->addWidget( frame );
 
    // Connect signals and slots
-   connect( m_pSearchButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSearchButtonPressed( ) ) );
+   connect( m_pSearchButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotSearchButtonPressed( ) ) );
 }
 
 void PMLibraryObjectSearch::slotSearchButtonPressed( )

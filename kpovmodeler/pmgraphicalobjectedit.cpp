@@ -59,15 +59,15 @@ void PMGraphicalObjectEdit::createBottomWidgets( )
    hl->addWidget( m_pRelativeVisibility );
    hl->addStretch( 1 );
 
-   connect( m_pNoShadowButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pNoImageButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pNoReflectionButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDoubleIlluminateButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRelativeVisibility, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotRelativeChanged( ) ) );
-   connect( m_pVisibilityLevel, TQT_SIGNAL( valueChanged( int ) ),
-            TQT_SLOT( slotLevelChanged( int ) ) );
-   connect( m_pExport, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoShadowButton, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoImageButton, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoReflectionButton, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDoubleIlluminateButton, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRelativeVisibility, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotRelativeChanged( ) ) );
+   connect( m_pVisibilityLevel, TQ_SIGNAL( valueChanged( int ) ),
+            TQ_SLOT( slotLevelChanged( int ) ) );
+   connect( m_pExport, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
 
    Base::createBottomWidgets( );

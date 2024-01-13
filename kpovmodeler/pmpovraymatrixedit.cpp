@@ -41,7 +41,7 @@ void PMPovrayMatrixEdit::createTopWidgets( )
    for( i = 0; i < 12; i++ )
    {
       m_pValue[i] = new PMFloatEdit( this );
-      connect( m_pValue[i], TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+      connect( m_pValue[i], TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
    }
 
    for( r = 0; r < 4; r++ )

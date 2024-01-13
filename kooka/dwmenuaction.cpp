@@ -36,9 +36,9 @@ dwMenuAction::dwMenuAction( const TQString& text, const TDEShortcut& cut,
 			    KDockMainWindow *mw, const char* name )
     :TDEToggleAction(text,cut,parent,name),m_dw(dw),m_mw(mw)
 {
-    connect(this,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotToggled(bool)));
-    connect(m_dw->dockManager(),TQT_SIGNAL(change()),this,TQT_SLOT(anDWChanged()));
-    connect(m_dw,TQT_SIGNAL(destroyed()),this,TQT_SLOT(slotWidgetDestroyed()));
+    connect(this,TQ_SIGNAL(toggled(bool)),this,TQ_SLOT(slotToggled(bool)));
+    connect(m_dw->dockManager(),TQ_SIGNAL(change()),this,TQ_SLOT(anDWChanged()));
+    connect(m_dw,TQ_SIGNAL(destroyed()),this,TQ_SLOT(slotWidgetDestroyed()));
     setChecked(m_dw->mayBeHide());
 }
 

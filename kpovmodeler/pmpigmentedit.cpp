@@ -37,7 +37,7 @@ void PMPigmentEdit::createTopWidgets()
    m_pUVMapping = new TQCheckBox( i18n( "UV mapping" ), this );
    topLayout( )->addWidget( m_pUVMapping );
 
-   connect( m_pUVMapping, TQT_SIGNAL( clicked() ), TQT_SIGNAL( dataChanged() ) );
+   connect( m_pUVMapping, TQ_SIGNAL( clicked() ), TQ_SIGNAL( dataChanged() ) );
 }
 
 void PMPigmentEdit::displayObject( PMObject* o )

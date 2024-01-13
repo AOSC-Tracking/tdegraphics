@@ -591,8 +591,8 @@ void kpToolResizeScaleDialog::createActOnBox (TQWidget *baseWidget)
     m_actOnBox->setStretchFactor (m_actOnCombo, 1);
 
 
-    connect (m_actOnCombo, TQT_SIGNAL (activated (int)),
-             this, TQT_SLOT (slotActOnChanged ()));
+    connect (m_actOnCombo, TQ_SIGNAL (activated (int)),
+             this, TQ_SLOT (slotActOnChanged ()));
 }
 
 
@@ -713,12 +713,12 @@ void kpToolResizeScaleDialog::createOperationGroupBox (TQWidget *baseWidget)
     //operationLayout->addWidget (m_smoothScaleLabel, 1, 2, TQt::AlignCenter);
 
 
-    connect (m_resizeButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotTypeChanged ()));
-    connect (m_scaleButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotTypeChanged ()));
-    connect (m_smoothScaleButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotTypeChanged ()));
+    connect (m_resizeButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotTypeChanged ()));
+    connect (m_scaleButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotTypeChanged ()));
+    connect (m_smoothScaleButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotTypeChanged ()));
 }
 
 // private
@@ -800,18 +800,18 @@ void kpToolResizeScaleDialog::createDimensionsGroupBox (TQWidget *baseWidget)
     dimensionsLayout->setRowSpacing (4/*row*/, dimensionsLayout->rowSpacing (4) * 2);
 
 
-    connect (m_newWidthInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (slotWidthChanged (int)));
-    connect (m_newHeightInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (slotHeightChanged (int)));
+    connect (m_newWidthInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (slotWidthChanged (int)));
+    connect (m_newHeightInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (slotHeightChanged (int)));
 
-    connect (m_percentWidthInput, TQT_SIGNAL (valueChanged (double)),
-             this, TQT_SLOT (slotPercentWidthChanged (double)));
-    connect (m_percentHeightInput, TQT_SIGNAL (valueChanged (double)),
-             this, TQT_SLOT (slotPercentHeightChanged (double)));
+    connect (m_percentWidthInput, TQ_SIGNAL (valueChanged (double)),
+             this, TQ_SLOT (slotPercentWidthChanged (double)));
+    connect (m_percentHeightInput, TQ_SIGNAL (valueChanged (double)),
+             this, TQ_SLOT (slotPercentHeightChanged (double)));
 
-    connect (m_keepAspectRatioCheckBox, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (setKeepAspectRatio (bool)));
+    connect (m_keepAspectRatioCheckBox, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (setKeepAspectRatio (bool)));
 }
 
 

@@ -55,8 +55,8 @@ namespace KImageViewer
      kapp->quit();
    }
    setCentralWidget( widget );
-   connect( widget, TQT_SIGNAL( contextPress( const TQPoint & ) ), TQT_SLOT( mySlot( const TQPoint & ) ) );
-   connect( m_canvas->widget(), TQT_SIGNAL( contextPress( const TQPoint & ) ), TQT_SLOT( mySlot( const TQPoint & ) ) );
+   connect( widget, TQ_SIGNAL( contextPress( const TQPoint & ) ), TQ_SLOT( mySlot( const TQPoint & ) ) );
+   connect( m_canvas->widget(), TQ_SIGNAL( contextPress( const TQPoint & ) ), TQ_SLOT( mySlot( const TQPoint & ) ) );
    </pre>
  *
  * You can't connect signals or slots using KImageViewer::Canvas, because this interface

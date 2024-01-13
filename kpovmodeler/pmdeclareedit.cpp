@@ -52,8 +52,8 @@ void PMDeclareEdit::createTopWidgets( )
    layout->addWidget( label );
    layout->addWidget( m_pNameEdit );
 
-   connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotNameChanged( const TQString& ) ) );
+   connect( m_pNameEdit, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotNameChanged( const TQString& ) ) );
 }
 
 void PMDeclareEdit::createBottomWidgets( )
@@ -63,15 +63,15 @@ void PMDeclareEdit::createBottomWidgets( )
 
    m_pLinkedObjects = new TQListBox( this );
    m_pLinkedObjects->setMinimumHeight( 100 );
-   connect( m_pLinkedObjects, TQT_SIGNAL( highlighted( TQListBoxItem* ) ),
-            TQT_SLOT( slotItemSelected( TQListBoxItem* ) ) );
+   connect( m_pLinkedObjects, TQ_SIGNAL( highlighted( TQListBoxItem* ) ),
+            TQ_SLOT( slotItemSelected( TQListBoxItem* ) ) );
    topLayout( )->addWidget( m_pLinkedObjects, 1 );
 
    TQHBoxLayout* layout = new TQHBoxLayout( topLayout( ) );
    m_pSelectButton = new TQPushButton( i18n( "Select..." ), this );
    m_pSelectButton->setEnabled( false );
 
-   connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelect( ) ) );
+   connect( m_pSelectButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotSelect( ) ) );
    layout->addStretch( );
    layout->addWidget( m_pSelectButton );
 

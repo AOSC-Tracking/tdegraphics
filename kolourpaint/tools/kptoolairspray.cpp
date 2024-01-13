@@ -65,7 +65,7 @@ kpToolAirSpray::kpToolAirSpray (kpMainWindow *mainWindow)
       m_currentCommand (0)
 {
     m_timer = new TQTimer (this);
-    connect (m_timer, TQT_SIGNAL (timeout ()), this, TQT_SLOT (actuallyDraw ()));
+    connect (m_timer, TQ_SIGNAL (timeout ()), this, TQ_SLOT (actuallyDraw ()));
 }
 
 kpToolAirSpray::~kpToolAirSpray ()
@@ -95,8 +95,8 @@ void kpToolAirSpray::begin ()
         if (m_toolWidgetSpraycanSize)
         {
             m_size = m_toolWidgetSpraycanSize->spraycanSize ();
-            connect (m_toolWidgetSpraycanSize, TQT_SIGNAL (spraycanSizeChanged (int)),
-                     this, TQT_SLOT (slotSpraycanSizeChanged (int)));
+            connect (m_toolWidgetSpraycanSize, TQ_SIGNAL (spraycanSizeChanged (int)),
+                     this, TQ_SLOT (slotSpraycanSizeChanged (int)));
 
             m_toolWidgetSpraycanSize->show ();
         }
@@ -110,8 +110,8 @@ void kpToolAirSpray::end ()
 {
     if (m_toolWidgetSpraycanSize)
     {
-        disconnect (m_toolWidgetSpraycanSize, TQT_SIGNAL (spraycanSizeChanged (int)),
-                    this, TQT_SLOT (slotSpraycanSizeChanged (int)));
+        disconnect (m_toolWidgetSpraycanSize, TQ_SIGNAL (spraycanSizeChanged (int)),
+                    this, TQ_SLOT (slotSpraycanSizeChanged (int)));
         m_toolWidgetSpraycanSize = 0;
     }
 

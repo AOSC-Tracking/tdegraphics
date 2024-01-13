@@ -56,8 +56,8 @@ PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
    hlayout->addWidget( m_pPovrayCommand );
    m_pBrowsePovrayCommand = new TQPushButton( gb );
    m_pBrowsePovrayCommand->setPixmap( SmallIcon( "document-open" ) );
-   connect( m_pBrowsePovrayCommand, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotBrowsePovrayCommand( ) ) );
+   connect( m_pBrowsePovrayCommand, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotBrowsePovrayCommand( ) ) );
    hlayout->addWidget( m_pBrowsePovrayCommand );
    vlayout->addWidget( gb );
 
@@ -70,8 +70,8 @@ PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
    hlayout->addWidget( m_pDocumentationPath );
    m_pBrowseDocumentationPath = new TQPushButton( gb );
    m_pBrowseDocumentationPath->setPixmap( SmallIcon( "document-open" ) );
-   connect( m_pBrowseDocumentationPath, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotBrowsePovrayDocumentation( ) ) );
+   connect( m_pBrowseDocumentationPath, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotBrowsePovrayDocumentation( ) ) );
    hlayout->addWidget( m_pBrowseDocumentationPath );
    vlayout->addWidget( gb );
    hlayout = new TQHBoxLayout( gvl );
@@ -89,28 +89,28 @@ PMPovraySettings::PMPovraySettings( TQWidget* parent, const char* name )
    gvl->addSpacing( 10 );
    hlayout = new TQHBoxLayout( gvl );
    m_pLibraryPaths = new TQListBox( gb );
-   connect( m_pLibraryPaths, TQT_SIGNAL( highlighted( int ) ),
-            TQT_SLOT( slotPathSelected( int ) ) );
+   connect( m_pLibraryPaths, TQ_SIGNAL( highlighted( int ) ),
+            TQ_SLOT( slotPathSelected( int ) ) );
    hlayout->addWidget( m_pLibraryPaths );
 
    TQVBoxLayout* bl = new TQVBoxLayout( hlayout );
    m_pAddLibraryPath = new TQPushButton( i18n( "Add..." ), gb );
-   connect( m_pAddLibraryPath, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddPath( ) ) );
+   connect( m_pAddLibraryPath, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddPath( ) ) );
    bl->addWidget( m_pAddLibraryPath );
    m_pRemoveLibraryPath = new TQPushButton( i18n( "Remove" ), gb );
-   connect( m_pRemoveLibraryPath, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotRemovePath( ) ) );
+   connect( m_pRemoveLibraryPath, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotRemovePath( ) ) );
    bl->addWidget( m_pRemoveLibraryPath );
    m_pChangeLibraryPath = new TQPushButton( i18n( "Edit..." ), gb );
-   connect( m_pChangeLibraryPath, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotEditPath( ) ) );
+   connect( m_pChangeLibraryPath, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotEditPath( ) ) );
    bl->addWidget( m_pChangeLibraryPath );
    m_pLibraryPathUp = new TQPushButton( i18n( "Up" ), gb );
-   connect( m_pLibraryPathUp, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPathUp( ) ) );
+   connect( m_pLibraryPathUp, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotPathUp( ) ) );
    bl->addWidget( m_pLibraryPathUp );
    m_pLibraryPathDown = new TQPushButton( i18n( "Down" ), gb );
-   connect( m_pLibraryPathDown, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotPathDown( ) ) );
+   connect( m_pLibraryPathDown, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotPathDown( ) ) );
    bl->addWidget( m_pLibraryPathDown );
    bl->addStretch( 1 );
    vlayout->addWidget( gb );

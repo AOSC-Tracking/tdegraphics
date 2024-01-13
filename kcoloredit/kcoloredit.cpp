@@ -64,40 +64,40 @@ KColorEditApp::~KColorEditApp() {
 void KColorEditApp::initActions()
 {
   // File actiojns
-  KStdAction::openNew( this, TQT_SLOT( slotFileNew() ), actionCollection() );
-  KStdAction::open( this, TQT_SLOT( slotFileOpen() ), actionCollection() );
-  KStdAction::saveAs( this, TQT_SLOT( slotFileSaveAs() ), actionCollection() );
-  KStdAction::close( this, TQT_SLOT( slotClose() ), actionCollection() );
-  KStdAction::quit( this, TQT_SLOT( slotQuit() ), actionCollection() );
-  m_actSave = KStdAction::save( this, TQT_SLOT( slotFileSave() ),
+  KStdAction::openNew( this, TQ_SLOT( slotFileNew() ), actionCollection() );
+  KStdAction::open( this, TQ_SLOT( slotFileOpen() ), actionCollection() );
+  KStdAction::saveAs( this, TQ_SLOT( slotFileSaveAs() ), actionCollection() );
+  KStdAction::close( this, TQ_SLOT( slotClose() ), actionCollection() );
+  KStdAction::quit( this, TQ_SLOT( slotQuit() ), actionCollection() );
+  m_actSave = KStdAction::save( this, TQ_SLOT( slotFileSave() ),
           actionCollection() );
   m_actRecent = KStdAction::openRecent( this,
-          TQT_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
+          TQ_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
 
   ( void ) new TDEAction( i18n("New &Window"), kapp->miniIcon(), TDEShortcut(),
-          this, TQT_SLOT( slotFileNewWindow() ), actionCollection(),
+          this, TQ_SLOT( slotFileNewWindow() ), actionCollection(),
           "file_new_window" );
 
   // Edit actions
-  m_actCut = KStdAction::cut( this, TQT_SLOT( slotEditCut() ),
+  m_actCut = KStdAction::cut( this, TQ_SLOT( slotEditCut() ),
           actionCollection() );
-  m_actCopy = KStdAction::copy( this, TQT_SLOT( slotEditCopy() ),
+  m_actCopy = KStdAction::copy( this, TQ_SLOT( slotEditCopy() ),
           actionCollection() );
-  m_actPaste = KStdAction::paste( this, TQT_SLOT( slotEditPaste() ),
+  m_actPaste = KStdAction::paste( this, TQ_SLOT( slotEditPaste() ),
           actionCollection() );
 
   m_actPaste->setEnabled( false );
 
   // Color Menu
   m_actNames = new TDEToggleAction( i18n("Show &Color Names"), TDEShortcut(), this,
-          TQT_SLOT( slotViewColorNames() ), actionCollection(),
+          TQ_SLOT( slotViewColorNames() ), actionCollection(),
           "color_view_names" );
   m_actNames->setCheckedState(i18n("Hide &Color Names"));
   m_actPalette = new TDEAction( i18n("From &Palette"), TDEShortcut(), this,
-          TQT_SLOT( slotColorFromPalette() ), actionCollection(),
+          TQ_SLOT( slotColorFromPalette() ), actionCollection(),
           "color_from_palette" );
   ( void ) new TDEAction( i18n("From &Screen"), TDEShortcut(), this,
-          TQT_SLOT( slotColorFromScreen() ), actionCollection(),
+          TQ_SLOT( slotColorFromScreen() ), actionCollection(),
           "color_from_screen" );
 }
 
@@ -112,14 +112,14 @@ void KColorEditApp::initDocument()
   doc = new KColorEditDoc(this);
   doc->newDocument();
 
-  connect( doc, TQT_SIGNAL( selectionChanged( int, int ) ),
-          TQT_SLOT( slotSelectionChanged( int, int ) ) );
-  connect( doc, TQT_SIGNAL( clipboardChanged() ),
-          TQT_SLOT( slotClipboardChanged() ) );
-  connect( doc, TQT_SIGNAL( modified( bool ) ),
-          TQT_SLOT( slotModified( bool ) ) );
-  connect( doc, TQT_SIGNAL( paletteAvailable( bool ) ),
-          TQT_SLOT( slotPaletteAvailable( bool ) ) );
+  connect( doc, TQ_SIGNAL( selectionChanged( int, int ) ),
+          TQ_SLOT( slotSelectionChanged( int, int ) ) );
+  connect( doc, TQ_SIGNAL( clipboardChanged() ),
+          TQ_SLOT( slotClipboardChanged() ) );
+  connect( doc, TQ_SIGNAL( modified( bool ) ),
+          TQ_SLOT( slotModified( bool ) ) );
+  connect( doc, TQ_SIGNAL( paletteAvailable( bool ) ),
+          TQ_SLOT( slotPaletteAvailable( bool ) ) );
 }
 
 void KColorEditApp::initView()
@@ -178,7 +178,7 @@ bool KColorEditApp::queryExit()
 }
 
 /////////////////////////////////////////////////////////////////////
-// TQT_SLOT IMPLEMENTATION
+// SLOT IMPLEMENTATION
 /////////////////////////////////////////////////////////////////////
 
 void KColorEditApp::slotSelectionChanged( int begin, int end )

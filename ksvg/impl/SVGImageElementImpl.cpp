@@ -273,8 +273,8 @@ void SVGImageElementImpl::createItem(KSVGCanvas *c)
 				m_doc->ref();
 				m_doc->attach(c);
 
-				connect(m_doc, TQT_SIGNAL(finishedParsing(bool, const TQString &)), this, TQT_SLOT(slotParsingFinished(bool, const TQString &)));
-				connect(m_doc, TQT_SIGNAL(finishedLoading()), this, TQT_SLOT(slotLoadingFinished()));
+				connect(m_doc, TQ_SIGNAL(finishedParsing(bool, const TQString &)), this, TQ_SLOT(slotParsingFinished(bool, const TQString &)));
+				connect(m_doc, TQ_SIGNAL(finishedLoading()), this, TQ_SLOT(slotLoadingFinished()));
 
 				KURL file;
 

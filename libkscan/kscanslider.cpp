@@ -49,8 +49,8 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
        m_stdButt->setPixmap( loader->loadIcon( "edit-undo",TDEIcon::Small ));
 
        /* connect the button click to setting the value */
-       connect( m_stdButt, TQT_SIGNAL(clicked()),
-		this, TQT_SLOT(slRevertValue()));
+       connect( m_stdButt, TQ_SIGNAL(clicked()),
+		this, TQ_SLOT(slRevertValue()));
 
        TQToolTip::add( m_stdButt,
 		      i18n( "Revert value back to its standard value %1" ).arg( stdValue ));
@@ -73,11 +73,11 @@ KScanSlider::KScanSlider( TQWidget *parent, const TQString& text,
 
 
     /* make spin box changes change the slider */
-    connect( m_spin, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(slSliderChange(int)));
+    connect( m_spin, TQ_SIGNAL(valueChanged(int)), this, TQ_SLOT(slSliderChange(int)));
 
     /* Handle internal number display */
-    // connect(slider, TQT_SIGNAL(valueChanged(int)), numdisp, TQT_SLOT( setNum(int) ));
-    connect(slider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT( slSliderChange(int) ));
+    // connect(slider, TQ_SIGNAL(valueChanged(int)), numdisp, TQ_SLOT( setNum(int) ));
+    connect(slider, TQ_SIGNAL(valueChanged(int)), this, TQ_SLOT( slSliderChange(int) ));
 
     /* set Value 0 to the widget */
     slider->setValue( (int) min -1 );
@@ -159,10 +159,10 @@ KScanEntry::KScanEntry( TQWidget *parent, const TQString& text )
 
     entry = new TQLineEdit( this, "AUTO_ENTRYFIELD_E" );
     l1->setBuddy( entry );
-    connect( entry, TQT_SIGNAL( textChanged(const TQString& )),
-	     this, TQT_SLOT( slEntryChange(const TQString&)));
-    connect( entry, TQT_SIGNAL( returnPressed()),
-	     this,  TQT_SLOT( slReturnPressed()));
+    connect( entry, TQ_SIGNAL( textChanged(const TQString& )),
+	     this, TQ_SLOT( slEntryChange(const TQString&)));
+    connect( entry, TQ_SIGNAL( returnPressed()),
+	     this,  TQ_SLOT( slReturnPressed()));
 
     hb->addWidget( entry,3 );
     hb->activate();
@@ -249,10 +249,10 @@ void KScanCombo::createCombo( const TQString& text )
 
     combo = new TQComboBox( this, "AUTO_COMBO" );
 
-    connect( combo, TQT_SIGNAL(activated( const TQString &)), this,
-             TQT_SLOT( slComboChange( const TQString &)));
-    connect( combo, TQT_SIGNAL(activated( int )),
-	     this,  TQT_SLOT(slFireActivated(int)));
+    connect( combo, TQ_SIGNAL(activated( const TQString &)), this,
+             TQ_SLOT( slComboChange( const TQString &)));
+    connect( combo, TQ_SIGNAL(activated( int )),
+	     this,  TQ_SLOT(slFireActivated(int)));
 
 }
 

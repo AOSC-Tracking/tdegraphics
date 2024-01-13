@@ -142,25 +142,25 @@ void PMGlobalSettingsEdit::createTopWidgets( )
 
    topLayout( )->addWidget( m_pRadiosityWidget );
 
-   connect( m_pAdcBailoutEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAmbientLightEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAssumedGammaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pHfGray16Edit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pIridWaveLengthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxIntersectionsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxTraceLevelEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pNumberWavesEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pNoiseGeneratorEdit, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRadiosityEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRadiosityClicked( ) ) );
-   connect( m_pBrightnessEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDistanceMaximumEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pErrorBoundEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pGrayThresholdEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pLowErrorFactorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMinimumReuseEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pNearestCountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRecursionLimitEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAdcBailoutEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAmbientLightEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAssumedGammaEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pHfGray16Edit, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridWaveLengthEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxIntersectionsEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxTraceLevelEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pNumberWavesEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoiseGeneratorEdit, TQ_SIGNAL( activated( int ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadiosityEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRadiosityClicked( ) ) );
+   connect( m_pBrightnessEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCountEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDistanceMaximumEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pErrorBoundEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pGrayThresholdEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pLowErrorFactorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMinimumReuseEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pNearestCountEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRecursionLimitEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMGlobalSettingsEdit::displayObject( PMObject* o )

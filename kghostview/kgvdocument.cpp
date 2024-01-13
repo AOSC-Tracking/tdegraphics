@@ -63,8 +63,8 @@ KGVDocument::KGVDocument( KGVPart* part, const char* name ) :
     readSettings();
 
     _pdf2dsc = new Pdf2dsc( _interpreterPath, this );
-    connect( _pdf2dsc, TQT_SIGNAL( finished( bool ) ),
-             TQT_SLOT( openPDFFileContinue( bool ) ) );
+    connect( _pdf2dsc, TQ_SIGNAL( finished( bool ) ),
+             TQ_SLOT( openPDFFileContinue( bool ) ) );
 }
 
 KGVDocument::~KGVDocument()
@@ -87,7 +87,7 @@ void KGVDocument::openFile( const TQString& name, const TQString& mimetype )
     _fileName = name;
     _mimetype = mimetype;
 
-    TQTimer::singleShot( 0, this, TQT_SLOT( doOpenFile() ) );
+    TQTimer::singleShot( 0, this, TQ_SLOT( doOpenFile() ) );
 }
 
 void KGVDocument::doOpenFile()
@@ -784,8 +784,8 @@ e=%1" ).arg( dscName )
 	    << "-c"
 	    << "quit";
 
-    connect( &process, TQT_SIGNAL( processExited( TDEProcess* ) ),
-	     this, TQT_SLOT( pdf2psExited( TDEProcess* ) ) );
+    connect( &process, TQ_SIGNAL( processExited( TDEProcess* ) ),
+	     this, TQ_SLOT( pdf2psExited( TDEProcess* ) ) );
 
     kdDebug(4500) << "KGVDocument: pdf2ps started" << endl;
     process.start( TDEProcess::NotifyOnExit );
@@ -830,8 +830,8 @@ void Pdf2dsc::run( const TQString& pdfName, const TQString& dscName )
               << "-c"
               << "quit";
 
-    connect( _process, TQT_SIGNAL( processExited( TDEProcess* ) ),
-	     this, TQT_SLOT( processExited() ) );
+    connect( _process, TQ_SIGNAL( processExited( TDEProcess* ) ),
+	     this, TQ_SLOT( processExited() ) );
 
     kdDebug(4500) << "Pdf2dsc: started" << endl;
     _process->start( TDEProcess::NotifyOnExit );

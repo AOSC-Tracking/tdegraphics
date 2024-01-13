@@ -37,16 +37,16 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	TQTabWidget* pages = new TQTabWidget(this);
 	 */
 	gradientSelection = new GradientSelection(this);
-	connect(gradientSelection, TQT_SIGNAL( valueChanged(Color*) ),
-		TQT_SLOT( slotGradientSelectionChangeColor(Color*) ));
-	connect(gradientSelection, TQT_SIGNAL( synchronizeColor() ),
-		TQT_SLOT( slotGradientSelectionSynchronizeColor() ));
-	connect(this, TQT_SIGNAL( valueChanged(Color*) ), gradientSelection, TQT_SLOT( slotSetValue(Color*) ));
+	connect(gradientSelection, TQ_SIGNAL( valueChanged(Color*) ),
+		TQ_SLOT( slotGradientSelectionChangeColor(Color*) ));
+	connect(gradientSelection, TQ_SIGNAL( synchronizeColor() ),
+		TQ_SLOT( slotGradientSelectionSynchronizeColor() ));
+	connect(this, TQ_SIGNAL( valueChanged(Color*) ), gradientSelection, TQ_SLOT( slotSetValue(Color*) ));
 	/*
 	pages->addTab(gradientSelection, i18n( "Gradient" ));
 	ImageSelection* imageSelection = new ImageSelection(this);
-	connect(imageSelection, TQT_SIGNAL( valueChanged(Color*) ), TQT_SLOT( slotSetColor(Color*) ));
-	connect(this, TQT_SIGNAL( valueChanged(Color*) ), imageSelection, TQT_SLOT( slotSetValue(Color*) ));
+	connect(imageSelection, TQ_SIGNAL( valueChanged(Color*) ), TQ_SLOT( slotSetColor(Color*) ));
+	connect(this, TQ_SIGNAL( valueChanged(Color*) ), imageSelection, TQ_SLOT( slotSetValue(Color*) ));
 	pages->addTab(imageSelection, i18n( "Image" ));
 	topLayout->addWidget(pages, 10);
 	 */
@@ -55,17 +55,17 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	topLayout->addWidget(hLine);
 	TQHBoxLayout* layout = new TQHBoxLayout();
 	TextEditSelection* textEditSelection = new TextEditSelection(this);
-	connect(textEditSelection, TQT_SIGNAL( valueChanged(Color*) ), TQT_SLOT( slotSetColor(Color*) ));
-	connect(this, TQT_SIGNAL( valueChanged(Color*) ), textEditSelection, TQT_SLOT( slotSetValue(Color*) ));
+	connect(textEditSelection, TQ_SIGNAL( valueChanged(Color*) ), TQ_SLOT( slotSetColor(Color*) ));
+	connect(this, TQ_SIGNAL( valueChanged(Color*) ), textEditSelection, TQ_SLOT( slotSetValue(Color*) ));
 	TQVBoxLayout* colorChangeLayout = new TQVBoxLayout();
 	colorChangeLayout->setMargin(2);
 	TQRadioButton* replaceButton = new TQRadioButton(i18n( "Replace" ), this);
-	connect(replaceButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotColorReplace() ));
+	connect(replaceButton, TQ_SIGNAL( clicked() ), TQ_SLOT( slotColorReplace() ));
 	replaceButton->setChecked(true);
 	colorChangeButtons.insert(replaceButton);
 	colorChangeLayout->addWidget(replaceButton);
 	TQRadioButton* changeButton = new TQRadioButton(i18n( "Change" ) + ":", this);
-	connect(changeButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotColorChange() ));
+	connect(changeButton, TQ_SIGNAL( clicked() ), TQ_SLOT( slotColorChange() ));
 	colorChangeButtons.insert(changeButton);
 	colorChangeLayout->addWidget(changeButton);
 	colorChangeValue = 0;
@@ -76,7 +76,7 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 		MAX_COLOR_CHANGE_VALUE/4, colorChangeValue, TQt::Horizontal, colorChangeSliderWidget);
 	colorChangeSlider->setTickInterval(colorChangeSlider->pageStep());
 	colorChangeSlider->setTickmarks(TQSlider::Above);
-	connect(colorChangeSlider, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( slotColorChangeValueChanged(int) ));
+	connect(colorChangeSlider, TQ_SIGNAL( valueChanged(int) ), TQ_SLOT( slotColorChangeValueChanged(int) ));
 	colorChangeSliderLayout->addWidget(colorChangeSlider);
 	TQHBoxLayout* colorChangeSliderLabelsLayout = new TQHBoxLayout(0);
 	TQLabel* subtractLabel = new TQLabel(i18n( "0" ), colorChangeSliderWidget);
@@ -95,7 +95,7 @@ ColorSelector::ColorSelector(TQWidget *parent, const char *name ) : TQWidget(par
 	layout->addWidget(vLine);
 	layout->addWidget(textEditSelection, 1);
 	colorPatch = new KColorPatch(this);
-	connect(colorPatch, TQT_SIGNAL( colorChanged(const TQColor&) ), TQT_SLOT( slotSetColor(const TQColor&) ));
+	connect(colorPatch, TQ_SIGNAL( colorChanged(const TQColor&) ), TQ_SLOT( slotSetColor(const TQColor&) ));
 	colorPatch->setMinimumSize(80, 64);
 	layout->addWidget(colorPatch, 10);
 	topLayout->addLayout(layout);

@@ -160,33 +160,33 @@ void PMLightEdit::createTopWidgets( )
    topLayout( )->addWidget( m_pMediaInteraction );
    topLayout( )->addWidget( m_pMediaAttenuation );
    
-   connect( m_pLocation, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pColor, TQT_SIGNAL( dataChanged( ) ),
-            TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotTypeActivated( int ) ) );
-   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFalloff, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pTightness, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPointAt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pParallel, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAreaLight, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAreaClicked( ) ) );
-   connect( m_pAreaType, TQT_SIGNAL( activated ( int ) ), TQT_SLOT( slotOrientCheck( ) ) );
-   connect( m_pAxis1, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
-   connect( m_pAxis2, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
-   connect( m_pSize1, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
-   connect( m_pSize2, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotOrientCheck( ) ) );
-   connect( m_pAdaptive, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pOrient, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pJitter, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFading, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFadingClicked( ) ) );
-   connect( m_pFadeDistance, TQT_SIGNAL( dataChanged( ) ),
-            TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFadePower, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaInteraction, TQT_SIGNAL( clicked( ) ),
-            TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaAttenuation, TQT_SIGNAL( clicked( ) ),
-            TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLocation, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pColor, TQ_SIGNAL( dataChanged( ) ),
+            TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotTypeActivated( int ) ) );
+   connect( m_pRadius, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFalloff, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pTightness, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPointAt, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pParallel, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAreaLight, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAreaClicked( ) ) );
+   connect( m_pAreaType, TQ_SIGNAL( activated ( int ) ), TQ_SLOT( slotOrientCheck( ) ) );
+   connect( m_pAxis1, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotOrientCheck( ) ) );
+   connect( m_pAxis2, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotOrientCheck( ) ) );
+   connect( m_pSize1, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotOrientCheck( ) ) );
+   connect( m_pSize2, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotOrientCheck( ) ) );
+   connect( m_pAdaptive, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pOrient, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pJitter, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFading, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotFadingClicked( ) ) );
+   connect( m_pFadeDistance, TQ_SIGNAL( dataChanged( ) ),
+            TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFadePower, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaInteraction, TQ_SIGNAL( clicked( ) ),
+            TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaAttenuation, TQ_SIGNAL( clicked( ) ),
+            TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMLightEdit::displayObject( PMObject* o )

@@ -103,18 +103,18 @@ PMLibraryEntryPreview::PMLibraryEntryPreview( TQWidget* parent ) :
    m_pCancelChanges->setEnabled( false );
    hl->addWidget( m_pCancelChanges );
 
-   connect( m_pName,                  TQT_SIGNAL( textChanged( const TQString& ) ),
-                                      TQT_SLOT( slotTextChanged( const TQString& ) ) );
-   connect( m_pDescription,           TQT_SIGNAL( textChanged( ) ),
-                                      TQT_SLOT( slotTextChanged( ) ) );
-   connect( m_pKeywords,              TQT_SIGNAL( textChanged( ) ),
-                                      TQT_SLOT( slotTextChanged( ) ) );
-   connect( m_pSetPreviewImageButton, TQT_SIGNAL( clicked( ) ),
-                                      TQT_SLOT( slotPreviewClicked( ) ) );
-   connect( m_pPart,                  TQT_SIGNAL( modified( ) ),
-                                      TQT_SLOT( slotTextChanged( ) ) );
-   connect( m_pApplyChanges, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotApplyClicked( ) ) );
-   connect( m_pCancelChanges, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCancelClicked( ) ) );
+   connect( m_pName,                  TQ_SIGNAL( textChanged( const TQString& ) ),
+                                      TQ_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pDescription,           TQ_SIGNAL( textChanged( ) ),
+                                      TQ_SLOT( slotTextChanged( ) ) );
+   connect( m_pKeywords,              TQ_SIGNAL( textChanged( ) ),
+                                      TQ_SLOT( slotTextChanged( ) ) );
+   connect( m_pSetPreviewImageButton, TQ_SIGNAL( clicked( ) ),
+                                      TQ_SLOT( slotPreviewClicked( ) ) );
+   connect( m_pPart,                  TQ_SIGNAL( modified( ) ),
+                                      TQ_SLOT( slotTextChanged( ) ) );
+   connect( m_pApplyChanges, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotApplyClicked( ) ) );
+   connect( m_pCancelChanges, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotCancelClicked( ) ) );
    vl->addStretch( 1 );
 }
 

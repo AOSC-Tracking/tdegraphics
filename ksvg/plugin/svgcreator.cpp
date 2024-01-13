@@ -62,7 +62,7 @@ bool SVGCreator::create(const TQString &path, int width, int height, TQImage &im
 	c->setup(&pix, &pix);
 
 	doc->attach(c);
-	connect(doc, TQT_SIGNAL(finishedRendering()), TQT_SLOT(slotFinished()));
+	connect(doc, TQ_SIGNAL(finishedRendering()), TQ_SLOT(slotFinished()));
 	doc->open( KURL::fromPathOrURL(path));
 
 	m_finished = false;

@@ -92,10 +92,10 @@ PMObjectSelect::PMObjectSelect( TQWidget* parent, const char* name, bool modal )
    setMainWidget( m_pListBox );
    setInitialSize( s_size );
 
-   connect( m_pListBox, TQT_SIGNAL( highlighted( TQListBoxItem* ) ),
-            TQT_SLOT( slotHighlighted( TQListBoxItem* ) ) );
-   connect( m_pListBox, TQT_SIGNAL( selected( TQListBoxItem* ) ),
-            TQT_SLOT( slotSelected( TQListBoxItem* ) ) );
+   connect( m_pListBox, TQ_SIGNAL( highlighted( TQListBoxItem* ) ),
+            TQ_SLOT( slotHighlighted( TQListBoxItem* ) ) );
+   connect( m_pListBox, TQ_SIGNAL( selected( TQListBoxItem* ) ),
+            TQ_SLOT( slotSelected( TQListBoxItem* ) ) );
    enableButtonOK( false );
 }
 

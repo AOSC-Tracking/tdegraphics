@@ -24,7 +24,7 @@ KViewTemplate::KViewTemplate( TQObject* parent, const char* name, const TQString
 	if( m_pViewer )
 	{
 		(void) new TDEAction( /*i18n(*/ "&Do Something" /*)*/, 0, 0,
-							this, TQT_SLOT( yourSlot() ),
+							this, TQ_SLOT( yourSlot() ),
 							actionCollection(), "plugin_template" );
 	}
 	else

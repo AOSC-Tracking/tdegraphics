@@ -424,11 +424,11 @@ kpViewScrollableContainer::kpViewScrollableContainer (kpMainWindow *parent,
     connectGripSignals (m_bottomRightGrip);
 
 
-    connect (this, TQT_SIGNAL (contentsMoving (int, int)),
-             this, TQT_SLOT (slotContentsMoving (int, int)));
+    connect (this, TQ_SIGNAL (contentsMoving (int, int)),
+             this, TQ_SLOT (slotContentsMoving (int, int)));
 
-    connect (m_dragScrollTimer, TQT_SIGNAL (timeout ()),
-             this, TQT_SLOT (slotDragScroll ()));
+    connect (m_dragScrollTimer, TQ_SIGNAL (timeout ()),
+             this, TQ_SLOT (slotDragScroll ()));
 }
 
 kpViewScrollableContainer::~kpViewScrollableContainer ()
@@ -458,20 +458,20 @@ int kpViewScrollableContainer::contentsYSoon ()
 // protected
 void kpViewScrollableContainer::connectGripSignals (kpGrip *grip)
 {
-    connect (grip, TQT_SIGNAL (beganDraw ()),
-             this, TQT_SLOT (slotGripBeganDraw ()));
-    connect (grip, TQT_SIGNAL (continuedDraw (int, int, bool)),
-             this, TQT_SLOT (slotGripContinuedDraw (int, int, bool)));
-    connect (grip, TQT_SIGNAL (cancelledDraw ()),
-             this, TQT_SLOT (slotGripCancelledDraw ()));
-    connect (grip, TQT_SIGNAL (endedDraw (int, int)),
-             this, TQT_SLOT (slotGripEndedDraw (int, int)));
+    connect (grip, TQ_SIGNAL (beganDraw ()),
+             this, TQ_SLOT (slotGripBeganDraw ()));
+    connect (grip, TQ_SIGNAL (continuedDraw (int, int, bool)),
+             this, TQ_SLOT (slotGripContinuedDraw (int, int, bool)));
+    connect (grip, TQ_SIGNAL (cancelledDraw ()),
+             this, TQ_SLOT (slotGripCancelledDraw ()));
+    connect (grip, TQ_SIGNAL (endedDraw (int, int)),
+             this, TQ_SLOT (slotGripEndedDraw (int, int)));
 
-    connect (grip, TQT_SIGNAL (statusMessageChanged (const TQString &)),
-             this, TQT_SLOT (slotGripStatusMessageChanged (const TQString &)));
+    connect (grip, TQ_SIGNAL (statusMessageChanged (const TQString &)),
+             this, TQ_SLOT (slotGripStatusMessageChanged (const TQString &)));
 
-    connect (grip, TQT_SIGNAL (releasedAllButtons ()),
-             this, TQT_SLOT (recalculateStatusMessage ()));
+    connect (grip, TQ_SIGNAL (releasedAllButtons ()),
+             this, TQ_SLOT (recalculateStatusMessage ()));
 }
 
 
@@ -946,7 +946,7 @@ void kpViewScrollableContainer::slotContentsMoving (int x, int y)
     // Reduce flicker - don't let TQScrollView scroll to-be-erased lines
     eraseResizeLines ();
 
-    TQTimer::singleShot (0, this, TQT_SLOT (slotContentsMoved ()));
+    TQTimer::singleShot (0, this, TQ_SLOT (slotContentsMoved ()));
 }
 
 // protected slot
@@ -972,19 +972,19 @@ void kpViewScrollableContainer::slotContentsMoved ()
 // protected
 void kpViewScrollableContainer::disconnectViewSignals ()
 {
-    disconnect (m_view, TQT_SIGNAL (sizeChanged (const TQSize &)),
-                this, TQT_SLOT (updateGrips ()));
-    disconnect (m_view, TQT_SIGNAL (destroyed ()),
-                this, TQT_SLOT (slotViewDestroyed ()));
+    disconnect (m_view, TQ_SIGNAL (sizeChanged (const TQSize &)),
+                this, TQ_SLOT (updateGrips ()));
+    disconnect (m_view, TQ_SIGNAL (destroyed ()),
+                this, TQ_SLOT (slotViewDestroyed ()));
 }
 
 // protected
 void kpViewScrollableContainer::connectViewSignals ()
 {
-    connect (m_view, TQT_SIGNAL (sizeChanged (const TQSize &)),
-             this, TQT_SLOT (updateGrips ()));
-    connect (m_view, TQT_SIGNAL (destroyed ()),
-             this, TQT_SLOT (slotViewDestroyed ()));
+    connect (m_view, TQ_SIGNAL (sizeChanged (const TQSize &)),
+             this, TQ_SLOT (updateGrips ()));
+    connect (m_view, TQ_SIGNAL (destroyed ()),
+             this, TQ_SLOT (slotViewDestroyed ()));
 }
 
 

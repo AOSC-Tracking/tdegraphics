@@ -98,17 +98,17 @@ PMLibraryBrowserViewWidget::PMLibraryBrowserViewWidget( TQWidget* parent, const 
    vl->addWidget( splitv, 99 );
 
    // Connect all the objects
-   connect( m_pUpButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUpButtonClicked( ) ) );
-   connect( m_pNewSubLibraryButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotNewSubLibraryClicked( ) ) );
-   connect( m_pNewObjectButton,  TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotNewObjectClicked( ) ) );
-   connect( m_pDeleteObjectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDeleteClicked( ) ) );
-   connect( m_pLibraryComboBox, TQT_SIGNAL( highlighted( const TQString& ) ),
-                                TQT_SLOT( slotPathSelected( const TQString& ) ) );
-   connect( m_pLibraryIconView, TQT_SIGNAL( selectionChanged( TQIconViewItem* ) ),
-                                TQT_SLOT( slotSelectionChanged( TQIconViewItem* ) ) );
-   connect( m_pLibraryIconView, TQT_SIGNAL( executed( TQIconViewItem* ) ),
-                                TQT_SLOT( slotSelectionExecuted( TQIconViewItem* ) ) );
-   connect( m_pLibraryEntryPreview, TQT_SIGNAL( objectChanged( ) ), TQT_SLOT( slotIconViewRefresh( ) ) );
+   connect( m_pUpButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotUpButtonClicked( ) ) );
+   connect( m_pNewSubLibraryButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotNewSubLibraryClicked( ) ) );
+   connect( m_pNewObjectButton,  TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotNewObjectClicked( ) ) );
+   connect( m_pDeleteObjectButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDeleteClicked( ) ) );
+   connect( m_pLibraryComboBox, TQ_SIGNAL( highlighted( const TQString& ) ),
+                                TQ_SLOT( slotPathSelected( const TQString& ) ) );
+   connect( m_pLibraryIconView, TQ_SIGNAL( selectionChanged( TQIconViewItem* ) ),
+                                TQ_SLOT( slotSelectionChanged( TQIconViewItem* ) ) );
+   connect( m_pLibraryIconView, TQ_SIGNAL( executed( TQIconViewItem* ) ),
+                                TQ_SLOT( slotSelectionExecuted( TQIconViewItem* ) ) );
+   connect( m_pLibraryEntryPreview, TQ_SIGNAL( objectChanged( ) ), TQ_SLOT( slotIconViewRefresh( ) ) );
 
    // Set the selected library
    slotPathSelected( m_pLibraryComboBox->currentText( ) );
@@ -161,14 +161,14 @@ void PMLibraryBrowserViewWidget::slotSelectionChanged( TQIconViewItem* item )
    if( sel->isSubLibrary( ) )
    {
       if( m_pLibraryEntryPreview->saveIfNeeded( ) )
-         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQ_SLOT( slotIconViewRefresh( ) ) );
       else
          m_pLibraryEntryPreview->showPreview( sel->path( ), m_topLibraryReadOnly, true );
    }
    else
    {
       if( m_pLibraryEntryPreview->saveIfNeeded( ) )
-         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQ_SLOT( slotIconViewRefresh( ) ) );
       else
          m_pLibraryEntryPreview->showPreview( sel->path( ), m_topLibraryReadOnly, false );
    }
@@ -184,14 +184,14 @@ void PMLibraryBrowserViewWidget::slotSelectionExecuted( TQIconViewItem* item )
       // It's a sub library
       m_pFutureLibrary = new PMLibraryHandle( sel->path( ) );
       m_pLibraryEntryPreview->clearPreview( );
-      TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewSetLibrary( ) ) );
+      TQTimer::singleShot( 100, this, TQ_SLOT( slotIconViewSetLibrary( ) ) );
       m_pUpButton->setEnabled( true );
    }
    else
    {
       // It's an object
       if( m_pLibraryEntryPreview->saveIfNeeded( ) )
-         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQ_SLOT( slotIconViewRefresh( ) ) );
       else
          m_pLibraryEntryPreview->showPreview( sel->path( ), m_topLibraryReadOnly, false );
    }
@@ -206,7 +206,7 @@ void PMLibraryBrowserViewWidget::slotUpButtonClicked( )
   m_pFutureLibrary = new PMLibraryHandle( pathManipulator.path( ) );
   if( !m_pFutureLibrary->isSubLibrary( ) )
      m_pUpButton->setEnabled( false );
-  TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewSetLibrary( ) ) );
+  TQTimer::singleShot( 100, this, TQ_SLOT( slotIconViewSetLibrary( ) ) );
 
   // Release the current Library
   delete m_pCurrentLibrary;
@@ -228,7 +228,7 @@ void PMLibraryBrowserViewWidget::slotDeleteClicked( )
       case PMLibraryHandle::Ok:
       {
          TDEIO::Job *job = TDEIO::del( sel->path() );
-         connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ), TQT_SLOT( slotJobResult( TDEIO::Job * ) ) );
+         connect( job, TQ_SIGNAL( result( TDEIO::Job * ) ), TQ_SLOT( slotJobResult( TDEIO::Job * ) ) );
       }
       break;
       case PMLibraryHandle::ReadOnlyLib:
@@ -250,7 +250,7 @@ void PMLibraryBrowserViewWidget::slotNewObjectClicked( )
    switch( m_pCurrentLibrary->createNewObject( ) )
    {
       case PMLibraryHandle::Ok:
-         TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
+         TQTimer::singleShot( 100, this, TQ_SLOT( slotIconViewRefresh( ) ) );
          break;
       case PMLibraryHandle::ReadOnlyLib:
          KMessageBox::error( this, i18n( "This library is read only." ), i18n( "Error" ) );
@@ -293,7 +293,7 @@ void PMLibraryBrowserViewWidget::slotJobResult( TDEIO::Job * job )
 {
    if( job->error( ) )
       job->showErrorDialog( this );
-   TQTimer::singleShot( 100, this, TQT_SLOT( slotIconViewRefresh( ) ) );
+   TQTimer::singleShot( 100, this, TQ_SLOT( slotIconViewRefresh( ) ) );
 }
 
 TQString PMLibraryBrowserViewFactory::description( ) const

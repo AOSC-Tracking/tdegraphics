@@ -55,21 +55,21 @@ FileWidget::FileWidget( const KURL& url, TQWidget *parent, const char *name )
     dirCompletionObject()->setCompletionMode( TDEGlobalSettings::CompletionAuto);
 
     slotViewChanged();
-    connect( this, TQT_SIGNAL( viewChanged( KFileView * )),
-	     TQT_SLOT( slotViewChanged() ));
+    connect( this, TQ_SIGNAL( viewChanged( KFileView * )),
+	     TQ_SLOT( slotViewChanged() ));
 
-    connect( dirLister(), TQT_SIGNAL( clear() ), TQT_SLOT( slotItemsCleared() ));
-    connect( dirLister(), TQT_SIGNAL( deleteItem( KFileItem * ) ),
-	     TQT_SLOT( slotItemDeleted( KFileItem *) ));
+    connect( dirLister(), TQ_SIGNAL( clear() ), TQ_SLOT( slotItemsCleared() ));
+    connect( dirLister(), TQ_SIGNAL( deleteItem( KFileItem * ) ),
+	     TQ_SLOT( slotItemDeleted( KFileItem *) ));
 
-    connect( this, TQT_SIGNAL( fileHighlighted( const KFileItem * )),
-	     TQT_SLOT( slotHighlighted( const KFileItem * )));
+    connect( this, TQ_SIGNAL( fileHighlighted( const KFileItem * )),
+	     TQ_SLOT( slotHighlighted( const KFileItem * )));
 
-    connect( this, TQT_SIGNAL(urlEntered(const KURL&)),
-             TQT_SLOT( slotURLEntered( const KURL& )));
+    connect( this, TQ_SIGNAL(urlEntered(const KURL&)),
+             TQ_SLOT( slotURLEntered( const KURL& )));
 
     // should actually be KDirOperator's job!
-    connect( this, TQT_SIGNAL( finishedLoading() ), TQT_SLOT( slotFinishedLoading() ));
+    connect( this, TQ_SIGNAL( finishedLoading() ), TQ_SLOT( slotFinishedLoading() ));
 }
 
 FileWidget::~FileWidget()
@@ -201,11 +201,11 @@ bool FileWidget::eventFilter( TQObject *o, TQEvent *e )
 		
                 if ( !m_fileFinder ) {
 		    m_fileFinder = new FileFinder( this, "file finder" );
-		    connect( m_fileFinder, TQT_SIGNAL( completion(const TQString&)),
-			     TQT_SLOT( findCompletion( const TQString& )));
+		    connect( m_fileFinder, TQ_SIGNAL( completion(const TQString&)),
+			     TQ_SLOT( findCompletion( const TQString& )));
 		    connect( m_fileFinder,
-			     TQT_SIGNAL( enterDir( const TQString& ) ),
-			     TQT_SLOT( slotReturnPressed( const TQString& )));
+			     TQ_SIGNAL( enterDir( const TQString& ) ),
+			     TQ_SLOT( slotReturnPressed( const TQString& )));
 		    m_fileFinder->move( width()  - m_fileFinder->width(),
 					height() - m_fileFinder->height() );
 		}

@@ -213,7 +213,7 @@ things are set multiple times. But it works :-)
   (font-lock-add-keywords 'c++-mode
   '(("\\<TQ_OBJECT\\>" . 'qt-keywords-face)))
   (font-lock-add-keywords 'c++-mode
-  '(("\\<SIGNAL\\|SLOT\\>" . 'qt-keywords-face)))
+  '(("\\<TQ_SIGNAL\\|TQ_SLOT\\>" . 'qt-keywords-face)))
   (font-lock-add-keywords 'c++-mode
   '(("\\<Q[A-Z][A-Za-z]*" . 'qt-keywords-face)))
   )

@@ -104,21 +104,21 @@ KViewViewer::KViewViewer( TQWidget *parentWidget, const char * /*widgetName*/,
 		else
 			setXMLFile( "kviewviewer_ro.rc" );
 
-		connect( widget, TQT_SIGNAL( contextPress( const TQPoint & ) ),
-				this, TQT_SLOT( slotPopupMenu( const TQPoint & ) ) );
-		connect( widget, TQT_SIGNAL( zoomChanged( double ) ),
-				this, TQT_SLOT( zoomChanged( double ) ) );
-		connect( widget, TQT_SIGNAL( showingImageDone() ),
-				this, TQT_SLOT( switchBlendEffect() ) );
-		connect( widget, TQT_SIGNAL( hasImage( bool ) ),
-				this, TQT_SLOT( hasImage( bool ) ) );
-		connect( widget, TQT_SIGNAL( imageChanged() ),
-				this, TQT_SLOT( setModified() ) );
+		connect( widget, TQ_SIGNAL( contextPress( const TQPoint & ) ),
+				this, TQ_SLOT( slotPopupMenu( const TQPoint & ) ) );
+		connect( widget, TQ_SIGNAL( zoomChanged( double ) ),
+				this, TQ_SLOT( zoomChanged( double ) ) );
+		connect( widget, TQ_SIGNAL( showingImageDone() ),
+				this, TQ_SLOT( switchBlendEffect() ) );
+		connect( widget, TQ_SIGNAL( hasImage( bool ) ),
+				this, TQ_SLOT( hasImage( bool ) ) );
+		connect( widget, TQ_SIGNAL( imageChanged() ),
+				this, TQ_SLOT( setModified() ) );
 
-		connect( m_pFileWatch, TQT_SIGNAL( dirty( const TQString & ) ),
-				this, TQT_SLOT( slotFileDirty( const TQString & ) ) );
+		connect( m_pFileWatch, TQ_SIGNAL( dirty( const TQString & ) ),
+				this, TQ_SLOT( slotFileDirty( const TQString & ) ) );
 
-		KSettings::Dispatcher::self()->registerInstance( instance(), this, TQT_SLOT( readSettings() ) );
+		KSettings::Dispatcher::self()->registerInstance( instance(), this, TQ_SLOT( readSettings() ) );
 
 		// by default disable progress info (so it won't open the dialog in Konqueror)
 		setProgressInfoEnabled( false );
@@ -202,8 +202,8 @@ bool KViewViewer::saveAs( const KURL & kurl )
 
 		TDEIO::Job * job = TDEIO::copy( KURL( m_file ), kurl, isProgressInfoEnabled() );
 		emit started( job );
-		connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ),
-				this, TQT_SLOT( slotResultSaveAs( TDEIO::Job * ) ) );
+		connect( job, TQ_SIGNAL( result( TDEIO::Job * ) ),
+				this, TQ_SLOT( slotResultSaveAs( TDEIO::Job * ) ) );
 		return true;
 	}
 	kdDebug( 4610 ) << "call KParts::ReadWritePart::saveAs( " << kurl.prettyURL() << " )" << endl;
@@ -268,8 +268,8 @@ bool KViewViewer::openURL( const KURL & url )
 
 		m_pJob = TDEIO::get( m_url, m_pExtension->urlArgs().reload, isProgressInfoEnabled() );
 		emit started( m_pJob );
-		connect( m_pJob, TQT_SIGNAL( result( TDEIO::Job * ) ), TQT_SLOT( slotJobFinished ( TDEIO::Job * ) ) );
-		connect( m_pJob, TQT_SIGNAL( data( TDEIO::Job *, const TQByteArray & ) ), TQT_SLOT( slotData( TDEIO::Job *, const TQByteArray & ) ) );
+		connect( m_pJob, TQ_SIGNAL( result( TDEIO::Job * ) ), TQ_SLOT( slotJobFinished ( TDEIO::Job * ) ) );
+		connect( m_pJob, TQ_SIGNAL( data( TDEIO::Job *, const TQByteArray & ) ), TQ_SLOT( slotData( TDEIO::Job *, const TQByteArray & ) ) );
 		return true;
 	}
 }
@@ -466,33 +466,33 @@ bool KViewViewer::saveFile()
 void KViewViewer::setupActions()
 {
 	m_paZoomIn = new TDEAction( i18n( "Zoom In" ), "zoom-in", TDEStdAccel::shortcut( TDEStdAccel::ZoomIn ), this,
-			TQT_SLOT( slotZoomIn() ), actionCollection(), "zoomin" );
+			TQ_SLOT( slotZoomIn() ), actionCollection(), "zoomin" );
 	m_paZoomOut = new TDEAction( i18n( "Zoom Out" ), "zoom-out", TDEStdAccel::shortcut( TDEStdAccel::ZoomOut ), this,
-			TQT_SLOT( slotZoomOut() ), actionCollection(), "zoomout" );
+			TQ_SLOT( slotZoomOut() ), actionCollection(), "zoomout" );
 
 	m_paZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, actionCollection(), "view_zoom" );
-	connect( m_paZoom, TQT_SIGNAL( activated( const TQString & ) ), this, TQT_SLOT( setZoom( const TQString & ) ) );
+	connect( m_paZoom, TQ_SIGNAL( activated( const TQString & ) ), this, TQ_SLOT( setZoom( const TQString & ) ) );
 	m_paZoom->setEditable( true );
 	m_paZoom->clear();
 	m_paZoom->setItems( TQStringList::split( '|', "20%|25%|33%|50%|75%|100%|125%|150%|200%|250%|300%|350%|400%|450%|500%" ) );
 	m_paZoom->setCurrentItem( 5 );
 
 	m_paFlipMenu = new TDEActionMenu( i18n( "&Flip" ), actionCollection(), "flip" );
-	m_paFlipV = new TDEAction( i18n( "&Vertical" ), Key_V, this, TQT_SLOT( slotFlipV() ), actionCollection(), "flip_vertical" );
-	m_paFlipH = new TDEAction( i18n( "&Horizontal" ), Key_H, this, TQT_SLOT( slotFlipH() ), actionCollection(), "flip_horizontal" );
+	m_paFlipV = new TDEAction( i18n( "&Vertical" ), Key_V, this, TQ_SLOT( slotFlipV() ), actionCollection(), "flip_vertical" );
+	m_paFlipH = new TDEAction( i18n( "&Horizontal" ), Key_H, this, TQ_SLOT( slotFlipH() ), actionCollection(), "flip_horizontal" );
 	m_paFlipMenu->insert( m_paFlipV );
 	m_paFlipMenu->insert( m_paFlipH );
 
 	m_paRotateCCW = new TDEAction( i18n( "Ro&tate Counter-Clockwise" ), "object-rotate-left", 0, this,
-			TQT_SLOT( slotRotateCCW() ), actionCollection(), "rotateCCW" );
+			TQ_SLOT( slotRotateCCW() ), actionCollection(), "rotateCCW" );
 	m_paRotateCW = new TDEAction( i18n( "Rotate Clockwise" ), "object-rotate-right", 0, this,
-			TQT_SLOT( slotRotateCW() ), actionCollection(), "rotateCW" );
-	m_paSave = KStdAction::save( this, TQT_SLOT( slotSave() ), actionCollection() );
+			TQ_SLOT( slotRotateCW() ), actionCollection(), "rotateCW" );
+	m_paSave = KStdAction::save( this, TQ_SLOT( slotSave() ), actionCollection() );
 	m_paSave->setEnabled( false );
-	m_paSaveAs = KStdAction::saveAs( this, TQT_SLOT( slotSaveAs() ), actionCollection() );
+	m_paSaveAs = KStdAction::saveAs( this, TQ_SLOT( slotSaveAs() ), actionCollection() );
 
 	m_paFitToWin = new TDEAction( i18n( "Fit Image to Window" ), 0, 0, this,
-			TQT_SLOT( slotFitToWin() ), actionCollection(), "fittowin" );
+			TQ_SLOT( slotFitToWin() ), actionCollection(), "fittowin" );
 	m_paZoomIn->setEnabled( false );
 	m_paZoomOut->setEnabled( false );
 	m_paZoom->setEnabled( false );
@@ -503,18 +503,18 @@ void KViewViewer::setupActions()
 	m_paFlipMenu->setEnabled( false );
 	m_paFlipV->setEnabled( false );
 	m_paFlipH->setEnabled( false );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paZoomIn, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paZoomOut, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paZoom, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paRotateCCW, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paRotateCW, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paSaveAs, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFitToWin, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipMenu, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipV, TQT_SLOT( setEnabled( bool ) ) );
-	connect( widget(), TQT_SIGNAL( hasImage( bool ) ), m_paFlipH, TQT_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paZoomIn, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paZoomOut, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paZoom, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paRotateCCW, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paRotateCW, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paSaveAs, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paFitToWin, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paFlipMenu, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paFlipV, TQ_SLOT( setEnabled( bool ) ) );
+	connect( widget(), TQ_SIGNAL( hasImage( bool ) ), m_paFlipH, TQ_SLOT( setEnabled( bool ) ) );
 
-	m_paShowScrollbars = new TDEToggleAction( i18n( "Show Scrollbars" ), 0, this, TQT_SLOT( slotToggleScrollbars() ),
+	m_paShowScrollbars = new TDEToggleAction( i18n( "Show Scrollbars" ), 0, this, TQ_SLOT( slotToggleScrollbars() ),
 	 actionCollection(), "show_scrollbars" );
 	m_paShowScrollbars->setCheckedState(i18n("Hide Scrollbars"));
 }
@@ -754,7 +754,7 @@ void KViewViewer::slotPopupMenu( const TQPoint &pos )
 {
 	KXMLGUIClient *popupGUIClient = new PopupGUIClient( instance(), m_popupDoc );
 
-	(void) new TDEAction( i18n( "Save Image As..." ), 0, this, TQT_SLOT( slotSaveAs() ),
+	(void) new TDEAction( i18n( "Save Image As..." ), 0, this, TQ_SLOT( slotSaveAs() ),
 						popupGUIClient->actionCollection(), "saveimageas" );
 
 	// ### HACK treat the image as dir to get the back/fwd/reload buttons (Simon)
@@ -818,9 +818,9 @@ void KViewViewer::slotFileDirty( const TQString & )
 		KPushButton * no = new KPushButton( i18n("Do Not Reload"), hb );
 		layout->addWidget( no );
 		layout->addItem( new TQSpacerItem( 0, 0, TQSizePolicy::Minimum, TQSizePolicy::Minimum ) );
-		connect( yes, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotReloadUnmodified() ) );
-		connect( yes, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );
-		connect( no, TQT_SIGNAL( clicked() ), pop, TQT_SLOT( hide() ) );
+		connect( yes, TQ_SIGNAL( clicked() ), this, TQ_SLOT( slotReloadUnmodified() ) );
+		connect( yes, TQ_SIGNAL( clicked() ), pop, TQ_SLOT( hide() ) );
+		connect( no, TQ_SIGNAL( clicked() ), pop, TQ_SLOT( hide() ) );
 		pop->setView( vb );
 		pop->setTimeout( 0 );
 		pop->setAutoDelete( true );

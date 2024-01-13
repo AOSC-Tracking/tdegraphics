@@ -54,7 +54,7 @@ PageView::PageView( TQWidget* parent, const char* name )
   continuousViewmode = true;
   fullScreen = false;
 
-  connect(this, TQT_SIGNAL(contentsMoving(int, int)), this, TQT_SLOT(calculateCurrentPageNumber(int, int)));
+  connect(this, TQ_SIGNAL(contentsMoving(int, int)), this, TQ_SLOT(calculateCurrentPageNumber(int, int)));
 }
 
 

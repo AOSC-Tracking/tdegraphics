@@ -87,9 +87,9 @@ void Shell::init()
     m_part = 0;
     return;
   }
-  connect( this, TQT_SIGNAL( restoreDocument(TDEConfig*) ),m_part, TQT_SLOT( restoreDocument(TDEConfig*)));
-  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(TDEConfig*) ), m_part, TQT_SLOT( saveDocumentRestoreInfo(TDEConfig*)));
-  connect( m_part, TQT_SIGNAL( enablePrintAction(bool) ), m_printAction, TQT_SLOT( setEnabled(bool)));
+  connect( this, TQ_SIGNAL( restoreDocument(TDEConfig*) ),m_part, TQ_SLOT( restoreDocument(TDEConfig*)));
+  connect( this, TQ_SIGNAL( saveDocumentRestoreInfo(TDEConfig*) ), m_part, TQ_SLOT( saveDocumentRestoreInfo(TDEConfig*)));
+  connect( m_part, TQ_SIGNAL( enablePrintAction(bool) ), m_printAction, TQ_SLOT( setEnabled(bool)));
   
   readSettings();
   if (!TDEGlobal::config()->hasGroup("MainWindow"))
@@ -99,7 +99,7 @@ void Shell::init()
   }
   setAutoSaveSettings();
   
-  if (m_openUrl.isValid()) TQTimer::singleShot(0, this, TQT_SLOT(delayedOpen()));
+  if (m_openUrl.isValid()) TQTimer::singleShot(0, this, TQ_SLOT(delayedOpen()));
 }
 
 void Shell::delayedOpen()
@@ -146,19 +146,19 @@ void Shell::writeSettings()
 
 void Shell::setupActions()
 {
-  TDEAction * openAction = KStdAction::open(this, TQT_SLOT(fileOpen()), actionCollection());
-  m_recent = KStdAction::openRecent( this, TQT_SLOT( openURL( const KURL& ) ), actionCollection() );
-  connect( m_recent, TQT_SIGNAL( activated() ), openAction, TQT_SLOT( activate() ) );
+  TDEAction * openAction = KStdAction::open(this, TQ_SLOT(fileOpen()), actionCollection());
+  m_recent = KStdAction::openRecent( this, TQ_SLOT( openURL( const KURL& ) ), actionCollection() );
+  connect( m_recent, TQ_SIGNAL( activated() ), openAction, TQ_SLOT( activate() ) );
   m_recent->setWhatsThis( i18n( "<b>Click</b> to open a file or <b>Click and hold</b> to select a recent file" ) );
-  m_printAction = KStdAction::print( m_part, TQT_SLOT( slotPrint() ), actionCollection() );
+  m_printAction = KStdAction::print( m_part, TQ_SLOT( slotPrint() ), actionCollection() );
   m_printAction->setEnabled( false );
-  KStdAction::quit(this, TQT_SLOT(slotQuit()), actionCollection());
+  KStdAction::quit(this, TQ_SLOT(slotQuit()), actionCollection());
 
   setStandardToolBarMenuEnabled(true);
 
-  m_showMenuBarAction = KStdAction::showMenubar( this, TQT_SLOT( slotShowMenubar() ), actionCollection());
-  KStdAction::configureToolbars(this, TQT_SLOT(optionsConfigureToolbars()), actionCollection());
-  m_fullScreenAction = KStdAction::fullScreen( this, TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
+  m_showMenuBarAction = KStdAction::showMenubar( this, TQ_SLOT( slotShowMenubar() ), actionCollection());
+  KStdAction::configureToolbars(this, TQ_SLOT(optionsConfigureToolbars()), actionCollection());
+  m_fullScreenAction = KStdAction::fullScreen( this, TQ_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 }
 
 void Shell::saveProperties(TDEConfig* config)
@@ -197,7 +197,7 @@ Shell::fileOpen()
 Shell::optionsConfigureToolbars()
 {
   KEditToolbar dlg(factory());
-  connect(&dlg, TQT_SIGNAL(newToolbarConfig()), this, TQT_SLOT(applyNewToolbarConfig()));
+  connect(&dlg, TQ_SIGNAL(newToolbarConfig()), this, TQ_SLOT(applyNewToolbarConfig()));
   dlg.exec();
 }
 

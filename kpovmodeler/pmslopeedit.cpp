@@ -54,8 +54,8 @@ void PMSlopeEdit::createTopWidgets( )
    gl->addWidget( m_pSlopeEdit, 1, 1 );
    hl->addStretch( 1 );
    
-   connect( m_pHeightEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHeightEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMSlopeEdit::displayObject( PMObject* o )

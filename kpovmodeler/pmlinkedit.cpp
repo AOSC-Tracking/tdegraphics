@@ -71,8 +71,8 @@ void PMLinkEdit::init( )
    m_pClearButton = new KPushButton( KStdGuiItem::clear(), this );
    layout->addWidget( m_pClearButton );
 
-   connect( m_pSelectButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSelectClicked( ) ) );
-   connect( m_pClearButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotClearClicked( ) ) );
+   connect( m_pSelectButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotSelectClicked( ) ) );
+   connect( m_pClearButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotClearClicked( ) ) );
 }
 
 void PMLinkEdit::setDisplayedObject( PMObject* obj )

@@ -136,31 +136,31 @@ PMDialogView::PMDialogView( PMPart* part, TQWidget* parent, const char* name )
    TQHBoxLayout* buttonLayout = new TQHBoxLayout( m_pLayout );
    m_pHelpButton = new KPushButton( KStdGuiItem::help(), this );
    buttonLayout->addWidget( m_pHelpButton );
-   connect( m_pHelpButton, TQT_SIGNAL( clicked( ) ), this, TQT_SLOT( slotHelp( ) ) );
+   connect( m_pHelpButton, TQ_SIGNAL( clicked( ) ), this, TQ_SLOT( slotHelp( ) ) );
    m_pHelpButton->setEnabled( false );
 
    m_pApplyButton = new KPushButton( KStdGuiItem::apply(), this );
    buttonLayout->addWidget( m_pApplyButton );
-   connect( m_pApplyButton, TQT_SIGNAL( clicked( ) ), this, TQT_SLOT( slotApply( ) ) );
+   connect( m_pApplyButton, TQ_SIGNAL( clicked( ) ), this, TQ_SLOT( slotApply( ) ) );
    m_pApplyButton->setEnabled( false );
 
    buttonLayout->addStretch( );
 
    m_pCancelButton = new KPushButton( KStdGuiItem::cancel(), this );
    buttonLayout->addWidget( m_pCancelButton );
-   connect( m_pCancelButton, TQT_SIGNAL( clicked( ) ), this, TQT_SLOT( slotCancel( ) ) );
+   connect( m_pCancelButton, TQ_SIGNAL( clicked( ) ), this, TQ_SLOT( slotCancel( ) ) );
    m_pCancelButton->setEnabled( false );
 
    m_pLayout->activate( );
 
-   connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );
-   connect( part, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
-   connect( part, TQT_SIGNAL( clear( ) ), TQT_SLOT( slotClear( ) ) );
-   connect( part, TQT_SIGNAL( aboutToRender( ) ), TQT_SLOT( slotAboutToRender( ) ) );
-   connect( part, TQT_SIGNAL( aboutToSave( ) ), TQT_SLOT( slotAboutToRender( ) ) );
-   connect( this, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-            part, TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQ_SIGNAL( refresh( ) ), TQ_SLOT( slotRefresh( ) ) );
+   connect( part, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQ_SIGNAL( clear( ) ), TQ_SLOT( slotClear( ) ) );
+   connect( part, TQ_SIGNAL( aboutToRender( ) ), TQ_SLOT( slotAboutToRender( ) ) );
+   connect( part, TQ_SIGNAL( aboutToSave( ) ), TQ_SLOT( slotAboutToRender( ) ) );
+   connect( this, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            part, TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
    displayObject( m_pPart->activeObject( ) );
 }
@@ -371,15 +371,15 @@ void PMDialogView::displayObject( PMObject* obj, bool updateDescription )
 
          if( m_pDisplayedWidget )
          {
-            connect( m_pDisplayedWidget, TQT_SIGNAL( dataChanged( ) ),
-                     this, TQT_SLOT( slotDataChanged( ) ) );
-            connect( m_pDisplayedWidget, TQT_SIGNAL( sizeChanged( ) ),
-                     this, TQT_SLOT( slotSizeChanged( ) ) );
-            connect( m_pDisplayedWidget, TQT_SIGNAL( aboutToRender( ) ),
-                     this, TQT_SLOT( slotAboutToRender( ) ) );
+            connect( m_pDisplayedWidget, TQ_SIGNAL( dataChanged( ) ),
+                     this, TQ_SLOT( slotDataChanged( ) ) );
+            connect( m_pDisplayedWidget, TQ_SIGNAL( sizeChanged( ) ),
+                     this, TQ_SLOT( slotSizeChanged( ) ) );
+            connect( m_pDisplayedWidget, TQ_SIGNAL( aboutToRender( ) ),
+                     this, TQ_SLOT( slotAboutToRender( ) ) );
             connect( m_pDisplayedWidget,
-                     TQT_SIGNAL( controlPointSelectionChanged( ) ),
-                     TQT_SLOT( slotControlPointSelectionChanged( ) ) );
+                     TQ_SIGNAL( controlPointSelectionChanged( ) ),
+                     TQ_SLOT( slotControlPointSelectionChanged( ) ) );
 
          }
       }

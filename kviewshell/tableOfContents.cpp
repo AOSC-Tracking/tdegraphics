@@ -55,7 +55,7 @@ TableOfContents::TableOfContents(TQWidget* parent)
 
   readSettings();
 
-  connect(this, TQT_SIGNAL(executed(TQListViewItem*)), this, TQT_SLOT(itemClicked(TQListViewItem*)));
+  connect(this, TQ_SIGNAL(executed(TQListViewItem*)), this, TQ_SLOT(itemClicked(TQListViewItem*)));
 }
 
 TableOfContents::~TableOfContents()

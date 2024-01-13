@@ -61,8 +61,8 @@ void dviRenderer::exportPDF()
   // has been called meanwhile. See also the exportPS method.
   if (proc != 0) {
     // Make sure all further output of the programm is ignored
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQ_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQ_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
     proc = 0;
   }
 
@@ -120,7 +120,7 @@ void dviRenderer::exportPDF()
   if (progress != 0) {
     progress->TextLabel2->setText( i18n("Please be patient") );
     progress->setTotalSteps( dviFile->total_pages );
-    tqApp->connect(progress, TQT_SIGNAL(finished()), this, TQT_SLOT(abortExternalProgramm()));
+    tqApp->connect(progress, TQ_SIGNAL(finished()), this, TQ_SLOT(abortExternalProgramm()));
   }
 
   proc = new KShellProcess();
@@ -128,11 +128,11 @@ void dviRenderer::exportPDF()
     kdError(4300) << "Could not allocate ShellProcess for the dvipdfm command." << endl;
     return;
   }
-  tqApp->disconnect( this, TQT_SIGNAL(mySignal()), 0, 0 );
+  tqApp->disconnect( this, TQ_SIGNAL(mySignal()), 0, 0 );
 
-  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(dvips_terminated(TDEProcess *)));
+  tqApp->connect(proc, TQ_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQ_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQ_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQ_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQ_SIGNAL(processExited(TDEProcess *)), this, TQ_SLOT(dvips_terminated(TDEProcess *)));
 
   export_errorString = i18n("<qt>The external program 'dvipdf', which was used to export the file, reported an error. "
 			    "You might wish to look at the <strong>document info dialog</strong> which you will "
@@ -167,8 +167,8 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
   // enough to ignore the exit status of the editor if another command
   // has been called meanwhile. See also the exportPDF method.
   if (proc != 0) {
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
-    tqApp->disconnect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQ_SIGNAL(receivedStderr(TDEProcess *, char *, int)), 0, 0);
+    tqApp->disconnect(proc, TQ_SIGNAL(receivedStdout(TDEProcess *, char *, int)), 0, 0);
     proc = 0;
   }
 
@@ -223,7 +223,7 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
   if (progress != 0) {
     progress->TextLabel2->setText( i18n("Please be patient") );
     progress->setTotalSteps( dviFile->total_pages );
-    tqApp->connect(progress, TQT_SIGNAL(finished()), this, TQT_SLOT(abortExternalProgramm()));
+    tqApp->connect(progress, TQ_SIGNAL(finished()), this, TQ_SLOT(abortExternalProgramm()));
   }
 
   // There is a major problem with dvips, at least 5.86 and lower: the
@@ -294,9 +294,9 @@ void dviRenderer::exportPS(const TQString& fname, const TQString& options, KPrin
     return;
   }
   
-  tqApp->connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQT_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
-  tqApp->connect(proc, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(dvips_terminated(TDEProcess *)));
+  tqApp->connect(proc, TQ_SIGNAL(receivedStderr(TDEProcess *, char *, int)), this, TQ_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQ_SIGNAL(receivedStdout(TDEProcess *, char *, int)), this, TQ_SLOT(dvips_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(proc, TQ_SIGNAL(processExited(TDEProcess *)), this, TQ_SLOT(dvips_terminated(TDEProcess *)));
   export_errorString = i18n("<qt>The external program 'dvips', which was used to export the file, reported an error. "
 			    "You might wish to look at the <strong>document info dialog</strong> which you will "
 			    "find in the File-Menu for a precise error report.</qt>") ;

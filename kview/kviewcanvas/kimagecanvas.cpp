@@ -71,12 +71,12 @@ KImageCanvas::KImageCanvas( TQWidget * parent, const char * name, const TQString
 	setMinimumSize( 0, 0 );
 	setBgColor( Defaults::bgColor );
 
-	connect( this, TQT_SIGNAL( imageChanged() ), this, TQT_SLOT( slotImageChanged() ) );
-	connect( m_pTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( hideCursor() ) );
+	connect( this, TQ_SIGNAL( imageChanged() ), this, TQ_SLOT( slotImageChanged() ) );
+	connect( m_pTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( hideCursor() ) );
 
 	KSettings::Dispatcher::self()->registerInstance(
 			KImageCanvasFactory::instance(), this,
-			TQT_SLOT( loadSettings() ) );
+			TQ_SLOT( loadSettings() ) );
 
 	viewport()->setFocusProxy( this );
 	clear();
@@ -517,7 +517,7 @@ void KImageCanvas::updateImage()
 {
 	kdDebug( 4620 ) << k_funcinfo << endl;
 	if( ! m_bImageUpdateScheduled )
-		TQTimer::singleShot( 0, this, TQT_SLOT( slotUpdateImage() ) );
+		TQTimer::singleShot( 0, this, TQ_SLOT( slotUpdateImage() ) );
 	m_bImageUpdateScheduled = true;
 }
 
@@ -940,10 +940,10 @@ KImageHolder * KImageCanvas::createNewClient()
 
 	addChild( client, 0, 0 );
 
-	connect( client, TQT_SIGNAL( contextPress( const TQPoint& ) ), TQT_SIGNAL( contextPress( const TQPoint& ) ) );
-	connect( client, TQT_SIGNAL( cursorPos( const TQPoint & ) ), TQT_SLOT( mapCursorPos( const TQPoint & ) ) );
-	connect( client, TQT_SIGNAL( selected( const TQRect & ) ), TQT_SLOT( selected( const TQRect & ) ) );
-	connect( client, TQT_SIGNAL( wannaScroll( int, int ) ), TQT_SLOT( scrollBy( int, int ) ) );
+	connect( client, TQ_SIGNAL( contextPress( const TQPoint& ) ), TQ_SIGNAL( contextPress( const TQPoint& ) ) );
+	connect( client, TQ_SIGNAL( cursorPos( const TQPoint & ) ), TQ_SLOT( mapCursorPos( const TQPoint & ) ) );
+	connect( client, TQ_SIGNAL( selected( const TQRect & ) ), TQ_SLOT( selected( const TQRect & ) ) );
+	connect( client, TQ_SIGNAL( wannaScroll( int, int ) ), TQ_SLOT( scrollBy( int, int ) ) );
 
 	return client;
 }

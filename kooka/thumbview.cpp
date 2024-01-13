@@ -73,8 +73,8 @@ ThumbView::ThumbView( TQWidget *parent, const char *name )
 
    slSetBackGround();
 
-   connect( m_iconView, TQT_SIGNAL( executed( TQIconViewItem* )),
-	    this, TQT_SLOT( slDoubleClicked( TQIconViewItem* )));
+   connect( m_iconView, TQ_SIGNAL( executed( TQIconViewItem* )),
+	    this, TQ_SLOT( slDoubleClicked( TQIconViewItem* )));
 
    m_pendingJobs.setAutoDelete(false);
 }
@@ -389,18 +389,18 @@ void ThumbView::slNewFileItems( const KFileItemList& items )
 
       if( m_job )
       {
-	 connect( m_job, TQT_SIGNAL( result( TDEIO::Job * )),
-		  this, TQT_SLOT( slPreviewResult( TDEIO::Job * )));
-	 connect( m_job, TQT_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
-		  TQT_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
+	 connect( m_job, TQ_SIGNAL( result( TDEIO::Job * )),
+		  this, TQ_SLOT( slPreviewResult( TDEIO::Job * )));
+	 connect( m_job, TQ_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
+		  TQ_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
 
          m_pendingJobs.clear();
 
          /* TDEIO::Jo result is called in any way: Success, Failed, Error,
 	  * thus connecting the failed is not really necessary.
 	  */
-        // connect( job, TQT_SIGNAL( failed( const KFileItem* )),
-        //          this, TQT_SLOT( slotFailed( const KFileItem* ) ));
+        // connect( job, TQ_SIGNAL( failed( const KFileItem* )),
+        //          this, TQ_SLOT( slotFailed( const KFileItem* ) ));
 
       }
    }

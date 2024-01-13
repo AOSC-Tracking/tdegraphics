@@ -106,25 +106,25 @@ void PMIsoSurfaceEdit::createTopWidgets( )
    topLayout( )->addWidget( m_pAllIntersections );
    topLayout( )->addWidget( m_pOpen );
 
-   connect( m_pFunction, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( textChanged( const TQString& ) ) );
-   connect( m_pContainedBy, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( currentChanged( int ) ) );
-   connect( m_pCorner1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCorner2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCenter, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pThreshold, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAccuracy, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxGradient, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEvaluate, TQT_SIGNAL( toggled( bool ) ),
-            TQT_SLOT( evaluateToggled( bool ) ) );
-   connect( m_pMaxTrace, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFunction, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( textChanged( const TQString& ) ) );
+   connect( m_pContainedBy, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( currentChanged( int ) ) );
+   connect( m_pCorner1, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCorner2, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCenter, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadius, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pThreshold, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAccuracy, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxGradient, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEvaluate, TQ_SIGNAL( toggled( bool ) ),
+            TQ_SLOT( evaluateToggled( bool ) ) );
+   connect( m_pMaxTrace, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
    for( i = 0; i < 3; i++ )
-      connect( m_pEvaluateValue[i], TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pOpen, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( toggled( bool ) ) );
-   connect( m_pAllIntersections, TQT_SIGNAL( toggled( bool ) ),
-            TQT_SLOT( allToggled( bool ) ) );
+      connect( m_pEvaluateValue[i], TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pOpen, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( toggled( bool ) ) );
+   connect( m_pAllIntersections, TQ_SIGNAL( toggled( bool ) ),
+            TQ_SLOT( allToggled( bool ) ) );
 }
 
 void PMIsoSurfaceEdit::displayObject( PMObject* o )

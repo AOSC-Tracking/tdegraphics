@@ -147,16 +147,16 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     /* Actions for the previewer zoom */
     TDEAction *act;
     act =  new TDEAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
-		       this, TQT_SLOT( slScaleToWidth()), this, "preview_scaletowidth" );
+		       this, TQ_SLOT( slScaleToWidth()), this, "preview_scaletowidth" );
     act->plug( img_canvas->contextMenu());
 
     act = new TDEAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
-		      this, TQT_SLOT( slScaleToHeight()), this, "preview_scaletoheight" );
+		      this, TQ_SLOT( slScaleToHeight()), this, "preview_scaletoheight" );
     act->plug( img_canvas->contextMenu());
 
     /*Signals: Control the custom-field and show size of selection */
-    connect( img_canvas, TQT_SIGNAL(newRect()),      this, TQT_SLOT(slCustomChange()));
-    connect( img_canvas, TQT_SIGNAL(newRect(TQRect)), this, TQT_SLOT(slNewDimen(TQRect)));
+    connect( img_canvas, TQ_SIGNAL(newRect()),      this, TQ_SLOT(slCustomChange()));
+    connect( img_canvas, TQ_SIGNAL(newRect(TQRect)), this, TQ_SLOT(slNewDimen(TQRect)));
 
     /* Stuff for the preview-Notification */
     left->addWidget( new TQLabel( i18n("<B>Preview</B>"), frame ), 1);
@@ -174,8 +174,8 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     pre_format_combo->insertItem( i18n( "10x15 cm" ), ID_10_15 );
     pre_format_combo->insertItem( i18n( "Letter" ), ID_LETTER);
 
-    connect( pre_format_combo, TQT_SIGNAL(activated (int)),
-             this, TQT_SLOT( slFormatChange(int)));
+    connect( pre_format_combo, TQ_SIGNAL(activated (int)),
+             this, TQ_SLOT( slFormatChange(int)));
 
     left->addWidget( pre_format_combo, 1 );
 
@@ -190,7 +190,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     portrait_id = bgroup->id( rb2 );
     bgroup->setButton( portrait_id );
 
-    connect(bgroup, TQT_SIGNAL(clicked(int)), this, TQT_SLOT(slOrientChange(int)));
+    connect(bgroup, TQ_SIGNAL(clicked(int)), this, TQ_SLOT(slOrientChange(int)));
 
     int rblen = 5+w+12;  // 12 for the button?
     rb1->setGeometry( 5, 6, rblen, h );
@@ -211,22 +211,22 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     d->m_cbBackground = new TQComboBox( hbox );
     d->m_cbBackground->insertItem(i18n("Black"), BG_ITEM_BLACK );
     d->m_cbBackground->insertItem(i18n("White"), BG_ITEM_WHITE );
-    connect( d->m_cbBackground, TQT_SIGNAL(activated(int) ),
-             this, TQT_SLOT( slScanBackgroundChanged( int )));
+    connect( d->m_cbBackground, TQ_SIGNAL(activated(int) ),
+             this, TQ_SLOT( slScanBackgroundChanged( int )));
 
 
     TQToolTip::add( d->m_cbBackground,
                    i18n("Select whether a scan of the empty\n"
                         "scanner glass results in a\n"
                         "black or a white image."));
-    connect( d->m_cbAutoSel, TQT_SIGNAL(toggled(bool) ), TQT_SLOT(slAutoSelToggled(bool)));
+    connect( d->m_cbAutoSel, TQ_SIGNAL(toggled(bool) ), TQ_SLOT(slAutoSelToggled(bool)));
 
     (void) new TQLabel( i18n("scanner background"), d->m_autoSelGroup );
 
     TQLabel *l1= new TQLabel( i18n("Thresh&old:"), d->m_autoSelGroup );
     d->m_sliderThresh = new TQSlider( 0, 254, 10, d->m_autoSelThresh,  TQt::Horizontal,
                                      d->m_autoSelGroup );
-    connect( d->m_sliderThresh, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slSetAutoSelThresh(int)));
+    connect( d->m_sliderThresh, TQ_SIGNAL(valueChanged(int)), TQ_SLOT(slSetAutoSelThresh(int)));
     TQToolTip::add( d->m_sliderThresh,
                    i18n("Threshold for autodetection.\n"
                         "All pixels higher (on black background)\n"
@@ -237,7 +237,7 @@ Previewer::Previewer(TQWidget *parent, const char *name )
 #if 0  /** Dustsize-Slider: No deep impact on result **/
     (void) new TQLabel( i18n("Dust size:"), grBox );
     d->m_sliderDust = new TQSlider( 0, 50, 5, d->m_dustsize,  TQt::Horizontal, grBox );
-    connect( d->m_sliderDust, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slSetAutoSelDustsize(int)));
+    connect( d->m_sliderDust, TQ_SIGNAL(valueChanged(int)), TQ_SLOT(slSetAutoSelDustsize(int)));
 #endif
 
     /* disable Autoselbox as long as no scanner is connected */
@@ -251,10 +251,10 @@ Previewer::Previewer(TQWidget *parent, const char *name )
     TQLabel *l2 = new TQLabel( i18n("width - mm" ), gbox );
     TQLabel *l3 = new TQLabel( i18n("height - mm" ), gbox );
 
-    connect( this, TQT_SIGNAL(setScanWidth(const TQString&)),
-             l2, TQT_SLOT(setText(const TQString&)));
-    connect( this, TQT_SIGNAL(setScanHeight(const TQString&)),
-             l3, TQT_SLOT(setText(const TQString&)));
+    connect( this, TQ_SIGNAL(setScanWidth(const TQString&)),
+             l2, TQ_SLOT(setText(const TQString&)));
+    connect( this, TQ_SIGNAL(setScanHeight(const TQString&)),
+             l3, TQ_SLOT(setText(const TQString&)));
 
     /* size indicator */
     TQHBox *hb = new TQHBox( gbox );
@@ -265,8 +265,8 @@ Previewer::Previewer(TQWidget *parent, const char *name )
                                "changing its background color." ));
     indi->setText( i18n("-") );
 
-    connect( this, TQT_SIGNAL( setSelectionSize(long)),
-             indi, TQT_SLOT(   setSizeInByte   (long)) );
+    connect( this, TQ_SIGNAL( setSelectionSize(long)),
+             indi, TQ_SLOT(   setSizeInByte   (long)) );
 
     left->addWidget( gbox, 1 );
 

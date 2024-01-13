@@ -1220,8 +1220,8 @@ void kpDocument::setSelection (const kpSelection &selection)
     // 2. We delete our copy when setSelection() is called again.
     //
     // See code above for both.
-    connect (m_selection, TQT_SIGNAL (changed (const TQRect &)),
-             this, TQT_SLOT (slotContentsChanged (const TQRect &)));
+    connect (m_selection, TQ_SIGNAL (changed (const TQRect &)),
+             this, TQ_SLOT (slotContentsChanged (const TQRect &)));
 
 
     if (!hadSelection)

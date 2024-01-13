@@ -75,15 +75,15 @@ void PMHeightFieldEdit::createTopWidgets( )
    m_pSmooth = new TQCheckBox( i18n( "Smooth" ), this );
    topLayout( )->addWidget( m_pSmooth );
 
-   connect( m_pHeightFieldType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotTypeChanged( int ) ) );
-   connect( m_pFileName, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotFileNameChanged( const TQString& ) ) );
-   connect( m_pChooseFileName, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotFileNameClicked( ) ) );
-   connect( m_pWaterLevel, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pHierarchy, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSmooth, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHeightFieldType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotTypeChanged( int ) ) );
+   connect( m_pFileName, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotFileNameChanged( const TQString& ) ) );
+   connect( m_pChooseFileName, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotFileNameClicked( ) ) );
+   connect( m_pWaterLevel, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pHierarchy, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSmooth, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMHeightFieldEdit::displayObject( PMObject* o )

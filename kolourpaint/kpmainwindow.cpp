@@ -259,20 +259,20 @@ void kpMainWindow::init ()
 #endif
 
     m_scrollView = new kpViewScrollableContainer (this, "scrollView");
-    connect (m_scrollView, TQT_SIGNAL (beganDocResize ()),
-             this, TQT_SLOT (slotBeganDocResize ()));
-    connect (m_scrollView, TQT_SIGNAL (continuedDocResize (const TQSize &)),
-             this, TQT_SLOT (slotContinuedDocResize (const TQSize &)));
-    connect (m_scrollView, TQT_SIGNAL (cancelledDocResize ()),
-             this, TQT_SLOT (slotCancelledDocResize ()));
-    connect (m_scrollView, TQT_SIGNAL (endedDocResize (const TQSize &)),
-             this, TQT_SLOT (slotEndedDocResize (const TQSize &)));
+    connect (m_scrollView, TQ_SIGNAL (beganDocResize ()),
+             this, TQ_SLOT (slotBeganDocResize ()));
+    connect (m_scrollView, TQ_SIGNAL (continuedDocResize (const TQSize &)),
+             this, TQ_SLOT (slotContinuedDocResize (const TQSize &)));
+    connect (m_scrollView, TQ_SIGNAL (cancelledDocResize ()),
+             this, TQ_SLOT (slotCancelledDocResize ()));
+    connect (m_scrollView, TQ_SIGNAL (endedDocResize (const TQSize &)),
+             this, TQ_SLOT (slotEndedDocResize (const TQSize &)));
 
-    connect (m_scrollView, TQT_SIGNAL (statusMessageChanged (const TQString &)),
-             this, TQT_SLOT (slotDocResizeMessageChanged (const TQString &)));
+    connect (m_scrollView, TQ_SIGNAL (statusMessageChanged (const TQString &)),
+             this, TQ_SLOT (slotDocResizeMessageChanged (const TQString &)));
 
-    connect (m_scrollView, TQT_SIGNAL (contentsMoving (int, int)),
-             this, TQT_SLOT (slotScrollViewAboutToScroll ()));
+    connect (m_scrollView, TQ_SIGNAL (contentsMoving (int, int)),
+             this, TQ_SLOT (slotScrollViewAboutToScroll ()));
     setCentralWidget (m_scrollView);
     m_scrollView->show ();
 #if DEBUG_KP_MAIN_WINDOW
@@ -707,16 +707,16 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
     #endif
 
         // Copy/Cut/Deselect/Delete
-        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
-                 m_actionCut, TQT_SLOT (setEnabled (bool)));
-        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
-                 m_actionCopy, TQT_SLOT (setEnabled (bool)));
-        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
-                 m_actionDelete, TQT_SLOT (setEnabled (bool)));
-        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
-                 m_actionDeselect, TQT_SLOT (setEnabled (bool)));
-        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
-                 m_actionCopyToFile, TQT_SLOT (setEnabled (bool)));
+        connect (m_document, TQ_SIGNAL (selectionEnabled (bool)),
+                 m_actionCut, TQ_SLOT (setEnabled (bool)));
+        connect (m_document, TQ_SIGNAL (selectionEnabled (bool)),
+                 m_actionCopy, TQ_SLOT (setEnabled (bool)));
+        connect (m_document, TQ_SIGNAL (selectionEnabled (bool)),
+                 m_actionDelete, TQ_SLOT (setEnabled (bool)));
+        connect (m_document, TQ_SIGNAL (selectionEnabled (bool)),
+                 m_actionDeselect, TQ_SLOT (setEnabled (bool)));
+        connect (m_document, TQ_SIGNAL (selectionEnabled (bool)),
+                 m_actionCopyToFile, TQ_SLOT (setEnabled (bool)));
 
         // this code won't actually enable any actions at this stage
         // (fresh document) but better safe than sorry
@@ -726,40 +726,40 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
         m_actionDelete->setEnabled (m_document->selection ());
         m_actionCopyToFile->setEnabled (m_document->selection ());
 
-        connect (m_document, TQT_SIGNAL (selectionEnabled (bool)),
-                 this, TQT_SLOT (slotImageMenuUpdateDueToSelection ()));
-        connect (m_document, TQT_SIGNAL (selectionIsTextChanged (bool)),
-                 this, TQT_SLOT (slotImageMenuUpdateDueToSelection ()));
+        connect (m_document, TQ_SIGNAL (selectionEnabled (bool)),
+                 this, TQ_SLOT (slotImageMenuUpdateDueToSelection ()));
+        connect (m_document, TQ_SIGNAL (selectionIsTextChanged (bool)),
+                 this, TQ_SLOT (slotImageMenuUpdateDueToSelection ()));
 
         // Status bar
-        connect (m_document, TQT_SIGNAL (documentOpened ()),
-                 this, TQT_SLOT (recalculateStatusBar ()));
+        connect (m_document, TQ_SIGNAL (documentOpened ()),
+                 this, TQ_SLOT (recalculateStatusBar ()));
 
-        connect (m_document, TQT_SIGNAL (sizeChanged (const TQSize &)),
-                 this, TQT_SLOT (setStatusBarDocSize (const TQSize &)));
+        connect (m_document, TQ_SIGNAL (sizeChanged (const TQSize &)),
+                 this, TQ_SLOT (setStatusBarDocSize (const TQSize &)));
 
         // Caption (url, modified)
-        connect (m_document, TQT_SIGNAL (documentModified ()),
-                 this, TQT_SLOT (slotUpdateCaption ()));
-        connect (m_document, TQT_SIGNAL (documentOpened ()),
-                 this, TQT_SLOT (slotUpdateCaption ()));
-        connect (m_document, TQT_SIGNAL (documentSaved ()),
-                 this, TQT_SLOT (slotUpdateCaption ()));
+        connect (m_document, TQ_SIGNAL (documentModified ()),
+                 this, TQ_SLOT (slotUpdateCaption ()));
+        connect (m_document, TQ_SIGNAL (documentOpened ()),
+                 this, TQ_SLOT (slotUpdateCaption ()));
+        connect (m_document, TQ_SIGNAL (documentSaved ()),
+                 this, TQ_SLOT (slotUpdateCaption ()));
 
         // File/Reload action only available with non-empty URL
-        connect (m_document, TQT_SIGNAL (documentSaved ()),
-                 this, TQT_SLOT (slotEnableReload ()));
+        connect (m_document, TQ_SIGNAL (documentSaved ()),
+                 this, TQ_SLOT (slotEnableReload ()));
 
-        connect (m_document, TQT_SIGNAL (documentSaved ()),
-                 this, TQT_SLOT (slotEnableSettingsShowPath ()));
+        connect (m_document, TQ_SIGNAL (documentSaved ()),
+                 this, TQ_SLOT (slotEnableSettingsShowPath ()));
 
         // Command history
         if (m_commandHistory)
         {
-            connect (m_commandHistory, TQT_SIGNAL (documentRestored ()),
-                     this, TQT_SLOT (slotDocumentRestored ()));  // caption "!modified"
-            connect (m_document, TQT_SIGNAL (documentSaved ()),
-                     m_commandHistory, TQT_SLOT (documentSaved ()));
+            connect (m_commandHistory, TQ_SIGNAL (documentRestored ()),
+                     this, TQ_SLOT (slotDocumentRestored ()));  // caption "!modified"
+            connect (m_document, TQ_SIGNAL (documentSaved ()),
+                     m_commandHistory, TQ_SLOT (documentSaved ()));
         }
         else
         {
@@ -768,10 +768,10 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
         }
 
         // Sync document -> views
-        connect (m_document, TQT_SIGNAL (contentsChanged (const TQRect &)),
-                 m_viewManager, TQT_SLOT (updateViews (const TQRect &)));
-        connect (m_document, TQT_SIGNAL (sizeChanged (int, int)),
-                 m_viewManager, TQT_SLOT (adjustViewsToEnvironment ()));
+        connect (m_document, TQ_SIGNAL (contentsChanged (const TQRect &)),
+                 m_viewManager, TQ_SLOT (updateViews (const TQRect &)));
+        connect (m_document, TQ_SIGNAL (sizeChanged (int, int)),
+                 m_viewManager, TQ_SLOT (adjustViewsToEnvironment ()));
 
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\tenabling actions" << endl;
@@ -814,7 +814,7 @@ void kpMainWindow::setDocument (kpDocument *newDoc)
             #if DEBUG_KP_MAIN_WINDOW
                 kdDebug () << "\tcreating thumbnail LATER" << endl;
             #endif
-                TQTimer::singleShot (0, this, TQT_SLOT (slotCreateThumbnail ()));
+                TQTimer::singleShot (0, this, TQ_SLOT (slotCreateThumbnail ()));
             }
         }
     #endif
@@ -1003,7 +1003,7 @@ void kpMainWindow::slotScrollViewAboutToScroll ()
     }
 #endif
 
-    TQTimer::singleShot (0, this, TQT_SLOT (slotScrollViewAfterScroll ()));
+    TQTimer::singleShot (0, this, TQ_SLOT (slotScrollViewAfterScroll ()));
 }
 
 // private slot

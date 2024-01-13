@@ -108,8 +108,8 @@ FormatDialog::FormatDialog( TQWidget *parent, const TQString&, const char *name 
 #endif
    kdDebug(28000) << "#### have " << fo.count() << " image types" << endl;
    lb_format->insertStringList( fo );
-   connect( lb_format, TQT_SIGNAL( highlighted(const TQString&)),
-	    TQT_SLOT( showHelp(const TQString&)));
+   connect( lb_format, TQ_SIGNAL( highlighted(const TQString&)),
+	    TQ_SLOT( showHelp(const TQString&)));
 
    // Insert label for helptext
    l_help = new TQLabel( page );

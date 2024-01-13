@@ -141,29 +141,29 @@ void PMCameraEdit::createTopWidgets( )
    m_pExport = new TQCheckBox( i18n( "Export to renderer" ), this );
    topLayout( )->addWidget( m_pExport );
 
-   connect( m_pLocation, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDirection, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotDirectionChanged( ) ) );
-   connect( m_pRight, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRight, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotRightChanged( ) ) );
-   connect( m_pUp, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSky, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pLookAt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableAngle, TQT_SIGNAL( toggled( bool ) ),
-            TQT_SLOT( slotAngleToggled( bool ) ) );
-   connect( m_pAngle, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotAngleChanged( ) ) );
-   connect( m_pCameraType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotCameraTypeActivated( int ) ) );
-   connect( m_pCylinderType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotCylinderTypeActivated( int ) ) );
+   connect( m_pLocation, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDirection, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotDirectionChanged( ) ) );
+   connect( m_pRight, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRight, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotRightChanged( ) ) );
+   connect( m_pUp, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSky, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pLookAt, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableAngle, TQ_SIGNAL( toggled( bool ) ),
+            TQ_SLOT( slotAngleToggled( bool ) ) );
+   connect( m_pAngle, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotAngleChanged( ) ) );
+   connect( m_pCameraType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotCameraTypeActivated( int ) ) );
+   connect( m_pCylinderType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotCylinderTypeActivated( int ) ) );
 
-   connect( m_pFocalBlur, TQT_SIGNAL( toggled( bool ) ),
-            TQT_SLOT( slotFocalBlurToggled( bool ) ) );
-   connect( m_pAperture, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pBlurSamples, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFocalPoint, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pVariance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pConfidence, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pExport, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFocalBlur, TQ_SIGNAL( toggled( bool ) ),
+            TQ_SLOT( slotFocalBlurToggled( bool ) ) );
+   connect( m_pAperture, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pBlurSamples, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFocalPoint, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pVariance, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pConfidence, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pExport, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMCameraEdit::displayObject( PMObject* o )
@@ -385,9 +385,9 @@ void PMCameraEdit::slotAngleChanged( )
    if( ( m_pCameraType->currentItem( ) == 0 ) && m_pEnableAngle->isChecked( ) )
    {
       // Only change direction's value in perspective and with an enabled angle
-      disconnect( m_pDirection, TQT_SIGNAL( dataChanged( ) ), 0, 0 );
+      disconnect( m_pDirection, TQ_SIGNAL( dataChanged( ) ), 0, 0 );
       m_pDirection->setVector( 0.5 * m_pRight->vector( ) / tan( 2 * deg2Rad( m_pAngle->value( ) ) ) );
-      connect( m_pDirection, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotDirectionChanged( ) ) );
+      connect( m_pDirection, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotDirectionChanged( ) ) );
    }
    */
    emit dataChanged( );

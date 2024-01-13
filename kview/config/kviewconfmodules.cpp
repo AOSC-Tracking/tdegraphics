@@ -39,7 +39,7 @@ KViewGeneralConfig::KViewGeneralConfig( TQWidget * parent, const char * /*name*/
 
 	m_pResizeGroup = new TQVButtonGroup( i18n( "Resizing" ), this );
 	m_pResizeGroup->setSizePolicy( TQSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed ) );
-	connect( m_pResizeGroup, TQT_SIGNAL( clicked( int ) ), this, TQT_SLOT( resizeChanged( int ) ) );
+	connect( m_pResizeGroup, TQ_SIGNAL( clicked( int ) ), this, TQ_SLOT( resizeChanged( int ) ) );
 	layout->addWidget( m_pResizeGroup );
 
 	( void )new TQRadioButton( i18n( "Only resize window" ), m_pResizeGroup );

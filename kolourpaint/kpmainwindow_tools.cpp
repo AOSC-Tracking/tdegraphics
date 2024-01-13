@@ -103,23 +103,23 @@ void kpMainWindow::setupToolActions ()
     m_actionPrevToolOptionGroup1 = new kpSingleKeyTriggersAction (
         i18n ("Previous Tool Option (Group #1)"),
         kpTool::shortcutForKey (TQt::Key_1),
-        this, TQT_SLOT (slotActionPrevToolOptionGroup1 ()),
+        this, TQ_SLOT (slotActionPrevToolOptionGroup1 ()),
         ac, "prev_tool_option_group_1");
     m_actionNextToolOptionGroup1 = new kpSingleKeyTriggersAction (
         i18n ("Next Tool Option (Group #1)"),
         kpTool::shortcutForKey (TQt::Key_2),
-        this, TQT_SLOT (slotActionNextToolOptionGroup1 ()),
+        this, TQ_SLOT (slotActionNextToolOptionGroup1 ()),
         ac, "next_tool_option_group_1");
 
     m_actionPrevToolOptionGroup2 = new kpSingleKeyTriggersAction (
         i18n ("Previous Tool Option (Group #2)"),
         kpTool::shortcutForKey (TQt::Key_3),
-        this, TQT_SLOT (slotActionPrevToolOptionGroup2 ()),
+        this, TQ_SLOT (slotActionPrevToolOptionGroup2 ()),
         ac, "prev_tool_option_group_2");
     m_actionNextToolOptionGroup2 = new kpSingleKeyTriggersAction (
         i18n ("Next Tool Option (Group #2)"),
         kpTool::shortcutForKey (TQt::Key_4),
-        this, TQT_SLOT (slotActionNextToolOptionGroup2 ()),
+        this, TQ_SLOT (slotActionNextToolOptionGroup2 ()),
         ac, "next_tool_option_group_2");
 }
 
@@ -127,10 +127,10 @@ void kpMainWindow::setupToolActions ()
 void kpMainWindow::createToolBox ()
 {
     m_toolToolBar = new kpToolToolBar (i18n ("Tool Box"), this, 2/*columns/rows*/, "Tool Box");
-    connect (m_toolToolBar, TQT_SIGNAL (sigToolSelected (kpTool *)),
-             this, TQT_SLOT (slotToolSelected (kpTool *)));
-    connect (m_toolToolBar, TQT_SIGNAL (toolWidgetOptionSelected ()),
-             this, TQT_SLOT (updateToolOptionPrevNextActionsEnabled ()));
+    connect (m_toolToolBar, TQ_SIGNAL (sigToolSelected (kpTool *)),
+             this, TQ_SLOT (slotToolSelected (kpTool *)));
+    connect (m_toolToolBar, TQ_SIGNAL (toolWidgetOptionSelected ()),
+             this, TQ_SLOT (updateToolOptionPrevNextActionsEnabled ()));
 
     for (TQPtrList <kpTool>::const_iterator it = m_tools.begin ();
          it != m_tools.end ();
@@ -331,55 +331,55 @@ void kpMainWindow::slotToolSelected (kpTool *tool)
 
     if (previousTool)
     {
-        disconnect (previousTool, TQT_SIGNAL (movedAndAboutToDraw (const TQPoint &, const TQPoint &, int, bool *)),
-                    this, TQT_SLOT (slotDragScroll (const TQPoint &, const TQPoint &, int, bool *)));
-        disconnect (previousTool, TQT_SIGNAL (endedDraw (const TQPoint &)),
-                    this, TQT_SLOT (slotEndDragScroll ()));
-        disconnect (previousTool, TQT_SIGNAL (cancelledShape (const TQPoint &)),
-                    this, TQT_SLOT (slotEndDragScroll ()));
+        disconnect (previousTool, TQ_SIGNAL (movedAndAboutToDraw (const TQPoint &, const TQPoint &, int, bool *)),
+                    this, TQ_SLOT (slotDragScroll (const TQPoint &, const TQPoint &, int, bool *)));
+        disconnect (previousTool, TQ_SIGNAL (endedDraw (const TQPoint &)),
+                    this, TQ_SLOT (slotEndDragScroll ()));
+        disconnect (previousTool, TQ_SIGNAL (cancelledShape (const TQPoint &)),
+                    this, TQ_SLOT (slotEndDragScroll ()));
 
-        disconnect (previousTool, TQT_SIGNAL (userMessageChanged (const TQString &)),
-                    this, TQT_SLOT (recalculateStatusBarMessage ()));
-        disconnect (previousTool, TQT_SIGNAL (userShapePointsChanged (const TQPoint &, const TQPoint &)),
-                    this, TQT_SLOT (recalculateStatusBarShape ()));
-        disconnect (previousTool, TQT_SIGNAL (userShapeSizeChanged (const TQSize &)),
-                    this, TQT_SLOT (recalculateStatusBarShape ()));
+        disconnect (previousTool, TQ_SIGNAL (userMessageChanged (const TQString &)),
+                    this, TQ_SLOT (recalculateStatusBarMessage ()));
+        disconnect (previousTool, TQ_SIGNAL (userShapePointsChanged (const TQPoint &, const TQPoint &)),
+                    this, TQ_SLOT (recalculateStatusBarShape ()));
+        disconnect (previousTool, TQ_SIGNAL (userShapeSizeChanged (const TQSize &)),
+                    this, TQ_SLOT (recalculateStatusBarShape ()));
 
-        disconnect (m_colorToolBar, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
-                    previousTool, TQT_SLOT (slotColorsSwappedInternal (const kpColor &, const kpColor &)));
-        disconnect (m_colorToolBar, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
-                    previousTool, TQT_SLOT (slotForegroundColorChangedInternal (const kpColor &)));
-        disconnect (m_colorToolBar, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
-                    previousTool, TQT_SLOT (slotBackgroundColorChangedInternal (const kpColor &)));
-        disconnect (m_colorToolBar, TQT_SIGNAL (colorSimilarityChanged (double, int)),
-                    previousTool, TQT_SLOT (slotColorSimilarityChangedInternal (double, int)));
+        disconnect (m_colorToolBar, TQ_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
+                    previousTool, TQ_SLOT (slotColorsSwappedInternal (const kpColor &, const kpColor &)));
+        disconnect (m_colorToolBar, TQ_SIGNAL (foregroundColorChanged (const kpColor &)),
+                    previousTool, TQ_SLOT (slotForegroundColorChangedInternal (const kpColor &)));
+        disconnect (m_colorToolBar, TQ_SIGNAL (backgroundColorChanged (const kpColor &)),
+                    previousTool, TQ_SLOT (slotBackgroundColorChangedInternal (const kpColor &)));
+        disconnect (m_colorToolBar, TQ_SIGNAL (colorSimilarityChanged (double, int)),
+                    previousTool, TQ_SLOT (slotColorSimilarityChangedInternal (double, int)));
     }
 
     if (tool)
     {
-        connect (tool, TQT_SIGNAL (movedAndAboutToDraw (const TQPoint &, const TQPoint &, int, bool *)),
-                 this, TQT_SLOT (slotDragScroll (const TQPoint &, const TQPoint &, int, bool *)));
-        connect (tool, TQT_SIGNAL (endedDraw (const TQPoint &)),
-                 this, TQT_SLOT (slotEndDragScroll ()));
-        connect (tool, TQT_SIGNAL (cancelledShape (const TQPoint &)),
-                 this, TQT_SLOT (slotEndDragScroll ()));
+        connect (tool, TQ_SIGNAL (movedAndAboutToDraw (const TQPoint &, const TQPoint &, int, bool *)),
+                 this, TQ_SLOT (slotDragScroll (const TQPoint &, const TQPoint &, int, bool *)));
+        connect (tool, TQ_SIGNAL (endedDraw (const TQPoint &)),
+                 this, TQ_SLOT (slotEndDragScroll ()));
+        connect (tool, TQ_SIGNAL (cancelledShape (const TQPoint &)),
+                 this, TQ_SLOT (slotEndDragScroll ()));
 
-        connect (tool, TQT_SIGNAL (userMessageChanged (const TQString &)),
-                 this, TQT_SLOT (recalculateStatusBarMessage ()));
-        connect (tool, TQT_SIGNAL (userShapePointsChanged (const TQPoint &, const TQPoint &)),
-                 this, TQT_SLOT (recalculateStatusBarShape ()));
-        connect (tool, TQT_SIGNAL (userShapeSizeChanged (const TQSize &)),
-                 this, TQT_SLOT (recalculateStatusBarShape ()));
+        connect (tool, TQ_SIGNAL (userMessageChanged (const TQString &)),
+                 this, TQ_SLOT (recalculateStatusBarMessage ()));
+        connect (tool, TQ_SIGNAL (userShapePointsChanged (const TQPoint &, const TQPoint &)),
+                 this, TQ_SLOT (recalculateStatusBarShape ()));
+        connect (tool, TQ_SIGNAL (userShapeSizeChanged (const TQSize &)),
+                 this, TQ_SLOT (recalculateStatusBarShape ()));
         recalculateStatusBar ();
 
-        connect (m_colorToolBar, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
-                 tool, TQT_SLOT (slotColorsSwappedInternal (const kpColor &, const kpColor &)));
-        connect (m_colorToolBar, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
-                 tool, TQT_SLOT (slotForegroundColorChangedInternal (const kpColor &)));
-        connect (m_colorToolBar, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
-                 tool, TQT_SLOT (slotBackgroundColorChangedInternal (const kpColor &)));
-        connect (m_colorToolBar, TQT_SIGNAL (colorSimilarityChanged (double, int)),
-                 tool, TQT_SLOT (slotColorSimilarityChangedInternal (double, int)));
+        connect (m_colorToolBar, TQ_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
+                 tool, TQ_SLOT (slotColorsSwappedInternal (const kpColor &, const kpColor &)));
+        connect (m_colorToolBar, TQ_SIGNAL (foregroundColorChanged (const kpColor &)),
+                 tool, TQ_SLOT (slotForegroundColorChangedInternal (const kpColor &)));
+        connect (m_colorToolBar, TQ_SIGNAL (backgroundColorChanged (const kpColor &)),
+                 tool, TQ_SLOT (slotBackgroundColorChangedInternal (const kpColor &)));
+        connect (m_colorToolBar, TQ_SIGNAL (colorSimilarityChanged (double, int)),
+                 tool, TQ_SLOT (slotColorSimilarityChangedInternal (double, int)));
 
 
         saveLastTool ();

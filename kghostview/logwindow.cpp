@@ -46,8 +46,8 @@ LogWindow::LogWindow( const TQString& caption,
     _logView->setFont( TDEGlobalSettings::fixedFont() );
     _logView->setMinimumWidth( 80 * fontMetrics().width( " " ) );
 
-    connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( clear() ) );
-    connect( _configureGS, TQT_SIGNAL( leftClickedURL() ), TQT_SLOT( emitConfigureGS() ) );
+    connect( this, TQ_SIGNAL( user1Clicked() ), TQ_SLOT( clear() ) );
+    connect( _configureGS, TQ_SIGNAL( leftClickedURL() ), TQ_SLOT( emitConfigureGS() ) );
 }
 
 void LogWindow::emitConfigureGS() {

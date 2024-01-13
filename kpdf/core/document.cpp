@@ -204,7 +204,7 @@ bool KPDFDocument::openDocument( const TQString & docFile, const KURL & url, con
     if ( !d->saveBookmarksTimer )
     {
         d->saveBookmarksTimer = new TQTimer( this );
-        connect( d->saveBookmarksTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( saveDocumentInfo() ) );
+        connect( d->saveBookmarksTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( saveDocumentInfo() ) );
     }
     d->saveBookmarksTimer->start( 5 * 60 * 1000 );
 
@@ -212,7 +212,7 @@ bool KPDFDocument::openDocument( const TQString & docFile, const KURL & url, con
     if ( !d->memCheckTimer )
     {
         d->memCheckTimer = new TQTimer( this );
-        connect( d->memCheckTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotTimedMemoryCheck() ) );
+        connect( d->memCheckTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( slotTimedMemoryCheck() ) );
     }
     d->memCheckTimer->start( 2000 );
 

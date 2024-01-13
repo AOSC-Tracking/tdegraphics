@@ -100,8 +100,8 @@ KDialogBase (parent, name, false/*non-modal*/,
     lay->setRowStretch (0, 1);
 
 
-    connect (m_filePixmapLabel, TQT_SIGNAL (resized ()),
-             this, TQT_SLOT (updatePixmapPreview ()));
+    connect (m_filePixmapLabel, TQ_SIGNAL (resized ()),
+             this, TQ_SLOT (updatePixmapPreview ()));
 }
 
 kpDocumentSaveOptionsPreviewDialog::~kpDocumentSaveOptionsPreviewDialog ()
@@ -331,27 +331,27 @@ void kpDocumentSaveOptionsWidget::init ()
     lay->addWidget (m_previewButton, 0/*stretch*/, TQt::AlignRight);
 
 
-    connect (m_colorDepthCombo, TQT_SIGNAL (activated (int)),
-             this, TQT_SLOT (slotColorDepthSelected ()));
-    connect (m_colorDepthCombo, TQT_SIGNAL (activated (int)),
-             this, TQT_SLOT (updatePreview ()));
+    connect (m_colorDepthCombo, TQ_SIGNAL (activated (int)),
+             this, TQ_SLOT (slotColorDepthSelected ()));
+    connect (m_colorDepthCombo, TQ_SIGNAL (activated (int)),
+             this, TQ_SLOT (updatePreview ()));
 
-    connect (m_qualityInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (updatePreviewDelayed ()));
+    connect (m_qualityInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (updatePreviewDelayed ()));
 
-    connect (m_previewButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (showPreview (bool)));
+    connect (m_previewButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (showPreview (bool)));
 
 
     m_updatePreviewDelay = 200/*ms*/;
 
     m_updatePreviewTimer = new TQTimer (this);
-    connect (m_updatePreviewTimer, TQT_SIGNAL (timeout ()),
-             this, TQT_SLOT (updatePreview ()));
+    connect (m_updatePreviewTimer, TQ_SIGNAL (timeout ()),
+             this, TQ_SLOT (updatePreview ()));
 
     m_updatePreviewDialogLastRelativeGeometryTimer = new TQTimer (this);
-    connect (m_updatePreviewDialogLastRelativeGeometryTimer, TQT_SIGNAL (timeout ()),
-             this, TQT_SLOT (updatePreviewDialogLastRelativeGeometry ()));
+    connect (m_updatePreviewDialogLastRelativeGeometryTimer, TQ_SIGNAL (timeout ()),
+             this, TQ_SLOT (updatePreviewDialogLastRelativeGeometry ()));
 
 
     setMode (None);
@@ -705,7 +705,7 @@ void kpDocumentSaveOptionsWidget::setMode (Mode mode)
     //       we change the height of "this", causing the text on the labels
     //       to move but the first instance of the text doesn't get erased.
     //       TQt bug.
-    TQTimer::singleShot (0, this, TQT_SLOT (repaintLabels ()));
+    TQTimer::singleShot (0, this, TQ_SLOT (repaintLabels ()));
 }
 
 // protected slot
@@ -738,8 +738,8 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
         m_previewDialog = new kpDocumentSaveOptionsPreviewDialog (m_visualParent, "previewSaveDialog");
         updatePreview ();
 
-        connect (m_previewDialog, TQT_SIGNAL (finished ()),
-                 this, TQT_SLOT (hidePreview ()));
+        connect (m_previewDialog, TQ_SIGNAL (finished ()),
+                 this, TQ_SLOT (hidePreview ()));
 
 
         TDEConfigGroupSaver cfgGroupSaver (TDEGlobal::config (), kpSettingsGroupPreviewSave);
@@ -834,10 +834,10 @@ void kpDocumentSaveOptionsWidget::showPreview (bool yes)
 
         updatePreviewDialogLastRelativeGeometry ();
 
-        connect (m_previewDialog, TQT_SIGNAL (moved ()),
-                 this, TQT_SLOT (updatePreviewDialogLastRelativeGeometry ()));
-        connect (m_previewDialog, TQT_SIGNAL (resized ()),
-                 this, TQT_SLOT (updatePreviewDialogLastRelativeGeometry ()));
+        connect (m_previewDialog, TQ_SIGNAL (moved ()),
+                 this, TQ_SLOT (updatePreviewDialogLastRelativeGeometry ()));
+        connect (m_previewDialog, TQ_SIGNAL (resized ()),
+                 this, TQ_SLOT (updatePreviewDialogLastRelativeGeometry ()));
 
         m_updatePreviewDialogLastRelativeGeometryTimer->start (200/*ms*/);
     }

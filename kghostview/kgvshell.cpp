@@ -64,25 +64,25 @@ KGVShell::KGVShell() :
 
     /*---- File -----------------------------------------------------------*/
     openact =
-	    KStdAction::open( this, TQT_SLOT( slotFileOpen() ),
+	    KStdAction::open( this, TQ_SLOT( slotFileOpen() ),
 			      actionCollection() );
     recent =
-	    KStdAction::openRecent( this, TQT_SLOT( openURL( const KURL& ) ),
+	    KStdAction::openRecent( this, TQ_SLOT( openURL( const KURL& ) ),
 				    actionCollection() );
-	    KStdAction::print( m_gvpart->document(), TQT_SLOT( print() ),
+	    KStdAction::print( m_gvpart->document(), TQ_SLOT( print() ),
 			       actionCollection() );
     (void)
-	    KStdAction::quit( this, TQT_SLOT( slotQuit() ), actionCollection() );
+	    KStdAction::quit( this, TQ_SLOT( slotQuit() ), actionCollection() );
 
     /*---- View -----------------------------------------------------------*/
             new TDEAction( i18n(  "&Reload" ), "reload",
 		    TDEStdAccel::shortcut( TDEStdAccel::Reload ),
-		    m_gvpart, TQT_SLOT(  reloadFile() ),
+		    m_gvpart, TQ_SLOT(  reloadFile() ),
 		    actionCollection(), "reload" );
 	    new TDEAction( i18n( "&Maximize" ), Key_M, this,
-			 TQT_SLOT( slotMaximize() ), actionCollection(),
+			 TQ_SLOT( slotMaximize() ), actionCollection(),
 			 "maximize");
-    _showMenuBarAction = KStdAction::showMenubar( this, TQT_SLOT( slotShowMenubar() ), actionCollection() );
+    _showMenuBarAction = KStdAction::showMenubar( this, TQ_SLOT( slotShowMenubar() ), actionCollection() );
 
     /*---- Settings -------------------------------------------------------*/
 #if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
@@ -91,12 +91,12 @@ KGVShell::KGVShell() :
     setAutoSaveSettings();
     setStandardToolBarMenuEnabled(true);
 #if TDE_VERSION >= TDE_MAKE_VERSION(3,1,90)
-    m_fullScreenAction = KStdAction::fullScreen( this, TQT_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
+    m_fullScreenAction = KStdAction::fullScreen( this, TQ_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
 #else
-    m_fullScreenAction = new TDEToggleAction( this, TQT_SLOT( slotUpdateFullScreen() ) );
+    m_fullScreenAction = new TDEToggleAction( this, TQ_SLOT( slotUpdateFullScreen() ) );
 #endif
-    KStdAction::configureToolbars( this, TQT_SLOT( slotConfigureToolbars() ), actionCollection() );
-    KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
+    KStdAction::configureToolbars( this, TQ_SLOT( slotConfigureToolbars() ), actionCollection() );
+    KStdAction::keyBindings(guiFactory(), TQ_SLOT(configureShortcuts()),
 actionCollection());
 
     //_popup = new TDEPopupMenu( i18n( "Full Screen Options" ), this, "rmb popup" );
@@ -108,21 +108,21 @@ actionCollection());
     m_fsFilter = new FullScreenFilter( *this );
 
     // Just save them automatically is destructor. (TODO: of kgv_view!)
-    //KStdAction::saveOptions ( this, TQT_SLOT (slotWriteSettings()), actionCollection());
+    //KStdAction::saveOptions ( this, TQ_SLOT (slotWriteSettings()), actionCollection());
 
     setXMLFile( "kghostviewui.rc" );
 
     // We could, at the user's option, make this connection and kghostview
     // will always resize to fit the width of the page.  But, for now,
     // let's not.
-    // connect ( m_gvpart->widget(), TQT_SIGNAL (sizeHintChanged()),	    this, TQT_SLOT (slotResize ()) );
+    // connect ( m_gvpart->widget(), TQ_SIGNAL (sizeHintChanged()),	    this, TQ_SLOT (slotResize ()) );
 
     setCentralWidget( m_gvpart->widget() );
     createGUI( m_gvpart );
 
-    connect( m_gvpart->pageView(), TQT_SIGNAL( rightClick() ),TQT_SLOT( slotRMBClick() ) );
-    connect( m_gvpart, TQT_SIGNAL( canceled(const TQString&) ),TQT_SLOT( slotReset() ) );
-    connect( m_gvpart, TQT_SIGNAL( completed() ), TQT_SLOT( slotDocumentState() ) );
+    connect( m_gvpart->pageView(), TQ_SIGNAL( rightClick() ),TQ_SLOT( slotRMBClick() ) );
+    connect( m_gvpart, TQ_SIGNAL( canceled(const TQString&) ),TQ_SLOT( slotReset() ) );
+    connect( m_gvpart, TQ_SIGNAL( completed() ), TQ_SLOT( slotDocumentState() ) );
 
     if (!initialGeometrySet())
         resize(640,400);
@@ -304,7 +304,7 @@ void KGVShell::slotMaximize()
     KWin::setState( winId(), NET::MaxHoriz | NET::MaxVert );
     // If we do it now, it comes to nothing since it would work
     // on the current (non-maximized) size
-    TQTimer::singleShot( 800, m_gvpart, TQT_SLOT( slotFitToPage() ) );
+    TQTimer::singleShot( 800, m_gvpart, TQ_SLOT( slotFitToPage() ) );
 }
 
 void KGVShell::slotResize()
@@ -352,7 +352,7 @@ void KGVShell::slotConfigureToolbars()
 {
     saveMainWindowSettings( TDEGlobal::config(), "MainWindow" );
     KEditToolbar dlg( factory() );
-    connect(&dlg,TQT_SIGNAL(newToolbarConfig()),this,TQT_SLOT(slotNewToolbarConfig()));
+    connect(&dlg,TQ_SIGNAL(newToolbarConfig()),this,TQ_SLOT(slotNewToolbarConfig()));
     dlg.exec();
 }
 

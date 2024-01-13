@@ -276,10 +276,10 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	: KDialogBase(parent, "kkameradeviceselect", true, i18n("Select Camera Device"), Ok | Cancel, Ok, true)
 {
 	m_device = device;
-	connect(m_device, TQT_SIGNAL(error(const TQString &)),
-		TQT_SLOT(slot_error(const TQString &)));
-	connect(m_device, TQT_SIGNAL(error(const TQString &, const TQString &)),
-		TQT_SLOT(slot_error(const TQString &, const TQString &)));
+	connect(m_device, TQ_SIGNAL(error(const TQString &)),
+		TQ_SLOT(slot_error(const TQString &)));
+	connect(m_device, TQ_SIGNAL(error(const TQString &, const TQString &)),
+		TQ_SLOT(slot_error(const TQString &, const TQString &)));
 
 	TQWidget *page = new TQWidget( this );
 	setMainWidget(page);
@@ -292,8 +292,8 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	topLayout->addWidget( m_modelSel );
 	m_modelSel->addColumn(i18n("Supported Cameras"));
 	m_modelSel->setColumnWidthMode(0, TQListView::Maximum);
-	connect(m_modelSel, TQT_SIGNAL(selectionChanged(TQListViewItem *)),
-        TQT_SLOT(slot_setModel(TQListViewItem *)));
+	connect(m_modelSel, TQ_SIGNAL(selectionChanged(TQListViewItem *)),
+        TQ_SLOT(slot_setModel(TQListViewItem *)));
 	// make sure listview only as wide as it needs to be
 	m_modelSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Maximum,
 		TQSizePolicy::Preferred));
@@ -315,8 +315,8 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	TQWhatsThis::add(m_USBRB, i18n("If this option is checked, the camera would have to be connected to one of the USB slots in your computer or USB hub."));
 	// Create port settings widget stack
 	m_settingsStack = new TQWidgetStack(m_portSettingsGroup);
-	connect(m_portSelectGroup, TQT_SIGNAL(clicked(int)),
-		m_settingsStack, TQT_SLOT(raiseWidget(int)));
+	connect(m_portSelectGroup, TQ_SIGNAL(clicked(int)),
+		m_settingsStack, TQ_SLOT(raiseWidget(int)));
 
 	// none tab
 	m_settingsStack->addWidget(new TQLabel(i18n("No port type selected."),

@@ -57,7 +57,7 @@ void kpMainWindow::setupHelpMenuActions ()
     // -- Thurston
     d->m_actionHelpTakingScreenshots = new TDEAction (
         i18n ("Acquiring &Screenshots"), 0,
-        this, TQT_SLOT (slotHelpTakingScreenshots ()),
+        this, TQ_SLOT (slotHelpTakingScreenshots ()),
         ac, "help_taking_screenshots");
 
 
@@ -185,10 +185,10 @@ void kpMainWindow::slotHelpTakingScreenshots ()
         true/*separator line*/);
 
     KActiveLabel *messageLabel = new KActiveLabel (message, &dlg);
-    disconnect (messageLabel, TQT_SIGNAL (linkClicked (const TQString &)),
-                messageLabel, TQT_SLOT (openLink (const TQString &)));
-    connect (messageLabel, TQT_SIGNAL (linkClicked (const TQString &)),
-             this, TQT_SLOT (slotHelpTakingScreenshotsFollowLink (const TQString &)));
+    disconnect (messageLabel, TQ_SIGNAL (linkClicked (const TQString &)),
+                messageLabel, TQ_SLOT (openLink (const TQString &)));
+    connect (messageLabel, TQ_SIGNAL (linkClicked (const TQString &)),
+             this, TQ_SLOT (slotHelpTakingScreenshotsFollowLink (const TQString &)));
 
     dlg.setMainWidget (messageLabel);
 

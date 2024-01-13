@@ -63,16 +63,16 @@ void PMTextEdit::createTopWidgets( )
    m_pOffset = new PMVectorEdit( "x", "y", this );
    hl->addWidget( m_pOffset );
    
-   connect( m_pFont, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotTextChanged( const TQString& ) ) );
-   connect( m_pChooseFont, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotChooseFont( ) ) );
-   connect( m_pText, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotTextChanged( const TQString& ) ) );
-   connect( m_pThickness, TQT_SIGNAL( dataChanged( ) ),
-            TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pOffset, TQT_SIGNAL( dataChanged( ) ),
-            TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pFont, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pChooseFont, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotChooseFont( ) ) );
+   connect( m_pText, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pThickness, TQ_SIGNAL( dataChanged( ) ),
+            TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pOffset, TQ_SIGNAL( dataChanged( ) ),
+            TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMTextEdit::displayObject( PMObject* o )

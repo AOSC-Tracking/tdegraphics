@@ -45,9 +45,9 @@ KViewBrowser::KViewBrowser( TQObject* parent, const char* name, const TQStringLi
 	m_pViewer = static_cast<KImageViewer::Viewer *>( parent );
 	if( m_pViewer )
 	{
-		m_paBack    = KStdAction::back   ( this, TQT_SLOT( slotBack()    ), actionCollection(), "previous_image" );
+		m_paBack    = KStdAction::back   ( this, TQ_SLOT( slotBack()    ), actionCollection(), "previous_image" );
 		m_paBack->setShortcut( SHIFT+Key_Left );
-		m_paForward = KStdAction::forward( this, TQT_SLOT( slotForward() ), actionCollection(), "next_image"     );
+		m_paForward = KStdAction::forward( this, TQ_SLOT( slotForward() ), actionCollection(), "next_image"     );
 		m_paForward->setShortcut( SHIFT+Key_Right );
 		m_pExtension = m_pViewer->browserExtension();
 	}
@@ -156,8 +156,8 @@ void KViewBrowser::setupDirLister()
 		m_pDirLister = new KDirLister();
 		m_pDirLister->setMimeFilter( KImageIO::mimeTypes( KImageIO::Reading ) );
 		m_pDirLister->setShowingDotFiles( true );
-		connect( m_pDirLister, TQT_SIGNAL( newItems( const KFileItemList & ) ), TQT_SLOT( slotNewItems( const KFileItemList & ) ) );
-		connect( m_pDirLister, TQT_SIGNAL( deleteItem( KFileItem * ) ), TQT_SLOT( slotDeleteItem( KFileItem * ) ) );
+		connect( m_pDirLister, TQ_SIGNAL( newItems( const KFileItemList & ) ), TQ_SLOT( slotNewItems( const KFileItemList & ) ) );
+		connect( m_pDirLister, TQ_SIGNAL( deleteItem( KFileItem * ) ), TQ_SLOT( slotDeleteItem( KFileItem * ) ) );
 	}
 	if( m_pDirLister->url() != KURL( m_pViewer->url().directory( true, false ) ) )
 	{

@@ -100,8 +100,8 @@ void KookaPreferences::setupOCRPage()
      */
     TQVGroupBox *gp = new TQVGroupBox( i18n("GOCR OCR"), page );
     m_urlReqGocr = binaryCheckBox( gp, "gocr" );
-    connect( m_urlReqGocr, TQT_SIGNAL( textChanged( const TQString& )),
-             this, TQT_SLOT( slCheckOnGOCR( const TQString& )));
+    connect( m_urlReqGocr, TQ_SIGNAL( textChanged( const TQString& )),
+             this, TQ_SLOT( slCheckOnGOCR( const TQString& )));
     TQString cmdGocr = tryFindBinary( "gocr", CFG_GOCR_BINARY );
     kdDebug(28000) << "Found gocr command: " << cmdGocr << endl;
     m_gocrBut->setEnabled(false);
@@ -119,8 +119,8 @@ void KookaPreferences::setupOCRPage()
      */
     gp = new TQVGroupBox( i18n("OCRAD OCR"), page );
     m_urlReqOcrad = binaryCheckBox( gp, "ocrad" );
-    connect( m_urlReqOcrad, TQT_SIGNAL( textChanged( const TQString& )),
-             this, TQT_SLOT( slCheckOnOCRAD( const TQString& )));
+    connect( m_urlReqOcrad, TQ_SIGNAL( textChanged( const TQString& )),
+             this, TQ_SLOT( slCheckOnOCRAD( const TQString& )));
     TQString cmdOcrad = tryFindBinary( "ocrad", CFG_OCRAD_BINARY );
     kdDebug(28000) << "Found ocrad command: " << cmdOcrad << endl;
     m_ocradBut->setEnabled(false);

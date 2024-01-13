@@ -37,12 +37,12 @@ FileFinder::FileFinder( TQWidget *parent, const char *name )
     setHandleSignals( true ); // we want the completionbox signals
     completionBox()->setTabHandling( true );
 
-    connect( completionBox(), TQT_SIGNAL( userCancelled(const TQString&) ),
-             TQT_SLOT( hide() ));
-    connect( completionBox(), TQT_SIGNAL( activated( const TQString& ) ),
-             TQT_SLOT( slotAccept( const TQString& )));
-    connect( this, TQT_SIGNAL( returnPressed( const TQString& )),
-             TQT_SLOT( slotAccept( const TQString& ) ));
+    connect( completionBox(), TQ_SIGNAL( userCancelled(const TQString&) ),
+             TQ_SLOT( hide() ));
+    connect( completionBox(), TQ_SIGNAL( activated( const TQString& ) ),
+             TQ_SLOT( slotAccept( const TQString& )));
+    connect( this, TQ_SIGNAL( returnPressed( const TQString& )),
+             TQ_SLOT( slotAccept( const TQString& ) ));
 
     KURLCompletion *comp = new KURLCompletion();
     comp->setReplaceHome( true );

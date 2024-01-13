@@ -148,24 +148,24 @@ void PMMediaEdit::createTopWidgets( )
    hl->addStretch( 1 );
    topLayout( )->addWidget( m_pScatteringWidget );
 
-   connect( m_pMethodEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotMethodChanged( int ) ) );
-   connect( m_pIntervalsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSamplesMinEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSamplesMaxEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pConfidenceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pVarianceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRatioEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAALevelEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAAThresholdEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAbsorptionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEmissionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableAbsorptionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAbsorptionClicked( ) ) );
-   connect( m_pEnableEmissionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotEmissionClicked( ) ) );
-   connect( m_pEnableScatteringEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotScatteringClicked( ) ) );
-   connect( m_pScatteringTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotScatteringTypeChanged( int ) ) );
-   connect( m_pScatteringColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pScatteringEccentricityEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pScatteringExtinctionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pMethodEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotMethodChanged( int ) ) );
+   connect( m_pIntervalsEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSamplesMinEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSamplesMaxEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pConfidenceEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pVarianceEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRatioEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAALevelEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAAThresholdEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAbsorptionEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEmissionEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableAbsorptionEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAbsorptionClicked( ) ) );
+   connect( m_pEnableEmissionEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotEmissionClicked( ) ) );
+   connect( m_pEnableScatteringEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotScatteringClicked( ) ) );
+   connect( m_pScatteringTypeEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotScatteringTypeChanged( int ) ) );
+   connect( m_pScatteringColorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pScatteringEccentricityEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pScatteringExtinctionEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMMediaEdit::displayObject( PMObject* o )

@@ -63,7 +63,7 @@ KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject 
   tableOfContents = new TableOfContents(sideBar);
   sideBar->addItem(tableOfContents, TQIconSet(SmallIcon("contents")), i18n("Contents"));
 
-  connect(tableOfContents, TQT_SIGNAL(gotoPage(const Anchor&)), this, TQT_SLOT(gotoPage(const Anchor&)));
+  connect(tableOfContents, TQ_SIGNAL(gotoPage(const Anchor&)), this, TQ_SLOT(gotoPage(const Anchor&)));
   
   // Create MarkList
   _markList = new MarkList(sideBar, "marklist");
@@ -74,30 +74,30 @@ KMultiPage::KMultiPage(TQWidget *parentWidget, const char *widgetName, TQObject 
 
   splitterWidget->setResizeMode(sideBar, TQSplitter::KeepSize);
 
-  connect(_markList, TQT_SIGNAL(selected(const PageNumber&)), this, TQT_SLOT(gotoPage(const PageNumber&)));
+  connect(_markList, TQ_SIGNAL(selected(const PageNumber&)), this, TQ_SLOT(gotoPage(const PageNumber&)));
 
   _scrollView = new PageView(splitterWidget, widgetName);
 
   // Create Search Panel
   searchWidget = new SearchWidget(verticalBox);
   searchWidget->hide();
-  connect(searchWidget, TQT_SIGNAL(findNextText()), this, TQT_SLOT(findNextText()));
-  connect(searchWidget, TQT_SIGNAL(findPrevText()), this, TQT_SLOT(findPrevText()));
+  connect(searchWidget, TQ_SIGNAL(findNextText()), this, TQ_SLOT(findNextText()));
+  connect(searchWidget, TQ_SIGNAL(findPrevText()), this, TQ_SLOT(findPrevText()));
 
   sideBar->setMinimumWidth(80);
   sideBar->setMaximumWidth(300);
 
-  connect(_scrollView, TQT_SIGNAL(currentPageChanged(const PageNumber&)), this, TQT_SLOT(setCurrentPageNumber(const PageNumber&)));
-  connect(_scrollView, TQT_SIGNAL(viewSizeChanged(const TQSize&)), scrollView(), TQT_SLOT(calculateCurrentPageNumber()));
-  connect(_scrollView, TQT_SIGNAL(wheelEventReceived(TQWheelEvent *)), this, TQT_SLOT(wheelEvent(TQWheelEvent*)));
+  connect(_scrollView, TQ_SIGNAL(currentPageChanged(const PageNumber&)), this, TQ_SLOT(setCurrentPageNumber(const PageNumber&)));
+  connect(_scrollView, TQ_SIGNAL(viewSizeChanged(const TQSize&)), scrollView(), TQ_SLOT(calculateCurrentPageNumber()));
+  connect(_scrollView, TQ_SIGNAL(wheelEventReceived(TQWheelEvent *)), this, TQ_SLOT(wheelEvent(TQWheelEvent*)));
 
-  connect(this, TQT_SIGNAL(enableMoveTool(bool)), _scrollView, TQT_SLOT(slotEnableMoveTool(bool)));
+  connect(this, TQ_SIGNAL(enableMoveTool(bool)), _scrollView, TQ_SLOT(slotEnableMoveTool(bool)));
 
   splitterWidget->setCollapsible(sideBar, false);
   splitterWidget->setSizes(KVSPrefs::guiLayout());
 
-  connect(searchWidget, TQT_SIGNAL(searchEnabled(bool)), this, TQT_SIGNAL(searchEnabled(bool)));
-  connect(searchWidget, TQT_SIGNAL(stopSearch()), this, TQT_SLOT(stopSearch()));
+  connect(searchWidget, TQ_SIGNAL(searchEnabled(bool)), this, TQ_SIGNAL(searchEnabled(bool)));
+  connect(searchWidget, TQ_SIGNAL(stopSearch()), this, TQ_SLOT(stopSearch()));
 }
 
 
@@ -173,7 +173,7 @@ void KMultiPage::slotSave()
   }
 
   TDEIO::Job *job = TDEIO::file_copy( KURL( m_file ), KURL( fileName ), 0600, true, false, true );
-  connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ), this, TQT_SLOT( slotIOJobFinished ( TDEIO::Job * ) ) );
+  connect( job, TQ_SIGNAL( result( TDEIO::Job * ) ), this, TQ_SLOT( slotIOJobFinished ( TDEIO::Job * ) ) );
 
   return;
 }
@@ -352,8 +352,8 @@ void KMultiPage::initializePageCache()
 DocumentWidget* KMultiPage::createDocumentWidget()
 {
   DocumentWidget* documentWidget = new DocumentWidget(scrollView()->viewport(), scrollView(), pageCache, "singlePageWidget");
-  connect(documentWidget, TQT_SIGNAL(clearSelection()), this, TQT_SLOT(clearSelection()));
-  connect(this, TQT_SIGNAL(enableMoveTool(bool)), documentWidget, TQT_SLOT(slotEnableMoveTool(bool)));
+  connect(documentWidget, TQ_SIGNAL(clearSelection()), this, TQ_SLOT(clearSelection()));
+  connect(this, TQ_SIGNAL(enableMoveTool(bool)), documentWidget, TQ_SLOT(slotEnableMoveTool(bool)));
   return documentWidget;
 }
 
@@ -436,8 +436,8 @@ void KMultiPage::generateDocumentWidgets(const PageNumber& _startPage)
       widgetList.insert(i, documentWidget);
       documentWidget->show();
 
-      connect(documentWidget, TQT_SIGNAL(localLink(const TQString &)), this, TQT_SLOT(handleLocalLink(const TQString &)));
-      connect(documentWidget, TQT_SIGNAL(setStatusBarText(const TQString&)), this, TQT_SIGNAL(setStatusBarText(const TQString&)) );
+      connect(documentWidget, TQ_SIGNAL(localLink(const TQString &)), this, TQ_SLOT(handleLocalLink(const TQString &)));
+      connect(documentWidget, TQ_SIGNAL(setStatusBarText(const TQString&)), this, TQ_SIGNAL(setStatusBarText(const TQString&)) );
     }
   }
 
@@ -868,11 +868,11 @@ void KMultiPage::setRenderer(DocumentRenderer* _renderer)
   widgetList.resize(0);
 
   // Relay signals.
-  connect(renderer, TQT_SIGNAL(setStatusBarText(const TQString&)), this, TQT_SIGNAL(setStatusBarText(const TQString&)));
-  connect(pageCache, TQT_SIGNAL(paperSizeChanged()), this, TQT_SLOT(renderModeChanged()));
-  connect(pageCache, TQT_SIGNAL(textSelected(bool)), this, TQT_SIGNAL(textSelected(bool)));
-  connect(renderer, TQT_SIGNAL(documentIsChanged()), this, TQT_SLOT(renderModeChanged()));
-  connect(this, TQT_SIGNAL(zoomChanged()), this, TQT_SLOT(repaintAllVisibleWidgets()));
+  connect(renderer, TQ_SIGNAL(setStatusBarText(const TQString&)), this, TQ_SIGNAL(setStatusBarText(const TQString&)));
+  connect(pageCache, TQ_SIGNAL(paperSizeChanged()), this, TQ_SLOT(renderModeChanged()));
+  connect(pageCache, TQ_SIGNAL(textSelected(bool)), this, TQ_SIGNAL(textSelected(bool)));
+  connect(renderer, TQ_SIGNAL(documentIsChanged()), this, TQ_SLOT(renderModeChanged()));
+  connect(this, TQ_SIGNAL(zoomChanged()), this, TQ_SLOT(repaintAllVisibleWidgets()));
 }
 
 

@@ -84,13 +84,13 @@ MassScanDialog::MassScanDialog( TQWidget *parent )
   	bigdad->addLayout( l_but );
 
    TQPushButton *b_start = new TQPushButton( i18n("Start Scan"), this, "ButtOK" );
-   connect( b_start, TQT_SIGNAL(clicked()), this, TQT_SLOT( slStartScan()) );
+   connect( b_start, TQ_SIGNAL(clicked()), this, TQ_SLOT( slStartScan()) );
 
    TQPushButton *b_cancel = new TQPushButton( i18n("Stop"), this, "ButtCancel" );
-   connect( b_cancel, TQT_SIGNAL(clicked()), this, TQT_SLOT(slStopScan()) );
+   connect( b_cancel, TQ_SIGNAL(clicked()), this, TQ_SLOT(slStopScan()) );
 
    TQPushButton *b_finish = new KPushButton( KStdGuiItem::close(), this, "ButtFinish" );
-   connect( b_finish, TQT_SIGNAL(clicked()), this, TQT_SLOT(slFinished()) );
+   connect( b_finish, TQ_SIGNAL(clicked()), this, TQ_SLOT(slFinished()) );
 
    l_but->addWidget( b_start );
    l_but->addWidget( b_cancel );

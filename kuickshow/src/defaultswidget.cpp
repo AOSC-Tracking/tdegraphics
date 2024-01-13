@@ -37,7 +37,7 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   imFiltered = 0L;
 
   cbEnableMods = new TQCheckBox( i18n("Apply default image modifications"), this );
-  connect( cbEnableMods, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( enableWidgets(bool) ));
+  connect( cbEnableMods, TQ_SIGNAL( toggled(bool) ), TQ_SLOT( enableWidgets(bool) ));
 
   // create all the widgets
 
@@ -52,8 +52,8 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   sbMaxUpScaleFactor = new KIntNumInput( gbScale, "upscale factor" );
   sbMaxUpScaleFactor->setRange( 1, 100, 1, false );
 
-  connect(cbUpScale, TQT_SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
-            TQT_SLOT( setEnabled(bool) ));
+  connect(cbUpScale, TQ_SIGNAL( toggled(bool)), sbMaxUpScaleFactor,
+            TQ_SLOT( setEnabled(bool) ));
 
   // --
 
@@ -99,7 +99,7 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
 
   lbImFiltered = new TQLabel( i18n("Modified"), gbPreview );
   imFiltered = new ImlibWidget( 0L, imOrig->getImlibData(), gbPreview, "" );
-  connect( imFiltered, TQT_SIGNAL( destroyed() ), TQT_SLOT( slotNoImage() ));
+  connect( imFiltered, TQ_SIGNAL( destroyed() ), TQ_SLOT( slotNoImage() ));
 
   ////
   ////////////////
@@ -159,16 +159,16 @@ DefaultsWidget::DefaultsWidget( TQWidget *parent, const char *name)
   ////////////////
 
   // connect them all to the update slot
-  connect( cbDownScale,        TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
-  connect( cbUpScale,          TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
-  connect( cbFlipVertically,   TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
-  connect( cbFlipHorizontally, TQT_SIGNAL( clicked() ), TQT_SLOT( updatePreview() ));
-  connect( sbMaxUpScaleFactor, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
-  connect( sbBrightness, TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
-  connect( sbContrast,   TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
-  connect( sbGamma,      TQT_SIGNAL( valueChanged(int) ), TQT_SLOT( updatePreview() ));
+  connect( cbDownScale,        TQ_SIGNAL( clicked() ), TQ_SLOT( updatePreview() ));
+  connect( cbUpScale,          TQ_SIGNAL( clicked() ), TQ_SLOT( updatePreview() ));
+  connect( cbFlipVertically,   TQ_SIGNAL( clicked() ), TQ_SLOT( updatePreview() ));
+  connect( cbFlipHorizontally, TQ_SIGNAL( clicked() ), TQ_SLOT( updatePreview() ));
+  connect( sbMaxUpScaleFactor, TQ_SIGNAL( valueChanged(int) ), TQ_SLOT( updatePreview() ));
+  connect( sbBrightness, TQ_SIGNAL( valueChanged(int) ), TQ_SLOT( updatePreview() ));
+  connect( sbContrast,   TQ_SIGNAL( valueChanged(int) ), TQ_SLOT( updatePreview() ));
+  connect( sbGamma,      TQ_SIGNAL( valueChanged(int) ), TQ_SLOT( updatePreview() ));
 
-  connect( comboRotate,  TQT_SIGNAL( activated(int) ), TQT_SLOT( updatePreview() ));
+  connect( comboRotate,  TQ_SIGNAL( activated(int) ), TQ_SLOT( updatePreview() ));
 
 
   TQString filename = locate( "data", "kuickshow/pics/calibrate.png" );

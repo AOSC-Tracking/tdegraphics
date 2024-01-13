@@ -68,18 +68,18 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 	if( m_pViewer )
 	{
 		( void ) new TDEAction( i18n( "&Image List..." ), 0, 0,
-							this, TQT_SLOT( slotImageList() ),
+							this, TQ_SLOT( slotImageList() ),
 							actionCollection(), "plugin_presenter_imageList" );
 		m_paSlideshow = new TDEToggleAction( i18n( "Start &Slideshow" ), Key_S, actionCollection(), "plugin_presenter_slideshow" );
 		( void ) new TDEAction( i18n( "&Previous Image in List" ), "go-previous", ALT+Key_Left,
-							  this, TQT_SLOT( prev() ),
+							  this, TQ_SLOT( prev() ),
 							  actionCollection(), "plugin_presenter_prev" );
 		( void ) new TDEAction( i18n( "&Next Image in List" ), "go-next", ALT+Key_Right,
-							  this, TQT_SLOT( next() ),
+							  this, TQ_SLOT( next() ),
 							  actionCollection(), "plugin_presenter_next" );
 
-		connect( m_paSlideshow, TQT_SIGNAL( toggled( bool ) ), m_pImageList->m_pSlideshow, TQT_SLOT( setOn( bool ) ) );
-		connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ), m_paSlideshow, TQT_SLOT( setChecked( bool ) ) );
+		connect( m_paSlideshow, TQ_SIGNAL( toggled( bool ) ), m_pImageList->m_pSlideshow, TQ_SLOT( setOn( bool ) ) );
+		connect( m_pImageList->m_pSlideshow, TQ_SIGNAL( toggled( bool ) ), m_paSlideshow, TQ_SLOT( setChecked( bool ) ) );
 
 		// search for file_open action
 		KXMLGUIClient * parentClient = static_cast<KXMLGUIClient*>( parent->tqt_cast( "KXMLGUIClient" ) );
@@ -89,48 +89,48 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 			m_paFileClose = parentClient->actionCollection()->action( "file_close" );
 		}
 		if( m_paFileClose )
-			connect( m_paFileClose, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotClose() ) );
+			connect( m_paFileClose, TQ_SIGNAL( activated() ), this, TQ_SLOT( slotClose() ) );
 		if( m_paFileOpen )
 		{
-			disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), parent, TQT_SLOT( slotOpenFile() ) );
-			connect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
+			disconnect( m_paFileOpen, TQ_SIGNAL( activated() ), parent, TQ_SLOT( slotOpenFile() ) );
+			connect( m_paFileOpen, TQ_SIGNAL( activated() ), this, TQ_SLOT( slotOpenFiles() ) );
 		}
 		else
 		{
 			(void) new TDEAction( i18n( "Open &Multiple Files..." ), "queue", CTRL+SHIFT+Key_O,
-							this, TQT_SLOT( slotOpenFiles() ),
+							this, TQ_SLOT( slotOpenFiles() ),
 							actionCollection(), "plugin_presenter_openFiles" );
 		}
-		connect( m_pViewer, TQT_SIGNAL( imageOpened( const KURL & ) ),
-				TQT_SLOT( slotImageOpened( const KURL & ) ) );
+		connect( m_pViewer, TQ_SIGNAL( imageOpened( const KURL & ) ),
+				TQ_SLOT( slotImageOpened( const KURL & ) ) );
 	}
 	else
 		kdWarning( 4630 ) << "no KImageViewer interface found - the presenter plugin won't work" << endl;
 
 	//( void )new KViewPresenterConfModule( this );
 
-	connect( m_pImageList->m_pListView, TQT_SIGNAL( executed( TQListViewItem* ) ),
-			this, TQT_SLOT( changeItem( TQListViewItem* ) ) );
-	connect( m_pImageList->m_pPrevious, TQT_SIGNAL( clicked() ),
-			this, TQT_SLOT( prev() ) );
-	connect( m_pImageList->m_pNext, TQT_SIGNAL( clicked() ),
-			this, TQT_SLOT( next() ) );
-	connect( m_pImageList->m_pListView, TQT_SIGNAL( spacePressed( TQListViewItem* ) ),
-			this, TQT_SLOT( changeItem( TQListViewItem* ) ) );
-	connect( m_pImageList->m_pListView, TQT_SIGNAL( returnPressed( TQListViewItem* ) ),
-			this, TQT_SLOT( changeItem( TQListViewItem* ) ) );
-	connect( m_pImageList->m_pSlideshow, TQT_SIGNAL( toggled( bool ) ),
-			this, TQT_SLOT( slideshow( bool ) ) );
-	connect( m_pImageList->m_pInterval, TQT_SIGNAL( valueChanged( int ) ),
-			this, TQT_SLOT( setSlideshowInterval( int ) ) );
-	connect( m_pImageList->m_pShuffle, TQT_SIGNAL( clicked() ),
-			this, TQT_SLOT( shuffle() ) );
-	connect( m_pImageList->m_pLoad, TQT_SIGNAL( clicked() ),
-			this, TQT_SLOT( loadList() ) );
-	connect( m_pImageList->m_pSave, TQT_SIGNAL( clicked() ),
-			this, TQT_SLOT( saveList() ) );
-	connect( m_pImageList->m_pCloseAll, TQT_SIGNAL( clicked() ),
-			this, TQT_SLOT( closeAll() ) );
+	connect( m_pImageList->m_pListView, TQ_SIGNAL( executed( TQListViewItem* ) ),
+			this, TQ_SLOT( changeItem( TQListViewItem* ) ) );
+	connect( m_pImageList->m_pPrevious, TQ_SIGNAL( clicked() ),
+			this, TQ_SLOT( prev() ) );
+	connect( m_pImageList->m_pNext, TQ_SIGNAL( clicked() ),
+			this, TQ_SLOT( next() ) );
+	connect( m_pImageList->m_pListView, TQ_SIGNAL( spacePressed( TQListViewItem* ) ),
+			this, TQ_SLOT( changeItem( TQListViewItem* ) ) );
+	connect( m_pImageList->m_pListView, TQ_SIGNAL( returnPressed( TQListViewItem* ) ),
+			this, TQ_SLOT( changeItem( TQListViewItem* ) ) );
+	connect( m_pImageList->m_pSlideshow, TQ_SIGNAL( toggled( bool ) ),
+			this, TQ_SLOT( slideshow( bool ) ) );
+	connect( m_pImageList->m_pInterval, TQ_SIGNAL( valueChanged( int ) ),
+			this, TQ_SLOT( setSlideshowInterval( int ) ) );
+	connect( m_pImageList->m_pShuffle, TQ_SIGNAL( clicked() ),
+			this, TQ_SLOT( shuffle() ) );
+	connect( m_pImageList->m_pLoad, TQ_SIGNAL( clicked() ),
+			this, TQ_SLOT( loadList() ) );
+	connect( m_pImageList->m_pSave, TQ_SIGNAL( clicked() ),
+			this, TQ_SLOT( saveList() ) );
+	connect( m_pImageList->m_pCloseAll, TQ_SIGNAL( clicked() ),
+			this, TQ_SLOT( closeAll() ) );
 
 	// allow drop on the dialog
 	m_pImageList->installEventFilter( this );
@@ -140,8 +140,8 @@ KViewPresenter::KViewPresenter( TQObject* parent, const char* name, const TQStri
 	// grab drops on the main view
 	m_pViewer->widget()->installEventFilter( this );
 
-	connect( m_pSlideshowTimer, TQT_SIGNAL( timeout() ),
-			this, TQT_SLOT( next() ) );
+	connect( m_pSlideshowTimer, TQ_SIGNAL( timeout() ),
+			this, TQ_SLOT( next() ) );
 }
 
 KViewPresenter::~KViewPresenter()
@@ -149,13 +149,13 @@ KViewPresenter::~KViewPresenter()
 	kdDebug( 4630 ) << k_funcinfo << endl;
 	if( m_paFileOpen )
 	{
-		disconnect( m_paFileOpen, TQT_SIGNAL( activated() ), this, TQT_SLOT( slotOpenFiles() ) );
+		disconnect( m_paFileOpen, TQ_SIGNAL( activated() ), this, TQ_SLOT( slotOpenFiles() ) );
 		// If the parent() doesn't exist we either leave the "File Open" action
 		// in an unusable state or KView was just shutting down and therefor we
 		// can ignore this. I've only seen the second one happening and to get
 		// rid of the TQObject::connect warning we do the parent() check.
 		if( parent() )
-			connect( m_paFileOpen, TQT_SIGNAL( activated() ), parent(), TQT_SLOT( slotOpenFile() ) );
+			connect( m_paFileOpen, TQ_SIGNAL( activated() ), parent(), TQ_SLOT( slotOpenFile() ) );
 	}
 }
 

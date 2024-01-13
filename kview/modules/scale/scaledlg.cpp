@@ -157,16 +157,16 @@ ScaleDlg::ScaleDlg( const TQSize & origsize, TQVBox * parent, const char * name 
 	m_newsizeunit2 = 0;
 	m_resolutionunit = 0;
 
-	connect( m_pNewWidth, TQT_SIGNAL( valueChanged( float ) ), TQT_SLOT( slotNewWidth( float ) ) );
-	connect( m_pNewHeight, TQT_SIGNAL( valueChanged( float ) ), TQT_SLOT( slotNewHeight( float ) ) );
-	connect( m_pNewWidth2, TQT_SIGNAL( valueChanged( float ) ), TQT_SLOT( slotNewWidth2( float ) ) );
-	connect( m_pNewHeight2, TQT_SIGNAL( valueChanged( float ) ), TQT_SLOT( slotNewHeight2( float ) ) );
-	connect( m_pResolutionX, TQT_SIGNAL( valueChanged( float ) ), TQT_SLOT( slotResolutionX( float ) ) );
-	connect( m_pResolutionY, TQT_SIGNAL( valueChanged( float ) ), TQT_SLOT( slotResolutionY( float ) ) );
+	connect( m_pNewWidth, TQ_SIGNAL( valueChanged( float ) ), TQ_SLOT( slotNewWidth( float ) ) );
+	connect( m_pNewHeight, TQ_SIGNAL( valueChanged( float ) ), TQ_SLOT( slotNewHeight( float ) ) );
+	connect( m_pNewWidth2, TQ_SIGNAL( valueChanged( float ) ), TQ_SLOT( slotNewWidth2( float ) ) );
+	connect( m_pNewHeight2, TQ_SIGNAL( valueChanged( float ) ), TQ_SLOT( slotNewHeight2( float ) ) );
+	connect( m_pResolutionX, TQ_SIGNAL( valueChanged( float ) ), TQ_SLOT( slotResolutionX( float ) ) );
+	connect( m_pResolutionY, TQ_SIGNAL( valueChanged( float ) ), TQ_SLOT( slotResolutionY( float ) ) );
 
-	connect( m_pNewSizeUnit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotChangeNewSizeUnit( int ) ) );
-	connect( m_pNewSizeUnit2, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotChangeNewSizeUnit2( int ) ) );
-	connect( m_pResolutionUnit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotChangeResolutionUnit( int ) ) );
+	connect( m_pNewSizeUnit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotChangeNewSizeUnit( int ) ) );
+	connect( m_pNewSizeUnit2, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotChangeNewSizeUnit2( int ) ) );
+	connect( m_pResolutionUnit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotChangeResolutionUnit( int ) ) );
 }
 
 ScaleDlg::~ScaleDlg()

@@ -42,7 +42,7 @@ void PMSolidColorEdit::createTopWidgets( )
    layout->addWidget( label, 0, AlignTop );
    layout->addWidget( m_pColorEdit );
 
-   connect( m_pColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pColorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMSolidColorEdit::displayObject( PMObject* o )

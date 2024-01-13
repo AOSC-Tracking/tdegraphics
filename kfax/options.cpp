@@ -143,17 +143,17 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   hbl4->addWidget( rawlabel );
 
   g3 = new TQRadioButton("G3",rawgroup,"g3");
-  connect(g3,TQT_SIGNAL(clicked()), this, TQT_SLOT(g3toggled()));
+  connect(g3,TQ_SIGNAL(clicked()), this, TQ_SLOT(g3toggled()));
   hbl4->addSpacing( 20 );
   hbl4->addWidget( g3 );
 
   g32d = new TQRadioButton("G32d",rawgroup,"g32d");
-  connect(g32d,TQT_SIGNAL(clicked()), this,TQT_SLOT(g32toggled()));
+  connect(g32d,TQ_SIGNAL(clicked()), this,TQ_SLOT(g32toggled()));
   hbl4->addSpacing( 30 );
   hbl4->addWidget( g32d );
 
   g4 = new TQRadioButton("G4",rawgroup,"g4");
-  connect(g4,TQT_SIGNAL(clicked()), this, TQT_SLOT(g4toggled()));
+  connect(g4,TQ_SIGNAL(clicked()), this, TQ_SLOT(g4toggled()));
   hbl4->addSpacing( 30 );
   hbl4->addWidget( g4 );
 
@@ -179,7 +179,7 @@ OptionsDialog::OptionsDialog( TQWidget *parent, const char *name)
   hbl5->addWidget( heightedit );
 
   geomauto = new TQCheckBox(i18n("Auto"),bg,"geomauto");
-  connect(geomauto,TQT_SIGNAL(clicked()),this,TQT_SLOT(geomtoggled()));
+  connect(geomauto,TQ_SIGNAL(clicked()),this,TQ_SLOT(geomtoggled()));
   hbl5->addSpacing( 10 );
   hbl5->addWidget( geomauto );
 }

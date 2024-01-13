@@ -304,8 +304,8 @@ void fontPool::locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFo
   // If PK fonts are generated, the kpsewhich command will re-route
   // the output of MetaFont into its stderr. Here we make sure this
   // output is intercepted and parsed.
-  tqApp->connect(&kpsewhichIO, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)),
-		this, TQT_SLOT(mf_output_receiver(TDEProcess *, char *, int)));
+  tqApp->connect(&kpsewhichIO, TQ_SIGNAL(receivedStderr(TDEProcess *, char *, int)),
+		this, TQ_SLOT(mf_output_receiver(TDEProcess *, char *, int)));
   
   
   kpsewhichIO.setUseShell(true);

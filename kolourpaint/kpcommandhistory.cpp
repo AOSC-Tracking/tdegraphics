@@ -259,13 +259,13 @@ kpCommandHistoryBase::kpCommandHistoryBase (bool doReadConfig,
     m_actionUndo = new TDEToolBarPopupAction (undoActionText (),
         TQString::fromLatin1 ("edit-undo"),
         TDEStdAccel::shortcut (TDEStdAccel::Undo),
-        this, TQT_SLOT (undo ()),
+        this, TQ_SLOT (undo ()),
         ac, KStdAction::name (KStdAction::Undo));
 
     m_actionRedo = new TDEToolBarPopupAction (redoActionText (),
         TQString::fromLatin1 ("edit-redo"),
         TDEStdAccel::shortcut (TDEStdAccel::Redo),
-        this, TQT_SLOT (redo ()),
+        this, TQ_SLOT (redo ()),
         ac, KStdAction::name (KStdAction::Redo));
 
 
@@ -273,10 +273,10 @@ kpCommandHistoryBase::kpCommandHistoryBase (bool doReadConfig,
     m_actionRedo->setEnabled (false);
 
 
-    connect (m_actionUndo->popupMenu (), TQT_SIGNAL (activated (int)),
-             this, TQT_SLOT (undoUpToNumber (int)));
-    connect (m_actionRedo->popupMenu (), TQT_SIGNAL (activated (int)),
-             this, TQT_SLOT (redoUpToNumber (int)));
+    connect (m_actionUndo->popupMenu (), TQ_SIGNAL (activated (int)),
+             this, TQ_SLOT (undoUpToNumber (int)));
+    connect (m_actionRedo->popupMenu (), TQ_SIGNAL (activated (int)),
+             this, TQ_SLOT (redoUpToNumber (int)));
 
 
     m_undoMinLimit = 10;

@@ -147,8 +147,8 @@ void KGamma::setupUI() {
     TQWidgetStack *stack = new TQWidgetStack( this );
     stack->setFrameStyle( TQFrame::Box | TQFrame::Raised );
 
-    connect( combo, TQT_SIGNAL( activated( int ) ),
-             stack, TQT_SLOT( raiseWidget( int ) ) );
+    connect( combo, TQ_SIGNAL( activated( int ) ),
+             stack, TQ_SLOT( raiseWidget( int ) ) );
 
     TQPixmap background;
     background.load(locate("data", "kgamma/pics/background.png"));
@@ -212,29 +212,29 @@ void KGamma::setupUI() {
     bluelabel->setText(i18n("Blue:"));
 
     gctrl = new GammaCtrl(this, xv);
-    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
-    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
+    connect(gctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(Changed()));
+    connect(gctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(SyncScreens()));
     gammalabel->setBuddy( gctrl );
 
     rgctrl = new GammaCtrl(this, xv, XVidExtWrap::Red);
-    connect(rgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
-    connect(rgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
-    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), rgctrl, TQT_SLOT(setCtrl(int)));
-    connect(rgctrl, TQT_SIGNAL(gammaChanged(int)), gctrl, TQT_SLOT(suspend()));
+    connect(rgctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(Changed()));
+    connect(rgctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(SyncScreens()));
+    connect(gctrl, TQ_SIGNAL(gammaChanged(int)), rgctrl, TQ_SLOT(setCtrl(int)));
+    connect(rgctrl, TQ_SIGNAL(gammaChanged(int)), gctrl, TQ_SLOT(suspend()));
     redlabel->setBuddy( rgctrl );
 
     ggctrl = new GammaCtrl(this, xv, XVidExtWrap::Green);
-    connect(ggctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
-    connect(ggctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
-    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), ggctrl, TQT_SLOT(setCtrl(int)));
-    connect(ggctrl, TQT_SIGNAL(gammaChanged(int)), gctrl, TQT_SLOT(suspend()));
+    connect(ggctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(Changed()));
+    connect(ggctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(SyncScreens()));
+    connect(gctrl, TQ_SIGNAL(gammaChanged(int)), ggctrl, TQ_SLOT(setCtrl(int)));
+    connect(ggctrl, TQ_SIGNAL(gammaChanged(int)), gctrl, TQ_SLOT(suspend()));
     greenlabel->setBuddy( ggctrl );
 
     bgctrl = new GammaCtrl(this, xv, XVidExtWrap::Blue);
-    connect(bgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(Changed()));
-    connect(bgctrl, TQT_SIGNAL(gammaChanged(int)), TQT_SLOT(SyncScreens()));
-    connect(gctrl, TQT_SIGNAL(gammaChanged(int)), bgctrl, TQT_SLOT(setCtrl(int)));
-    connect(bgctrl, TQT_SIGNAL(gammaChanged(int)), gctrl, TQT_SLOT(suspend()));
+    connect(bgctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(Changed()));
+    connect(bgctrl, TQ_SIGNAL(gammaChanged(int)), TQ_SLOT(SyncScreens()));
+    connect(gctrl, TQ_SIGNAL(gammaChanged(int)), bgctrl, TQ_SLOT(setCtrl(int)));
+    connect(bgctrl, TQ_SIGNAL(gammaChanged(int)), gctrl, TQ_SLOT(suspend()));
     bluelabel->setBuddy( bgctrl );
 
     TQGridLayout *grid = new TQGridLayout(4, 9);
@@ -256,17 +256,17 @@ void KGamma::setupUI() {
     TQHBox *options = new TQHBox(this);
 
     xf86cfgbox = new TQCheckBox( i18n("Save settings to X-Server Config"), options );
-    connect(xf86cfgbox, TQT_SIGNAL(clicked()), TQT_SLOT(changeConfig()));
+    connect(xf86cfgbox, TQ_SIGNAL(clicked()), TQ_SLOT(changeConfig()));
 
     syncbox = new TQCheckBox( i18n("Sync screens"), options );
-    connect(syncbox, TQT_SIGNAL(clicked()), TQT_SLOT(SyncScreens()));
-    connect(syncbox, TQT_SIGNAL(clicked()), TQT_SLOT(Changed()));
+    connect(syncbox, TQ_SIGNAL(clicked()), TQ_SLOT(SyncScreens()));
+    connect(syncbox, TQ_SIGNAL(clicked()), TQ_SLOT(Changed()));
 
     screenselect = new TQComboBox( options );
     for ( int i = 0; i < ScreenCount; i++ )
       screenselect->insertItem( i18n("Screen %1").arg(i+1) );
     screenselect->setCurrentItem(currentScreen);
-    connect(screenselect, TQT_SIGNAL(activated(int)), TQT_SLOT(changeScreen(int)));
+    connect(screenselect, TQ_SIGNAL(activated(int)), TQ_SLOT(changeScreen(int)));
 
     options->setSpacing( 10 );
     options->setStretchFactor( xf86cfgbox, 10 );

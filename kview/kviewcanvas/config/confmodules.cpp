@@ -56,17 +56,17 @@ KViewCanvasConfig::KViewCanvasConfig( TQWidget * parent, const char *, const TQS
 		m_items.append( item );
 	}
 
-	connect( m_pWidget->m_pListView, TQT_SIGNAL( clicked( TQListViewItem * ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_pListView, TQT_SIGNAL( spacePressed( TQListViewItem * ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pListView, TQ_SIGNAL( clicked( TQListViewItem * ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pListView, TQ_SIGNAL( spacePressed( TQListViewItem * ) ), this, TQ_SLOT( configChanged() ) );
 
-	connect( m_pWidget->m_pSmoothScaling, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_pKeepRatio, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_pCenterImage, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_bgColor, TQT_SIGNAL( changed( const TQColor & ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMinWidth, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMaxWidth, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMinHeight, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
-	connect( m_pWidget->m_pMaxHeight, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pSmoothScaling, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pKeepRatio, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pCenterImage, TQ_SIGNAL( toggled( bool ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_bgColor, TQ_SIGNAL( changed( const TQColor & ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMinWidth, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMaxWidth, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMinHeight, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( configChanged() ) );
+	connect( m_pWidget->m_pMaxHeight, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( configChanged() ) );
 
 	load();
 }

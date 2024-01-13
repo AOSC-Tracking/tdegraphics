@@ -67,18 +67,18 @@ void PMInteriorEdit::createTopWidgets( )
    layout->addWidget( m_pFadePowerEdit, 5, 1 );
    hl->addStretch( 1 );
 
-   connect( m_pIorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCausticsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDispersionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDispSamplesEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
-   connect( m_pFadeDistanceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFadePowerEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableIorEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotIorClicked( ) ) );
-   connect( m_pEnableCausticsEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCausticsClicked( ) ) );
-   connect( m_pEnableDispersionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDispersionClicked( ) ) );
-   connect( m_pEnableDispSamplesEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDispSamplesClicked( ) ) );
-   connect( m_pEnableFadeDistanceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFadeDistanceClicked( ) ) );
-   connect( m_pEnableFadePowerEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFadePowerClicked( ) ) );
+   connect( m_pIorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCausticsEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDispersionEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDispSamplesEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL ( dataChanged( ) ) );
+   connect( m_pFadeDistanceEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFadePowerEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableIorEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotIorClicked( ) ) );
+   connect( m_pEnableCausticsEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotCausticsClicked( ) ) );
+   connect( m_pEnableDispersionEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDispersionClicked( ) ) );
+   connect( m_pEnableDispSamplesEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDispSamplesClicked( ) ) );
+   connect( m_pEnableFadeDistanceEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotFadeDistanceClicked( ) ) );
+   connect( m_pEnableFadePowerEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotFadePowerClicked( ) ) );
 }
 
 void PMInteriorEdit::displayObject( PMObject* o )

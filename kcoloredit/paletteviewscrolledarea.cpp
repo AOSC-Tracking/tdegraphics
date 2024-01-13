@@ -48,7 +48,7 @@ PaletteViewScrolledArea::PaletteViewScrolledArea(const int defaultCellWidth,
 	this->view = view;
 	setBackgroundMode(NoBackground);
 	scrollTimeoutTimer = new TQTimer(this);
-	connect(scrollTimeoutTimer, TQT_SIGNAL( timeout() ), TQT_SLOT( slotScrollTimeout() ));
+	connect(scrollTimeoutTimer, TQ_SIGNAL( timeout() ), TQ_SLOT( slotScrollTimeout() ));
 	scrollTimeout = true;
 	mousePressed = false;
 	cursorPositioning = false;

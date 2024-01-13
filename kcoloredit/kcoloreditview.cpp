@@ -48,15 +48,15 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	addColorLayout->setMargin(8);
 	TQHBoxLayout* buttonsLayout = new TQHBoxLayout(4);
 	TQPushButton* addColorButton = new TQPushButton(i18n( "Add Color" ), paletteViewArea);
-	connect(addColorButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotAddColor() ));
+	connect(addColorButton, TQ_SIGNAL( clicked() ), TQ_SLOT( slotAddColor() ));
 	buttonsLayout->addWidget(addColorButton);
 	buttonsLayout->addStretch(10);
 	addColorLayout->addLayout(buttonsLayout);
 	TQCheckBox* atCursorCheckBox = new TQCheckBox(i18n( "At cursor" ), paletteViewArea);
-	connect(atCursorCheckBox, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( slotAddColorAtCursor(bool) ));
+	connect(atCursorCheckBox, TQ_SIGNAL( toggled(bool) ), TQ_SLOT( slotAddColorAtCursor(bool) ));
 	addColorLayout->addWidget(atCursorCheckBox);
 	overwriteCheckBox = new TQCheckBox(i18n( "Overwrite" ), paletteViewArea);
-	connect(overwriteCheckBox, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( slotAddColorOverwrite(bool) ));
+	connect(overwriteCheckBox, TQ_SIGNAL( toggled(bool) ), TQ_SLOT( slotAddColorOverwrite(bool) ));
 	slotAddColorAtCursor(false);
 	slotAddColorOverwrite(false);
 	addColorLayout->addWidget(overwriteCheckBox);
@@ -66,8 +66,8 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	//addColorLayout->addStretch(10);
 	//TQCheckBox* cursorFollowsChosenColor = new TQCheckBox(i18n( "Cursor follows" ), paletteViewArea);
 	//addColorLayout->addWidget(cursorFollowsChosenColor);
-	//connect(cursorFollowsChosenColor, TQT_SIGNAL( toggled(bool) ),
-	//	paletteView, TQT_SLOT( slotCursorFollowsChosenColor(bool) ));
+	//connect(cursorFollowsChosenColor, TQ_SIGNAL( toggled(bool) ),
+	//	paletteView, TQ_SLOT( slotCursorFollowsChosenColor(bool) ));
 	//cursorFollowsChosenColor->toggle();
 	paletteView->slotCursorFollowsChosenColor(true);
 	layout->addLayout(addColorLayout, 0);
@@ -78,7 +78,7 @@ KColorEditView::KColorEditView(TQWidget *parent, const char *name) : TQSplitter(
 	TQLabel* nameLabel = new TQLabel(i18n( "Name" ) + ": ", colorAtCursorFrameArea);
 	colorNameLayout->addWidget(nameLabel, 0);
 	colorName = new TQLineEdit(colorAtCursorFrameArea);
-	connect(colorName, TQT_SIGNAL( textChanged(const TQString&) ), TQT_SLOT( slotSetColorName(const TQString&) ));
+	connect(colorName, TQ_SIGNAL( textChanged(const TQString&) ), TQ_SLOT( slotSetColorName(const TQString&) ));
 	colorNameLayout->addWidget(colorName, 10);
 	colorAtCursorLayout->addLayout(colorNameLayout);
 	TQGridLayout* colorAtCursorComponentsLayout = new TQGridLayout(3, 6, 4);

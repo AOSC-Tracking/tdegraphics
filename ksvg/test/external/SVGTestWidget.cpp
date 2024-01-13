@@ -20,7 +20,7 @@ SVGTestWidget::SVGTestWidget(const KURL &url)
 	setMouseTracking(true);	
 	setFocusPolicy(TQWidget::WheelFocus);
 
-	m_doc = DocumentFactory::self()->requestDocument(this, TQT_SLOT(slotRenderingFinished()));
+	m_doc = DocumentFactory::self()->requestDocument(this, TQ_SLOT(slotRenderingFinished()));
 	if(!m_doc)
 		return;	
 

@@ -83,13 +83,13 @@ void PMBlendMapModifiersEdit::createTopWidgets( )
    hl->addWidget( m_pWaveExponentEdit );
    hl->addStretch( 1 );
 
-   connect( m_pEnableFrequencyEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFrequencyClicked( ) ) );
-   connect( m_pFrequencyEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEnablePhaseEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPhaseClicked( ) ) );
-   connect( m_pPhaseEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableWaveFormEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotWaveFormClicked( ) ) );
-   connect( m_pWaveExponentEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pWaveTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotTypeComboChanged( int ) ) );
+   connect( m_pEnableFrequencyEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotFrequencyClicked( ) ) );
+   connect( m_pFrequencyEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnablePhaseEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotPhaseClicked( ) ) );
+   connect( m_pPhaseEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableWaveFormEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotWaveFormClicked( ) ) );
+   connect( m_pWaveExponentEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pWaveTypeCombo, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotTypeComboChanged( int ) ) );
 }
 
 void PMBlendMapModifiersEdit::displayObject( PMObject* o )

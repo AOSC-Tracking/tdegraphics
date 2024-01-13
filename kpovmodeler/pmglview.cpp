@@ -150,33 +150,33 @@ PMGLView::PMGLView( PMPart* part, PMViewType t,
 
    setMinimumSize( 50, 50 );
 
-   connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );
-   connect( part, TQT_SIGNAL( clear( ) ), TQT_SLOT( slotClear( ) ) );
+   connect( part, TQ_SIGNAL( refresh( ) ), TQ_SLOT( slotRefresh( ) ) );
+   connect( part, TQ_SIGNAL( clear( ) ), TQ_SLOT( slotClear( ) ) );
 
-   connect( this, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-            part, TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
-   connect( part, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( this, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            part, TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
-   connect( part, TQT_SIGNAL( activeRenderModeChanged( ) ),
-            TQT_SLOT( slotActiveRenderModeChanged( ) ) );
+   connect( part, TQ_SIGNAL( activeRenderModeChanged( ) ),
+            TQ_SLOT( slotActiveRenderModeChanged( ) ) );
 
-   connect( &m_startTimer, TQT_SIGNAL( timeout( ) ),
-            TQT_SLOT( slotMouseChangeTimer( ) ) );
-   connect( &m_autoScrollTimer, TQT_SIGNAL( timeout( ) ),
-            TQT_SLOT( slotAutoScroll( ) ) );
+   connect( &m_startTimer, TQ_SIGNAL( timeout( ) ),
+            TQ_SLOT( slotMouseChangeTimer( ) ) );
+   connect( &m_autoScrollTimer, TQ_SIGNAL( timeout( ) ),
+            TQ_SLOT( slotAutoScroll( ) ) );
 
-   connect( rm, TQT_SIGNAL( renderingStarted( PMGLView* ) ),
-            TQT_SLOT( slotRenderingStarted( PMGLView* ) ) );
-   connect( rm, TQT_SIGNAL( aboutToUpdate( PMGLView* ) ),
-            TQT_SLOT( slotAboutToUpdate( PMGLView* ) ) );
-   connect( rm, TQT_SIGNAL( renderingFinished( PMGLView* ) ),
-            TQT_SLOT( slotRenderingFinished( PMGLView* ) ) );
-   connect( rm, TQT_SIGNAL( renderingSettingsChanged( ) ),
-            TQT_SLOT( slotRefresh( ) ) );
+   connect( rm, TQ_SIGNAL( renderingStarted( PMGLView* ) ),
+            TQ_SLOT( slotRenderingStarted( PMGLView* ) ) );
+   connect( rm, TQ_SIGNAL( aboutToUpdate( PMGLView* ) ),
+            TQ_SLOT( slotAboutToUpdate( PMGLView* ) ) );
+   connect( rm, TQ_SIGNAL( renderingFinished( PMGLView* ) ),
+            TQ_SLOT( slotRenderingFinished( PMGLView* ) ) );
+   connect( rm, TQ_SIGNAL( renderingSettingsChanged( ) ),
+            TQ_SLOT( slotRefresh( ) ) );
 
-   connect( this, TQT_SIGNAL( controlPointMessage( const TQString& ) ),
-            m_pPart, TQT_SIGNAL( controlPointMessage( const TQString& ) ) );
+   connect( this, TQ_SIGNAL( controlPointMessage( const TQString& ) ),
+            m_pPart, TQ_SIGNAL( controlPointMessage( const TQString& ) ) );
 
    updateControlPoints( );
 }
@@ -1537,12 +1537,12 @@ void PMGLView::restoreConfig( TDEConfig* /*cfg*/ )
 void PMGLView::contextMenu( )
 {
    TQPopupMenu* m = new TQPopupMenu( );
-   m->insertItem( i18n( "Left View" ), this, TQT_SLOT( slotSetTypePosX( ) ) );
-   m->insertItem( i18n( "Right View" ), this, TQT_SLOT( slotSetTypeNegX( ) ) );
-   m->insertItem( i18n( "Top View" ), this, TQT_SLOT( slotSetTypeNegY( ) ) );
-   m->insertItem( i18n( "Bottom View" ), this, TQT_SLOT( slotSetTypePosY( ) ) );
-   m->insertItem( i18n( "Front View" ), this, TQT_SLOT( slotSetTypePosZ( ) ) );
-   m->insertItem( i18n( "Back View" ), this, TQT_SLOT( slotSetTypeNegZ( ) ) );
+   m->insertItem( i18n( "Left View" ), this, TQ_SLOT( slotSetTypePosX( ) ) );
+   m->insertItem( i18n( "Right View" ), this, TQ_SLOT( slotSetTypeNegX( ) ) );
+   m->insertItem( i18n( "Top View" ), this, TQ_SLOT( slotSetTypeNegY( ) ) );
+   m->insertItem( i18n( "Bottom View" ), this, TQ_SLOT( slotSetTypePosY( ) ) );
+   m->insertItem( i18n( "Front View" ), this, TQ_SLOT( slotSetTypePosZ( ) ) );
+   m->insertItem( i18n( "Back View" ), this, TQ_SLOT( slotSetTypeNegZ( ) ) );
 
    TQPopupMenu* cm = new TQPopupMenu( m );
    TQPtrListIterator<PMCamera> it = m_pPart->cameras( );
@@ -1560,13 +1560,13 @@ void PMGLView::contextMenu( )
          cm->insertItem( name, cnr );
       }
    }
-   connect( cm, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotCameraView( int ) ) );
+   connect( cm, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotCameraView( int ) ) );
 
    m->insertItem( SmallIconSet( "pmcamera" ), i18n( "Camera" ), cm );
 
    m->insertSeparator( );
 
-   m->insertItem( i18n( "Snap to Grid" ), this, TQT_SLOT( slotSnapToGrid( ) ) );
+   m->insertItem( i18n( "Snap to Grid" ), this, TQ_SLOT( slotSnapToGrid( ) ) );
    m_objectActions.clear( );
    if( m_pActiveObject )
    {
@@ -1583,7 +1583,7 @@ void PMGLView::contextMenu( )
          }
       }
    }
-   connect( m, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotObjectAction( int ) ) );
+   connect( m, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotObjectAction( int ) ) );
 
    m->insertSeparator( );
 
@@ -1598,7 +1598,7 @@ void PMGLView::contextMenu( )
       for( ; pit.current( ); ++pit, ++cnr )
          menu->insertItem( pit.current( )->description( ), cnr );
    }
-   connect( menu, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotControlPoint( int ) ) );
+   connect( menu, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotControlPoint( int ) ) );
 
    m->insertItem( i18n( "Control Points" ), menu );
 
@@ -1816,8 +1816,8 @@ PMGLViewOptionsWidget::PMGLViewOptionsWidget( TQWidget* parent,
          break;
    }
 
-   connect( m_pGLViewType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotGLViewTypeChanged( int ) ) );
+   connect( m_pGLViewType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotGLViewTypeChanged( int ) ) );
    hl->addWidget( m_pGLViewType );
 }
 

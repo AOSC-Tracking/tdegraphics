@@ -154,41 +154,41 @@ void PMFinishEdit::createTopWidgets( )
    layout->addMultiCellWidget( m_pReflectionWidget, 5, 5, 0, 1 );
 
 
-   connect( m_pAmbientColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDiffuseEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pBrillianceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCrandEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pConserveEnergyEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPhongEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPhongSizeEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMetallicEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSpecularEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRoughnessEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pIridAmountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pIridThicknessEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pIridTurbulenceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pIridEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotIridClicked( ) ) );
-   connect( m_pReflectionColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionMinColorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionFresnelEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionFalloffEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionExponentEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pReflectionMetallicEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAmbientColorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDiffuseEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pBrillianceEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrandEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pConserveEnergyEdit, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPhongEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPhongSizeEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMetallicEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSpecularEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRoughnessEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridAmountEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridThicknessEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridTurbulenceEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pIridEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotIridClicked( ) ) );
+   connect( m_pReflectionColorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionMinColorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionFresnelEdit, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionFalloffEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionExponentEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflectionMetallicEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
    
-   connect( m_pEnableAmbientEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAmbientClicked( ) ) );
-   connect( m_pEnablePhongEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPhongClicked( ) ) );
-   connect( m_pEnablePhongSizeEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotPhongSizeClicked( ) ) );
-   connect( m_pEnableDiffuseEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDiffuseClicked( ) ) );
-   connect( m_pEnableBrillianceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotBrillianceClicked( ) ) );
-   connect( m_pEnableCrandEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCrandClicked( ) ) );
-   connect( m_pEnableSpecularEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSpecularClicked( ) ) );
-   connect( m_pEnableRoughnessEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRoughnessClicked( ) ) );
-   connect( m_pEnableMetallicEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotMetallicClicked( ) ) );
-   connect( m_pEnableReflectionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotReflectionClicked( ) ) );
-   connect( m_pEnableReflectionMinEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotReflectionMinClicked( ) ) );
-   connect( m_pEnableRefFalloffEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRefFalloffClicked( ) ) );
-   connect( m_pEnableRefExponentEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRefExponentClicked( ) ) );
-   connect( m_pEnableRefMetallicEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRefMetallicClicked( ) ) );
+   connect( m_pEnableAmbientEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAmbientClicked( ) ) );
+   connect( m_pEnablePhongEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotPhongClicked( ) ) );
+   connect( m_pEnablePhongSizeEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotPhongSizeClicked( ) ) );
+   connect( m_pEnableDiffuseEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDiffuseClicked( ) ) );
+   connect( m_pEnableBrillianceEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotBrillianceClicked( ) ) );
+   connect( m_pEnableCrandEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotCrandClicked( ) ) );
+   connect( m_pEnableSpecularEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotSpecularClicked( ) ) );
+   connect( m_pEnableRoughnessEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRoughnessClicked( ) ) );
+   connect( m_pEnableMetallicEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotMetallicClicked( ) ) );
+   connect( m_pEnableReflectionEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotReflectionClicked( ) ) );
+   connect( m_pEnableReflectionMinEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotReflectionMinClicked( ) ) );
+   connect( m_pEnableRefFalloffEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRefFalloffClicked( ) ) );
+   connect( m_pEnableRefExponentEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRefExponentClicked( ) ) );
+   connect( m_pEnableRefMetallicEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRefMetallicClicked( ) ) );
 }
 
 void PMFinishEdit::displayObject( PMObject* o )

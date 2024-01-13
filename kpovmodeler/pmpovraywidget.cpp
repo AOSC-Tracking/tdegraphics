@@ -85,25 +85,25 @@ PMPovrayWidget::PMPovrayWidget( TQWidget* parent, const char* name )
    TQPushButton* closeButton = new KPushButton( KStdGuiItem::close(), this );
    buttonLayout->addWidget( closeButton );
 
-   connect( m_pRenderWidget, TQT_SIGNAL( finished( int ) ),
-            TQT_SLOT( slotRenderingFinished( int ) ) );
-   connect( m_pRenderWidget, TQT_SIGNAL( progress( int ) ),
-            TQT_SLOT( slotProgress( int ) ) );
-   connect( m_pRenderWidget, TQT_SIGNAL( lineFinished( int ) ),
-            TQT_SLOT( slotLineFinished( int ) ) );
+   connect( m_pRenderWidget, TQ_SIGNAL( finished( int ) ),
+            TQ_SLOT( slotRenderingFinished( int ) ) );
+   connect( m_pRenderWidget, TQ_SIGNAL( progress( int ) ),
+            TQ_SLOT( slotProgress( int ) ) );
+   connect( m_pRenderWidget, TQ_SIGNAL( lineFinished( int ) ),
+            TQ_SLOT( slotLineFinished( int ) ) );
 
-   connect( m_pStopButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotStop( ) ) );
-   connect( m_pSuspendButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSuspend( ) ) );
-   connect( m_pResumeButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotResume( ) ) );
-   connect( m_pSaveButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSave( ) ) );
-   connect( closeButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotClose( ) ) );
-   connect( m_pPovrayOutputButton, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotPovrayOutput( ) ) );
+   connect( m_pStopButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotStop( ) ) );
+   connect( m_pSuspendButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotSuspend( ) ) );
+   connect( m_pResumeButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotResume( ) ) );
+   connect( m_pSaveButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotSave( ) ) );
+   connect( closeButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotClose( ) ) );
+   connect( m_pPovrayOutputButton, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotPovrayOutput( ) ) );
 
    m_bRunning = false;
    m_pProgressTimer = new TQTimer( this );
-   connect( m_pProgressTimer, TQT_SIGNAL( timeout( ) ),
-            TQT_SLOT( slotUpdateSpeed( ) ) );
+   connect( m_pProgressTimer, TQ_SIGNAL( timeout( ) ),
+            TQ_SLOT( slotUpdateSpeed( ) ) );
 
    setCaption( i18n( "Render Window" ) );
 
@@ -111,8 +111,8 @@ PMPovrayWidget::PMPovrayWidget( TQWidget* parent, const char* name )
    m_stopped = false;
 
    m_pPovrayOutputWidget = new PMPovrayOutputWidget( );
-   connect( m_pRenderWidget, TQT_SIGNAL( povrayMessage( const TQString& ) ),
-            m_pPovrayOutputWidget, TQT_SLOT( slotText( const TQString& ) ) );
+   connect( m_pRenderWidget, TQ_SIGNAL( povrayMessage( const TQString& ) ),
+            m_pPovrayOutputWidget, TQ_SLOT( slotText( const TQString& ) ) );
 }
 
 PMPovrayWidget::~PMPovrayWidget( )

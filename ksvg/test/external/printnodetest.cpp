@@ -21,7 +21,7 @@ static TDECmdLineOptions options[] =
 
 Worker::Worker(const KURL &url)
 {
-	m_doc = DocumentFactory::self()->requestDocument(this, TQT_SLOT(slotParsingFinished(bool, const TQString &)));
+	m_doc = DocumentFactory::self()->requestDocument(this, TQ_SLOT(slotParsingFinished(bool, const TQString &)));
 
 	if(!m_doc)
 		return;

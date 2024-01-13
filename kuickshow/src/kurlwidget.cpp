@@ -27,7 +27,7 @@ KURLWidget::KURLWidget(const TQString& text, TQWidget *parent, const char *name)
     : KURLLabel( parent, name )
 {
     setText( text );
-    connect( this, TQT_SIGNAL( leftClickedURL() ), TQT_SLOT( run() ));
+    connect( this, TQ_SIGNAL( leftClickedURL() ), TQ_SLOT( run() ));
     setUseTips( true );
 }
 

@@ -64,7 +64,7 @@ KuickConfigDialog::KuickConfigDialog( TDEActionCollection *_coll, TQWidget *pare
     box = addVBoxPage( i18n("Bro&wser Shortcuts") );
     browserKeyChooser = new KKeyChooser( coll, box );
 
-    connect( this, TQT_SIGNAL( defaultClicked() ), TQT_SLOT( resetDefaults() ));
+    connect( this, TQ_SIGNAL( defaultClicked() ), TQ_SLOT( resetDefaults() ));
 }
 
 KuickConfigDialog::~KuickConfigDialog()

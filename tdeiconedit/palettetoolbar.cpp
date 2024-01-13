@@ -63,8 +63,8 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
 
   vlayout->addWidget( m_sysColors );
 
-  connect( m_sysColors, TQT_SIGNAL( newColor(uint) ), 
-      TQT_SIGNAL( newColor(uint) ) );
+  connect( m_sysColors, TQ_SIGNAL( newColor(uint) ), 
+      TQ_SIGNAL( newColor(uint) ) );
 
   vlayout = new TQVBoxLayout( m_layout, 0 );
   l = new TQLabel( i18n( "Custom colors:" ), base );
@@ -76,10 +76,10 @@ PaletteToolBar::PaletteToolBar( TQWidget *parent, const char *name )
 
   vlayout->addWidget( m_customColors );
 
-  connect( m_customColors, TQT_SIGNAL( newColor(uint) ), 
-      TQT_SIGNAL( newColor(uint) ) );
-  connect( this, TQT_SIGNAL( newColor(uint)),
-      this, TQT_SLOT(currentColorChanged(uint)));
+  connect( m_customColors, TQ_SIGNAL( newColor(uint) ), 
+      TQ_SIGNAL( newColor(uint) ) );
+  connect( this, TQ_SIGNAL( newColor(uint)),
+      this, TQ_SLOT(currentColorChanged(uint)));
   currentColorChanged(OPAQUE_MASK|0);
 
   setEnableContextMenu( false );

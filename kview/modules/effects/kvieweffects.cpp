@@ -38,20 +38,20 @@ KViewEffects::KViewEffects( TQObject* parent, const char* name, const TQStringLi
 	if( m_pViewer )
 	{
 		TDEAction * gammaaction = new TDEAction( i18n( "&Gamma Correction..." ), 0, 0,
-				this, TQT_SLOT( gamma() ),
+				this, TQ_SLOT( gamma() ),
 				actionCollection(), "plugin_effects_gamma" );
 		TDEAction * blendaction = new TDEAction( i18n( "&Blend Color..." ), 0, 0,
-				this, TQT_SLOT( blend() ),
+				this, TQ_SLOT( blend() ),
 				actionCollection(), "plugin_effects_blend" );
 		TDEAction * intensityaction = new TDEAction( i18n( "Change &Intensity (Brightness)..." ), 0, 0,
-				this, TQT_SLOT( intensity() ),
+				this, TQ_SLOT( intensity() ),
 				actionCollection(), "plugin_effects_intensity" );
 		gammaaction->setEnabled( m_pViewer->canvas()->image() != 0 );
 		blendaction->setEnabled( m_pViewer->canvas()->image() != 0 );
 		intensityaction->setEnabled( m_pViewer->canvas()->image() != 0 );
-		connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), gammaaction, TQT_SLOT( setEnabled( bool ) ) );
-		connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), blendaction, TQT_SLOT( setEnabled( bool ) ) );
-		connect( m_pViewer->widget(), TQT_SIGNAL( hasImage( bool ) ), intensityaction, TQT_SLOT( setEnabled( bool ) ) );
+		connect( m_pViewer->widget(), TQ_SIGNAL( hasImage( bool ) ), gammaaction, TQ_SLOT( setEnabled( bool ) ) );
+		connect( m_pViewer->widget(), TQ_SIGNAL( hasImage( bool ) ), blendaction, TQ_SLOT( setEnabled( bool ) ) );
+		connect( m_pViewer->widget(), TQ_SIGNAL( hasImage( bool ) ), intensityaction, TQ_SLOT( setEnabled( bool ) ) );
 	}
 	else
 		kdWarning( 4630 ) << "no KImageViewer interface found - the effects plugin won't work" << endl;
@@ -67,7 +67,7 @@ KViewEffects::~KViewEffects()
 void KViewEffects::intensity()
 {
 	KDialogBase dlg( m_pViewer->widget(), "Intensity Dialog", true /*modal*/, i18n( "Change Intensity" ), KDialogBase::Ok | KDialogBase::Try | KDialogBase::Cancel );
-	connect( &dlg, TQT_SIGNAL( tryClicked() ), this, TQT_SLOT( applyIntensity() ) );
+	connect( &dlg, TQ_SIGNAL( tryClicked() ), this, TQ_SLOT( applyIntensity() ) );
 
 	TQVBox * vbox = new TQVBox( &dlg );
 	vbox->setSpacing( KDialog::spacingHint() );
@@ -77,7 +77,7 @@ void KViewEffects::intensity()
 	percent->setValue( m_intensity );
 	percent->setLabel( i18n( "&Intensity:" ) );
 	percent->setSuffix( TQString::fromAscii( "%" ) );
-	connect( percent, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( setIntensity( int ) ) );
+	connect( percent, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( setIntensity( int ) ) );
 
 	int result = dlg.exec();
 	if( result == TQDialog::Accepted )
@@ -117,7 +117,7 @@ void KViewEffects::applyIntensity()
 void KViewEffects::blend()
 {
 	KDialogBase dlg( m_pViewer->widget(), "Blend Color Dialog", true /*modal*/, i18n( "Blend Color" ), KDialogBase::Ok | KDialogBase::Try | KDialogBase::Cancel );
-	connect( &dlg, TQT_SIGNAL( tryClicked() ), this, TQT_SLOT( applyBlend() ) );
+	connect( &dlg, TQ_SIGNAL( tryClicked() ), this, TQ_SLOT( applyBlend() ) );
 
 	TQVBox * vbox = new TQVBox( &dlg );
 	vbox->setSpacing( KDialog::spacingHint() );
@@ -127,11 +127,11 @@ void KViewEffects::blend()
 	opacity->setValue( m_opacity );
 	opacity->setLabel( i18n( "O&pacity:" ) );
 	opacity->setSuffix( TQString::fromAscii( "%" ) );
-	connect( opacity, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( setOpacity( int ) ) );
+	connect( opacity, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( setOpacity( int ) ) );
 	TQLabel * label = new TQLabel( i18n( "Blend c&olor:" ), vbox );
 	KColorButton * color = new KColorButton( m_color, vbox, "Color Input Button" );
 	label->setBuddy( color );
-	connect( color, TQT_SIGNAL( changed( const TQColor & ) ), this, TQT_SLOT( setColor( const TQColor & ) ) );
+	connect( color, TQ_SIGNAL( changed( const TQColor & ) ), this, TQ_SLOT( setColor( const TQColor & ) ) );
 
 	int result = dlg.exec();
 	if( result == TQDialog::Accepted )
@@ -175,12 +175,12 @@ void KViewEffects::applyBlend()
 void KViewEffects::gamma()
 {
 	KDialogBase dlg( m_pViewer->widget(), "Gamma Correction Dialog", true /*modal*/, i18n( "Gamma Correction" ), KDialogBase::Ok | KDialogBase::Try | KDialogBase::Cancel );
-	connect( &dlg, TQT_SIGNAL( tryClicked() ), this, TQT_SLOT( applyGammaCorrection() ) );
+	connect( &dlg, TQ_SIGNAL( tryClicked() ), this, TQ_SLOT( applyGammaCorrection() ) );
 
 	// create dialog
 	KDoubleNumInput * gammavalue = new KDoubleNumInput( 0.0, 1.0, 0.5, 0.01, 4, &dlg, "Gamma value input" );
 	gammavalue->setRange( 0.0, 1.0, 0.01, true );
-	connect( gammavalue, TQT_SIGNAL( valueChanged( double ) ), this, TQT_SLOT( setGammaValue( double ) ) );
+	connect( gammavalue, TQ_SIGNAL( valueChanged( double ) ), this, TQ_SLOT( setGammaValue( double ) ) );
 	gammavalue->setLabel( i18n( "Gamma value:" ) );
 	dlg.setMainWidget( gammavalue );
 

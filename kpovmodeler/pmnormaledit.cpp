@@ -56,10 +56,10 @@ void PMNormalEdit::createTopWidgets( )
    m_pUVMapping = new TQCheckBox( i18n( "UV mapping" ), this );
    topLayout( )->addWidget( m_pUVMapping );
 
-   connect( m_pBumpSizeCheck, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotBumpSizeClicked( )) );
-   connect( m_pBumpSizeEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( )) );
-   connect( m_pAccuracy, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pUVMapping, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pBumpSizeCheck, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotBumpSizeClicked( )) );
+   connect( m_pBumpSizeEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( )) );
+   connect( m_pAccuracy, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pUVMapping, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMNormalEdit::displayObject( PMObject* o )

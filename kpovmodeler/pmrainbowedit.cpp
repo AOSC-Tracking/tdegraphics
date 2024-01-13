@@ -92,22 +92,22 @@ void PMRainbowEdit::createTopWidgets( )
    gl->addWidget( m_pFalloffAngleEdit, 1, 1 );
    hl->addStretch( 1 );
 
-   connect( m_pDirectionEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAngleEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pWidthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDistanceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pJitterEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pUpEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pArcAngleEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFalloffAngleEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableDirectionEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDirectionClicked( ) ) );
-   connect( m_pEnableAngleEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAngleClicked( ) ) );
-   connect( m_pEnableWidthEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotWidthClicked( ) ) );
-   connect( m_pEnableDistanceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDistanceClicked( ) ) );
-   connect( m_pEnableJitterEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotJitterClicked( ) ) );
-   connect( m_pEnableUpEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUpClicked( ) ) );
-   connect( m_pEnableArcAngleEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotArcAngleClicked( ) ) );
-   connect( m_pEnableFalloffAngleEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFalloffAngleClicked( ) ) );
+   connect( m_pDirectionEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAngleEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pWidthEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDistanceEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pJitterEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pUpEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pArcAngleEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFalloffAngleEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableDirectionEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDirectionClicked( ) ) );
+   connect( m_pEnableAngleEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAngleClicked( ) ) );
+   connect( m_pEnableWidthEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotWidthClicked( ) ) );
+   connect( m_pEnableDistanceEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDistanceClicked( ) ) );
+   connect( m_pEnableJitterEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotJitterClicked( ) ) );
+   connect( m_pEnableUpEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotUpClicked( ) ) );
+   connect( m_pEnableArcAngleEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotArcAngleClicked( ) ) );
+   connect( m_pEnableFalloffAngleEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotFalloffAngleClicked( ) ) );
 }
 
 void PMRainbowEdit::displayObject( PMObject* o )

@@ -57,9 +57,9 @@ void PMPlaneEdit::createTopWidgets( )
    layout->addWidget( nb );
    layout->addStretch( 1 );
 
-   connect( m_pNormal, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDistance, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( nb, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotNormalize( ) ) );
+   connect( m_pNormal, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDistance, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( nb, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotNormalize( ) ) );
 }
 
 void PMPlaneEdit::slotNormalize( )

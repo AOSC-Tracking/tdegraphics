@@ -192,15 +192,15 @@ kpEffectInvertWidget::kpEffectInvertWidget (bool actOnSelection,
 
 
     m_inSignalHandler = false;
-    connect (m_redCheckBox, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotRGBCheckBoxToggled ()));
-    connect (m_greenCheckBox, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotRGBCheckBoxToggled ()));
-    connect (m_blueCheckBox, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotRGBCheckBoxToggled ()));
+    connect (m_redCheckBox, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotRGBCheckBoxToggled ()));
+    connect (m_greenCheckBox, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotRGBCheckBoxToggled ()));
+    connect (m_blueCheckBox, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotRGBCheckBoxToggled ()));
 
-    connect (m_allCheckBox, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotAllCheckBoxToggled ()));
+    connect (m_allCheckBox, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotAllCheckBoxToggled ()));
 }
 
 kpEffectInvertWidget::~kpEffectInvertWidget ()

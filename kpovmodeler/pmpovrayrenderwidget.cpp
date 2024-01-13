@@ -87,12 +87,12 @@ bool PMPovrayRenderWidget::render( const TQByteArray& scene,
    m_pTempFile->close( );
 
    m_pProcess = new TDEProcess( );
-   connect( m_pProcess, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
-            TQT_SLOT( slotPovrayImage( TDEProcess*, char*, int ) ) );
-   connect( m_pProcess, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
-            TQT_SLOT( slotPovrayMessage( TDEProcess*, char*, int ) ) );
-   connect( m_pProcess, TQT_SIGNAL( processExited( TDEProcess* ) ),
-            TQT_SLOT( slotRenderingFinished( TDEProcess* ) ) );
+   connect( m_pProcess, TQ_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+            TQ_SLOT( slotPovrayImage( TDEProcess*, char*, int ) ) );
+   connect( m_pProcess, TQ_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+            TQ_SLOT( slotPovrayMessage( TDEProcess*, char*, int ) ) );
+   connect( m_pProcess, TQ_SIGNAL( processExited( TDEProcess* ) ),
+            TQ_SLOT( slotRenderingFinished( TDEProcess* ) ) );
 
    *m_pProcess << s_povrayCommand;
 

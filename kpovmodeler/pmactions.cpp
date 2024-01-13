@@ -82,11 +82,11 @@ int PMComboAction::plug( TQWidget* w, int index )
 
    toolBar->insertWidget( id, m_minWidth > 0 ? m_minWidth : 300,
                           comboBox, index );
-   connect( comboBox, TQT_SIGNAL( activated( int ) ), m_receiver, m_member );
+   connect( comboBox, TQ_SIGNAL( activated( int ) ), m_receiver, m_member );
 
    addContainer( toolBar, id );
 
-   connect( toolBar, TQT_SIGNAL( destroyed( ) ), this, TQT_SLOT( slotDestroyed( ) ) );
+   connect( toolBar, TQ_SIGNAL( destroyed( ) ), this, TQ_SLOT( slotDestroyed( ) ) );
 
    //toolBar->setItemAutoSized( id, true );
 
@@ -164,7 +164,7 @@ int PMLabelAction::plug( TQWidget *widget, int index )
 
       addContainer( tb, id );
 
-      connect( tb, TQT_SIGNAL( destroyed( ) ), this, TQT_SLOT( slotDestroyed( ) ) );
+      connect( tb, TQ_SIGNAL( destroyed( ) ), this, TQ_SLOT( slotDestroyed( ) ) );
 
       return containerCount( ) - 1;
   }
@@ -216,11 +216,11 @@ int PMSpinBoxAction::plug( TQWidget* w, int index )
    TQSpinBox* spinBox = new TQSpinBox( -1000, 1000, 1, w );
    toolBar->insertWidget( id, 70, spinBox, index );
    
-   connect( spinBox, TQT_SIGNAL( valueChanged( int ) ), m_receiver, m_member );
+   connect( spinBox, TQ_SIGNAL( valueChanged( int ) ), m_receiver, m_member );
 
    addContainer( toolBar, id );
 
-   connect( toolBar, TQT_SIGNAL( destroyed( ) ), this, TQT_SLOT( slotDestroyed( ) ) );
+   connect( toolBar, TQ_SIGNAL( destroyed( ) ), this, TQ_SLOT( slotDestroyed( ) ) );
    //toolBar->setItemAutoSized( id, false );
 
    m_spinBox = spinBox;

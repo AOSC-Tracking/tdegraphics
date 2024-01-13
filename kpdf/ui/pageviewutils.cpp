@@ -131,7 +131,7 @@ void PageViewMessage::display( const TQString & message, Icon icon, int duration
         if ( !m_timer )
         {
             m_timer = new TQTimer( this );
-            connect( m_timer, TQT_SIGNAL( timeout() ), TQT_SLOT( hide() ) );
+            connect( m_timer, TQ_SIGNAL( timeout() ), TQ_SLOT( hide() ) );
         }
         m_timer->start( durationMs, true );
     } else if ( m_timer )

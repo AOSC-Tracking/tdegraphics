@@ -178,28 +178,28 @@ void PMDialogEditBase::displayObject( PMObject* o )
          vl->addWidget( m_pRenderFrame );
 
          m_pRenderWidget = new PMPovrayRenderWidget( m_pRenderFrame );
-         connect( m_pRenderWidget, TQT_SIGNAL( finished( int ) ),
-                  TQT_SLOT( slotPreviewFinished( int ) ) );
+         connect( m_pRenderWidget, TQ_SIGNAL( finished( int ) ),
+                  TQ_SLOT( slotPreviewFinished( int ) ) );
          m_pPreviewLocalBox = new TQCheckBox( i18n( "local" ), m_pTexturePreviewWidget );
          m_pPreviewLocalBox->setChecked( s_previewLocal );
-         connect( m_pPreviewLocalBox, TQT_SIGNAL( toggled( bool ) ),
-                  TQT_SLOT( slotPreviewLocal( bool ) ) );
+         connect( m_pPreviewLocalBox, TQ_SIGNAL( toggled( bool ) ),
+                  TQ_SLOT( slotPreviewLocal( bool ) ) );
          vl->addWidget( m_pPreviewLocalBox );
 
          TQHBoxLayout* hl = new TQHBoxLayout( vl );
          m_pPreviewButton = new TQPushButton( i18n( "&Preview" ), m_pTexturePreviewWidget );
          hl->addWidget( m_pPreviewButton );
-         connect( m_pPreviewButton, TQT_SIGNAL( clicked( ) ),
-                  TQT_SLOT( slotTexturePreview( ) ) );
+         connect( m_pPreviewButton, TQ_SIGNAL( clicked( ) ),
+                  TQ_SLOT( slotTexturePreview( ) ) );
          m_pOutputButton = new TQPushButton( i18n( "Povray Output" ), m_pTexturePreviewWidget );
          hl->addWidget( m_pOutputButton );
-         connect( m_pOutputButton, TQT_SIGNAL( clicked( ) ),
-                  TQT_SLOT( slotPovrayOutput( ) ) );
+         connect( m_pOutputButton, TQ_SIGNAL( clicked( ) ),
+                  TQ_SLOT( slotPovrayOutput( ) ) );
          hl->addStretch( 1 );
 
          m_pOutputWidget = new PMPovrayOutputWidget( );
-         connect( m_pRenderWidget, TQT_SIGNAL( povrayMessage( const TQString& ) ),
-                  m_pOutputWidget, TQT_SLOT( slotText( const TQString& ) ) );
+         connect( m_pRenderWidget, TQ_SIGNAL( povrayMessage( const TQString& ) ),
+                  m_pOutputWidget, TQ_SLOT( slotText( const TQString& ) ) );
       }
 
       m_pTexturePreviewWidget->show( );

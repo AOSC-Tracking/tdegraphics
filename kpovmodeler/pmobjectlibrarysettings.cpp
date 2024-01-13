@@ -43,20 +43,20 @@ PMObjectLibrarySettings::PMObjectLibrarySettings( TQWidget* parent, const char* 
 
    TQHBoxLayout* hlayout = new TQHBoxLayout( gb, KDialog::marginHint( ) + 5, KDialog::spacingHint( ) );
    m_pObjectLibraries = new TQListBox( gb );
-   connect( m_pObjectLibraries, TQT_SIGNAL( selectionChanged( ) ), TQT_SLOT( slotObjectLibraryChanged( ) ) );
+   connect( m_pObjectLibraries, TQ_SIGNAL( selectionChanged( ) ), TQ_SLOT( slotObjectLibraryChanged( ) ) );
    hlayout->addWidget( m_pObjectLibraries );
    TQVBoxLayout* gvl = new TQVBoxLayout( hlayout );
    m_pCreateObjectLibrary = new TQPushButton( i18n( "Create..." ), gb );
-   connect( m_pCreateObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotCreateObjectLibrary( ) ) );
+   connect( m_pCreateObjectLibrary, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotCreateObjectLibrary( ) ) );
    gvl->addWidget( m_pCreateObjectLibrary );
    m_pRemoveObjectLibrary = new TQPushButton( i18n( "Remove" ), gb );
-   connect( m_pRemoveObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveObjectLibrary( ) ) );
+   connect( m_pRemoveObjectLibrary, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemoveObjectLibrary( ) ) );
    gvl->addWidget( m_pRemoveObjectLibrary );
    m_pImportObjectLibrary = new TQPushButton( i18n( "Import" ), gb );
-   connect( m_pImportObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotImportObjectLibrary( ) ) );
+   connect( m_pImportObjectLibrary, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotImportObjectLibrary( ) ) );
    gvl->addWidget( m_pImportObjectLibrary );
    m_pModifyObjectLibrary = new TQPushButton( i18n( "Properties" ), gb );
-   connect( m_pModifyObjectLibrary, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotModifyObjectLibrary( ) ) );
+   connect( m_pModifyObjectLibrary, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotModifyObjectLibrary( ) ) );
    gvl->addWidget( m_pModifyObjectLibrary );
    gvl->addStretch( 1 );
 

@@ -37,7 +37,7 @@ void PMTextureBaseEdit::createTopWidgets( )
    Base::createTopWidgets( );
    m_pLinkEdit = new PMLinkEdit( this );
    topLayout( )->addWidget( m_pLinkEdit );
-   connect( m_pLinkEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLinkEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 

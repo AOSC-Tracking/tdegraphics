@@ -46,7 +46,7 @@ void PMCSGEdit::createTopWidgets( )
    layout->addWidget( m_pTypeCombo );
    layout->addStretch( 1 );
 
-   connect( m_pTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotTypeSelected( int ) ) );
+   connect( m_pTypeCombo, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotTypeSelected( int ) ) );
 }
 
 void PMCSGEdit::displayObject( PMObject* o )

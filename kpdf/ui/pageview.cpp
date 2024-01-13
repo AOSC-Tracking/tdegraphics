@@ -216,8 +216,8 @@ PageView::PageView( TQWidget *parent, KPDFDocument *document )
     viewport()->setMouseTracking( true );
 
     // conntect the padding of the viewport to pixmaps requests
-    connect( this, TQT_SIGNAL(contentsMoving(int, int)), this, TQT_SLOT(slotRequestVisiblePixmaps(int, int)) );
-    connect( &d->dragScrollTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(slotDragScroll()) );
+    connect( this, TQ_SIGNAL(contentsMoving(int, int)), this, TQ_SLOT(slotRequestVisiblePixmaps(int, int)) );
+    connect( &d->dragScrollTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(slotDragScroll()) );
 
     // set a corner button to resize the view to the page size
 //    TQPushButton * resizeButton = new TQPushButton( viewport() );
@@ -228,7 +228,7 @@ PageView::PageView( TQWidget *parent, KPDFDocument *document )
     setInputMethodEnabled( true );
 
     // schedule the welcome message
-    TQTimer::singleShot( 0, this, TQT_SLOT( slotShowWelcome() ) );
+    TQTimer::singleShot( 0, this, TQ_SLOT( slotShowWelcome() ) );
 }
 
 PageView::~PageView()
@@ -246,68 +246,68 @@ PageView::~PageView()
 void PageView::setupActions( TDEActionCollection * ac )
 {
     // Zoom actions ( higher scales takes lots of memory! )
-    d->aZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, this, TQT_SLOT( slotZoom() ), ac, "zoom_to" );
+    d->aZoom = new TDESelectAction( i18n( "Zoom" ), "viewmag", 0, this, TQ_SLOT( slotZoom() ), ac, "zoom_to" );
     d->aZoom->setEditable( true );
 #if KDE_IS_VERSION(3,4,89)
     d->aZoom->setMaxComboViewCount( 13 );
 #endif
     updateZoomText();
 
-    KStdAction::zoomIn( this, TQT_SLOT( slotZoomIn() ), ac, "zoom_in" );
+    KStdAction::zoomIn( this, TQ_SLOT( slotZoomIn() ), ac, "zoom_in" );
 
-    KStdAction::zoomOut( this, TQT_SLOT( slotZoomOut() ), ac, "zoom_out" );
+    KStdAction::zoomOut( this, TQ_SLOT( slotZoomOut() ), ac, "zoom_out" );
 
     d->aZoomFitWidth = new TDEToggleAction( i18n("Fit to Page &Width"), "view_fit_width", 0, ac, "zoom_fit_width" );
-    connect( d->aZoomFitWidth, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToWidthToggled( bool ) ) );
+    connect( d->aZoomFitWidth, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotFitToWidthToggled( bool ) ) );
 
     d->aZoomFitPage = new TDEToggleAction( i18n("Fit to &Page"), "view_fit_window", 0, ac, "zoom_fit_page" );
-    connect( d->aZoomFitPage, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToPageToggled( bool ) ) );
+    connect( d->aZoomFitPage, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotFitToPageToggled( bool ) ) );
 
     d->aZoomFitText = new TDEToggleAction( i18n("Fit to &Text"), "zoom-fit-best", 0, ac, "zoom_fit_text" );
-    connect( d->aZoomFitText, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotFitToTextToggled( bool ) ) );
+    connect( d->aZoomFitText, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotFitToTextToggled( bool ) ) );
 
     // rotate actions
     TDEAction *action;
     action = new TDEAction( i18n("Rotate Right"), "object-rotate-right", TDEShortcut( "Ctrl+Shift++" ),
-                          this, TQT_SLOT( slotRotateRight() ), ac, "rotate_right" );
+                          this, TQ_SLOT( slotRotateRight() ), ac, "rotate_right" );
 
     action = new TDEAction( i18n("Rotate Left"), "object-rotate-left", TDEShortcut( "Ctrl+Shift+-" ),
-                          this, TQT_SLOT( slotRotateLeft() ), ac, "rotate_left" );
+                          this, TQ_SLOT( slotRotateLeft() ), ac, "rotate_left" );
 
     // View-Layout actions
     d->aViewTwoPages = new TDEToggleAction( i18n("&Two Pages"), "view_left_right", 0, ac, "view_twopages" );
-    connect( d->aViewTwoPages, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotTwoPagesToggled( bool ) ) );
+    connect( d->aViewTwoPages, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotTwoPagesToggled( bool ) ) );
     d->aViewTwoPages->setChecked( KpdfSettings::viewColumns() > 1 );
 
     d->aViewContinuous = new TDEToggleAction( i18n("&Continuous"), "view_text", 0, ac, "view_continuous" );
-    connect( d->aViewContinuous, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotContinuousToggled( bool ) ) );
+    connect( d->aViewContinuous, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotContinuousToggled( bool ) ) );
     d->aViewContinuous->setChecked( KpdfSettings::viewContinuous() );
 
     d->aViewCoverPage = new TDEToggleAction( i18n("Co&ver Page"), "contents2", 0, ac, "view_coverpage" );
-    connect( d->aViewCoverPage, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotCoverPageToggled( bool ) ) );
+    connect( d->aViewCoverPage, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotCoverPageToggled( bool ) ) );
     d->aViewCoverPage->setChecked( KpdfSettings::viewCoverPage() );
     d->aViewCoverPage->setEnabled( KpdfSettings::viewColumns() > 1 );
 
     // Mouse-Mode actions
-    d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "input-mouse", 0, this, TQT_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
+    d->aMouseNormal = new TDERadioAction( i18n("&Browse Tool"), "input-mouse", 0, this, TQ_SLOT( slotSetMouseNormal() ), ac, "mouse_drag" );
     d->aMouseNormal->setExclusiveGroup( "MouseType" );
     d->aMouseNormal->setChecked( true );
 
-    TDEToggleAction * mz = new TDERadioAction( i18n("&Zoom Tool"), "viewmag", 0, this, TQT_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
+    TDEToggleAction * mz = new TDERadioAction( i18n("&Zoom Tool"), "viewmag", 0, this, TQ_SLOT( slotSetMouseZoom() ), ac, "mouse_zoom" );
     mz->setExclusiveGroup( "MouseType" );
 
-    d->aMouseSelect = new TDERadioAction( i18n("&Select Tool"), "frame_edit", 0, this, TQT_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
+    d->aMouseSelect = new TDERadioAction( i18n("&Select Tool"), "frame_edit", 0, this, TQ_SLOT( slotSetMouseSelect() ), ac, "mouse_select" );
     d->aMouseSelect->setExclusiveGroup( "MouseType" );
 
-/*    d->aMouseEdit = new TDERadioAction( i18n("Draw"), "edit", 0, this, TQT_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
+/*    d->aMouseEdit = new TDERadioAction( i18n("Draw"), "edit", 0, this, TQ_SLOT( slotSetMouseDraw() ), ac, "mouse_draw" );
     d->aMouseEdit->setExclusiveGroup("MouseType");
     d->aMouseEdit->setEnabled( false ); // implement feature before removing this line*/
 
     // Other actions
-    TDEAction * su = new TDEAction( i18n("Scroll Up"), 0, this, TQT_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
+    TDEAction * su = new TDEAction( i18n("Scroll Up"), 0, this, TQ_SLOT( slotScrollUp() ), ac, "view_scroll_up" );
     su->setShortcut( "Shift+Up" );
 
-    TDEAction * sd = new TDEAction( i18n("Scroll Down"), 0, this, TQT_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
+    TDEAction * sd = new TDEAction( i18n("Scroll Down"), 0, this, TQ_SLOT( slotScrollDown() ), ac, "view_scroll_down" );
     sd->setShortcut( "Shift+Down" );
 }
 
@@ -354,7 +354,7 @@ void PageView::notifySetup( const TQValueVector< KPDFPage * > & pageSet, bool do
         // Need slotRelayoutPages() here instead of d->dirtyLayout = true
         // because opening a pdf from another pdf will not trigger a viewportchange
         // so pages are never relayouted
-        TQTimer::singleShot(0, this, TQT_SLOT(slotRelayoutPages()));
+        TQTimer::singleShot(0, this, TQ_SLOT(slotRelayoutPages()));
     else
     {
         // update the mouse cursor when closing because we may have close through a link and
@@ -437,8 +437,8 @@ void PageView::notifyViewportChanged( bool smoothMove )
         if ( !d->viewportMoveTimer )
         {
             d->viewportMoveTimer = new TQTimer( this );
-            connect( d->viewportMoveTimer, TQT_SIGNAL( timeout() ),
-                     this, TQT_SLOT( slotMoveViewport() ) );
+            connect( d->viewportMoveTimer, TQ_SIGNAL( timeout() ),
+                     this, TQ_SLOT( slotMoveViewport() ) );
         }
         d->viewportMoveTimer->start( 25 );
         verticalScrollBar()->setEnabled( false );
@@ -643,7 +643,7 @@ void PageView::viewportResizeEvent( TQResizeEvent * )
     if ( !d->delayResizeTimer )
     {
         d->delayResizeTimer = new TQTimer( this );
-        connect( d->delayResizeTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotRelayoutPages() ) );
+        connect( d->delayResizeTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( slotRelayoutPages() ) );
     }
     d->delayResizeTimer->start( 333, true );
 }
@@ -725,7 +725,7 @@ void PageView::keyPressEvent( TQKeyEvent * e )
         {
             // create the timer on demand
             d->findTimeoutTimer = new TQTimer( this );
-            connect( d->findTimeoutTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( findAheadStop() ) );
+            connect( d->findTimeoutTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( findAheadStop() ) );
         }
         d->findTimeoutTimer->start( 3000, true );
         // it is needed to grab the keyboard becase people may have Space assigned to a 
@@ -2004,7 +2004,7 @@ void PageView::slotAutoScoll()
     if ( !d->autoScrollTimer )
     {
         d->autoScrollTimer = new TQTimer( this );
-        connect( d->autoScrollTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotAutoScoll() ) );
+        connect( d->autoScrollTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( slotAutoScoll() ) );
     }
 
     // if scrollIncrement is zero, stop the timer

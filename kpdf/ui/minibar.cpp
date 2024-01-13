@@ -121,10 +121,10 @@ MiniBar::MiniBar( TQWidget * parent, KPDFDocument * document )
     setFrameStyle( TQFrame::StyledPanel | TQFrame::Sunken );
 
     // connect signals from child widgets to internal handlers / signals bouncers
-    connect( m_pagesEdit, TQT_SIGNAL( returnPressed() ), this, TQT_SLOT( slotChangePage() ) );
-    connect( m_pagesButton, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( gotoPage() ) );
-    connect( m_prevButton, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( prevPage() ) );
-    connect( m_nextButton, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( nextPage() ) );
+    connect( m_pagesEdit, TQ_SIGNAL( returnPressed() ), this, TQ_SLOT( slotChangePage() ) );
+    connect( m_pagesButton, TQ_SIGNAL( clicked() ), this, TQ_SIGNAL( gotoPage() ) );
+    connect( m_prevButton, TQ_SIGNAL( clicked() ), this, TQ_SIGNAL( prevPage() ) );
+    connect( m_nextButton, TQ_SIGNAL( clicked() ), this, TQ_SIGNAL( nextPage() ) );
 
     // widget starts hidden (will be shown after opening a document)
     parent->hide();

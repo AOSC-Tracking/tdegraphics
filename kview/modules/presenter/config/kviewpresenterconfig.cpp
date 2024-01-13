@@ -38,7 +38,7 @@ KViewPresenterConfig::KViewPresenterConfig( TQWidget * parent, const char *, con
 	layout->setAutoAdd( true );
 
 	m_pCheckBox = new TQCheckBox( "This is only for testing...", this );
-	connect( m_pCheckBox, TQT_SIGNAL( clicked() ), this, TQT_SLOT( checkChanged() ) );
+	connect( m_pCheckBox, TQ_SIGNAL( clicked() ), this, TQ_SLOT( checkChanged() ) );
 }
 
 KViewPresenterConfig::~KViewPresenterConfig()

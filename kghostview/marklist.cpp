@@ -105,7 +105,7 @@ void MarkListItem::paintEvent( TQPaintEvent* )
      */
     if ( _requested ) return;
     if ( !_thumbnailW->paletteBackgroundPixmap() ||  _thumbnailW->paletteBackgroundPixmap()->isNull() ) {
-	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, this, TQT_SLOT( setPixmap( TQPixmap ) ) );
+	_miniWidget->getThumbnailService()->delayedGetThumbnail( _pageNum, this, TQ_SLOT( setPixmap( TQPixmap ) ) );
 	_requested = true;
     }
 }
@@ -122,8 +122,8 @@ _miniWidget( mini )
     setLeftMargin( 0 ); // we don't want the vertical header
     horizontalHeader()->setLabel( 0, i18n("Page") );
 
-    connect( this, TQT_SIGNAL( currentChanged( int, int ) ),
-	    this, TQT_SIGNAL( selected( int ) ) );
+    connect( this, TQ_SIGNAL( currentChanged( int, int ) ),
+	    this, TQ_SIGNAL( selected( int ) ) );
 }
 
 TQValueList<int> MarkList::markList() const

@@ -73,33 +73,33 @@ KViewShell::KViewShell(const TQString& defaultMimeType)
   setCentralWidget(view->widget());
 
   // file menu
-  KStdAction::open(view, TQT_SLOT(slotFileOpen()), actionCollection());
-  recent = KStdAction::openRecent (this, TQT_SLOT(openURL(const KURL &)), actionCollection());
-  reloadAction = new TDEAction(i18n("Reload"), "reload", CTRL + Key_R, view, TQT_SLOT(reload()), actionCollection(), "reload");
-  closeAction = KStdAction::close(this, TQT_SLOT(slotFileClose()), actionCollection());
-  KStdAction::quit (this, TQT_SLOT(slotQuit()), actionCollection());
+  KStdAction::open(view, TQ_SLOT(slotFileOpen()), actionCollection());
+  recent = KStdAction::openRecent (this, TQ_SLOT(openURL(const KURL &)), actionCollection());
+  reloadAction = new TDEAction(i18n("Reload"), "reload", CTRL + Key_R, view, TQ_SLOT(reload()), actionCollection(), "reload");
+  closeAction = KStdAction::close(this, TQ_SLOT(slotFileClose()), actionCollection());
+  KStdAction::quit (this, TQ_SLOT(slotQuit()), actionCollection());
 
-  connect(view, TQT_SIGNAL(fileOpened()), this, TQT_SLOT(addRecentFile()));
+  connect(view, TQ_SIGNAL(fileOpened()), this, TQ_SLOT(addRecentFile()));
 
   // view menu
-  fullScreenAction = KStdAction::fullScreen(this, TQT_SLOT(slotFullScreen()), actionCollection(), this, "fullscreen" );
+  fullScreenAction = KStdAction::fullScreen(this, TQ_SLOT(slotFullScreen()), actionCollection(), this, "fullscreen" );
 
   // settings menu
   createStandardStatusBarAction();
 
   setStandardToolBarMenuEnabled(true);
 
-  KStdAction::keyBindings(this, TQT_SLOT(slotConfigureKeys()), actionCollection());
-  KStdAction::configureToolbars(this, TQT_SLOT(slotEditToolbar()), actionCollection());
+  KStdAction::keyBindings(this, TQ_SLOT(slotConfigureKeys()), actionCollection());
+  KStdAction::configureToolbars(this, TQ_SLOT(slotEditToolbar()), actionCollection());
 
   // statusbar connects
-  connect( view, TQT_SIGNAL( zoomChanged(const TQString &) ), this,TQT_SLOT( slotChangeZoomText(const TQString &) ) );
-  connect( view, TQT_SIGNAL( pageChanged(const TQString &) ), this,TQT_SLOT( slotChangePageText(const TQString &) ) );
-  connect( view, TQT_SIGNAL( sizeChanged(const TQString &) ), this,TQT_SLOT( slotChangeSizeText(const TQString &) ) );
+  connect( view, TQ_SIGNAL( zoomChanged(const TQString &) ), this,TQ_SLOT( slotChangeZoomText(const TQString &) ) );
+  connect( view, TQ_SIGNAL( pageChanged(const TQString &) ), this,TQ_SLOT( slotChangePageText(const TQString &) ) );
+  connect( view, TQ_SIGNAL( sizeChanged(const TQString &) ), this,TQ_SLOT( slotChangeSizeText(const TQString &) ) );
 
   // Setup session management
-  connect( this, TQT_SIGNAL( restoreDocument(const KURL &, int) ), view, TQT_SLOT( restoreDocument(const KURL &, int)));
-  connect( this, TQT_SIGNAL( saveDocumentRestoreInfo(TDEConfig*) ), view, TQT_SLOT( saveDocumentRestoreInfo(TDEConfig*)));
+  connect( this, TQ_SIGNAL( restoreDocument(const KURL &, int) ), view, TQ_SLOT( restoreDocument(const KURL &, int)));
+  connect( this, TQ_SIGNAL( saveDocumentRestoreInfo(TDEConfig*) ), view, TQ_SLOT( saveDocumentRestoreInfo(TDEConfig*)));
 
   setXMLFile( "kviewshell.rc" );
   createGUI(view);
@@ -120,7 +120,7 @@ KViewShell::KViewShell(const TQString& defaultMimeType)
   statusBar()->changeItem("", StatusBar_ID_Zoom);
   statusBar()->insertItem(view->pageSizeDescription(), StatusBar_ID_PageSize, 0, true);
 
-  connect( view, TQT_SIGNAL(pluginChanged(KParts::Part*)), this, TQT_SLOT(createGUI(KParts::Part*)));
+  connect( view, TQ_SIGNAL(pluginChanged(KParts::Part*)), this, TQ_SLOT(createGUI(KParts::Part*)));
 }
 
 
@@ -290,7 +290,7 @@ void KViewShell::slotEditToolbar()
 {
   saveMainWindowSettings( TDEGlobal::config(), autoSaveGroup() );
   KEditToolbar dlg(factory());
-  connect( &dlg, TQT_SIGNAL( newToolbarConfig() ), TQT_SLOT( slotNewToolbarConfig() ) );
+  connect( &dlg, TQ_SIGNAL( newToolbarConfig() ), TQ_SLOT( slotNewToolbarConfig() ) );
   dlg.exec();
 }
 

@@ -84,8 +84,8 @@ kpEffectsDialog::kpEffectsDialog (bool actOnSelection,
         setCaption (i18n ("More Image Effects"));
 
 
-    connect (m_delayedUpdateTimer, TQT_SIGNAL (timeout ()),
-             this, TQT_SLOT (slotUpdateWithWaitCursor ()));
+    connect (m_delayedUpdateTimer, TQ_SIGNAL (timeout ()),
+             this, TQ_SLOT (slotUpdateWithWaitCursor ()));
 
 
     TQHBox *effectContainer = new TQHBox (mainWidget ());
@@ -116,8 +116,8 @@ kpEffectsDialog::kpEffectsDialog (bool actOnSelection,
     addCustomWidgetToBack (m_settingsGroupBox);
 
 
-    connect (m_effectsComboBox, TQT_SIGNAL (activated (int)),
-             this, TQT_SLOT (selectEffect (int)));
+    connect (m_effectsComboBox, TQ_SIGNAL (activated (int)),
+             this, TQ_SLOT (selectEffect (int)));
     selectEffect (0);
 
 
@@ -308,12 +308,12 @@ void kpEffectsDialog::selectEffect (int which)
     #endif
 
 
-        connect (m_colorEffectWidget, TQT_SIGNAL (settingsChangedNoWaitCursor ()),
-                 this, TQT_SLOT (slotUpdate ()));
-        connect (m_colorEffectWidget, TQT_SIGNAL (settingsChanged ()),
-                 this, TQT_SLOT (slotUpdateWithWaitCursor ()));
-        connect (m_colorEffectWidget, TQT_SIGNAL (settingsChangedDelayed ()),
-                 this, TQT_SLOT (slotDelayedUpdate ()));
+        connect (m_colorEffectWidget, TQ_SIGNAL (settingsChangedNoWaitCursor ()),
+                 this, TQ_SLOT (slotUpdate ()));
+        connect (m_colorEffectWidget, TQ_SIGNAL (settingsChanged ()),
+                 this, TQ_SLOT (slotUpdateWithWaitCursor ()));
+        connect (m_colorEffectWidget, TQ_SIGNAL (settingsChangedDelayed ()),
+                 this, TQ_SLOT (slotDelayedUpdate ()));
         slotUpdateWithWaitCursor ();
     #if DEBUG_KP_EFFECTS_DIALOG
         kdDebug () << "\tafter slotUpdateWithWaitCursor, previewGroupBox.size="

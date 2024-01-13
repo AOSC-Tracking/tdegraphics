@@ -35,11 +35,11 @@ PaletteView::PaletteView(const int defaultCellWidth, const int defaultCellHeight
 	hScrollBar = new TQScrollBar(0, 1, 1, 1, 0, TQt::Horizontal, this);
 	scrolledArea = new PaletteViewScrolledArea(defaultCellWidth,
 		defaultCellHeight, cellSpacing, scrollBar, hScrollBar, view, this);
-	connect(scrollBar, TQT_SIGNAL( valueChanged(int) ),
-		TQT_SLOT( slotRepaintScrolledArea() ));
+	connect(scrollBar, TQ_SIGNAL( valueChanged(int) ),
+		TQ_SLOT( slotRepaintScrolledArea() ));
 	topLayout->addWidget(scrolledArea, 0, 0);
-	connect(hScrollBar, TQT_SIGNAL( valueChanged(int) ),
-		TQT_SLOT( slotRepaintScrolledArea() ));
+	connect(hScrollBar, TQ_SIGNAL( valueChanged(int) ),
+		TQ_SLOT( slotRepaintScrolledArea() ));
 	TQHBoxLayout* hScrollBarLayout = new TQHBoxLayout();
 	hScrollBarLayout->addWidget(hScrollBar, 10);
 	hScrollBarLayout->addWidget(new TQWidget(this), 0);

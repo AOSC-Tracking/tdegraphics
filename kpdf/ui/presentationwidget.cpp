@@ -69,11 +69,11 @@ PresentationWidget::PresentationWidget( TQWidget * parent, KPDFDocument * doc )
     // misc stuff
     setMouseTracking( true );
     m_transitionTimer = new TQTimer( this );
-    connect( m_transitionTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotTransitionStep() ) );
+    connect( m_transitionTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( slotTransitionStep() ) );
     m_overlayHideTimer = new TQTimer( this );
-    connect( m_overlayHideTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotHideOverlay() ) );
+    connect( m_overlayHideTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( slotHideOverlay() ) );
     m_nextPageTimer = new TQTimer( this );
-    connect( m_nextPageTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotNextPage() ) );
+    connect( m_nextPageTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( slotNextPage() ) );
 
     // handle cursor appearance as specified in configuration
     if ( KpdfSettings::slidesCursor() == KpdfSettings::EnumSlidesCursor::HiddenDelay )
@@ -100,11 +100,11 @@ PresentationWidget::~PresentationWidget()
 
 void PresentationWidget::setupActions( TDEActionCollection * ac )
 {
-    m_accel->insert( "previous_page", ac->action( "previous_page" )->shortcut(), this, TQT_SLOT( slotPrevPage() ), false, true );
-    m_accel->insert( "next_page", ac->action( "next_page" )->shortcut(), this, TQT_SLOT( slotNextPage() ), false, true );
-    m_accel->insert( "first_page", ac->action( "first_page" )->shortcut(), this, TQT_SLOT( slotFirstPage() ), false, true );
-    m_accel->insert( "last_page", ac->action( "last_page" )->shortcut(), this, TQT_SLOT( slotLastPage() ), false, true );
-    m_accel->insert( "presentation", ac->action( "presentation" )->shortcut(), this, TQT_SLOT( close() ), false, true );
+    m_accel->insert( "previous_page", ac->action( "previous_page" )->shortcut(), this, TQ_SLOT( slotPrevPage() ), false, true );
+    m_accel->insert( "next_page", ac->action( "next_page" )->shortcut(), this, TQ_SLOT( slotNextPage() ), false, true );
+    m_accel->insert( "first_page", ac->action( "first_page" )->shortcut(), this, TQ_SLOT( slotFirstPage() ), false, true );
+    m_accel->insert( "last_page", ac->action( "last_page" )->shortcut(), this, TQ_SLOT( slotLastPage() ), false, true );
+    m_accel->insert( "presentation", ac->action( "presentation" )->shortcut(), this, TQ_SLOT( close() ), false, true );
 }
 
 void PresentationWidget::notifySetup( const TQValueVector< KPDFPage * > & pageSet, bool /*documentChanged*/ )
@@ -307,9 +307,9 @@ void PresentationWidget::paintEvent( TQPaintEvent * pe )
         m_topBar = new TDEToolBar( this, "presentationBar" );
         m_topBar->setIconSize( 32 );
         m_topBar->setMovingEnabled( false );
-        m_topBar->insertButton( TQApplication::reverseLayout() ? "1rightarrow" : "1leftarrow", 2, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotPrevPage() ) );
-        m_topBar->insertButton( TQApplication::reverseLayout() ? "1leftarrow" : "1rightarrow", 3, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotNextPage() ) );
-        m_topBar->insertButton( "system-log-out", 1, TQT_SIGNAL( clicked() ), this, TQT_SLOT( close() ) );
+        m_topBar->insertButton( TQApplication::reverseLayout() ? "1rightarrow" : "1leftarrow", 2, TQ_SIGNAL( clicked() ), this, TQ_SLOT( slotPrevPage() ) );
+        m_topBar->insertButton( TQApplication::reverseLayout() ? "1leftarrow" : "1rightarrow", 3, TQ_SIGNAL( clicked() ), this, TQ_SLOT( slotNextPage() ) );
+        m_topBar->insertButton( "system-log-out", 1, TQ_SIGNAL( clicked() ), this, TQ_SLOT( close() ) );
         m_topBar->setGeometry( 0, 0, m_width, 32 + 10 );
         m_topBar->alignItemRight( 1 );
         m_topBar->hide();

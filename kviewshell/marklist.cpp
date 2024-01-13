@@ -108,7 +108,7 @@ void ThumbnailWidget::paintEvent(TQPaintEvent* e)
     // TODO: Disable or find something less distractiong.
     p.drawPixmap(10, 10, *waitIcon);
 
-    TQTimer::singleShot(50, this, TQT_SLOT(setThumbnail()));
+    TQTimer::singleShot(50, this, TQ_SLOT(setThumbnail()));
     return;
   }
 
@@ -325,8 +325,8 @@ void MarkList::setNumberOfPages(int numberOfPages, bool _showThumbnails)
   {
     MarkListWidget* item = new MarkListWidget(viewport(), this, page, pageCache, showThumbnails);
 
-    connect(item, TQT_SIGNAL(selected(const PageNumber&)), this, TQT_SLOT(thumbnailSelected(const PageNumber&)));
-    connect(item, TQT_SIGNAL(showPopupMenu(const PageNumber&, const TQPoint&)), this, TQT_SLOT(showPopupMenu(const PageNumber&, const TQPoint&)));
+    connect(item, TQ_SIGNAL(selected(const PageNumber&)), this, TQ_SLOT(thumbnailSelected(const PageNumber&)));
+    connect(item, TQ_SIGNAL(showPopupMenu(const PageNumber&, const TQPoint&)), this, TQ_SLOT(showPopupMenu(const PageNumber&, const TQPoint&)));
 
     widgetList.insert(page - 1, item);
 

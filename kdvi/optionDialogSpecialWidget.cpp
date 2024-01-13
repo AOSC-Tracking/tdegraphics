@@ -73,8 +73,8 @@ optionDialogSpecialWidget::optionDialogSpecialWidget( TQWidget* parent,  const c
     usersEditorCommand = currentEditorCommand;
   slotComboBox(i);
 
-  connect(urll, TQT_SIGNAL(leftClickedURL(const TQString&)), this, TQT_SLOT(slotExtraHelpButton(const TQString&)));
-  connect(editorChoice, TQT_SIGNAL( activated( int ) ), this, TQT_SLOT( slotComboBox( int ) ) );
+  connect(urll, TQ_SIGNAL(leftClickedURL(const TQString&)), this, TQ_SLOT(slotExtraHelpButton(const TQString&)));
+  connect(editorChoice, TQ_SIGNAL( activated( int ) ), this, TQ_SLOT( slotComboBox( int ) ) );
 
   // Editor description strings (and their translations) vary in
   // size. Find the longest description string available to make sure
@@ -87,7 +87,7 @@ optionDialogSpecialWidget::optionDialogSpecialWidget( TQWidget* parent,  const c
   }
   editorDescription->setMinimumWidth(maximumWidth+10);
 
-  connect(kcfg_EditorCommand, TQT_SIGNAL( textChanged (const TQString &) ), this, TQT_SLOT( slotUserDefdEditorCommand( const TQString & ) ) );
+  connect(kcfg_EditorCommand, TQ_SIGNAL( textChanged (const TQString &) ), this, TQ_SLOT( slotUserDefdEditorCommand( const TQString & ) ) );
 }
 
 optionDialogSpecialWidget::~optionDialogSpecialWidget()

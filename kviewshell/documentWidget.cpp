@@ -85,7 +85,7 @@ DocumentWidget::DocumentWidget(TQWidget *parent, PageView *sv, DocumentPageCache
   setMouseTracking(true);
   setFocusPolicy(TQWidget::ClickFocus);
 
-  connect(&clearStatusBarTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(clearStatusBar()));
+  connect(&clearStatusBarTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(clearStatusBar()));
   setBackgroundMode(TQt::NoBackground);
 
   if (!busyIcon)
@@ -260,7 +260,7 @@ void DocumentWidget::paintEvent(TQPaintEvent *e)
     {
       // Request page pixmap.
       pixmapRequested = true;
-      TQTimer::singleShot(50, this, TQT_SLOT(delayedRequestPage()));
+      TQTimer::singleShot(50, this, TQ_SLOT(delayedRequestPage()));
     }
     return;
   }
@@ -367,7 +367,7 @@ void DocumentWidget::drawScrollGuide(int ycoord)
   //kdDebug() << "draw scroll guide for page " << pageNr << " at y = " << ycoord << endl;
   scrollGuide = ycoord;
   update(TQRect(1, scrollGuide, pageSize().width(), 1));
-  TQTimer::singleShot(1000, this, TQT_SLOT(clearScrollGuide()));
+  TQTimer::singleShot(1000, this, TQ_SLOT(clearScrollGuide()));
 }
 
 void DocumentWidget::clearScrollGuide()

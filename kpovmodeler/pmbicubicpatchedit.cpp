@@ -78,15 +78,15 @@ void PMBicubicPatchEdit::createTopWidgets( )
    m_pUVVectors->setSize( 4 );
    topLayout( )->addWidget( m_pUVVectors );
 
-   connect( m_pType, TQT_SIGNAL( highlighted( int ) ), TQT_SLOT( slotTypeSelected( int ) ) );
-   connect( m_pUSteps, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pVSteps, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFlatness, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPoints, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPoints, TQT_SIGNAL( selectionChanged( ) ),
-            TQT_SLOT( slotSelectionChanged( ) ) );
-   connect( m_pUVEnabled, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUVEnabledClicked( ) ) );
-   connect( m_pUVVectors, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pType, TQ_SIGNAL( highlighted( int ) ), TQ_SLOT( slotTypeSelected( int ) ) );
+   connect( m_pUSteps, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pVSteps, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFlatness, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPoints, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPoints, TQ_SIGNAL( selectionChanged( ) ),
+            TQ_SLOT( slotSelectionChanged( ) ) );
+   connect( m_pUVEnabled, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotUVEnabledClicked( ) ) );
+   connect( m_pUVVectors, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBicubicPatchEdit::displayObject( PMObject* o )

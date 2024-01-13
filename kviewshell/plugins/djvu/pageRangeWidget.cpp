@@ -41,8 +41,8 @@ PageRangeWidget::PageRangeWidget( TQ_UINT16 _from, TQ_UINT16 _to, TQ_UINT16 _cur
     _current = _to;
   }
 
-  connect(from, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(fromValueChanged(int)));
-  connect(to, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(toValueChanged(int)));
+  connect(from, TQ_SIGNAL(valueChanged(int)), this, TQ_SLOT(fromValueChanged(int)));
+  connect(to, TQ_SIGNAL(valueChanged(int)), this, TQ_SLOT(toValueChanged(int)));
 
   from->setRange(_from, _to);
   from->setValue(_current);

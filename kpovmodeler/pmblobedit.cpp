@@ -49,9 +49,9 @@ void PMBlobEdit::createTopWidgets( )
    m_pHierarchy = new TQCheckBox( i18n( "Hierarchy" ), this );
    topLayout( )->addWidget( m_pHierarchy );
    
-   connect( m_pThreshold, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pHierarchy, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pThreshold, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pHierarchy, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBlobEdit::displayObject( PMObject* o )

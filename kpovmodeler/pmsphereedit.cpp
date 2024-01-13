@@ -50,8 +50,8 @@ void PMSphereEdit::createTopWidgets( )
    layout->addWidget( m_pRadius );
    layout->addStretch( 1 );
 
-   connect( m_pCentre, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRadius, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCentre, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRadius, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMSphereEdit::displayObject( PMObject* o )

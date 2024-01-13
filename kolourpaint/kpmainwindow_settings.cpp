@@ -57,19 +57,19 @@ void kpMainWindow::setupSettingsMenuActions ()
     createStandardStatusBarAction ();
 
 
-    m_actionFullScreen = KStdAction::fullScreen (this, TQT_SLOT (slotFullScreen ()), ac,
+    m_actionFullScreen = KStdAction::fullScreen (this, TQ_SLOT (slotFullScreen ()), ac,
                                                  this/*window*/);
 
 
     m_actionShowPath = new TDEToggleAction (i18n ("Show &Path"), 0,
-        this, TQT_SLOT (slotShowPathToggled ()), ac, "settings_show_path");
+        this, TQ_SLOT (slotShowPathToggled ()), ac, "settings_show_path");
     m_actionShowPath->setCheckedState (i18n ("Hide &Path"));
     slotEnableSettingsShowPath ();
 
 
-    m_actionKeyBindings = KStdAction::keyBindings (this, TQT_SLOT (slotKeyBindings ()), ac);
-    m_actionConfigureToolbars = KStdAction::configureToolbars (this, TQT_SLOT (slotConfigureToolBars ()), ac);
-    // m_actionConfigure = KStdAction::preferences (this, TQT_SLOT (slotConfigure ()), ac);
+    m_actionKeyBindings = KStdAction::keyBindings (this, TQ_SLOT (slotKeyBindings ()), ac);
+    m_actionConfigureToolbars = KStdAction::configureToolbars (this, TQ_SLOT (slotConfigureToolBars ()), ac);
+    // m_actionConfigure = KStdAction::preferences (this, TQ_SLOT (slotConfigure ()), ac);
 
 
     enableSettingsMenuDocumentActions (false);
@@ -174,8 +174,8 @@ void kpMainWindow::slotConfigureToolBars ()
     // Clicking on OK after Apply brings up the dialog (below) again.
     // Bug with KEditToolBar.
     dialog.showButtonApply (false);
-    connect (&dialog, TQT_SIGNAL (newToolbarConfig ()),
-             this, TQT_SLOT (slotNewToolBarConfig ()));
+    connect (&dialog, TQ_SIGNAL (newToolbarConfig ()),
+             this, TQ_SLOT (slotNewToolBarConfig ()));
 
     dialog.exec ();
 }

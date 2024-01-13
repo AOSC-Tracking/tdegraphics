@@ -68,7 +68,7 @@ DocumentFactory *DocumentFactory::self()
 SVGDocument *DocumentFactory::requestDocument(TQObject *notifyObject, const char *notifySlot) const
 {
 	SVGDocumentImpl *impl = requestDocumentImpl(false);
-	TQObject::connect(impl, TQT_SIGNAL(finishedParsing(bool, const TQString &)), notifyObject, notifySlot);
+	TQObject::connect(impl, TQ_SIGNAL(finishedParsing(bool, const TQString &)), notifyObject, notifySlot);
 	
 	return new SVGDocument(impl);
 }

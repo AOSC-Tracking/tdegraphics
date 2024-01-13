@@ -145,15 +145,15 @@ PMPart::PMPart( TQWidget* parentWidget, const char* widgetName,
 
    restoreConfig( instance( )->config( ) );
 
-   connect( tqApp->clipboard( ), TQT_SIGNAL( dataChanged( ) ),
-            TQT_SLOT( slotClipboardDataChanged( ) ) );
+   connect( tqApp->clipboard( ), TQ_SIGNAL( dataChanged( ) ),
+            TQ_SLOT( slotClipboardDataChanged( ) ) );
    slotClipboardDataChanged( );
-   connect( &m_commandManager, TQT_SIGNAL( updateUndoRedo( const TQString&, const TQString& ) ),
-            TQT_SLOT( slotUpdateUndoRedo( const TQString&, const TQString& ) ) );
-   connect( &m_commandManager, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
-   connect( &m_commandManager, TQT_SIGNAL( idChanged( PMObject*, const TQString& ) ),
-            TQT_SLOT( slotIDChanged( PMObject*, const TQString& ) ) );
+   connect( &m_commandManager, TQ_SIGNAL( updateUndoRedo( const TQString&, const TQString& ) ),
+            TQ_SLOT( slotUpdateUndoRedo( const TQString&, const TQString& ) ) );
+   connect( &m_commandManager, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( &m_commandManager, TQ_SIGNAL( idChanged( PMObject*, const TQString& ) ),
+            TQ_SLOT( slotIDChanged( PMObject*, const TQString& ) ) );
 
    PMPluginManager::theManager( )->registerPart( this );
 
@@ -202,8 +202,8 @@ PMPart::PMPart( TQWidget* /*parentWidget*/, const char* /*widgetName*/,
 
    initCopyPasteActions( );
 
-   connect( &m_commandManager, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-            TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( &m_commandManager, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
    PMPluginManager::theManager( )->registerPart( this );
 
@@ -222,13 +222,13 @@ PMPart::~PMPart( )
 void PMPart::initCopyPasteActions( )
 {
    // setup edit menu
-   m_pCutAction = KStdAction::cut( this, TQT_SLOT( slotEditCut( ) ), actionCollection( ) );
-   m_pCopyAction = KStdAction::copy( this, TQT_SLOT( slotEditCopy( ) ), actionCollection( ) );
-   m_pPasteAction = KStdAction::paste( this, TQT_SLOT( slotEditPaste( ) ), actionCollection( ) );
+   m_pCutAction = KStdAction::cut( this, TQ_SLOT( slotEditCut( ) ), actionCollection( ) );
+   m_pCopyAction = KStdAction::copy( this, TQ_SLOT( slotEditCopy( ) ), actionCollection( ) );
+   m_pPasteAction = KStdAction::paste( this, TQ_SLOT( slotEditPaste( ) ), actionCollection( ) );
 
    m_pDeleteAction =
       new TDEAction( i18n( "Delete" ), "edittrash", TQt::Key_Delete,
-                   this, TQT_SLOT( slotEditDelete( ) ),
+                   this, TQ_SLOT( slotEditDelete( ) ),
                    actionCollection( ), "edit_delete" );
 
    m_pCutAction->setEnabled( false );
@@ -242,32 +242,32 @@ void PMPart::initActions( )
 {
    // file menu
    m_pImportAction = new TDEAction( i18n( "Import..." ), 0, this,
-                                  TQT_SLOT( slotFileImport( ) ), actionCollection( ),
+                                  TQ_SLOT( slotFileImport( ) ), actionCollection( ),
                                   "file_import" );
    m_pExportAction = new TDEAction( i18n( "&Export..." ), 0, this,
-                                  TQT_SLOT( slotFileExport( ) ), actionCollection( ),
+                                  TQ_SLOT( slotFileExport( ) ), actionCollection( ),
                                   "file_export" );
 
    initCopyPasteActions( );
    m_onlyCopyPaste = false;
 
-   m_pRenderComboAction = new PMComboAction( i18n( "Render Modes" ), 0, this, TQT_SLOT( slotRenderMode( int ) ),
+   m_pRenderComboAction = new PMComboAction( i18n( "Render Modes" ), 0, this, TQ_SLOT( slotRenderMode( int ) ),
                                              actionCollection( ), "view_render_combo" );
    m_pRenderComboAction->setMinimumWidth( 250 );
-   connect( m_pRenderComboAction, TQT_SIGNAL( plugged( ) ),
-            TQT_SLOT( slotRenderModeActionPlugged( ) ) );
-   m_pRenderAction = new TDEAction( i18n( "Render" ), "pmrender", 0, this, TQT_SLOT( slotRender( ) ),
+   connect( m_pRenderComboAction, TQ_SIGNAL( plugged( ) ),
+            TQ_SLOT( slotRenderModeActionPlugged( ) ) );
+   m_pRenderAction = new TDEAction( i18n( "Render" ), "pmrender", 0, this, TQ_SLOT( slotRender( ) ),
                                   actionCollection( ), "view_render" );
-   m_pRenderSettingsAction = new TDEAction( i18n( "Render Modes..." ), "pmrendersettings", 0, this, TQT_SLOT( slotRenderSettings( ) ),
+   m_pRenderSettingsAction = new TDEAction( i18n( "Render Modes..." ), "pmrendersettings", 0, this, TQ_SLOT( slotRenderSettings( ) ),
                                           actionCollection( ), "view_render_settings" );
-   m_pViewRenderWindowAction = new TDEAction( i18n( "Render Window" ), 0, this, TQT_SLOT( slotViewRenderWindow( ) ),
+   m_pViewRenderWindowAction = new TDEAction( i18n( "Render Window" ), 0, this, TQ_SLOT( slotViewRenderWindow( ) ),
                                             actionCollection( ), "view_render_window" );
    m_pVisibilityLabelAction = new PMLabelAction( i18n( "Visibility level:" ) + TQString( " " ), actionCollection( ), "view_visibility_label" );
    m_pVisibilityLevelAction = new PMSpinBoxAction( i18n( "Visibility Level" ),
-                     0, this, TQT_SLOT( slotVisibilityLevelChanged( int ) ),
+                     0, this, TQ_SLOT( slotVisibilityLevelChanged( int ) ),
                      actionCollection( ), "view_visibility_level" );
-   connect( m_pVisibilityLevelAction, TQT_SIGNAL( plugged( ) ),
-            TQT_SLOT( slotVisibilityActionPlugged( ) ) );
+   connect( m_pVisibilityLevelAction, TQ_SIGNAL( plugged( ) ),
+            TQ_SLOT( slotVisibilityActionPlugged( ) ) );
 
    m_pGlobalDetailLabelAction = new PMLabelAction( i18n( "Global detail:" ) + TQString( " " ), actionCollection( ), "global_detail_label" );
    m_pGlobalDetailAction = new TDESelectAction( i18n("Global Detail Level"), TDEShortcut(), actionCollection(), "global_detail_level" );
@@ -278,275 +278,275 @@ void PMPart::initActions( )
    strList.append( i18n( "High" ) );
    strList.append( i18n( "Very High" ) );
    m_pGlobalDetailAction->setItems( strList );
-   connect( m_pGlobalDetailAction, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotGlobalDetailLevelChanged( int ) ) );
+   connect( m_pGlobalDetailAction, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotGlobalDetailLevelChanged( int ) ) );
 
    // new objects
    if( isReadWrite( ) )
    {
-      m_pNewGlobalSettingsAction = new TDEAction( i18n( "Global Settings" ), "pmglobalsettings", 0, this, TQT_SLOT( slotNewGlobalSettings( ) ),
+      m_pNewGlobalSettingsAction = new TDEAction( i18n( "Global Settings" ), "pmglobalsettings", 0, this, TQ_SLOT( slotNewGlobalSettings( ) ),
                                      actionCollection( ), "new_globalsettings" );
       m_readWriteActions.append( m_pNewGlobalSettingsAction );
-      m_pNewSkySphereAction = new TDEAction( i18n( "Sky Sphere" ), "pmskysphere", 0, this, TQT_SLOT( slotNewSkySphere( ) ),
+      m_pNewSkySphereAction = new TDEAction( i18n( "Sky Sphere" ), "pmskysphere", 0, this, TQ_SLOT( slotNewSkySphere( ) ),
                                      actionCollection( ), "new_skysphere" );
       m_readWriteActions.append( m_pNewSkySphereAction );
-      m_pNewRainbowAction = new TDEAction( i18n( "Rainbow" ), "pmrainbow", 0, this, TQT_SLOT( slotNewRainbow( ) ),
+      m_pNewRainbowAction = new TDEAction( i18n( "Rainbow" ), "pmrainbow", 0, this, TQ_SLOT( slotNewRainbow( ) ),
                                      actionCollection( ), "new_rainbow" );
       m_readWriteActions.append( m_pNewRainbowAction );
-      m_pNewFogAction = new TDEAction( i18n( "Fog" ), "pmfog", 0, this, TQT_SLOT( slotNewFog( ) ),
+      m_pNewFogAction = new TDEAction( i18n( "Fog" ), "pmfog", 0, this, TQ_SLOT( slotNewFog( ) ),
                                      actionCollection( ), "new_fog" );
       m_readWriteActions.append( m_pNewFogAction );
-      m_pNewInteriorAction = new TDEAction( i18n( "Interior" ), "pminterior", 0, this, TQT_SLOT( slotNewInterior( ) ),
+      m_pNewInteriorAction = new TDEAction( i18n( "Interior" ), "pminterior", 0, this, TQ_SLOT( slotNewInterior( ) ),
                                      actionCollection( ), "new_interior" );
       m_readWriteActions.append( m_pNewInteriorAction );
-      m_pNewMediaAction = new TDEAction( i18n( "Media" ), "pmmedia", 0, this, TQT_SLOT( slotNewMedia( ) ),
+      m_pNewMediaAction = new TDEAction( i18n( "Media" ), "pmmedia", 0, this, TQ_SLOT( slotNewMedia( ) ),
                                      actionCollection( ), "new_media" );
       m_readWriteActions.append( m_pNewMediaAction );
-      m_pNewDensityAction = new TDEAction( i18n( "Density" ), "pmdensity", 0, this, TQT_SLOT( slotNewDensity( ) ),
+      m_pNewDensityAction = new TDEAction( i18n( "Density" ), "pmdensity", 0, this, TQ_SLOT( slotNewDensity( ) ),
                                      actionCollection( ), "new_density" );
       m_readWriteActions.append( m_pNewDensityAction );
-      m_pNewMaterialAction = new TDEAction( i18n( "Material" ), "pmmaterial", 0, this, TQT_SLOT( slotNewMaterial( ) ),
+      m_pNewMaterialAction = new TDEAction( i18n( "Material" ), "pmmaterial", 0, this, TQ_SLOT( slotNewMaterial( ) ),
                                      actionCollection( ), "new_material" );
       m_readWriteActions.append( m_pNewMaterialAction );
-      m_pNewBoxAction = new TDEAction( i18n( "Box" ), "pmbox", 0, this, TQT_SLOT( slotNewBox( ) ),
+      m_pNewBoxAction = new TDEAction( i18n( "Box" ), "pmbox", 0, this, TQ_SLOT( slotNewBox( ) ),
                                      actionCollection( ), "new_box" );
       m_readWriteActions.append( m_pNewBoxAction );
-      m_pNewSphereAction = new TDEAction( i18n( "Sphere" ), "pmsphere", 0, this, TQT_SLOT( slotNewSphere( ) ),
+      m_pNewSphereAction = new TDEAction( i18n( "Sphere" ), "pmsphere", 0, this, TQ_SLOT( slotNewSphere( ) ),
                                         actionCollection( ), "new_sphere" );
       m_readWriteActions.append( m_pNewSphereAction );
-      m_pNewCylinderAction = new TDEAction( i18n( "Cylinder" ), "pmcylinder", 0, this, TQT_SLOT( slotNewCylinder( ) ),
+      m_pNewCylinderAction = new TDEAction( i18n( "Cylinder" ), "pmcylinder", 0, this, TQ_SLOT( slotNewCylinder( ) ),
                                           actionCollection( ), "new_cylinder" );
       m_readWriteActions.append( m_pNewCylinderAction );
-      m_pNewConeAction =  new TDEAction( i18n( "Cone" ), "pmcone", 0, this, TQT_SLOT( slotNewCone( ) ),
+      m_pNewConeAction =  new TDEAction( i18n( "Cone" ), "pmcone", 0, this, TQ_SLOT( slotNewCone( ) ),
                                        actionCollection( ), "new_cone" );
       m_readWriteActions.append( m_pNewConeAction );
-      m_pNewTorusAction = new TDEAction( i18n( "Torus" ), "pmtorus", 0, this, TQT_SLOT( slotNewTorus( ) ),
+      m_pNewTorusAction = new TDEAction( i18n( "Torus" ), "pmtorus", 0, this, TQ_SLOT( slotNewTorus( ) ),
                                        actionCollection( ), "new_torus" );
       m_readWriteActions.append( m_pNewTorusAction );
 
-      m_pNewLatheAction = new TDEAction( i18n( "Lathe" ), "pmlathe", 0, this, TQT_SLOT( slotNewLathe( ) ),
+      m_pNewLatheAction = new TDEAction( i18n( "Lathe" ), "pmlathe", 0, this, TQ_SLOT( slotNewLathe( ) ),
                                        actionCollection( ), "new_lathe" );
       m_readWriteActions.append( m_pNewLatheAction );
-      m_pNewPrismAction = new TDEAction( i18n( "Prism" ), "pmprism", 0, this, TQT_SLOT( slotNewPrism( ) ),
+      m_pNewPrismAction = new TDEAction( i18n( "Prism" ), "pmprism", 0, this, TQ_SLOT( slotNewPrism( ) ),
                                        actionCollection( ), "new_prism" );
       m_readWriteActions.append( m_pNewPrismAction );
-      m_pNewSurfaceOfRevolutionAction = new TDEAction( i18n( "Surface of Revolution" ), "pmsor", 0, this, TQT_SLOT( slotNewSurfaceOfRevolution( ) ),
+      m_pNewSurfaceOfRevolutionAction = new TDEAction( i18n( "Surface of Revolution" ), "pmsor", 0, this, TQ_SLOT( slotNewSurfaceOfRevolution( ) ),
                                        actionCollection( ), "new_surfaceofrevolution" );
       m_readWriteActions.append( m_pNewSurfaceOfRevolutionAction );
-      m_pNewSuperquadricEllipsoidAction = new TDEAction( i18n( "Superquadric Ellipsoid" ), "pmsqe", 0, this, TQT_SLOT( slotNewSuperquadricEllipsoid( ) ),
+      m_pNewSuperquadricEllipsoidAction = new TDEAction( i18n( "Superquadric Ellipsoid" ), "pmsqe", 0, this, TQ_SLOT( slotNewSuperquadricEllipsoid( ) ),
                                        actionCollection( ), "new_superquadricellipsoid" );
       m_readWriteActions.append( m_pNewSuperquadricEllipsoidAction );
 
-      m_pNewJuliaFractalAction = new TDEAction( i18n( "Julia Fractal" ), "pmjuliafractal", 0, this, TQT_SLOT( slotNewJuliaFractal( ) ),
+      m_pNewJuliaFractalAction = new TDEAction( i18n( "Julia Fractal" ), "pmjuliafractal", 0, this, TQ_SLOT( slotNewJuliaFractal( ) ),
                                               actionCollection( ), "new_juliafractal" );
       m_readWriteActions.append( m_pNewJuliaFractalAction );
-      m_pNewHeightFieldAction = new TDEAction( i18n( "Height Field" ), "pmheightfield", 0, this, TQT_SLOT( slotNewHeightField( ) ),
+      m_pNewHeightFieldAction = new TDEAction( i18n( "Height Field" ), "pmheightfield", 0, this, TQ_SLOT( slotNewHeightField( ) ),
                                              actionCollection( ), "new_heightfield" );
       m_readWriteActions.append( m_pNewHeightFieldAction );
-      m_pNewTextAction = new TDEAction( i18n( "Text" ), "pmtext", 0, this, TQT_SLOT( slotNewText( ) ),
+      m_pNewTextAction = new TDEAction( i18n( "Text" ), "pmtext", 0, this, TQ_SLOT( slotNewText( ) ),
                                       actionCollection( ), "new_text" );
       m_readWriteActions.append( m_pNewTextAction );
 
-      m_pNewBlobAction = new TDEAction( i18n( "Blob" ), "pmblob", 0, this, TQT_SLOT( slotNewBlob( ) ),
+      m_pNewBlobAction = new TDEAction( i18n( "Blob" ), "pmblob", 0, this, TQ_SLOT( slotNewBlob( ) ),
                                       actionCollection( ), "new_blob" );
       m_readWriteActions.append( m_pNewBlobAction );
-      m_pNewBlobSphereAction = new TDEAction( i18n( "Blob Sphere" ), "pmblobsphere", 0, this, TQT_SLOT( slotNewBlobSphere( ) ),
+      m_pNewBlobSphereAction = new TDEAction( i18n( "Blob Sphere" ), "pmblobsphere", 0, this, TQ_SLOT( slotNewBlobSphere( ) ),
                                             actionCollection( ), "new_blobsphere" );
       m_readWriteActions.append( m_pNewBlobSphereAction );
-      m_pNewBlobCylinderAction = new TDEAction( i18n( "Blob Cylinder" ), "pmblobcylinder", 0, this, TQT_SLOT( slotNewBlobCylinder( ) ),
+      m_pNewBlobCylinderAction = new TDEAction( i18n( "Blob Cylinder" ), "pmblobcylinder", 0, this, TQ_SLOT( slotNewBlobCylinder( ) ),
                                               actionCollection( ), "new_blobcylinder" );
       m_readWriteActions.append( m_pNewBlobCylinderAction );
 
-      m_pNewPlaneAction = new TDEAction( i18n( "Plane" ), "pmplane", 0, this, TQT_SLOT( slotNewPlane( ) ),
+      m_pNewPlaneAction = new TDEAction( i18n( "Plane" ), "pmplane", 0, this, TQ_SLOT( slotNewPlane( ) ),
                                        actionCollection( ), "new_plane" );
       m_readWriteActions.append( m_pNewPlaneAction );
-      m_pNewPolynomAction = new TDEAction( i18n( "Polynom" ), "pmpolynom", 0, this, TQT_SLOT( slotNewPolynom( ) ),
+      m_pNewPolynomAction = new TDEAction( i18n( "Polynom" ), "pmpolynom", 0, this, TQ_SLOT( slotNewPolynom( ) ),
                                          actionCollection( ), "new_polynom" );
       m_readWriteActions.append( m_pNewPolynomAction );
 
-      m_pNewDeclareAction = new TDEAction( i18n( "Declaration" ), "pmdeclare", 0, this, TQT_SLOT( slotNewDeclare( ) ),
+      m_pNewDeclareAction = new TDEAction( i18n( "Declaration" ), "pmdeclare", 0, this, TQ_SLOT( slotNewDeclare( ) ),
                                          actionCollection( ), "new_declare" );
       m_readWriteActions.append( m_pNewDeclareAction );
-      m_pNewObjectLinkAction = new TDEAction( i18n( "Object Link" ), "pmobjectlink", 0, this, TQT_SLOT( slotNewObjectLink( ) ),
+      m_pNewObjectLinkAction = new TDEAction( i18n( "Object Link" ), "pmobjectlink", 0, this, TQ_SLOT( slotNewObjectLink( ) ),
                                             actionCollection( ), "new_objectlink" );
       m_readWriteActions.append( m_pNewObjectLinkAction );
 
-      m_pNewUnionAction = new TDEAction( i18n( "Union" ), "pmunion", 0, this, TQT_SLOT( slotNewUnion( ) ),
+      m_pNewUnionAction = new TDEAction( i18n( "Union" ), "pmunion", 0, this, TQ_SLOT( slotNewUnion( ) ),
                                        actionCollection( ), "new_union" );
       m_readWriteActions.append( m_pNewUnionAction );
-      m_pNewIntersectionAction = new TDEAction( i18n( "Intersection" ), "pmintersection", 0, this, TQT_SLOT( slotNewIntersection( ) ),
+      m_pNewIntersectionAction = new TDEAction( i18n( "Intersection" ), "pmintersection", 0, this, TQ_SLOT( slotNewIntersection( ) ),
                                               actionCollection( ), "new_intersection" );
       m_readWriteActions.append( m_pNewIntersectionAction );
-      m_pNewDifferenceAction = new TDEAction( i18n( "Difference" ), "pmdifference", 0, this, TQT_SLOT( slotNewDifference( ) ),
+      m_pNewDifferenceAction = new TDEAction( i18n( "Difference" ), "pmdifference", 0, this, TQ_SLOT( slotNewDifference( ) ),
                                             actionCollection( ), "new_difference" );
       m_readWriteActions.append( m_pNewDifferenceAction );
-      m_pNewMergeAction = new TDEAction( i18n( "Merge" ), "pmmerge", 0, this, TQT_SLOT( slotNewMerge( ) ),
+      m_pNewMergeAction = new TDEAction( i18n( "Merge" ), "pmmerge", 0, this, TQ_SLOT( slotNewMerge( ) ),
                                        actionCollection( ), "new_merge" );
       m_readWriteActions.append( m_pNewMergeAction );
 
-      m_pNewBoundedByAction = new TDEAction( i18n( "Bounded By" ), "pmboundedby", 0, this, TQT_SLOT( slotNewBoundedBy( ) ),
+      m_pNewBoundedByAction = new TDEAction( i18n( "Bounded By" ), "pmboundedby", 0, this, TQ_SLOT( slotNewBoundedBy( ) ),
                                        actionCollection( ), "new_boundedby" );
       m_readWriteActions.append( m_pNewBoundedByAction );
-      m_pNewClippedByAction = new TDEAction( i18n( "Clipped By" ), "pmclippedby", 0, this, TQT_SLOT( slotNewClippedBy( ) ),
+      m_pNewClippedByAction = new TDEAction( i18n( "Clipped By" ), "pmclippedby", 0, this, TQ_SLOT( slotNewClippedBy( ) ),
                                        actionCollection( ), "new_clippedby" );
       m_readWriteActions.append( m_pNewClippedByAction );
 
-      m_pNewLightAction = new TDEAction( i18n( "Light" ), "pmlight", 0, this, TQT_SLOT( slotNewLight( ) ),
+      m_pNewLightAction = new TDEAction( i18n( "Light" ), "pmlight", 0, this, TQ_SLOT( slotNewLight( ) ),
                                        actionCollection( ), "new_light" );
       m_readWriteActions.append( m_pNewLightAction );
-      m_pNewLooksLikeAction = new TDEAction( i18n( "Looks Like" ), "pmlookslike", 0, this, TQT_SLOT( slotNewLooksLike( ) ),
+      m_pNewLooksLikeAction = new TDEAction( i18n( "Looks Like" ), "pmlookslike", 0, this, TQ_SLOT( slotNewLooksLike( ) ),
                                        actionCollection( ), "new_lookslike" );
       m_readWriteActions.append( m_pNewLooksLikeAction );
-      m_pNewProjectedThroughAction = new TDEAction( i18n( "Projected Through" ), "pmprojectedthrough", 0, this, TQT_SLOT( slotNewProjectedThrough( ) ),
+      m_pNewProjectedThroughAction = new TDEAction( i18n( "Projected Through" ), "pmprojectedthrough", 0, this, TQ_SLOT( slotNewProjectedThrough( ) ),
                                        actionCollection( ), "new_projectedthrough" );
       m_readWriteActions.append( m_pNewProjectedThroughAction );
 
-      m_pNewBicubicPatchAction = new TDEAction( i18n( "Bicubic Patch" ), "pmbicubicpatch", 0, this, TQT_SLOT( slotNewBicubicPatch( ) ),
+      m_pNewBicubicPatchAction = new TDEAction( i18n( "Bicubic Patch" ), "pmbicubicpatch", 0, this, TQ_SLOT( slotNewBicubicPatch( ) ),
                                               actionCollection( ), "new_bicubicpatch" );
       m_readWriteActions.append( m_pNewBicubicPatchAction );
-      m_pNewDiscAction = new TDEAction( i18n( "Disc" ), "pmdisc", 0, this, TQT_SLOT( slotNewDisc( ) ),
+      m_pNewDiscAction = new TDEAction( i18n( "Disc" ), "pmdisc", 0, this, TQ_SLOT( slotNewDisc( ) ),
                                       actionCollection( ), "new_disc" );
       m_readWriteActions.append( m_pNewDiscAction );
-      m_pNewTriangleAction = new TDEAction( i18n( "Triangle" ), "pmtriangle", 0, this, TQT_SLOT( slotNewTriangle( ) ),
+      m_pNewTriangleAction = new TDEAction( i18n( "Triangle" ), "pmtriangle", 0, this, TQ_SLOT( slotNewTriangle( ) ),
                                           actionCollection( ), "new_triangle" );
       m_readWriteActions.append( m_pNewTriangleAction );
 
 
-      m_pNewCameraAction = new TDEAction( i18n( "Camera" ), "pmcamera", 0, this, TQT_SLOT( slotNewCamera( ) ),
+      m_pNewCameraAction = new TDEAction( i18n( "Camera" ), "pmcamera", 0, this, TQ_SLOT( slotNewCamera( ) ),
                                         actionCollection( ), "new_camera" );
       m_readWriteActions.append( m_pNewCameraAction );
 
-      m_pNewTextureAction = new TDEAction( i18n( "Texture" ), "pmtexture", 0, this, TQT_SLOT( slotNewTexture( ) ),
+      m_pNewTextureAction = new TDEAction( i18n( "Texture" ), "pmtexture", 0, this, TQ_SLOT( slotNewTexture( ) ),
                                          actionCollection( ), "new_texture" );
       m_readWriteActions.append( m_pNewTextureAction );
 
-      m_pNewPigmentAction = new TDEAction( i18n( "Pigment" ), "pmpigment", 0, this, TQT_SLOT( slotNewPigment( ) ),
+      m_pNewPigmentAction = new TDEAction( i18n( "Pigment" ), "pmpigment", 0, this, TQ_SLOT( slotNewPigment( ) ),
                                          actionCollection( ), "new_pigment" );
       m_readWriteActions.append( m_pNewPigmentAction );
-      m_pNewNormalAction = new TDEAction( i18n( "Normal" ), "pmnormal", 0, this, TQT_SLOT( slotNewNormal( ) ),
+      m_pNewNormalAction = new TDEAction( i18n( "Normal" ), "pmnormal", 0, this, TQ_SLOT( slotNewNormal( ) ),
                                          actionCollection( ), "new_normal" );
       m_readWriteActions.append( m_pNewNormalAction );
-      m_pNewSolidColorAction = new TDEAction( i18n( "Solid Color" ), "pmsolidcolor", 0, this, TQT_SLOT( slotNewSolidColor( ) ),
+      m_pNewSolidColorAction = new TDEAction( i18n( "Solid Color" ), "pmsolidcolor", 0, this, TQ_SLOT( slotNewSolidColor( ) ),
                                             actionCollection( ), "new_solidcolor" );
       m_readWriteActions.append( m_pNewSolidColorAction );
 
-      m_pNewTextureListAction = new TDEAction( i18n( "Texture List" ), "pmtexturelist", 0, this, TQT_SLOT( slotNewTextureList( ) ),
+      m_pNewTextureListAction = new TDEAction( i18n( "Texture List" ), "pmtexturelist", 0, this, TQ_SLOT( slotNewTextureList( ) ),
                                             actionCollection( ), "new_texturelist" );
       m_readWriteActions.append( m_pNewTextureListAction );
-      m_pNewColorListAction = new TDEAction( i18n( "Color List" ), "pmcolorlist", 0, this, TQT_SLOT( slotNewColorList( ) ),
+      m_pNewColorListAction = new TDEAction( i18n( "Color List" ), "pmcolorlist", 0, this, TQ_SLOT( slotNewColorList( ) ),
                                             actionCollection( ), "new_colorlist" );
       m_readWriteActions.append( m_pNewColorListAction );
-      m_pNewPigmentListAction = new TDEAction( i18n( "Pigment List" ), "pmpigmentlist", 0, this, TQT_SLOT( slotNewPigmentList( ) ),
+      m_pNewPigmentListAction = new TDEAction( i18n( "Pigment List" ), "pmpigmentlist", 0, this, TQ_SLOT( slotNewPigmentList( ) ),
                                             actionCollection( ), "new_pigmentlist" );
       m_readWriteActions.append( m_pNewPigmentListAction );
-      m_pNewNormalListAction = new TDEAction( i18n( "Normal List" ), "pmnormallist", 0, this, TQT_SLOT( slotNewNormalList( ) ),
+      m_pNewNormalListAction = new TDEAction( i18n( "Normal List" ), "pmnormallist", 0, this, TQ_SLOT( slotNewNormalList( ) ),
                                             actionCollection( ), "new_normallist" );
       m_readWriteActions.append( m_pNewNormalListAction );
-      m_pNewDensityListAction = new TDEAction( i18n( "Density List" ), "pmdensitylist", 0, this, TQT_SLOT( slotNewDensityList( ) ),
+      m_pNewDensityListAction = new TDEAction( i18n( "Density List" ), "pmdensitylist", 0, this, TQ_SLOT( slotNewDensityList( ) ),
                                             actionCollection( ), "new_densitylist" );
       m_readWriteActions.append( m_pNewDensityListAction );
 
-      m_pNewFinishAction = new TDEAction( i18n( "Finish" ), "pmfinish", 0, this, TQT_SLOT( slotNewFinish( ) ),
+      m_pNewFinishAction = new TDEAction( i18n( "Finish" ), "pmfinish", 0, this, TQ_SLOT( slotNewFinish( ) ),
                                             actionCollection( ), "new_finish" );
       m_readWriteActions.append( m_pNewFinishAction );
 
-      m_pNewPatternAction = new TDEAction( i18n( "Pattern" ), "pmpattern", 0, this, TQT_SLOT( slotNewPattern( ) ),
+      m_pNewPatternAction = new TDEAction( i18n( "Pattern" ), "pmpattern", 0, this, TQ_SLOT( slotNewPattern( ) ),
                                          actionCollection( ), "new_pattern" );
       m_readWriteActions.append( m_pNewPatternAction );
-      m_pNewBlendMapModifiersAction = new TDEAction( i18n( "Blend Map Modifiers" ), "pmblendmapmodifiers", 0, this, TQT_SLOT( slotNewBlendMapModifiers( ) ),
+      m_pNewBlendMapModifiersAction = new TDEAction( i18n( "Blend Map Modifiers" ), "pmblendmapmodifiers", 0, this, TQ_SLOT( slotNewBlendMapModifiers( ) ),
                                          actionCollection( ), "new_blendmapmodifiers" );
       m_readWriteActions.append( m_pNewBlendMapModifiersAction );
-      m_pNewTextureMapAction = new TDEAction( i18n( "Texture Map" ), "pmtexturemap", 0, this, TQT_SLOT( slotNewTextureMap( ) ),
+      m_pNewTextureMapAction = new TDEAction( i18n( "Texture Map" ), "pmtexturemap", 0, this, TQ_SLOT( slotNewTextureMap( ) ),
                                             actionCollection( ), "new_texturemap" );
       m_readWriteActions.append( m_pNewTextureMapAction );
-      m_pNewMaterialMapAction = new TDEAction( i18n( "Material Map" ), "pmmaterialmap", 0, this, TQT_SLOT( slotNewMaterialMap( ) ),
+      m_pNewMaterialMapAction = new TDEAction( i18n( "Material Map" ), "pmmaterialmap", 0, this, TQ_SLOT( slotNewMaterialMap( ) ),
                                             actionCollection( ), "new_materialmap" );
       m_readWriteActions.append( m_pNewMaterialMapAction );
-      m_pNewPigmentMapAction = new TDEAction( i18n( "Pigment Map" ), "pmpigmentmap", 0, this, TQT_SLOT( slotNewPigmentMap( ) ),
+      m_pNewPigmentMapAction = new TDEAction( i18n( "Pigment Map" ), "pmpigmentmap", 0, this, TQ_SLOT( slotNewPigmentMap( ) ),
                                             actionCollection( ), "new_pigmentmap" );
       m_readWriteActions.append( m_pNewPigmentMapAction );
-      m_pNewColorMapAction = new TDEAction( i18n( "Color Map" ), "pmcolormap", 0, this, TQT_SLOT( slotNewColorMap( ) ),
+      m_pNewColorMapAction = new TDEAction( i18n( "Color Map" ), "pmcolormap", 0, this, TQ_SLOT( slotNewColorMap( ) ),
                                           actionCollection( ), "new_colormap" );
       m_readWriteActions.append( m_pNewColorMapAction );
-      m_pNewNormalMapAction = new TDEAction( i18n( "Normal Map" ), "pmnormalmap", 0, this, TQT_SLOT( slotNewNormalMap( ) ),
+      m_pNewNormalMapAction = new TDEAction( i18n( "Normal Map" ), "pmnormalmap", 0, this, TQ_SLOT( slotNewNormalMap( ) ),
                                            actionCollection( ), "new_normalmap" );
       m_readWriteActions.append( m_pNewNormalMapAction );
-      m_pNewBumpMapAction = new TDEAction( i18n( "Bump Map" ), "pmbumpmap", 0, this, TQT_SLOT( slotNewBumpMap( ) ),
+      m_pNewBumpMapAction = new TDEAction( i18n( "Bump Map" ), "pmbumpmap", 0, this, TQ_SLOT( slotNewBumpMap( ) ),
                                            actionCollection( ), "new_bumpmap" );
       m_readWriteActions.append( m_pNewBumpMapAction );
-      m_pNewSlopeMapAction = new TDEAction( i18n( "Slope Map" ), "pmslopemap", 0, this, TQT_SLOT( slotNewSlopeMap( ) ),
+      m_pNewSlopeMapAction = new TDEAction( i18n( "Slope Map" ), "pmslopemap", 0, this, TQ_SLOT( slotNewSlopeMap( ) ),
                                            actionCollection( ), "new_slopemap" );
       m_readWriteActions.append( m_pNewSlopeMapAction );
-      m_pNewDensityMapAction = new TDEAction( i18n( "Density Map" ), "pmdensitymap", 0, this, TQT_SLOT( slotNewDensityMap( ) ),
+      m_pNewDensityMapAction = new TDEAction( i18n( "Density Map" ), "pmdensitymap", 0, this, TQ_SLOT( slotNewDensityMap( ) ),
                                            actionCollection( ), "new_densitymap" );
       m_readWriteActions.append( m_pNewDensityMapAction );
-      m_pNewSlopeAction = new TDEAction( i18n( "Slope" ), "pmslope", 0, this, TQT_SLOT( slotNewSlope( ) ),
+      m_pNewSlopeAction = new TDEAction( i18n( "Slope" ), "pmslope", 0, this, TQ_SLOT( slotNewSlope( ) ),
                                            actionCollection( ), "new_slope" );
       m_readWriteActions.append( m_pNewSlopeAction );
 
-      m_pNewWarpAction = new TDEAction( i18n( "Warp" ), "pmwarp", 0, this, TQT_SLOT( slotNewWarp( ) ),
+      m_pNewWarpAction = new TDEAction( i18n( "Warp" ), "pmwarp", 0, this, TQ_SLOT( slotNewWarp( ) ),
                                             actionCollection( ), "new_warp" );
       m_readWriteActions.append( m_pNewWarpAction );
-      m_pNewImageMapAction = new TDEAction( i18n( "Image Map" ), "pmimagemap", 0, this, TQT_SLOT( slotNewImageMap( ) ),
+      m_pNewImageMapAction = new TDEAction( i18n( "Image Map" ), "pmimagemap", 0, this, TQ_SLOT( slotNewImageMap( ) ),
                                             actionCollection( ), "new_imagemap" );
       m_readWriteActions.append( m_pNewImageMapAction );
-      m_pNewQuickColorAction = new TDEAction( i18n( "QuickColor" ), "pmquickcolor", 0, this, TQT_SLOT( slotNewQuickColor( ) ),
+      m_pNewQuickColorAction = new TDEAction( i18n( "QuickColor" ), "pmquickcolor", 0, this, TQ_SLOT( slotNewQuickColor( ) ),
                                              actionCollection( ), "new_quickcolor" );
       m_readWriteActions.append( m_pNewQuickColorAction );
 
-      m_pNewTranslateAction = new TDEAction( i18n( "Translate" ), "pmtranslate", 0, this, TQT_SLOT( slotNewTranslate( ) ),
+      m_pNewTranslateAction = new TDEAction( i18n( "Translate" ), "pmtranslate", 0, this, TQ_SLOT( slotNewTranslate( ) ),
                                      actionCollection( ), "new_translate" );
       m_readWriteActions.append( m_pNewTranslateAction );
-      m_pNewScaleAction = new TDEAction( i18n( "Scale" ), "pmscale", 0, this, TQT_SLOT( slotNewScale( ) ),
+      m_pNewScaleAction = new TDEAction( i18n( "Scale" ), "pmscale", 0, this, TQ_SLOT( slotNewScale( ) ),
                                      actionCollection( ), "new_scale" );
       m_readWriteActions.append( m_pNewScaleAction );
-      m_pNewRotateAction = new TDEAction( i18n( "Rotate" ), "pmrotate", 0, this, TQT_SLOT( slotNewRotate( ) ),
+      m_pNewRotateAction = new TDEAction( i18n( "Rotate" ), "pmrotate", 0, this, TQ_SLOT( slotNewRotate( ) ),
                                      actionCollection( ), "new_rotate" );
       m_readWriteActions.append( m_pNewRotateAction );
-      m_pNewMatrixAction = new TDEAction( i18n( "Matrix" ), "pmmatrix", 0, this, TQT_SLOT( slotNewMatrix( ) ),
+      m_pNewMatrixAction = new TDEAction( i18n( "Matrix" ), "pmmatrix", 0, this, TQ_SLOT( slotNewMatrix( ) ),
                                         actionCollection( ), "new_povraymatrix" );
       m_readWriteActions.append( m_pNewMatrixAction );
 
-      m_pNewCommentAction = new TDEAction( i18n( "Comment" ), "pmcomment", 0, this, TQT_SLOT( slotNewComment( ) ),
+      m_pNewCommentAction = new TDEAction( i18n( "Comment" ), "pmcomment", 0, this, TQ_SLOT( slotNewComment( ) ),
                                          actionCollection( ), "new_comment" );
       m_readWriteActions.append( m_pNewCommentAction );
-      m_pNewRawAction = new TDEAction( i18n( "Raw Povray" ), "pmraw", 0, this, TQT_SLOT( slotNewRaw( ) ),
+      m_pNewRawAction = new TDEAction( i18n( "Raw Povray" ), "pmraw", 0, this, TQ_SLOT( slotNewRaw( ) ),
                                          actionCollection( ), "new_raw" );
       m_readWriteActions.append( m_pNewRawAction );
 
       // POV-Ray 3.5 objects
-      m_pNewIsoSurfaceAction = new TDEAction( i18n( "Iso Surface" ), "pmisosurface", 0, this, TQT_SLOT( slotNewIsoSurface( ) ),
+      m_pNewIsoSurfaceAction = new TDEAction( i18n( "Iso Surface" ), "pmisosurface", 0, this, TQ_SLOT( slotNewIsoSurface( ) ),
                                          actionCollection( ), "new_isosurface" );
       m_readWriteActions.append( m_pNewIsoSurfaceAction );
-      m_pNewRadiosityAction = new TDEAction( i18n( "Radiosity" ), "pmradiosity", 0, this, TQT_SLOT( slotNewRadiosity( ) ),
+      m_pNewRadiosityAction = new TDEAction( i18n( "Radiosity" ), "pmradiosity", 0, this, TQ_SLOT( slotNewRadiosity( ) ),
                                          actionCollection( ), "new_radiosity" );
       m_readWriteActions.append( m_pNewRadiosityAction );
-      m_pNewGlobalPhotonsAction = new TDEAction( i18n( "Global Photons" ), "pmglobalphotons", 0, this, TQT_SLOT( slotNewGlobalPhotons( ) ),
+      m_pNewGlobalPhotonsAction = new TDEAction( i18n( "Global Photons" ), "pmglobalphotons", 0, this, TQ_SLOT( slotNewGlobalPhotons( ) ),
                                          actionCollection( ), "new_globalphotons" );
       m_readWriteActions.append( m_pNewGlobalPhotonsAction );
-      m_pNewPhotonsAction = new TDEAction( i18n( "Photons" ), "pmphotons", 0, this, TQT_SLOT( slotNewPhotons( ) ),
+      m_pNewPhotonsAction = new TDEAction( i18n( "Photons" ), "pmphotons", 0, this, TQ_SLOT( slotNewPhotons( ) ),
                                          actionCollection( ), "new_photons" );
       m_readWriteActions.append( m_pNewPhotonsAction );
-      m_pNewLightGroupAction = new TDEAction( i18n( "Light Group" ), "pmlightgroup", 0, this, TQT_SLOT( slotNewLightGroup( ) ),
+      m_pNewLightGroupAction = new TDEAction( i18n( "Light Group" ), "pmlightgroup", 0, this, TQ_SLOT( slotNewLightGroup( ) ),
                                          actionCollection( ), "new_lightgroup" );
       m_readWriteActions.append( m_pNewLightGroupAction );
-      m_pNewInteriorTextureAction = new TDEAction( i18n( "Interior Texture" ), "pminteriortexture", 0, this, TQT_SLOT( slotNewInteriorTexture( ) ),
+      m_pNewInteriorTextureAction = new TDEAction( i18n( "Interior Texture" ), "pminteriortexture", 0, this, TQ_SLOT( slotNewInteriorTexture( ) ),
                                          actionCollection( ), "new_interiortexture" );
       m_readWriteActions.append( m_pNewInteriorTextureAction );
-      m_pNewSphereSweepAction = new TDEAction( i18n( "Sphere Sweep" ), "pmspheresweep", 0, this, TQT_SLOT( slotNewSphereSweep( ) ),
+      m_pNewSphereSweepAction = new TDEAction( i18n( "Sphere Sweep" ), "pmspheresweep", 0, this, TQ_SLOT( slotNewSphereSweep( ) ),
                                          actionCollection( ), "new_spheresweep" );
       m_readWriteActions.append( m_pNewSphereSweepAction );
-      m_pNewMeshAction = new TDEAction( i18n( "Mesh" ), "pmmesh", 0, this, TQT_SLOT( slotNewMesh( ) ),
+      m_pNewMeshAction = new TDEAction( i18n( "Mesh" ), "pmmesh", 0, this, TQ_SLOT( slotNewMesh( ) ),
                                          actionCollection( ), "new_mesh" );
       m_readWriteActions.append( m_pNewMeshAction );
 
 #ifdef KPM_WITH_OBJECT_LIBRARY
-      m_pSearchLibraryObjectAction = new TDEAction( i18n( "Search Object" ), "pmsearchlibrary", 0, this, TQT_SLOT( slotSearchLibraryObject( ) ),
+      m_pSearchLibraryObjectAction = new TDEAction( i18n( "Search Object" ), "pmsearchlibrary", 0, this, TQ_SLOT( slotSearchLibraryObject( ) ),
                                          actionCollection( ), "search_library_object" );
       m_readWriteActions.append( m_pSearchLibraryObjectAction );
 #endif
 
-      m_pUndoAction = KStdAction::undo( this, TQT_SLOT( slotEditUndo( ) ), actionCollection( ) );
-      m_pRedoAction = KStdAction::redo( this, TQT_SLOT( slotEditRedo( ) ), actionCollection( ) );
+      m_pUndoAction = KStdAction::undo( this, TQ_SLOT( slotEditUndo( ) ), actionCollection( ) );
+      m_pRedoAction = KStdAction::redo( this, TQ_SLOT( slotEditRedo( ) ), actionCollection( ) );
       m_pUndoAction->setEnabled( false );
       m_pRedoAction->setEnabled( false );
    }
@@ -2783,8 +2783,8 @@ void PMPart::updateRenderModes( )
 void PMPart::slotRenderModeActionPlugged( )
 {
    updateRenderModes( );
-//   connect( m_pRenderComboAction->combo( ), TQT_SIGNAL( activated( int ) ),
-//            TQT_SLOT( slotRenderMode( int ) ) );
+//   connect( m_pRenderComboAction->combo( ), TQ_SIGNAL( activated( int ) ),
+//            TQ_SLOT( slotRenderMode( int ) ) );
 }
 
 void PMPart::slotVisibilityLevelChanged( int l )

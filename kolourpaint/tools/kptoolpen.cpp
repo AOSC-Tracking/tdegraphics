@@ -133,8 +133,8 @@ void kpToolPen::begin ()
     if (m_mode & SquareBrushes)
     {
         m_toolWidgetEraserSize = tb->toolWidgetEraserSize ();
-        connect (m_toolWidgetEraserSize, TQT_SIGNAL (eraserSizeChanged (int)),
-                 this, TQT_SLOT (slotEraserSizeChanged (int)));
+        connect (m_toolWidgetEraserSize, TQ_SIGNAL (eraserSizeChanged (int)),
+                 this, TQ_SLOT (slotEraserSizeChanged (int)));
         m_toolWidgetEraserSize->show ();
 
         slotEraserSizeChanged (m_toolWidgetEraserSize->eraserSize ());
@@ -145,8 +145,8 @@ void kpToolPen::begin ()
     if (m_mode & DiverseBrushes)
     {
         m_toolWidgetBrush = tb->toolWidgetBrush ();
-        connect (m_toolWidgetBrush, TQT_SIGNAL (brushChanged (const TQPixmap &, bool)),
-                 this, TQT_SLOT (slotBrushChanged (const TQPixmap &, bool)));
+        connect (m_toolWidgetBrush, TQ_SIGNAL (brushChanged (const TQPixmap &, bool)),
+                 this, TQ_SLOT (slotBrushChanged (const TQPixmap &, bool)));
         m_toolWidgetBrush->show ();
 
         slotBrushChanged (m_toolWidgetBrush->brush (),
@@ -163,15 +163,15 @@ void kpToolPen::end ()
 {
     if (m_toolWidgetEraserSize)
     {
-        disconnect (m_toolWidgetEraserSize, TQT_SIGNAL (eraserSizeChanged (int)),
-                    this, TQT_SLOT (slotEraserSizeChanged (int)));
+        disconnect (m_toolWidgetEraserSize, TQ_SIGNAL (eraserSizeChanged (int)),
+                    this, TQ_SLOT (slotEraserSizeChanged (int)));
         m_toolWidgetEraserSize = 0;
     }
 
     if (m_toolWidgetBrush)
     {
-        disconnect (m_toolWidgetBrush, TQT_SIGNAL (brushChanged (const TQPixmap &, bool)),
-                    this, TQT_SLOT (slotBrushChanged (const TQPixmap &, bool)));
+        disconnect (m_toolWidgetBrush, TQ_SIGNAL (brushChanged (const TQPixmap &, bool)),
+                    this, TQ_SLOT (slotBrushChanged (const TQPixmap &, bool)));
         m_toolWidgetBrush = 0;
     }
 

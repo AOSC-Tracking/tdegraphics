@@ -111,16 +111,16 @@ void PMImageMapEdit::createTopWidgets( )
    hl->addWidget( lbl );
    hl->addWidget( m_pMapTypeEdit );
 
-   connect( m_pImageFileTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotImageFileTypeChanged( int ) ) );
-   connect( m_pMapTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotMapTypeChanged( int ) ) );
-   connect( m_pInterpolateTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotInterpolateTypeChanged( int ) ) );
-   connect( m_pImageFileNameBrowse, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotImageFileBrowseClicked( ) ) );
-   connect( m_pImageFileNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotImageFileNameChanged( const TQString& ) ) );
-   connect( m_pEnableFilterAllEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFilterAllClicked( ) ) );
-   connect( m_pEnableTransmitAllEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotTransmitAllClicked( ) ) );
-   connect( m_pFilterAllEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pTransmitAllEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pOnceEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pImageFileTypeEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotImageFileTypeChanged( int ) ) );
+   connect( m_pMapTypeEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotMapTypeChanged( int ) ) );
+   connect( m_pInterpolateTypeEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotInterpolateTypeChanged( int ) ) );
+   connect( m_pImageFileNameBrowse, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotImageFileBrowseClicked( ) ) );
+   connect( m_pImageFileNameEdit, TQ_SIGNAL( textChanged( const TQString& ) ), TQ_SLOT( slotImageFileNameChanged( const TQString& ) ) );
+   connect( m_pEnableFilterAllEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotFilterAllClicked( ) ) );
+   connect( m_pEnableTransmitAllEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotTransmitAllClicked( ) ) );
+   connect( m_pFilterAllEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pTransmitAllEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pOnceEdit, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMImageMapEdit::createBottomWidgets( )
@@ -265,7 +265,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    button = new TQPushButton( m_pFiltersWidget );
    button->setPixmap( addButtonPixmap );
    m_filterAddButtons.append( button );
-   connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddFilterEntry( ) ) );
+   connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddFilterEntry( ) ) );
    gl->addWidget( button, 0, 1 );
    button->show( );
    button->setEnabled( !readOnly );
@@ -275,7 +275,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    {
       edit = new PMPaletteValueEdit( m_pFiltersWidget );
       m_filterEntries.append( edit );
-      connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+      connect( edit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
       gl->addWidget( edit, i+1, 0 );
       edit->setIndex( filters[ i ].index( ) );
       edit->setValue( filters[ i ].value( ) );
@@ -285,7 +285,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
       button = new TQPushButton( m_pFiltersWidget );
       button->setPixmap( addButtonPixmap );
       m_filterAddButtons.append( button );
-      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddFilterEntry( ) ) );
+      connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddFilterEntry( ) ) );
       gl->addWidget( button, i+1, 1 );
       button->show( );
       button->setEnabled( !readOnly );
@@ -294,7 +294,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
       button = new TQPushButton( m_pFiltersWidget );
       button->setPixmap( removeButtonPixmap );
       m_filterRemoveButtons.append( button );
-      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveFilterEntry( ) ) );
+      connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemoveFilterEntry( ) ) );
       gl->addWidget( button, i+1, 2 );
       button->show( );
       button->setEnabled( !readOnly );
@@ -321,7 +321,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    button = new TQPushButton( m_pTransmitsWidget );
    button->setPixmap( addButtonPixmap );
    m_transmitAddButtons.append( button );
-   connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddTransmitEntry( ) ) );
+   connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddTransmitEntry( ) ) );
    gl->addWidget( button, 0, 1 );
    button->show( );
    button->setEnabled( !readOnly );
@@ -331,7 +331,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
    {
       edit = new PMPaletteValueEdit( m_pTransmitsWidget );
       m_transmitEntries.append( edit );
-      connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+      connect( edit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
       gl->addWidget( edit, i+1, 0 );
       edit->setIndex( transmits[ i ].index( ) );
       edit->setValue( transmits[ i ].value( ) );
@@ -341,7 +341,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
       button = new TQPushButton( m_pTransmitsWidget );
       button->setPixmap( addButtonPixmap );
       m_transmitAddButtons.append( button );
-      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddTransmitEntry( ) ) );
+      connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddTransmitEntry( ) ) );
       gl->addWidget( button, i+1, 1 );
       button->show( );
       button->setEnabled( !readOnly );
@@ -350,7 +350,7 @@ void PMImageMapEdit::displayPaletteEntries( const TQValueList<PMPaletteValue>& f
       button = new TQPushButton( m_pTransmitsWidget );
       button->setPixmap( removeButtonPixmap );
       m_transmitRemoveButtons.append( button );
-      connect( button, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveTransmitEntry( ) ) );
+      connect( button, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemoveTransmitEntry( ) ) );
       gl->addWidget( button, i+1, 2 );
       button->show( );
       button->setEnabled( !readOnly );

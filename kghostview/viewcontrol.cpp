@@ -56,8 +56,8 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 
 	//magComboBox->hide();
 
-	connect ( magComboBox, TQT_SIGNAL (activated (int)),
-		  this, TQT_SLOT (slotMagSelection (int)) );
+	connect ( magComboBox, TQ_SIGNAL (activated (int)),
+		  this, TQ_SLOT (slotMagSelection (int)) );
 	grid->addWidget( magComboBox, 0, 1 );
 
 
@@ -65,8 +65,8 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	mediaComboBox = new TQComboBox( FALSE, vcGroupBox );
 	mediaComboBox->setFixedHeight( magComboBox->sizeHint().height() );
 
-	connect ( mediaComboBox, TQT_SIGNAL (activated (int)),
-		  this, TQT_SLOT (slotMediaSelection (int)) );
+	connect ( mediaComboBox, TQ_SIGNAL (activated (int)),
+		  this, TQ_SLOT (slotMediaSelection (int)) );
 
 	grid->addWidget( mediaComboBox, 1, 1 );
 
@@ -77,8 +77,8 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	orientComboBox->insertItem(i18n("Upside Down"));
 	orientComboBox->setFixedHeight( magComboBox->sizeHint().height() );
 
-	connect ( orientComboBox, TQT_SIGNAL (activated (int)),
-		  this, TQT_SLOT (slotOrientSelection (int)) );
+	connect ( orientComboBox, TQ_SIGNAL (activated (int)),
+		  this, TQ_SLOT (slotOrientSelection (int)) );
 	grid->addWidget( orientComboBox, 2, 1 );
 
 	int labelWidth = 0;
@@ -124,10 +124,10 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	bbox->addStretch( 10 );
 
 	apply = bbox->addButton( KStdGuiItem::apply() );
-	connect( apply, TQT_SIGNAL(clicked()), TQT_SLOT(slotApplyClicked()) );
+	connect( apply, TQ_SIGNAL(clicked()), TQ_SLOT(slotApplyClicked()) );
 
 	TQPushButton *closebtn = bbox->addButton( KStdGuiItem::close() );
-	connect( closebtn, TQT_SIGNAL(clicked()), TQT_SLOT(reject()) );
+	connect( closebtn, TQ_SIGNAL(clicked()), TQ_SLOT(reject()) );
 
 
 	bbox->layout();

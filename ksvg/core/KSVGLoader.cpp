@@ -72,8 +72,8 @@ void KSVGLoader::getSVGContent(::KURL url)
 
 		m_job->setAutoErrorHandlingEnabled(true);
 
-		connect(m_job, TQT_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
-		connect(m_job, TQT_SIGNAL(result(TDEIO::Job *)), this, TQT_SLOT(slotResult(TDEIO::Job *)));
+		connect(m_job, TQ_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQ_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
+		connect(m_job, TQ_SIGNAL(result(TDEIO::Job *)), this, TQ_SLOT(slotResult(TDEIO::Job *)));
 	}
 }
 
@@ -90,8 +90,8 @@ void KSVGLoader::newImageJob(SVGImageElementImpl *image, ::KURL baseURL)
 	map->imageElement = image;
 
 	TDEIO::TransferJob *imageJob = TDEIO::get(::KURL(baseURL, map->imageElement->fileName()), false, false);
-	connect(imageJob, TQT_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
-	connect(imageJob, TQT_SIGNAL(result(TDEIO::Job *)), this, TQT_SLOT(slotResult(TDEIO::Job *)));
+	connect(imageJob, TQ_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQ_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
+	connect(imageJob, TQ_SIGNAL(result(TDEIO::Job *)), this, TQ_SLOT(slotResult(TDEIO::Job *)));
 
 	m_imageJobs.insert(imageJob, map);
 }
@@ -212,7 +212,7 @@ void KSVGLoader::postUrl(::KURL url, const TQByteArray &data, const TQString &mi
 	m_postUrlData.status = &status;
 	m_postUrlData.callBackFunction = &callBackFunction;
 
-	connect(job, TQT_SIGNAL(result(TDEIO::Job *)), TQT_SLOT(slotResult(TDEIO::Job *)));
+	connect(job, TQ_SIGNAL(result(TDEIO::Job *)), TQ_SLOT(slotResult(TDEIO::Job *)));
 }
 
 class CharacterDataSearcher : public TQXmlDefaultHandler

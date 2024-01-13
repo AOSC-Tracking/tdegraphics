@@ -231,7 +231,7 @@ bool SVGDocumentImpl::open(const ::KURL &url)
 		if(!m_loader)
 			m_loader = new KSVGLoader();
 
-		connect(m_loader, TQT_SIGNAL(gotResult(TQIODevice *)), this, TQT_SLOT(slotSVGContent(TQIODevice *)));
+		connect(m_loader, TQ_SIGNAL(gotResult(TQIODevice *)), this, TQ_SLOT(slotSVGContent(TQIODevice *)));
 		m_loader->getSVGContent(url);
 	}
 	else
@@ -257,7 +257,7 @@ void SVGDocumentImpl::slotSVGContent(TQIODevice *dev)
 		args.SVGFragmentId = url.mid(pos + 1);
 		
 	m_reader = new KSVGReader(this, m_canvas, args);
-	connect(m_reader, TQT_SIGNAL(finished(bool, const TQString &)), this, TQT_SLOT(slotFinishedParsing(bool, const TQString &)));
+	connect(m_reader, TQ_SIGNAL(finished(bool, const TQString &)), this, TQ_SLOT(slotFinishedParsing(bool, const TQString &)));
 	m_t.start();
 	
 #if USE_VALGRIND
@@ -277,7 +277,7 @@ void SVGDocumentImpl::parseSVG(TQXmlInputSource *inputSource, bool getURLMode)
 	args.fit = m_fit;
 	args.getURLMode = getURLMode;
 	m_reader = new KSVGReader(this, 0, args);
-	connect(m_reader, TQT_SIGNAL(finished(bool, const TQString &)), this, TQT_SLOT(slotFinishedParsing(bool, const TQString &)));
+	connect(m_reader, TQ_SIGNAL(finished(bool, const TQString &)), this, TQ_SLOT(slotFinishedParsing(bool, const TQString &)));
 	
 #if USE_VALGRIND
 	CALLTREE_ZERO_STATS();
@@ -454,7 +454,7 @@ void SVGDocumentImpl::executeScripts()
 	bool test = executeScriptsRecursiveCheck(*rootElement());
 	
 	if(!test)
-		TQTimer::singleShot(50, this, TQT_SLOT(executeScripts()));
+		TQTimer::singleShot(50, this, TQ_SLOT(executeScripts()));
 	else
 	{
 		executeScriptsRecursive(*rootElement());

@@ -67,13 +67,13 @@ KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQO
   DVIRenderer.setName("DVI renderer");
   setRenderer(&DVIRenderer);
 
-  docInfoAction    = new TDEAction(i18n("Document &Info"), "application-vnd.tde.info", 0, &DVIRenderer, TQT_SLOT(showInfo()), actionCollection(), "info_dvi");
-  embedPSAction    = new TDEAction(i18n("Embed External PostScript Files..."), 0, this, TQT_SLOT(slotEmbedPostScript()), actionCollection(), "embed_postscript");
-  new TDEAction(i18n("Enable All Warnings && Messages"), 0, this, TQT_SLOT(doEnableWarnings()), actionCollection(), "enable_msgs");
-  exportPSAction   = new TDEAction(i18n("PostScript..."), 0, &DVIRenderer, TQT_SLOT(exportPS()), actionCollection(), "export_postscript");
-  exportPDFAction  = new TDEAction(i18n("PDF..."), 0, &DVIRenderer, TQT_SLOT(exportPDF()), actionCollection(), "export_pdf");
+  docInfoAction    = new TDEAction(i18n("Document &Info"), "application-vnd.tde.info", 0, &DVIRenderer, TQ_SLOT(showInfo()), actionCollection(), "info_dvi");
+  embedPSAction    = new TDEAction(i18n("Embed External PostScript Files..."), 0, this, TQ_SLOT(slotEmbedPostScript()), actionCollection(), "embed_postscript");
+  new TDEAction(i18n("Enable All Warnings && Messages"), 0, this, TQ_SLOT(doEnableWarnings()), actionCollection(), "enable_msgs");
+  exportPSAction   = new TDEAction(i18n("PostScript..."), 0, &DVIRenderer, TQ_SLOT(exportPS()), actionCollection(), "export_postscript");
+  exportPDFAction  = new TDEAction(i18n("PDF..."), 0, &DVIRenderer, TQ_SLOT(exportPDF()), actionCollection(), "export_pdf");
 
-  KStdAction::tipOfDay(this, TQT_SLOT(showTip()), actionCollection(), "help_tipofday");
+  KStdAction::tipOfDay(this, TQ_SLOT(showTip()), actionCollection(), "help_tipofday");
 
   setXMLFile("kdvi_part.rc");
 
@@ -81,7 +81,7 @@ KDVIMultiPage::KDVIMultiPage(TQWidget *parentWidget, const char *widgetName, TQO
 
   enableActions(false);
   // Show tip of the day, when the first main window is shown.
-  TQTimer::singleShot(0,this,TQT_SLOT(showTipOnStart()));
+  TQTimer::singleShot(0,this,TQ_SLOT(showTipOnStart()));
 }
 
 
@@ -435,12 +435,12 @@ DocumentWidget* KDVIMultiPage::createDocumentWidget()
                               "singlePageWidget" );
 
   // Lets not forget the connections we make in the KMultiPage
-  connect(documentWidget, TQT_SIGNAL(clearSelection()), this, TQT_SLOT(clearSelection()));
-  connect(this, TQT_SIGNAL(enableMoveTool(bool)), documentWidget, TQT_SLOT(slotEnableMoveTool(bool)));
+  connect(documentWidget, TQ_SIGNAL(clearSelection()), this, TQ_SLOT(clearSelection()));
+  connect(this, TQ_SIGNAL(enableMoveTool(bool)), documentWidget, TQ_SLOT(slotEnableMoveTool(bool)));
 
   // Handle source links
-  connect(documentWidget, TQT_SIGNAL(SRCLink(const TQString&, TQMouseEvent*, DocumentWidget*)), getRenderer(),
-          TQT_SLOT(handleSRCLink(const TQString& ,TQMouseEvent*, DocumentWidget*)));
+  connect(documentWidget, TQ_SIGNAL(SRCLink(const TQString&, TQMouseEvent*, DocumentWidget*)), getRenderer(),
+          TQ_SLOT(handleSRCLink(const TQString& ,TQMouseEvent*, DocumentWidget*)));
 
   return documentWidget;
 }

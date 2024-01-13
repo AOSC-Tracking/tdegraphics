@@ -39,8 +39,8 @@ void PMSolidObjectEdit::createBottomWidgets( )
    topLayout( )->addWidget( m_pInverseButton );
    topLayout( )->addWidget( m_pHollowButton );
 
-   connect( m_pHollowButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pInverseButton, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHollowButton, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pInverseButton, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
    Base::createBottomWidgets( );
 }

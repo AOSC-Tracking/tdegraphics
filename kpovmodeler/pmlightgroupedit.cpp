@@ -41,7 +41,7 @@ void PMLightGroupEdit::createTopWidgets( )
    layout->addWidget( m_pGlobalLights );
    layout->addStretch( 1 );
 
-   connect( m_pGlobalLights, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pGlobalLights, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMLightGroupEdit::displayObject( PMObject* o )

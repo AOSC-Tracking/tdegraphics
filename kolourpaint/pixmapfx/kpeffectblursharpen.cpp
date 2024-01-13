@@ -149,11 +149,11 @@ kpEffectBlurSharpenWidget::kpEffectBlurSharpenWidget (bool actOnSelection,
     lay->setColStretch (1, 1);
 
 
-    connect (m_amountInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SIGNAL (settingsChangedDelayed ()));
+    connect (m_amountInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SIGNAL (settingsChangedDelayed ()));
 
-    connect (m_amountInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (slotUpdateTypeLabel ()));
+    connect (m_amountInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (slotUpdateTypeLabel ()));
 }
 
 kpEffectBlurSharpenWidget::~kpEffectBlurSharpenWidget ()

@@ -213,8 +213,8 @@ void ocradDialog::version( const TQString& exe )
     *m_proc << exe;
     *m_proc << TQString("-V");
 
-    connect( m_proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int )),
-             this,     TQT_SLOT(slReceiveStdIn(TDEProcess *, char *, int )));
+    connect( m_proc, TQ_SIGNAL(receivedStdout(TDEProcess *, char *, int )),
+             this,     TQ_SLOT(slReceiveStdIn(TDEProcess *, char *, int )));
 
     if( ! m_proc->start( TDEProcess::NotifyOnExit, TDEProcess::Stdout ) )
     {

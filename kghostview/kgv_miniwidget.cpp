@@ -66,16 +66,16 @@ KGVMiniWidget::KGVMiniWidget( KGVPart* part, const char* name ) :
               static_cast< TQPrinter::PageSize >( locale.pageSize() ) );
     _thumbnailService = new ThumbnailService( this );
 
-    connect( this, TQT_SIGNAL( newPageShown( int ) ), 
-             TQT_SLOT( updateStatusBarText( int ) ) );
+    connect( this, TQ_SIGNAL( newPageShown( int ) ), 
+             TQ_SLOT( updateStatusBarText( int ) ) );
 }
 
 void KGVMiniWidget::setDocument( KGVDocument* document )
 {
     _document = document;
     if( _document )
-	connect( _document, TQT_SIGNAL( completed() ), 
-	         TQT_SLOT( slotDocumentOpened() ) );
+	connect( _document, TQ_SIGNAL( completed() ), 
+	         TQ_SLOT( slotDocumentOpened() ) );
 }
 
 TQString KGVMiniWidget::pageSizeToString( TQPrinter::PageSize pageSize )
@@ -109,8 +109,8 @@ void KGVMiniWidget::setPSWidget( KPSWidget* psWidget )
 {
     _psWidget = psWidget;
     // setMagnification( _magnification );
-    connect( _psWidget, TQT_SIGNAL( newPageImage( TQPixmap ) ), 
-             this, TQT_SLOT( sendPage() ) );
+    connect( _psWidget, TQ_SIGNAL( newPageImage( TQPixmap ) ), 
+             this, TQ_SLOT( sendPage() ) );
 }
 
 void KGVMiniWidget::goToPage()
@@ -452,8 +452,8 @@ void KGVMiniWidget::showPage( int pagenumber )
 	}
     }
     // Do this after ajusting pagenumber above
-    _thumbnailService->cancelRequests( -1 , _part->scrollBox(), TQT_SLOT( setThumbnail( TQPixmap ) ) );
-    _thumbnailService->delayedGetThumbnail( pagenumber, _part->scrollBox(), TQT_SLOT( setThumbnail( TQPixmap ) ), true );
+    _thumbnailService->cancelRequests( -1 , _part->scrollBox(), TQ_SLOT( setThumbnail( TQPixmap ) ) );
+    _thumbnailService->delayedGetThumbnail( pagenumber, _part->scrollBox(), TQ_SLOT( setThumbnail( TQPixmap ) ), true );
 
     emit newPageShown( pagenumber );
 }

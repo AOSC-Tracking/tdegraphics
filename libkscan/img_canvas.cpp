@@ -114,8 +114,8 @@ ImageCanvas::ImageCanvas(TQWidget *parent,
     update_scaled_pixmap();
 
     // timer-Start and stop
-    connect( this, TQT_SIGNAL( newRect()), TQT_SLOT( newRectSlot()));
-    connect( this, TQT_SIGNAL( noRect()),  TQT_SLOT( noRectSlot()));
+    connect( this, TQ_SIGNAL( newRect()), TQ_SLOT( newRectSlot()));
+    connect( this, TQ_SIGNAL( noRect()),  TQ_SLOT( noRectSlot()));
 
     //zoomOut();scrollview/scrollview
     viewport()->setCursor( crossCursor );

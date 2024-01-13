@@ -158,28 +158,28 @@ void PMGlobalPhotonsEdit::createTopWidgets( )
    m_pRadiusMediaMulti->setValidation( true, 0, false, 0 );
    gl->addWidget( m_pRadiusMediaMulti, 2, 4 );
 
-   connect( m_pNumberType, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotNumberTypeActivated( int ) ) );
-   connect( m_pSpacing, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCount, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pGatherMin, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pGatherMax, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaMaxSteps, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMediaFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pJitter, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxTraceLevelGlobal, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotMaxTraceLevelGlobalClicked( ) ) );
-   connect( m_pMaxTraceLevel, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAdcBailoutGlobal, TQT_SIGNAL( clicked( ) ),
-            TQT_SLOT( slotAdcBailoutGlobalClicked( ) ) );
-   connect( m_pAdcBailout, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAutostop, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pExpandIncrease, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
-   connect( m_pExpandMin, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusGather, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusGatherMulti, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusMedia, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
-   connect( m_pRadiusMediaMulti, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL ( dataChanged( ) ) );
+   connect( m_pNumberType, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotNumberTypeActivated( int ) ) );
+   connect( m_pSpacing, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCount, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pGatherMin, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pGatherMax, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaMaxSteps, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMediaFactor, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pJitter, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxTraceLevelGlobal, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotMaxTraceLevelGlobalClicked( ) ) );
+   connect( m_pMaxTraceLevel, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAdcBailoutGlobal, TQ_SIGNAL( clicked( ) ),
+            TQ_SLOT( slotAdcBailoutGlobalClicked( ) ) );
+   connect( m_pAdcBailout, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAutostop, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pExpandIncrease, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL ( dataChanged( ) ) );
+   connect( m_pExpandMin, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusGather, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusGatherMulti, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusMedia, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL ( dataChanged( ) ) );
+   connect( m_pRadiusMediaMulti, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL ( dataChanged( ) ) );
 }
 
 void PMGlobalPhotonsEdit::displayObject( PMObject* o )

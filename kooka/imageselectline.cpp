@@ -58,11 +58,11 @@ ImageSelectLine::ImageSelectLine( TQWidget *parent, const TQString& text )
 
    m_urlCombo->setMaxItems(5);
 
-   connect( m_urlCombo, TQT_SIGNAL( urlActivated( const KURL& )),
-	    this, TQT_SLOT( slUrlActivated( const KURL& )));
+   connect( m_urlCombo, TQ_SIGNAL( urlActivated( const KURL& )),
+	    this, TQ_SLOT( slUrlActivated( const KURL& )));
 
-   connect( m_buttFileSelect, TQT_SIGNAL( clicked() ),
-	    this, TQT_SLOT( slSelectFile()));
+   connect( m_buttFileSelect, TQ_SIGNAL( clicked() ),
+	    this, TQ_SLOT( slSelectFile()));
 }
 
 void ImageSelectLine::slSelectFile()

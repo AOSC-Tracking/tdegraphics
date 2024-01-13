@@ -40,7 +40,7 @@ void PMObjectLinkEdit::createTopWidgets( )
    l.append( "Light" );
    m_pLinkEdit->setLinkPossibilities( l );
    topLayout( )->addWidget( m_pLinkEdit );
-   connect( m_pLinkEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pLinkEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMObjectLinkEdit::displayObject( PMObject* o )

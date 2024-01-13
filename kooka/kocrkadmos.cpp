@@ -291,7 +291,7 @@ EngineError KadmosDialog::setupGui()
     m_cbLang = new TQComboBox( m_gbLang );
     m_cbLang->setCurrentText( TDELocale::defaultCountry() );
 
-    connect( m_bbFont, TQT_SIGNAL(clicked(int)), this, TQT_SLOT(slFontChanged(int) ));
+    connect( m_bbFont, TQ_SIGNAL(clicked(int)), this, TQ_SLOT(slFontChanged(int) ));
     m_rbMachine->setChecked(true);
 
     /* --- */

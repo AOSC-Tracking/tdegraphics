@@ -884,13 +884,13 @@ PMSaveViewLayoutDialog::PMSaveViewLayoutDialog( PMShell* parent,
 
    m_pLayoutName = new TQLineEdit( w );
    vl->addWidget( m_pLayoutName );
-   connect( m_pLayoutName, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotNameChanged( const TQString& ) ) );
+   connect( m_pLayoutName, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotNameChanged( const TQString& ) ) );
 
    TQListBox* lb = new TQListBox( w );
    vl->addWidget( lb );
-   connect( lb, TQT_SIGNAL( highlighted( const TQString& ) ),
-            TQT_SLOT( slotNameSelected( const TQString& ) ) );
+   connect( lb, TQ_SIGNAL( highlighted( const TQString& ) ),
+            TQ_SLOT( slotNameSelected( const TQString& ) ) );
    lb->insertStringList( PMViewLayoutManager::theManager( )
                          ->availableLayouts( ) );
 

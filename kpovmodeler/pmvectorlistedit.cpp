@@ -119,8 +119,8 @@ void PMVectorListEdit::init( int dimensions )
    setSelectionMode( TQTable::MultiRow );
    for( i = 0; i < m_dimension; ++i )
       setColumnStretchable( i, true );
-   connect( this, TQT_SIGNAL( valueChanged( int, int ) ),
-            TQT_SLOT( slotTextChanged( int, int ) ) );
+   connect( this, TQ_SIGNAL( valueChanged( int, int ) ),
+            TQ_SLOT( slotTextChanged( int, int ) ) );
    setSizePolicy( TQSizePolicy( TQSizePolicy::Preferred, TQSizePolicy::Fixed ) );
 }
 

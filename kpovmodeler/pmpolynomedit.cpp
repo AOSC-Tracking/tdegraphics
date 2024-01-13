@@ -46,14 +46,14 @@ void PMPolynomEdit::createTopWidgets( )
    m_pOrder = new TQSpinBox( 2, 7, 1, this );
    hl->addWidget( m_pOrder );
    hl->addStretch( 1 );
-   connect( m_pOrder, TQT_SIGNAL( valueChanged( int ) ), TQT_SLOT( slotOrderChanged( int ) ) );
+   connect( m_pOrder, TQ_SIGNAL( valueChanged( int ) ), TQ_SLOT( slotOrderChanged( int ) ) );
    
    topLayout( )->addWidget( new TQLabel( i18n( "Formula:" ), this ) );
    m_pPolyWidget = new TQWidget( this );
    topLayout( )->addWidget( m_pPolyWidget );
    m_pSturm = new TQCheckBox( i18n( "Sturm" ), this );
    topLayout( )->addWidget( m_pSturm );
-   connect( m_pSturm, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSturm, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPolynomEdit::displayObject( PMObject* o )
@@ -135,7 +135,7 @@ void PMPolynomEdit::displayCoefficients( const PMVector& co, int cOrder,
          }
          
          edit = new PMFloatEdit( m_pPolyWidget );
-         connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+         connect( edit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
          m_edits.append( edit );
          gl->addWidget( edit, row, col + 1 );
          edit->show( );

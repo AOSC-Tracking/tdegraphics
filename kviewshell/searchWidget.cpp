@@ -72,12 +72,12 @@ SearchWidget::SearchWidget(TQWidget* parent, const char* name, WFlags fl)
   caseSensitiveCheckBox->setText(i18n("Case sensitive"));
   layout->addWidget(caseSensitiveCheckBox);
 
-  connect(stopButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(stopSearch()));
+  connect(stopButton, TQ_SIGNAL(clicked()), this, TQ_SIGNAL(stopSearch()));
 
-  connect(findNextButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(findNextText()));
-  connect(findPrevButton, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(findPrevText()));
+  connect(findNextButton, TQ_SIGNAL(clicked()), this, TQ_SIGNAL(findNextText()));
+  connect(findPrevButton, TQ_SIGNAL(clicked()), this, TQ_SIGNAL(findPrevText()));
 
-  connect(searchText, TQT_SIGNAL(textChanged(const TQString&)), this, TQT_SLOT(textChanged()));
+  connect(searchText, TQ_SIGNAL(textChanged(const TQString&)), this, TQ_SLOT(textChanged()));
 
   textChanged();
 }

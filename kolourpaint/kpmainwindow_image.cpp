@@ -90,37 +90,37 @@ void kpMainWindow::setupImageMenuActions ()
     TDEActionCollection *ac = actionCollection ();
 
     m_actionResizeScale = new TDEAction (i18n ("R&esize / Scale..."), TQt::CTRL + TQt::Key_E,
-        this, TQT_SLOT (slotResizeScale ()), ac, "image_resize_scale");
+        this, TQ_SLOT (slotResizeScale ()), ac, "image_resize_scale");
 
     m_actionCrop = new TDEAction (i18n ("Se&t as Image (Crop)"), TQt::CTRL + TQt::Key_T,
-        this, TQT_SLOT (slotCrop ()), ac, "image_crop");
+        this, TQ_SLOT (slotCrop ()), ac, "image_crop");
 
     m_actionAutoCrop = new TDEAction (autoCropText (), TQt::CTRL + TQt::Key_U,
-        this, TQT_SLOT (slotAutoCrop ()), ac, "image_auto_crop");
+        this, TQ_SLOT (slotAutoCrop ()), ac, "image_auto_crop");
 
     m_actionFlip = new TDEAction (i18n ("&Flip..."), TQt::CTRL + TQt::Key_F,
-        this, TQT_SLOT (slotFlip ()), ac, "image_flip");
+        this, TQ_SLOT (slotFlip ()), ac, "image_flip");
 
     m_actionRotate = new TDEAction (i18n ("&Rotate..."), TQt::CTRL + TQt::Key_R,
-        this, TQT_SLOT (slotRotate ()), ac, "image_rotate");
+        this, TQ_SLOT (slotRotate ()), ac, "image_rotate");
 
     m_actionSkew = new TDEAction (i18n ("S&kew..."), TQt::CTRL + TQt::Key_K,
-        this, TQT_SLOT (slotSkew ()), ac, "image_skew");
+        this, TQ_SLOT (slotSkew ()), ac, "image_skew");
 
     m_actionConvertToBlackAndWhite = new TDEAction (i18n ("Reduce to Mo&nochrome (Dithered)"), 0,
-        this, TQT_SLOT (slotConvertToBlackAndWhite ()), ac, "image_convert_to_black_and_white");
+        this, TQ_SLOT (slotConvertToBlackAndWhite ()), ac, "image_convert_to_black_and_white");
 
     m_actionConvertToGrayscale = new TDEAction (i18n ("Reduce to &Grayscale"), 0,
-        this, TQT_SLOT (slotConvertToGrayscale ()), ac, "image_convert_to_grayscale");
+        this, TQ_SLOT (slotConvertToGrayscale ()), ac, "image_convert_to_grayscale");
 
     m_actionInvertColors = new TDEAction (i18n ("&Invert Colors"), TQt::CTRL + TQt::Key_I,
-        this, TQT_SLOT (slotInvertColors ()), ac, "image_invert_colors");
+        this, TQ_SLOT (slotInvertColors ()), ac, "image_invert_colors");
 
     m_actionClear = new TDEAction (i18n ("C&lear"), TQt::CTRL + TQt::SHIFT + TQt::Key_N,
-        this, TQT_SLOT (slotClear ()), ac, "image_clear");
+        this, TQ_SLOT (slotClear ()), ac, "image_clear");
 
     m_actionMoreEffects = new TDEAction (i18n ("&More Effects..."), TQt::CTRL + TQt::Key_M,
-        this, TQT_SLOT (slotMoreEffects ()), ac, "image_more_effects");
+        this, TQ_SLOT (slotMoreEffects ()), ac, "image_more_effects");
 
     enableImageMenuDocumentActions (false);
 }

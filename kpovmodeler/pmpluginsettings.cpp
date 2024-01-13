@@ -63,8 +63,8 @@ PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
    gvl->addSpacing( 10 );
 
    m_pPluginsList = new TQListView( gb );
-   connect( m_pPluginsList, TQT_SIGNAL( selectionChanged( ) ),
-            TQT_SLOT( slotSelectionChanged( ) ) );
+   connect( m_pPluginsList, TQ_SIGNAL( selectionChanged( ) ),
+            TQ_SLOT( slotSelectionChanged( ) ) );
    m_pPluginsList->addColumn( i18n( "Name" ) );
    m_pPluginsList->addColumn( i18n( "Description" ) );
    m_pPluginsList->addColumn( i18n( "Status" ) );
@@ -73,7 +73,7 @@ PMPluginSettings::PMPluginSettings( TQWidget* parent, const char* name )
    TQHBoxLayout* hl = new TQHBoxLayout( gvl );
    m_pToggle = new TQPushButton( i18n( "Load" ), gb );
    m_pToggle->setEnabled( false );
-   connect( m_pToggle, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotToggle( ) ) );
+   connect( m_pToggle, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotToggle( ) ) );
    hl->addWidget( m_pToggle );
    hl->addStretch( 1 );
 

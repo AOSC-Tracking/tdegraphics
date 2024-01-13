@@ -135,8 +135,8 @@ KScanOption *KScanDevice::getGuiElement( const TQCString& name, TQWidget *parent
       w = so->createWidget( parent, desc, tooltip );
       if( w )
       {
-	 connect( so,   TQT_SIGNAL( optionChanged( KScanOption* ) ),
-		  this, TQT_SLOT(   slOptChanged( KScanOption* )));
+	 connect( so,   TQ_SIGNAL( optionChanged( KScanOption* ) ),
+		  this, TQ_SLOT(   slOptChanged( KScanOption* )));
 	 w->setEnabled( so->active() );
       }
       else
@@ -209,7 +209,7 @@ KScanDevice::KScanDevice( TQObject *parent )
             }
         }
 #if 0
-        connect( this, TQT_SIGNAL(sigOptionsChanged()), TQT_SLOT(slReloadAll()));
+        connect( this, TQ_SIGNAL(sigOptionsChanged()), TQ_SLOT(slReloadAll()));
 #endif
 	gammaTables = new KScanOptSet( "GammaTables" );
      }
@@ -218,7 +218,7 @@ KScanDevice::KScanDevice( TQObject *parent )
         kdDebug(29000) << "ERROR: sane_init failed -> SANE installed ?" << endl;
      }
 
-    connect( this, TQT_SIGNAL( sigScanFinished( KScanStat )), TQT_SLOT( slScanFinished( KScanStat )));
+    connect( this, TQ_SIGNAL( sigScanFinished( KScanStat )), TQ_SLOT( slScanFinished( KScanStat )));
 
 }
 
@@ -1105,8 +1105,8 @@ KScanStat KScanDevice::acquire_data( bool isPreview )
 	 if( sane_get_select_fd( scanner_handle, &fd ) == SANE_STATUS_GOOD )
 	 {
 	    sn = new TQSocketNotifier( fd, TQSocketNotifier::Read, this );
-	    TQObject::connect( sn, TQT_SIGNAL(activated(int)),
-			      this, TQT_SLOT( doProcessABlock() ) );
+	    TQObject::connect( sn, TQ_SIGNAL(activated(int)),
+			      this, TQ_SLOT( doProcessABlock() ) );
 
 	 }
       }

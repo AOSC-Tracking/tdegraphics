@@ -171,10 +171,10 @@ kpToolFlipDialog::kpToolFlipDialog (bool actOnSelection, TQWidget *parent)
         m_verticalFlipRadioButton->setChecked (s_lastIsVerticalFlip);
         m_horizontalFlipRadioButton->setChecked (!s_lastIsVerticalFlip);
 
-        connect (m_verticalFlipRadioButton, TQT_SIGNAL (toggled (bool)),
-                 this, TQT_SLOT (slotIsVerticalFlipChanged ()));
-        connect (m_horizontalFlipRadioButton, TQT_SIGNAL (toggled (bool)),
-                 this, TQT_SLOT (slotIsVerticalFlipChanged ()));
+        connect (m_verticalFlipRadioButton, TQ_SIGNAL (toggled (bool)),
+                 this, TQ_SLOT (slotIsVerticalFlipChanged ()));
+        connect (m_horizontalFlipRadioButton, TQ_SIGNAL (toggled (bool)),
+                 this, TQ_SLOT (slotIsVerticalFlipChanged ()));
     }
 }
 

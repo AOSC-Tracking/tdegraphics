@@ -46,7 +46,7 @@ PMPovrayOutputWidget::PMPovrayOutputWidget( TQWidget* parent, const char* name )
    TQPushButton* closeButton = new KPushButton( KStdGuiItem::close(), this );
    buttonLayout->addWidget( closeButton );
    closeButton->setDefault( true );
-   connect( closeButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( hide( ) ) );
+   connect( closeButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( hide( ) ) );
 
    setCaption( i18n( "Povray Output" ) );
    resize( s_size );

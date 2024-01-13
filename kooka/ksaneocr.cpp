@@ -224,9 +224,9 @@ bool KSANEOCR::startOCRVisible( TQWidget *parent )
        m_ocrProcessDia->introduceImage( m_img );
        visibleOCRRunning = true;
 
-      connect( m_ocrProcessDia, TQT_SIGNAL( user1Clicked()), this, TQT_SLOT( startOCRProcess() ));
-      connect( m_ocrProcessDia, TQT_SIGNAL( closeClicked()), this, TQT_SLOT( slotClose() ));
-      connect( m_ocrProcessDia, TQT_SIGNAL( user2Clicked()), this, TQT_SLOT( slotStopOCR() ));
+      connect( m_ocrProcessDia, TQ_SIGNAL( user1Clicked()), this, TQ_SLOT( startOCRProcess() ));
+      connect( m_ocrProcessDia, TQ_SIGNAL( closeClicked()), this, TQ_SLOT( slotClose() ));
+      connect( m_ocrProcessDia, TQ_SIGNAL( user2Clicked()), this, TQ_SLOT( slotStopOCR() ));
       m_ocrProcessDia->show();
 
    }
@@ -279,9 +279,9 @@ void KSANEOCR::finishedOCRVisible( bool success )
             */
 
            connect( new KSpell( m_parent, i18n("Kooka OCR Dictionary Check"),
-                                this, TQT_SLOT( slSpellReady(KSpell*)),
+                                this, TQ_SLOT( slSpellReady(KSpell*)),
                                 m_ocrProcessDia->spellConfig() ),
-                    TQT_SIGNAL( death()), this, TQT_SLOT(slSpellDead()));
+                    TQ_SIGNAL( death()), this, TQ_SLOT(slSpellDead()));
        }
 
        delete m_ocrProcessDia;
@@ -425,12 +425,12 @@ void KSANEOCR::startOCRAD( )
 
     m_ocrResultText = "";
 
-    connect(daemon, TQT_SIGNAL(processExited(TDEProcess *)),
-	    this,   TQT_SLOT(  ocradExited(TDEProcess*)));
-    connect(daemon, TQT_SIGNAL(receivedStdout(TDEProcess *, char*, int)),
-	    this,   TQT_SLOT(  ocradStdIn(TDEProcess*, char*, int)));
-    connect(daemon, TQT_SIGNAL(receivedStderr(TDEProcess *, char*, int)),
-	    this,   TQT_SLOT(  ocradStdErr(TDEProcess*, char*, int)));
+    connect(daemon, TQ_SIGNAL(processExited(TDEProcess *)),
+	    this,   TQ_SLOT(  ocradExited(TDEProcess*)));
+    connect(daemon, TQ_SIGNAL(receivedStdout(TDEProcess *, char*, int)),
+	    this,   TQ_SLOT(  ocradStdIn(TDEProcess*, char*, int)));
+    connect(daemon, TQ_SIGNAL(receivedStderr(TDEProcess *, char*, int)),
+	    this,   TQ_SLOT(  ocradStdErr(TDEProcess*, char*, int)));
 
     if (!daemon->start(TDEProcess::NotifyOnExit, TDEProcess::All))
     {
@@ -535,12 +535,12 @@ void KSANEOCR::startOCRProcess( void )
        TQ_CHECK_PTR(daemon);
        m_ocrResultText = "";
 
-       connect(daemon, TQT_SIGNAL(processExited(TDEProcess *)),
-               this,   TQT_SLOT(  gocrExited(TDEProcess*)));
-       connect(daemon, TQT_SIGNAL(receivedStdout(TDEProcess *, char*, int)),
-               this,   TQT_SLOT(  gocrStdIn(TDEProcess*, char*, int)));
-       connect(daemon, TQT_SIGNAL(receivedStderr(TDEProcess *, char*, int)),
-               this,   TQT_SLOT(  gocrStdErr(TDEProcess*, char*, int)));
+       connect(daemon, TQ_SIGNAL(processExited(TDEProcess *)),
+               this,   TQ_SLOT(  gocrExited(TDEProcess*)));
+       connect(daemon, TQ_SIGNAL(receivedStdout(TDEProcess *, char*, int)),
+               this,   TQ_SLOT(  gocrStdIn(TDEProcess*, char*, int)));
+       connect(daemon, TQ_SIGNAL(receivedStderr(TDEProcess *, char*, int)),
+               this,   TQ_SLOT(  gocrStdErr(TDEProcess*, char*, int)));
 
        TQString opt;
        *daemon << TQFile::encodeName(cmd).data();
@@ -649,7 +649,7 @@ void KSANEOCR::startOCRProcess( void )
        }
 #ifdef TQT_THREAD_SUPPORT
        /* start a timer and wait until it fires. */
-       TQTimer::singleShot( 500, this, TQT_SLOT( slotKadmosResult() ));
+       TQTimer::singleShot( 500, this, TQ_SLOT( slotKadmosResult() ));
 #else
        slotKadmosResult();
 #endif
@@ -703,7 +703,7 @@ void KSANEOCR::slotKadmosResult()
     else
     {
         /* recognition thread is not yet finished. Wait another half a second. */
-        TQTimer::singleShot( 500, this, TQT_SLOT( slotKadmosResult() ));
+        TQTimer::singleShot( 500, this, TQ_SLOT( slotKadmosResult() ));
         /* Never comes here if no threads exist on the system */
     }
 #endif /* HAVE_KADMOS */
@@ -1347,18 +1347,18 @@ void KSANEOCR::slMisspelling( const TQString& originalword, const TQStringList& 
 void KSANEOCR::slSpellReady( KSpell *spell )
 {
     m_spell = spell;
-    connect ( m_spell, TQT_SIGNAL( misspelling( const TQString&, const TQStringList&,
+    connect ( m_spell, TQ_SIGNAL( misspelling( const TQString&, const TQStringList&,
                                             unsigned int )),
-              this, TQT_SLOT( slMisspelling(const TQString& ,
+              this, TQ_SLOT( slMisspelling(const TQString& ,
                                         const TQStringList& ,
                                         unsigned int  )));
-    connect( m_spell, TQT_SIGNAL( corrected ( const TQString&, const TQString&, unsigned int )),
-             this, TQT_SLOT( slSpellCorrected( const TQString&, const TQString&, unsigned int )));
+    connect( m_spell, TQ_SIGNAL( corrected ( const TQString&, const TQString&, unsigned int )),
+             this, TQ_SLOT( slSpellCorrected( const TQString&, const TQString&, unsigned int )));
 
-    connect( m_spell, TQT_SIGNAL( ignoreword( const TQString& )),
-             this, TQT_SLOT( slSpellIgnoreWord( const TQString& )));
+    connect( m_spell, TQ_SIGNAL( ignoreword( const TQString& )),
+             this, TQ_SLOT( slSpellIgnoreWord( const TQString& )));
 
-    connect( m_spell, TQT_SIGNAL( done(bool)), this, TQT_SLOT(slCheckListDone(bool)));
+    connect( m_spell, TQ_SIGNAL( done(bool)), this, TQ_SLOT(slCheckListDone(bool)));
 
     kdDebug(28000) << "Spellcheck available" << endl;
 

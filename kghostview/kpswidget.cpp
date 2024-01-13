@@ -358,14 +358,14 @@ bool KPSWidget::startInterpreter()
     else
 	*_process << _fileName << "-c" << "quit";
 
-    connect( _process, TQT_SIGNAL( processExited( TDEProcess* ) ),
-             this, TQT_SLOT( slotProcessExited( TDEProcess* ) ) );
-    connect( _process, TQT_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( gs_output( TDEProcess*, char*, int ) ) );
-    connect( _process, TQT_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
-             this, TQT_SLOT( gs_output( TDEProcess*, char*, int ) ) );
-    connect( _process, TQT_SIGNAL( wroteStdin( TDEProcess*) ),
-             this, TQT_SLOT( gs_input( TDEProcess* ) ) );
+    connect( _process, TQ_SIGNAL( processExited( TDEProcess* ) ),
+             this, TQ_SLOT( slotProcessExited( TDEProcess* ) ) );
+    connect( _process, TQ_SIGNAL( receivedStdout( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( gs_output( TDEProcess*, char*, int ) ) );
+    connect( _process, TQ_SIGNAL( receivedStderr( TDEProcess*, char*, int ) ),
+             this, TQ_SLOT( gs_output( TDEProcess*, char*, int ) ) );
+    connect( _process, TQ_SIGNAL( wroteStdin( TDEProcess*) ),
+             this, TQ_SLOT( gs_input( TDEProcess* ) ) );
 
     kapp->flushX();
 

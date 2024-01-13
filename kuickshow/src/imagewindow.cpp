@@ -146,103 +146,103 @@ void ImageWindow::updateActions()
 void ImageWindow::setupActions()
 {
     new TDEAction( i18n("Show Next Image"), TDEStdAccel::next(),
-                 this, TQT_SLOT( slotRequestNext() ),
+                 this, TQ_SLOT( slotRequestNext() ),
                  m_actions, "next_image" );
     new TDEAction( i18n("Show Previous Image"), TDEStdAccel::prior(),
-                 this, TQT_SLOT( slotRequestPrevious() ),
+                 this, TQ_SLOT( slotRequestPrevious() ),
                  m_actions, "previous_image" );
 
     new TDEAction( i18n("Delete Image"), SHIFT + Key_Delete,
-                 this, TQT_SLOT( imageDelete() ),
+                 this, TQ_SLOT( imageDelete() ),
                  m_actions, "delete_image" );
     new TDEAction( i18n("Move Image to Trash"), Key_Delete,
-                 this, TQT_SLOT( imageTrash() ),
+                 this, TQ_SLOT( imageTrash() ),
                  m_actions, "trash_image" );
 
     new TDEAction( i18n("Zoom In"), Key_Plus,
-                 this, TQT_SLOT( zoomIn() ),
+                 this, TQ_SLOT( zoomIn() ),
                  m_actions, "zoom_in" );
     new TDEAction( i18n("Zoom Out"), Key_Minus,
-                 this, TQT_SLOT( zoomOut() ),
+                 this, TQ_SLOT( zoomOut() ),
                  m_actions, "zoom_out" );
     new TDEAction( i18n("Restore Original Size"), Key_O,
-                 this, TQT_SLOT( showImageOriginalSize() ),
+                 this, TQ_SLOT( showImageOriginalSize() ),
                  m_actions, "original_size" );
     new TDEAction( i18n("Maximize"), Key_M,
-                 this, TQT_SLOT( maximize() ),
+                 this, TQ_SLOT( maximize() ),
                  m_actions, "maximize" );
 
     new TDEAction( i18n("Rotate 90 Degrees"), Key_9,
-                 this, TQT_SLOT( rotate90() ),
+                 this, TQ_SLOT( rotate90() ),
                  m_actions, "rotate90" );
     new TDEAction( i18n("Rotate 180 Degrees"), Key_8,
-                 this, TQT_SLOT( rotate180() ),
+                 this, TQ_SLOT( rotate180() ),
                  m_actions, "rotate180" );
     new TDEAction( i18n("Rotate 270 Degrees"), Key_7,
-                 this, TQT_SLOT( rotate270() ),
+                 this, TQ_SLOT( rotate270() ),
                  m_actions, "rotate270" );
 
     new TDEAction( i18n("Flip Horizontally"), Key_Asterisk,
-                 this, TQT_SLOT( flipHoriz() ),
+                 this, TQ_SLOT( flipHoriz() ),
                  m_actions, "flip_horicontally" );
     new TDEAction( i18n("Flip Vertically"), Key_Slash,
-                 this, TQT_SLOT( flipVert() ),
+                 this, TQ_SLOT( flipVert() ),
                  m_actions, "flip_vertically" );
 
     new TDEAction( i18n("Print Image..."), TDEStdAccel::print(),
-                 this, TQT_SLOT( printImage() ),
+                 this, TQ_SLOT( printImage() ),
                  m_actions, "print_image" );
-    KStdAction::saveAs( this, TQT_SLOT( saveImage() ),
+    KStdAction::saveAs( this, TQ_SLOT( saveImage() ),
                  m_actions, "save_image_as" );
 
-    KStdAction::close( this, TQT_SLOT( close() ),
+    KStdAction::close( this, TQ_SLOT( close() ),
                  m_actions, "close_image" );
     // --------
     new TDEAction( i18n("More Brightness"), Key_B,
-                 this, TQT_SLOT( moreBrightness() ),
+                 this, TQ_SLOT( moreBrightness() ),
                  m_actions, "more_brightness" );
     new TDEAction( i18n("Less Brightness"), SHIFT + Key_B,
-                 this, TQT_SLOT( lessBrightness() ),
+                 this, TQ_SLOT( lessBrightness() ),
                  m_actions, "less_brightness" );
     new TDEAction( i18n("More Contrast"), Key_C,
-                 this, TQT_SLOT( moreContrast() ),
+                 this, TQ_SLOT( moreContrast() ),
                  m_actions, "more_contrast" );
     new TDEAction( i18n("Less Contrast"), SHIFT + Key_C,
-                 this, TQT_SLOT( lessContrast() ),
+                 this, TQ_SLOT( lessContrast() ),
                  m_actions, "less_contrast" );
     new TDEAction( i18n("More Gamma"), Key_G,
-                 this, TQT_SLOT( moreGamma() ),
+                 this, TQ_SLOT( moreGamma() ),
                  m_actions, "more_gamma" );
     new TDEAction( i18n("Less Gamma"), SHIFT + Key_G,
-                 this, TQT_SLOT( lessGamma() ),
+                 this, TQ_SLOT( lessGamma() ),
                  m_actions, "less_gamma" );
 
     // --------
     new TDEAction( i18n("Scroll Up"), Key_Up,
-                 this, TQT_SLOT( scrollUp() ),
+                 this, TQ_SLOT( scrollUp() ),
                  m_actions, "scroll_up" );
     new TDEAction( i18n("Scroll Down"), Key_Down,
-                 this, TQT_SLOT( scrollDown() ),
+                 this, TQ_SLOT( scrollDown() ),
                  m_actions, "scroll_down" );
     new TDEAction( i18n("Scroll Left"), Key_Left,
-                 this, TQT_SLOT( scrollLeft() ),
+                 this, TQ_SLOT( scrollLeft() ),
                  m_actions, "scroll_left" );
     new TDEAction( i18n("Scroll Right"), Key_Right,
-                 this, TQT_SLOT( scrollRight() ),
+                 this, TQ_SLOT( scrollRight() ),
                  m_actions, "scroll_right" );
     // --------
     new TDEAction( i18n("Pause Slideshow"), Key_P,
-                 this, TQT_SLOT( pauseSlideShow() ),
+                 this, TQ_SLOT( pauseSlideShow() ),
                  m_actions, "kuick_slideshow_pause" );
 
-    TDEAction *fullscreenAction = KStdAction::fullScreen(this, TQT_SLOT( toggleFullscreen() ), m_actions, 0 );
+    TDEAction *fullscreenAction = KStdAction::fullScreen(this, TQ_SLOT( toggleFullscreen() ), m_actions, 0 );
 
     TDEAction *reloadAction = new TDEAction( i18n("Reload Image"), TDEStdAccel::shortcut(TDEStdAccel::Reload),
-                                         this, TQT_SLOT( reload() ),
+                                         this, TQ_SLOT( reload() ),
                                          m_actions, "reload_image" );
 
     new TDEAction( i18n("Properties"), ALT + Key_Return,
-                 this, TQT_SLOT( slotProperties() ),
+                 this, TQ_SLOT( slotProperties() ),
                  m_actions, "properties" );
 
     m_actions->readShortcutSettings();

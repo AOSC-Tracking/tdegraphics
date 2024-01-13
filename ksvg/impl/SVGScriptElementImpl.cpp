@@ -75,8 +75,8 @@ void SVGScriptElementImpl::setAttributes()
 		if(m_job == 0)
 			m_job = TDEIO::get(url, false, false);
 
-		connect(m_job, TQT_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQT_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
-		connect(m_job, TQT_SIGNAL(result(TDEIO::Job *)), this, TQT_SLOT(slotResult(TDEIO::Job *)));
+		connect(m_job, TQ_SIGNAL(data(TDEIO::Job *, const TQByteArray &)), this, TQ_SLOT(slotData(TDEIO::Job *, const TQByteArray &)));
+		connect(m_job, TQ_SIGNAL(result(TDEIO::Job *)), this, TQ_SLOT(slotResult(TDEIO::Job *)));
 	}
 }
 

@@ -39,7 +39,7 @@ void PMCommentEdit::createTopWidgets( )
    m_pEdit->setFont( TDEGlobalSettings::fixedFont( ) );
    topLayout( )->addWidget( m_pEdit, 2 );
    
-   connect( m_pEdit, TQT_SIGNAL( textChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEdit, TQ_SIGNAL( textChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMCommentEdit::displayObject( PMObject* o )

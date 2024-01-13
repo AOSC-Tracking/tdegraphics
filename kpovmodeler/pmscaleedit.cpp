@@ -37,7 +37,7 @@ void PMScaleEdit::createTopWidgets( )
    m_pVector = new PMVectorEdit( "x", "y", "z", this );
    topLayout( )->addWidget( m_pVector );
 
-   connect( m_pVector, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );   
+   connect( m_pVector, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );   
 }
 
 void PMScaleEdit::displayObject( PMObject* o )

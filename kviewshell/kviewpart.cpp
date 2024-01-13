@@ -68,7 +68,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   setInstance(KViewPartFactory::instance());
 
   watch = KDirWatch::self();
-  connect(watch, TQT_SIGNAL(dirty(const TQString&)), this, TQT_SLOT(fileChanged(const TQString&)));
+  connect(watch, TQ_SIGNAL(dirty(const TQString&)), this, TQ_SLOT(fileChanged(const TQString&)));
   watch->startScan();
 
   mainWidget = new TQHBox(parentWidget, widgetName);
@@ -83,7 +83,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   // Without this the GUI-items of the KMultiPages are not merged
   partManager->setAllowNestedParts(true);
 
-  connect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
+  connect(partManager, TQ_SIGNAL(activePartChanged(KParts::Part*)), this, TQ_SIGNAL(pluginChanged(KParts::Part*)));
   partManager->addPart(this);
 
   // create the displaying part
@@ -170,28 +170,28 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   // Add the multipage to the GUI.
   partManager->addPart(multiPage);
 
-  exportTextAction = new TDEAction(i18n("Text..."), 0, this, TQT_SLOT(mp_exportText()), actionCollection(), "export_text");
+  exportTextAction = new TDEAction(i18n("Text..."), 0, this, TQ_SLOT(mp_exportText()), actionCollection(), "export_text");
 
   // edit menu
-  findTextAction = KStdAction::find(this, TQT_SLOT(mp_showFindTextDialog()), actionCollection(), "find");
-  findNextAction = KStdAction::findNext(this, TQT_SLOT(mp_findNextText()), actionCollection(), "findnext");
+  findTextAction = KStdAction::find(this, TQ_SLOT(mp_showFindTextDialog()), actionCollection(), "find");
+  findNextAction = KStdAction::findNext(this, TQ_SLOT(mp_findNextText()), actionCollection(), "findnext");
   findNextAction->setEnabled(false);
-  findPrevAction = KStdAction::findPrev(this, TQT_SLOT(mp_findPrevText()), actionCollection(), "findprev");
+  findPrevAction = KStdAction::findPrev(this, TQ_SLOT(mp_findPrevText()), actionCollection(), "findprev");
   findPrevAction->setEnabled(false);
 
-  selectAllAction = KStdAction::selectAll(this, TQT_SLOT(mp_doSelectAll()), actionCollection(), "edit_select_all");
+  selectAllAction = KStdAction::selectAll(this, TQ_SLOT(mp_doSelectAll()), actionCollection(), "edit_select_all");
 
-  copyTextAction = KStdAction::copy(this, TQT_SLOT(mp_copyText()), actionCollection(), "copy_text");
+  copyTextAction = KStdAction::copy(this, TQ_SLOT(mp_copyText()), actionCollection(), "copy_text");
   copyTextAction->setEnabled(false);
 
-  deselectAction = KStdAction::deselect(this, TQT_SLOT(mp_clearSelection()), actionCollection(), "edit_deselect_all");
+  deselectAction = KStdAction::deselect(this, TQ_SLOT(mp_clearSelection()), actionCollection(), "edit_deselect_all");
   deselectAction->setEnabled(false);
 
-  saveAction = KStdAction::save(this, TQT_SLOT(mp_slotSave_defaultFilename()), actionCollection());
+  saveAction = KStdAction::save(this, TQ_SLOT(mp_slotSave_defaultFilename()), actionCollection());
 
   // settings menu
   showSidebar = new TDEToggleAction (i18n("Show &Sidebar"), "show_side_panel", 0, this,
-                                   TQT_SLOT(slotShowSidebar()), actionCollection(), "show_sidebar");
+                                   TQ_SLOT(slotShowSidebar()), actionCollection(), "show_sidebar");
   showSidebar->setCheckedState(i18n("Hide &Sidebar"));
   watchAct = new TDEToggleAction(i18n("&Watch File"), 0, 0, 0, actionCollection(), "watch_file");
   scrollbarHandling = new TDEToggleAction (i18n("Show Scrollbars"), 0, 0, 0, actionCollection(), "scrollbarHandling");
@@ -212,17 +212,17 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   orientations.append(i18n("Landscape"));
   orientation = new TDESelectAction (i18n("Preferred &Orientation"), 0, 0, 0, actionCollection(), "view_orientation");
   orientation->setItems(orientations);
-  connect(orientation, TQT_SIGNAL(activated (int)), &userRequestedPaperSize, TQT_SLOT(setOrientation(int)));
+  connect(orientation, TQ_SIGNAL(activated (int)), &userRequestedPaperSize, TQ_SLOT(setOrientation(int)));
 
   // Zoom Menu
   zoom_action = new TDESelectAction (i18n("&Zoom"), 0, 0, 0, actionCollection(), "view_zoom");
   zoom_action->setEditable(true);
   zoom_action->setItems(_zoomVal.zoomNames());
 
-  connect (&_zoomVal, TQT_SIGNAL(zoomNamesChanged(const TQStringList &)), zoom_action, TQT_SLOT(setItems(const TQStringList &)));
-  connect (&_zoomVal, TQT_SIGNAL(valNoChanged(int)), zoom_action, TQT_SLOT(setCurrentItem(int)));
-  connect (&_zoomVal, TQT_SIGNAL(zoomNameChanged(const TQString &)), this, TQT_SIGNAL(zoomChanged(const TQString &)) );
-  connect (zoom_action, TQT_SIGNAL(activated(const TQString &)), this, TQT_SLOT(setZoomValue(const TQString &)));
+  connect (&_zoomVal, TQ_SIGNAL(zoomNamesChanged(const TQStringList &)), zoom_action, TQ_SLOT(setItems(const TQStringList &)));
+  connect (&_zoomVal, TQ_SIGNAL(valNoChanged(int)), zoom_action, TQ_SLOT(setCurrentItem(int)));
+  connect (&_zoomVal, TQ_SIGNAL(zoomNameChanged(const TQString &)), this, TQ_SIGNAL(zoomChanged(const TQString &)) );
+  connect (zoom_action, TQ_SIGNAL(activated(const TQString &)), this, TQ_SLOT(setZoomValue(const TQString &)));
   _zoomVal.setZoomValue(1.0); // should not be necessary @@@@
   emit(zoomChanged("100%"));
 
@@ -231,14 +231,14 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   TQStringList items = userRequestedPaperSize.pageSizeNames();
   items.prepend(i18n("Custom Size..."));
   media->setItems(items);
-  connect (media, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotMedia(int)));
+  connect (media, TQ_SIGNAL(activated(int)), this, TQ_SLOT(slotMedia(int)));
 
-  useDocumentSpecifiedSize = new TDEToggleAction(i18n("&Use Document Specified Paper Size"), 0, this, TQT_SLOT(slotShowSidebar()),
+  useDocumentSpecifiedSize = new TDEToggleAction(i18n("&Use Document Specified Paper Size"), 0, this, TQ_SLOT(slotShowSidebar()),
 					       actionCollection(), "view_use_document_specified_size");
 
   // Zoom Actions
-  zoomInAct = KStdAction::zoomIn (this, TQT_SLOT(zoomIn()), actionCollection());
-  zoomOutAct = KStdAction::zoomOut(this, TQT_SLOT(zoomOut()), actionCollection());
+  zoomInAct = KStdAction::zoomIn (this, TQ_SLOT(zoomIn()), actionCollection());
+  zoomOutAct = KStdAction::zoomOut(this, TQ_SLOT(zoomOut()), actionCollection());
 
   fitPageAct = new TDEToggleAction(i18n("&Fit to Page"), "view_fit_window", Key_P,
                                  actionCollection(), "view_fit_to_page");
@@ -251,24 +251,24 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   fitWidthAct -> setExclusiveGroup("view_fit");
   fitHeightAct -> setExclusiveGroup("view_fit");
 
-  connect(fitPageAct, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(enableFitToPage(bool)));
-  connect(fitWidthAct, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(enableFitToWidth(bool)));
-  connect(fitHeightAct, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(enableFitToHeight(bool)));
+  connect(fitPageAct, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(enableFitToPage(bool)));
+  connect(fitWidthAct, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(enableFitToWidth(bool)));
+  connect(fitHeightAct, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(enableFitToHeight(bool)));
 
   // go menu
-  backAct = KStdAction::prior(this, TQT_SLOT(mp_prevPage()), actionCollection());
-  forwardAct = KStdAction::next(this, TQT_SLOT(mp_nextPage()), actionCollection());
-  startAct = KStdAction::firstPage(this, TQT_SLOT(mp_firstPage()), actionCollection());
-  endAct = KStdAction::lastPage(this, TQT_SLOT(mp_lastPage()), actionCollection());
-  gotoAct = KStdAction::gotoPage(this, TQT_SLOT(goToPage()), actionCollection());
+  backAct = KStdAction::prior(this, TQ_SLOT(mp_prevPage()), actionCollection());
+  forwardAct = KStdAction::next(this, TQ_SLOT(mp_nextPage()), actionCollection());
+  startAct = KStdAction::firstPage(this, TQ_SLOT(mp_firstPage()), actionCollection());
+  endAct = KStdAction::lastPage(this, TQ_SLOT(mp_lastPage()), actionCollection());
+  gotoAct = KStdAction::gotoPage(this, TQ_SLOT(goToPage()), actionCollection());
   gotoAct->setShortcut("CTRL+G");
 
-  readUpAct = new TDEAction(i18n("Read Up Document"), "go-up", SHIFT+Key_Space, this, TQT_SLOT(mp_readUp()), actionCollection(), "go_read_up");
-  readDownAct = new TDEAction(i18n("Read Down Document"), "go-down", Key_Space, this, TQT_SLOT(mp_readDown()), actionCollection(), "go_read_down");
+  readUpAct = new TDEAction(i18n("Read Up Document"), "go-up", SHIFT+Key_Space, this, TQ_SLOT(mp_readUp()), actionCollection(), "go_read_up");
+  readDownAct = new TDEAction(i18n("Read Down Document"), "go-down", Key_Space, this, TQ_SLOT(mp_readDown()), actionCollection(), "go_read_down");
 
-  printAction = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
+  printAction = KStdAction::print(this, TQ_SLOT(slotPrint()), actionCollection());
 
-  saveAsAction = KStdAction::saveAs(this, TQT_SLOT(mp_slotSave()), actionCollection());
+  saveAsAction = KStdAction::saveAs(this, TQ_SLOT(mp_slotSave()), actionCollection());
 
   // mode action
   moveModeAction = new TDERadioAction(i18n("&Move Tool"), "movetool", Key_F4, actionCollection(), "move_tool");
@@ -279,20 +279,20 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
 
   moveModeAction->setChecked(true);
 
-  connect(moveModeAction, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotEnableMoveTool(bool)));
-  //connect(selectionModeAction, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotEnableSelectionTool(bool)));
+  connect(moveModeAction, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotEnableMoveTool(bool)));
+  //connect(selectionModeAction, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotEnableSelectionTool(bool)));
 
   // history action
   backAction = new TDEAction(i18n("&Back"), "1leftarrow", 0,
-                   this, TQT_SLOT(mp_doGoBack()), actionCollection(), "go_back");
+                   this, TQ_SLOT(mp_doGoBack()), actionCollection(), "go_back");
   forwardAction = new TDEAction(i18n("&Forward"), "1rightarrow", 0,
-                      this, TQT_SLOT(mp_doGoForward()), actionCollection(), "go_forward");
+                      this, TQ_SLOT(mp_doGoForward()), actionCollection(), "go_forward");
 
   backAction->setEnabled(false);
   forwardAction->setEnabled(false);
 
 
-  settingsAction = KStdAction::preferences(this, TQT_SLOT(doSettings()), actionCollection());
+  settingsAction = KStdAction::preferences(this, TQ_SLOT(doSettings()), actionCollection());
 
   // We only show this menuitem if no default mimetype is set. This usually means kviewshell
   // has been started by itself. Otherwise if KDVI or KFaxView has been started show the
@@ -300,20 +300,20 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
   if (!args.isEmpty())
   {
     aboutAction = new TDEAction(i18n("About KViewShell"), "kviewshell", 0, this,
-                            TQT_SLOT(aboutKViewShell()), actionCollection(), "help_about_kviewshell");
+                            TQ_SLOT(aboutKViewShell()), actionCollection(), "help_about_kviewshell");
   }
 
   // keyboard accelerators
   accel = new TDEAccel(mainWidget);
-  accel->insert(I18N_NOOP("Scroll Up"), Key_Up, this, TQT_SLOT(mp_scrollUp()));
-  accel->insert(I18N_NOOP("Scroll Down"), Key_Down, this, TQT_SLOT(mp_scrollDown()));
-  accel->insert(I18N_NOOP("Scroll Left"), Key_Left, this, TQT_SLOT(mp_scrollLeft()));
-  accel->insert(I18N_NOOP("Scroll Right"), Key_Right, this, TQT_SLOT(mp_scrollRight()));
+  accel->insert(I18N_NOOP("Scroll Up"), Key_Up, this, TQ_SLOT(mp_scrollUp()));
+  accel->insert(I18N_NOOP("Scroll Down"), Key_Down, this, TQ_SLOT(mp_scrollDown()));
+  accel->insert(I18N_NOOP("Scroll Left"), Key_Left, this, TQ_SLOT(mp_scrollLeft()));
+  accel->insert(I18N_NOOP("Scroll Right"), Key_Right, this, TQ_SLOT(mp_scrollRight()));
 
-  accel->insert(I18N_NOOP("Scroll Up Page"), SHIFT+Key_Up, this, TQT_SLOT(mp_scrollUpPage()));
-  accel->insert(I18N_NOOP("Scroll Down Page"), SHIFT+Key_Down, this, TQT_SLOT(mp_scrollDownPage()));
-  accel->insert(I18N_NOOP("Scroll Left Page"), SHIFT+Key_Left, this, TQT_SLOT(mp_scrollLeftPage()));
-  accel->insert(I18N_NOOP("Scroll Right Page"), SHIFT+Key_Right, this, TQT_SLOT(mp_scrollRightPage()));
+  accel->insert(I18N_NOOP("Scroll Up Page"), SHIFT+Key_Up, this, TQ_SLOT(mp_scrollUpPage()));
+  accel->insert(I18N_NOOP("Scroll Down Page"), SHIFT+Key_Down, this, TQ_SLOT(mp_scrollDownPage()));
+  accel->insert(I18N_NOOP("Scroll Left Page"), SHIFT+Key_Left, this, TQ_SLOT(mp_scrollLeftPage()));
+  accel->insert(I18N_NOOP("Scroll Right Page"), SHIFT+Key_Right, this, TQ_SLOT(mp_scrollRightPage()));
 
   accel->readSettings();
   readSettings();
@@ -333,7 +333,7 @@ KViewPart::KViewPart(TQWidget *parentWidget, const char *widgetName, TQObject *p
 
   // We disconnect because we dont want some FocusEvents to trigger a GUI update, which might mess
   // with our menus.
-  disconnect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
+  disconnect(partManager, TQ_SIGNAL(activePartChanged(KParts::Part*)), this, TQ_SIGNAL(pluginChanged(KParts::Part*)));
 }
 
 KViewPart::~KViewPart()
@@ -360,41 +360,41 @@ void KViewPart::initializeMultiPage()
   // Paper Size handling
   multiPage->setUseDocumentSpecifiedSize(useDocumentSpecifiedSize->isChecked());
   multiPage->setUserPreferredSize(userRequestedPaperSize);
-  connect(&userRequestedPaperSize, TQT_SIGNAL(sizeChanged(const SimplePageSize&)), multiPage, TQT_SLOT(setUserPreferredSize(const SimplePageSize&)));
-  connect(useDocumentSpecifiedSize, TQT_SIGNAL(toggled(bool)), multiPage, TQT_SLOT(setUseDocumentSpecifiedSize(bool)));
+  connect(&userRequestedPaperSize, TQ_SIGNAL(sizeChanged(const SimplePageSize&)), multiPage, TQ_SLOT(setUserPreferredSize(const SimplePageSize&)));
+  connect(useDocumentSpecifiedSize, TQ_SIGNAL(toggled(bool)), multiPage, TQ_SLOT(setUseDocumentSpecifiedSize(bool)));
 
 
-  connect(scrollbarHandling, TQT_SIGNAL(toggled(bool)),  multiPage, TQT_SLOT(slotShowScrollbars(bool)));
+  connect(scrollbarHandling, TQ_SIGNAL(toggled(bool)),  multiPage, TQ_SLOT(slotShowScrollbars(bool)));
 
   // connect to the multi page view
-  connect( this, TQT_SIGNAL(scrollbarStatusChanged(bool)), multiPage, TQT_SLOT(slotShowScrollbars(bool)));
-  connect( multiPage, TQT_SIGNAL(pageInfo(int, int)), this, TQT_SLOT(pageInfo(int, int)) );
-  connect( multiPage, TQT_SIGNAL(askingToCheckActions()), this, TQT_SLOT(checkActions()) );
-  connect( multiPage, TQT_SIGNAL( started( TDEIO::Job * ) ), this, TQT_SIGNAL( started( TDEIO::Job * ) ) );
-  connect( multiPage, TQT_SIGNAL( completed() ), this, TQT_SIGNAL( completed() ) );
-  connect( multiPage, TQT_SIGNAL( canceled( const TQString & ) ), this, TQT_SIGNAL( canceled( const TQString & ) ) );
-  connect( multiPage, TQT_SIGNAL( setStatusBarText( const TQString& ) ), this, TQT_SLOT( setStatusBarTextFromMultiPage( const TQString& ) ) );
+  connect( this, TQ_SIGNAL(scrollbarStatusChanged(bool)), multiPage, TQ_SLOT(slotShowScrollbars(bool)));
+  connect( multiPage, TQ_SIGNAL(pageInfo(int, int)), this, TQ_SLOT(pageInfo(int, int)) );
+  connect( multiPage, TQ_SIGNAL(askingToCheckActions()), this, TQ_SLOT(checkActions()) );
+  connect( multiPage, TQ_SIGNAL( started( TDEIO::Job * ) ), this, TQ_SIGNAL( started( TDEIO::Job * ) ) );
+  connect( multiPage, TQ_SIGNAL( completed() ), this, TQ_SIGNAL( completed() ) );
+  connect( multiPage, TQ_SIGNAL( canceled( const TQString & ) ), this, TQ_SIGNAL( canceled( const TQString & ) ) );
+  connect( multiPage, TQ_SIGNAL( setStatusBarText( const TQString& ) ), this, TQ_SLOT( setStatusBarTextFromMultiPage( const TQString& ) ) );
 
-  connect( multiPage, TQT_SIGNAL(zoomIn()), this, TQT_SLOT(zoomIn()) );
-  connect( multiPage, TQT_SIGNAL(zoomOut()), this, TQT_SLOT(zoomOut()) );
+  connect( multiPage, TQ_SIGNAL(zoomIn()), this, TQ_SLOT(zoomIn()) );
+  connect( multiPage, TQ_SIGNAL(zoomOut()), this, TQ_SLOT(zoomOut()) );
 
   // change the viewmode
-  connect(viewModeAction, TQT_SIGNAL(activated (int)), multiPage, TQT_SLOT(setViewMode(int)));
+  connect(viewModeAction, TQ_SIGNAL(activated (int)), multiPage, TQ_SLOT(setViewMode(int)));
 
   // Update zoomlevel on viewmode changes
-  connect(multiPage, TQT_SIGNAL(viewModeChanged()), this, TQT_SLOT(updateZoomLevel()));
+  connect(multiPage, TQ_SIGNAL(viewModeChanged()), this, TQ_SLOT(updateZoomLevel()));
 
   // navigation history
-  connect(multiPage->history(), TQT_SIGNAL(backItem(bool)), backAction, TQT_SLOT(setEnabled(bool)));
-  connect(multiPage->history(), TQT_SIGNAL(forwardItem(bool)), forwardAction, TQT_SLOT(setEnabled(bool)));
+  connect(multiPage->history(), TQ_SIGNAL(backItem(bool)), backAction, TQ_SLOT(setEnabled(bool)));
+  connect(multiPage->history(), TQ_SIGNAL(forwardItem(bool)), forwardAction, TQ_SLOT(setEnabled(bool)));
 
   // text selection
-  connect(multiPage, TQT_SIGNAL(textSelected(bool)), copyTextAction, TQT_SLOT(setEnabled(bool)));
-  connect(multiPage, TQT_SIGNAL(textSelected(bool)), deselectAction, TQT_SLOT(setEnabled(bool)));
+  connect(multiPage, TQ_SIGNAL(textSelected(bool)), copyTextAction, TQ_SLOT(setEnabled(bool)));
+  connect(multiPage, TQ_SIGNAL(textSelected(bool)), deselectAction, TQ_SLOT(setEnabled(bool)));
 
   // text search
-  connect(multiPage, TQT_SIGNAL(searchEnabled(bool)), findNextAction, TQT_SLOT(setEnabled(bool)));
-  connect(multiPage, TQT_SIGNAL(searchEnabled(bool)), findPrevAction, TQT_SLOT(setEnabled(bool)));
+  connect(multiPage, TQ_SIGNAL(searchEnabled(bool)), findNextAction, TQ_SLOT(setEnabled(bool)));
+  connect(multiPage, TQ_SIGNAL(searchEnabled(bool)), findPrevAction, TQ_SLOT(setEnabled(bool)));
 
   // allow parts to have a GUI, too :-)
   // (will be merged automatically)
@@ -845,7 +845,7 @@ bool KViewPart::openFile()
     // Remember the name of the part. So only need to switch if really necessary.
     multiPageLibrary = service->library();
 
-    connect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
+    connect(partManager, TQ_SIGNAL(activePartChanged(KParts::Part*)), this, TQ_SIGNAL(pluginChanged(KParts::Part*)));
 
     // Switch to the new multiPage
     partManager->replacePart(oldMultiPage, multiPage);
@@ -862,7 +862,7 @@ bool KViewPart::openFile()
 
     // We disconnect because we dont want some FocusEvents to trigger a GUI update, which might mess
     // with our menus.
-    disconnect(partManager, TQT_SIGNAL(activePartChanged(KParts::Part*)), this, TQT_SIGNAL(pluginChanged(KParts::Part*)));
+    disconnect(partManager, TQ_SIGNAL(activePartChanged(KParts::Part*)), this, TQ_SIGNAL(pluginChanged(KParts::Part*)));
 
     readSettings();
   }
@@ -1083,15 +1083,15 @@ void KViewPart::enableFitToPage(bool enable)
   if (enable)
   {
     fitToPage();
-    connect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
-            this, TQT_SLOT(slotStartFitTimer()));
-    connect(&fitTimer, TQT_SIGNAL(timeout()), TQT_SLOT(fitToPage()));
+    connect(multiPage->mainWidget(), TQ_SIGNAL(viewSizeChanged(const TQSize&)),
+            this, TQ_SLOT(slotStartFitTimer()));
+    connect(&fitTimer, TQ_SIGNAL(timeout()), TQ_SLOT(fitToPage()));
   }
   else
   {
-    disconnect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
-               this, TQT_SLOT(slotStartFitTimer()));
-    disconnect(&fitTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(fitToPage()));
+    disconnect(multiPage->mainWidget(), TQ_SIGNAL(viewSizeChanged(const TQSize&)),
+               this, TQ_SLOT(slotStartFitTimer()));
+    disconnect(&fitTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(fitToPage()));
   }
 }
 
@@ -1100,15 +1100,15 @@ void KViewPart::enableFitToWidth(bool enable)
   if (enable)
   {
     fitToWidth();
-    connect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
-            this, TQT_SLOT(slotStartFitTimer()));
-    connect(&fitTimer, TQT_SIGNAL(timeout()), TQT_SLOT(fitToWidth()));
+    connect(multiPage->mainWidget(), TQ_SIGNAL(viewSizeChanged(const TQSize&)),
+            this, TQ_SLOT(slotStartFitTimer()));
+    connect(&fitTimer, TQ_SIGNAL(timeout()), TQ_SLOT(fitToWidth()));
   }
   else
   {
-    disconnect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
-               this, TQT_SLOT(slotStartFitTimer()));
-    disconnect(&fitTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(fitToWidth()));
+    disconnect(multiPage->mainWidget(), TQ_SIGNAL(viewSizeChanged(const TQSize&)),
+               this, TQ_SLOT(slotStartFitTimer()));
+    disconnect(&fitTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(fitToWidth()));
   }
 }
 
@@ -1117,15 +1117,15 @@ void KViewPart::enableFitToHeight(bool enable)
   if (enable)
   {
     fitToHeight();
-    connect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
-            this, TQT_SLOT(slotStartFitTimer()));
-    connect(&fitTimer, TQT_SIGNAL(timeout()), TQT_SLOT(fitToHeight()));
+    connect(multiPage->mainWidget(), TQ_SIGNAL(viewSizeChanged(const TQSize&)),
+            this, TQ_SLOT(slotStartFitTimer()));
+    connect(&fitTimer, TQ_SIGNAL(timeout()), TQ_SLOT(fitToHeight()));
   }
   else
   {
-    disconnect(multiPage->mainWidget(), TQT_SIGNAL(viewSizeChanged(const TQSize&)),
-               this, TQT_SLOT(slotStartFitTimer()));
-    disconnect(&fitTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(fitToHeight()));
+    disconnect(multiPage->mainWidget(), TQ_SIGNAL(viewSizeChanged(const TQSize&)),
+               this, TQ_SLOT(slotStartFitTimer()));
+    disconnect(&fitTimer, TQ_SIGNAL(timeout()), this, TQ_SLOT(fitToHeight()));
   }
 }
 
@@ -1460,7 +1460,7 @@ void KViewPart::doSettings()
 
   multiPage->addConfigDialogs(configDialog);
 
-  connect(configDialog, TQT_SIGNAL(settingsChanged()), this, TQT_SLOT(preferencesChanged()));
+  connect(configDialog, TQ_SIGNAL(settingsChanged()), this, TQ_SLOT(preferencesChanged()));
   configDialog->show();
 }
 

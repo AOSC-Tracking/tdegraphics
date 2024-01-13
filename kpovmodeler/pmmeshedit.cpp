@@ -47,9 +47,9 @@ void PMMeshEdit::createTopWidgets( )
    layout->addWidget( m_pInsideVector );
    layout->addStretch( 1 );
 
-   connect( m_pHierarchy, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pEnableInsideVector, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotInsideVectorClicked( ) ) );
-   connect( m_pInsideVector, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pHierarchy, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableInsideVector, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotInsideVectorClicked( ) ) );
+   connect( m_pInsideVector, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMMeshEdit::displayObject( PMObject* o )

@@ -229,7 +229,7 @@ KuickPrintDialogPage::KuickPrintDialogPage( TQWidget *parent, const char *name )
     m_scale->setEnabled( false ); // ###
     grid->addMultiCellWidget( m_scale, 0, 0, 0, 1 );
     group->insert( m_scale );
-    connect( m_scale, TQT_SIGNAL( toggled( bool )), TQT_SLOT( toggleScaling( bool )));
+    connect( m_scale, TQ_SIGNAL( toggled( bool )), TQ_SLOT( toggleScaling( bool )));
 
     m_units = new KComboBox( false, widget, "unit combobox" );
     grid->addWidget( m_units, 0, 2, AlignLeft );

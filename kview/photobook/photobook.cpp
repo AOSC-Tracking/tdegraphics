@@ -50,24 +50,24 @@ Previews::Previews(PhotoBook *parent, const TQStringList &mimetypes)
 	mPhotoBook = parent;
 	mMimeTypes = mimetypes;
 
-	connect(&mDirLister, TQT_SIGNAL(clear()), TQT_SLOT(slotClearView()));
-	connect(&mDirLister, TQT_SIGNAL(completed()), TQT_SLOT(doneListing()));
+	connect(&mDirLister, TQ_SIGNAL(clear()), TQ_SLOT(slotClearView()));
+	connect(&mDirLister, TQ_SIGNAL(completed()), TQ_SLOT(doneListing()));
 	connect(
-			&mDirLister, TQT_SIGNAL(newItems(const KFileItemList &)),
-			TQT_SLOT(insertNewFiles(const KFileItemList &))
+			&mDirLister, TQ_SIGNAL(newItems(const KFileItemList &)),
+			TQ_SLOT(insertNewFiles(const KFileItemList &))
 		);
 	connect(
-			signaler(), TQT_SIGNAL(fileSelected(const KFileItem*)),
-			TQT_SLOT(open(const KFileItem*))
+			signaler(), TQ_SIGNAL(fileSelected(const KFileItem*)),
+			TQ_SLOT(open(const KFileItem*))
 		);
 	connect(
-			&mDirLister, TQT_SIGNAL(deleteItem(KFileItem *)),
-			TQT_SLOT(removeItem(KFileItem *))
+			&mDirLister, TQ_SIGNAL(deleteItem(KFileItem *)),
+			TQ_SLOT(removeItem(KFileItem *))
 		);
 	
 	connect(
-			&mDirLister, TQT_SIGNAL( refreshItems( const KFileItemList& ) ),
-			TQT_SLOT( slotRefreshItems( const KFileItemList& ) )
+			&mDirLister, TQ_SIGNAL( refreshItems( const KFileItemList& ) ),
+			TQ_SLOT( slotRefreshItems( const KFileItemList& ) )
 		);
 	
 	setFixedWidth(128);
@@ -136,7 +136,7 @@ void Previews::open(const KFileItem *item)
 void Previews::doneListing()
 {
 	// eep! -- this should not be necessary
-	TQTimer::singleShot(0, this, TQT_SLOT(goToFirst()));
+	TQTimer::singleShot(0, this, TQ_SLOT(goToFirst()));
 }
 
 void Previews::goToFirst()
@@ -184,8 +184,8 @@ PhotoBook::PhotoBook(TQWidget *parent, PhotoBookPart *part, const char *name)
 
 	mFit = mViewer->action("fittowin");
 
-	connect(mList, TQT_SIGNAL(open(const KURL&)), mViewer, TQT_SLOT(openURL(const KURL&)));
-	connect(mViewer, TQT_SIGNAL(completed()), mFit, TQT_SLOT(activate()));
+	connect(mList, TQ_SIGNAL(open(const KURL&)), mViewer, TQ_SLOT(openURL(const KURL&)));
+	connect(mViewer, TQ_SIGNAL(completed()), mFit, TQ_SLOT(activate()));
 
 	part->insertChildClient(mViewer);
 }
@@ -233,11 +233,11 @@ PhotoBookPart::PhotoBookPart(
 	setWidget(bv);
 
 	connect(
-			bv, TQT_SIGNAL(emitUpdateButton(bool, bool)),
-			this, TQT_SLOT(slotUpdateButton(bool, bool))
+			bv, TQ_SIGNAL(emitUpdateButton(bool, bool)),
+			this, TQ_SLOT(slotUpdateButton(bool, bool))
 		);
-	m_pNextAction = KStdAction::next(bv, TQT_SLOT(next()), actionCollection(), "next");
-	m_pPreviousAction = KStdAction::prior(bv, TQT_SLOT(previous()), actionCollection(), "previous");
+	m_pNextAction = KStdAction::next(bv, TQ_SLOT(next()), actionCollection(), "next");
+	m_pPreviousAction = KStdAction::prior(bv, TQ_SLOT(previous()), actionCollection(), "previous");
 
 	setXMLFile( "photobookui.rc" );
 

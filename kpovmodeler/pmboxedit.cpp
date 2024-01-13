@@ -43,8 +43,8 @@ void PMBoxEdit::createTopWidgets( )
    gl->addWidget( new TQLabel( i18n( "Corner 2:" ), this ), 1, 0 );
    gl->addWidget( m_pCorner2, 1, 1 );
 
-   connect( m_pCorner1, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCorner2, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCorner1, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCorner2, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMBoxEdit::displayObject( PMObject* o )

@@ -63,16 +63,16 @@ PMColorEdit::PMColorEdit( bool filterAndTransmit, TQWidget* parent, const char* 
       l->addWidget( m_edits[4] );
    }
 
-   connect( m_edits[0], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
-   connect( m_edits[1], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
-   connect( m_edits[2], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
+   connect( m_edits[0], TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotEditChanged( ) ) );
+   connect( m_edits[1], TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotEditChanged( ) ) );
+   connect( m_edits[2], TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotEditChanged( ) ) );
    if( filterAndTransmit )
    {
-      connect( m_edits[3], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
-      connect( m_edits[4], TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotEditChanged( ) ) );
+      connect( m_edits[3], TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotEditChanged( ) ) );
+      connect( m_edits[4], TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotEditChanged( ) ) );
    }
-   connect( m_pButton, TQT_SIGNAL( changed( const TQColor& ) ),
-            TQT_SLOT( slotColorChanged( const TQColor& ) ) );
+   connect( m_pButton, TQ_SIGNAL( changed( const TQColor& ) ),
+            TQ_SLOT( slotColorChanged( const TQColor& ) ) );
 }
 
 void PMColorEdit::setColor( const PMColor& c )

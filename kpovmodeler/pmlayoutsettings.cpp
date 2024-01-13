@@ -58,14 +58,14 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    
    grid = new TQGridLayout( gvl, 3, 2 );
    m_pViewLayouts = new TQListBox( gb );
-   connect( m_pViewLayouts, TQT_SIGNAL( highlighted( int ) ), 
-                            TQT_SLOT( slotLayoutSelected( int ) ) );
+   connect( m_pViewLayouts, TQ_SIGNAL( highlighted( int ) ), 
+                            TQ_SLOT( slotLayoutSelected( int ) ) );
    grid->addMultiCellWidget( m_pViewLayouts, 0, 2, 0, 0 );
    m_pAddLayout = new TQPushButton( i18n( "Add" ), gb );
-   connect( m_pAddLayout, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddLayout( ) ) );
+   connect( m_pAddLayout, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddLayout( ) ) );
    grid->addWidget( m_pAddLayout, 0, 1 );
    m_pRemoveLayout = new TQPushButton( i18n( "Remove" ), gb );
-   connect( m_pRemoveLayout, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveLayout( ) ) );
+   connect( m_pRemoveLayout, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemoveLayout( ) ) );
    grid->addWidget( m_pRemoveLayout, 1, 1 );
    grid->setRowStretch( 2, 1 );
 
@@ -76,8 +76,8 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    ghe = new TQHBoxLayout( gvle );
    ghe->addWidget( new TQLabel( i18n( "Name:" ), gbe ) );
    m_pViewLayoutName = new TQLineEdit( gbe );
-   connect( m_pViewLayoutName, TQT_SIGNAL( textChanged( const TQString& ) ), 
-                               TQT_SLOT( slotLayoutNameChanged( const TQString& ) ) );
+   connect( m_pViewLayoutName, TQ_SIGNAL( textChanged( const TQString& ) ), 
+                               TQ_SLOT( slotLayoutNameChanged( const TQString& ) ) );
    ghe->addWidget( m_pViewLayoutName );
    grid = new TQGridLayout( gvle, 4, 2 );
    m_pViewEntries = new TQListView( gbe );
@@ -87,21 +87,21 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    m_pViewEntries->addColumn( i18n( "Position" ) );
    m_pViewEntries->setSorting( -1 );
    m_pViewEntries->setMaximumHeight( 150 );
-   connect( m_pViewEntries, TQT_SIGNAL( selectionChanged( TQListViewItem* ) ),
-                            TQT_SLOT( slotViewEntrySelected( TQListViewItem* ) ) );
+   connect( m_pViewEntries, TQ_SIGNAL( selectionChanged( TQListViewItem* ) ),
+                            TQ_SLOT( slotViewEntrySelected( TQListViewItem* ) ) );
    grid->addMultiCellWidget( m_pViewEntries, 0, 3, 0, 0 );
    m_pAddEntry = new TQPushButton( i18n( "Add" ), gbe );
-   connect( m_pAddEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAddViewEntryClicked( ) ) );
+   connect( m_pAddEntry, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAddViewEntryClicked( ) ) );
    grid->addWidget( m_pAddEntry, 0, 1 );
    m_pRemoveEntry = new TQPushButton( i18n( "Remove" ), gbe );
-   connect( m_pRemoveEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemoveViewEntryClicked( ) ) );
+   connect( m_pRemoveEntry, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemoveViewEntryClicked( ) ) );
    grid->addWidget( m_pRemoveEntry, 1, 1 );
    /* //TODO
    m_pMoveUpEntry = new TQPushButton( i18n( "Move Up" ), gbe );
-   connect( m_pMoveUpEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotMoveUpViewEntryClicked( ) ) );
+   connect( m_pMoveUpEntry, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotMoveUpViewEntryClicked( ) ) );
    grid->addWidget( m_pMoveUpEntry, 2, 1 );
    m_pMoveDownEntry = new TQPushButton( i18n( "Move Down" ), gbe );
-   connect( m_pMoveDownEntry, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotMoveDownViewEntryClicked( ) ) );
+   connect( m_pMoveDownEntry, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotMoveDownViewEntryClicked( ) ) );
    grid->addWidget( m_pMoveDownEntry, 3, 1 );
    */
 
@@ -122,26 +122,26 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    for( ; *it; ++it )
       m_pViewTypeEdit->insertItem( ( *it )->description( ) );
    
-   connect( m_pViewTypeEdit, TQT_SIGNAL( activated( int ) ),
-                             TQT_SLOT( slotViewTypeChanged( int ) ) );
+   connect( m_pViewTypeEdit, TQ_SIGNAL( activated( int ) ),
+                             TQ_SLOT( slotViewTypeChanged( int ) ) );
    grid->addWidget( m_pViewTypeEdit, 0, 1 );
    m_pDockPositionEdit = new TQComboBox( gbe );
    m_pDockPositionEdit->insertItem( i18n( "New Column" ) );
    m_pDockPositionEdit->insertItem( i18n( "Below" ) );
    m_pDockPositionEdit->insertItem( i18n( "Tabbed" ) );
    m_pDockPositionEdit->insertItem( i18n( "Floating" ) );
-   connect( m_pDockPositionEdit, TQT_SIGNAL( activated( int ) ),
-            TQT_SLOT( slotDockPositionChanged( int ) ) );
+   connect( m_pDockPositionEdit, TQ_SIGNAL( activated( int ) ),
+            TQ_SLOT( slotDockPositionChanged( int ) ) );
    grid->addWidget( m_pDockPositionEdit, 2, 1 );
    
    m_pColumnWidthEdit = new PMIntEdit( gbe );
-   connect( m_pColumnWidthEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotColumnWidthChanged( const TQString& ) ) );
+   connect( m_pColumnWidthEdit, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotColumnWidthChanged( const TQString& ) ) );
    grid->addWidget( m_pColumnWidthEdit, 3, 1 );
    
    m_pViewHeightEdit = new PMIntEdit( gbe );
-   connect( m_pViewHeightEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotViewHeightChanged( const TQString& ) ) );
+   connect( m_pViewHeightEdit, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotViewHeightChanged( const TQString& ) ) );
    grid->addWidget( m_pViewHeightEdit, 4, 1 );
 
    m_pFloatingWidthLabel = new TQLabel( i18n( "Width:" ), gbe );
@@ -154,17 +154,17 @@ PMLayoutSettings::PMLayoutSettings( TQWidget* parent, const char* name )
    grid->addWidget( m_pFloatingPosYLabel, 6, 2 );
 
    m_pFloatingWidth = new PMIntEdit( gbe );
-   connect( m_pFloatingWidth, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotFloatingWidthChanged( const TQString& ) ) );
+   connect( m_pFloatingWidth, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotFloatingWidthChanged( const TQString& ) ) );
    m_pFloatingHeight = new PMIntEdit( gbe );
-   connect( m_pFloatingHeight, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotFloatingHeightChanged( const TQString& ) ) );
+   connect( m_pFloatingHeight, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotFloatingHeightChanged( const TQString& ) ) );
    m_pFloatingPosX = new PMIntEdit( gbe );
-   connect( m_pFloatingPosX, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotFloatingPosXChanged( const TQString& ) ) );
+   connect( m_pFloatingPosX, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotFloatingPosXChanged( const TQString& ) ) );
    m_pFloatingPosY = new PMIntEdit( gbe );
-   connect( m_pFloatingPosY, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotFloatingPosYChanged( const TQString& ) ) );
+   connect( m_pFloatingPosY, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotFloatingPosYChanged( const TQString& ) ) );
    grid->addWidget( m_pFloatingWidth, 5, 1 );
    grid->addWidget( m_pFloatingHeight, 5, 3 );
    grid->addWidget( m_pFloatingPosX, 6, 1 );
@@ -741,8 +741,8 @@ void PMLayoutSettings::displayCustomOptions( )
                                   ( *m_currentViewEntry ).customOptions( ) );
          if( m_pCustomOptionsWidget )
          {
-            connect( m_pCustomOptionsWidget, TQT_SIGNAL( viewTypeDescriptionChanged( ) ),
-                     TQT_SLOT( slotViewTypeDescriptionChanged( ) ) );
+            connect( m_pCustomOptionsWidget, TQ_SIGNAL( viewTypeDescriptionChanged( ) ),
+                     TQ_SLOT( slotViewTypeDescriptionChanged( ) ) );
             TQHBoxLayout* hl = new TQHBoxLayout( m_pCustomOptionsHolder,
                                                0, KDialog::spacingHint( ) );
             hl->addWidget( m_pCustomOptionsWidget );

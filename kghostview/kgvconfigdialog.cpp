@@ -146,6 +146,6 @@ void  ConfigDialog::showSettings( KGVPart* main ) {
 
     gssw->setDetectedVersion(Configuration::version());
 
-    TQObject::connect( dialog, TQT_SIGNAL( settingsChanged() ), main, TQT_SLOT( slotConfigurationChanged() ) );
+    TQObject::connect( dialog, TQ_SIGNAL( settingsChanged() ), main, TQ_SLOT( slotConfigurationChanged() ) );
     dialog->show();
 }

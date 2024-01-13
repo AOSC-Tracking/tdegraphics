@@ -49,8 +49,8 @@ void PMSuperquadricEllipsoidEdit::createTopWidgets( )
    gl->addWidget( m_pValueN, 1, 1 );
    hl->addStretch( 1 );
 
-   connect( m_pValueE, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pValueN, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pValueE, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pValueN, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMSuperquadricEllipsoidEdit::displayObject( PMObject* o )

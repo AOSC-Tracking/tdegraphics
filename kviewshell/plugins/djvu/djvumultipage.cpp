@@ -67,10 +67,10 @@ DjVuMultiPage::DjVuMultiPage(TQWidget *parentWidget, const char *widgetName, TQO
 
   renderModeAction->setCurrentItem(Prefs::renderMode());
 
-  deletePagesAction = new TDEAction(i18n("Delete Pages..."), 0, this, TQT_SLOT(slotDeletePages()), actionCollection(), "delete_pages");
+  deletePagesAction = new TDEAction(i18n("Delete Pages..."), 0, this, TQ_SLOT(slotDeletePages()), actionCollection(), "delete_pages");
 
   // change the rendermode
-  connect(renderModeAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(setRenderMode(int)));
+  connect(renderModeAction, TQ_SIGNAL(activated(int)), this, TQ_SLOT(setRenderMode(int)));
 
   /* It is very important that this method is called in the
      constructor. Otherwise tdemultipage does not know how to render

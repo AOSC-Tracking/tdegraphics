@@ -76,13 +76,13 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     TQVBox *vbox = makeVBoxMainWidget();
     mainWidget = new KSnapshotWidget( vbox, "mainWidget" );
 
-    connect(mainWidget, TQT_SIGNAL(startImageDrag()), TQT_SLOT(slotDragSnapshot()));
-    connect(mainWidget, TQT_SIGNAL(newClicked()), TQT_SLOT(slotGrab()));
-    connect(mainWidget, TQT_SIGNAL(saveClicked()), TQT_SLOT(slotSaveAs()));
-    connect(mainWidget, TQT_SIGNAL(printClicked()), TQT_SLOT(slotPrint()));
-    connect(mainWidget, TQT_SIGNAL(copyClicked()), TQT_SLOT(slotCopy()));
-    connect(mainWidget, TQT_SIGNAL(openWithKPClicked()), TQT_SLOT(slotOpenWithKP()));
-    connect(tqApp,      TQT_SIGNAL(aboutToQuit()), TQT_SLOT(slotAboutToQuit()));
+    connect(mainWidget, TQ_SIGNAL(startImageDrag()), TQ_SLOT(slotDragSnapshot()));
+    connect(mainWidget, TQ_SIGNAL(newClicked()), TQ_SLOT(slotGrab()));
+    connect(mainWidget, TQ_SIGNAL(saveClicked()), TQ_SLOT(slotSaveAs()));
+    connect(mainWidget, TQ_SIGNAL(printClicked()), TQ_SLOT(slotPrint()));
+    connect(mainWidget, TQ_SIGNAL(copyClicked()), TQ_SLOT(slotCopy()));
+    connect(mainWidget, TQ_SIGNAL(openWithKPClicked()), TQ_SLOT(slotOpenWithKP()));
+    connect(tqApp,      TQ_SIGNAL(aboutToQuit()), TQ_SLOT(slotAboutToQuit()));
 
     grabber->show();
     grabber->grabMouse( waitCursor );
@@ -111,9 +111,9 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
 	autoincFilename();
     }
 
-    connect( &grabTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  grabTimerDone() ) );
-    connect( &updateTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT(  updatePreview() ) );
-    TQTimer::singleShot( 0, this, TQT_SLOT( updateCaption() ) );
+    connect( &grabTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT(  grabTimerDone() ) );
+    connect( &updateTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT(  updatePreview() ) );
+    TQTimer::singleShot( 0, this, TQ_SLOT( updateCaption() ) );
 
     KHelpMenu *helpMenu = new KHelpMenu(this, TDEGlobal::instance()->aboutData(), false);
 
@@ -130,7 +130,7 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
         ++i; // we need menu ids to match with OfferList indexes
     }
     mainWidget->btnOpenWith->setPopup(popupOpenWith);
-    connect(popupOpenWith, SIGNAL(activated(int)), this, SLOT(slotOpenWith(int)));
+    connect(popupOpenWith, TQ_SIGNAL(activated(int)), this, TQ_SLOT(slotOpenWith(int)));
 
     // Check for KolourPaint availability
     KService::Ptr kpaint = KService::serviceByDesktopName("kolourpaint");
@@ -139,27 +139,27 @@ KSnapshot::KSnapshot(TQWidget *parent, const char *name, bool grabCurrent)
     }
 
     TDEAccel* accel = new TDEAccel(this);
-    accel->insert(TDEStdAccel::Quit, kapp, TQT_SLOT(quit()));
+    accel->insert(TDEStdAccel::Quit, kapp, TQ_SLOT(quit()));
     accel->insert( "QuickSave", i18n("Quick Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user without showing the file dialog."),
-		   CTRL+SHIFT+Key_S, this, TQT_SLOT(slotSave()));
-    accel->insert(TDEStdAccel::Save, this, TQT_SLOT(slotSaveAs()));
-//    accel->insert(TDEShortcut(CTRL+Key_A), this, TQT_SLOT(slotSaveAs()));
+		   CTRL+SHIFT+Key_S, this, TQ_SLOT(slotSave()));
+    accel->insert(TDEStdAccel::Save, this, TQ_SLOT(slotSaveAs()));
+//    accel->insert(TDEShortcut(CTRL+Key_A), this, TQ_SLOT(slotSaveAs()));
     accel->insert( "SaveAs", i18n("Save Snapshot &As..."),
 		   i18n("Save the snapshot to the file specified by the user."),
-		   CTRL+Key_A, this, TQT_SLOT(slotSaveAs()));
-    accel->insert(TDEStdAccel::Print, this, TQT_SLOT(slotPrint()));
-    accel->insert(TDEStdAccel::New, this, TQT_SLOT(slotGrab()));
-    accel->insert(TDEStdAccel::Copy, this, TQT_SLOT(slotCopy()));
+		   CTRL+Key_A, this, TQ_SLOT(slotSaveAs()));
+    accel->insert(TDEStdAccel::Print, this, TQ_SLOT(slotPrint()));
+    accel->insert(TDEStdAccel::New, this, TQ_SLOT(slotGrab()));
+    accel->insert(TDEStdAccel::Copy, this, TQ_SLOT(slotCopy()));
 
-    accel->insert( "Quit2", Key_Q, this, TQT_SLOT(slotSave()));
-    accel->insert( "Save2", Key_S, this, TQT_SLOT(slotSaveAs()));
-    accel->insert( "Print2", Key_P, this, TQT_SLOT(slotPrint()));
-    accel->insert( "New2", Key_N, this, TQT_SLOT(slotGrab()));
-    accel->insert( "New3", Key_Space, this, TQT_SLOT(slotGrab()));
+    accel->insert( "Quit2", Key_Q, this, TQ_SLOT(slotSave()));
+    accel->insert( "Save2", Key_S, this, TQ_SLOT(slotSaveAs()));
+    accel->insert( "Print2", Key_P, this, TQ_SLOT(slotPrint()));
+    accel->insert( "New2", Key_N, this, TQ_SLOT(slotGrab()));
+    accel->insert( "New3", Key_Space, this, TQ_SLOT(slotGrab()));
 
     setEscapeButton( User1 );
-    connect( this, TQT_SIGNAL( user1Clicked() ), TQT_SLOT( reject() ) );
+    connect( this, TQ_SIGNAL( user1Clicked() ), TQ_SLOT( reject() ) );
 
     mainWidget->btnNew->setFocus();
 
@@ -287,8 +287,8 @@ void KSnapshot::slotGrab()
     else {
 	if ( mainWidget->mode() == Region ) {
 	    rgnGrab = new RegionGrabber();
-	    connect( rgnGrab, TQT_SIGNAL( regionGrabbed( const TQPixmap & ) ),
-		     TQT_SLOT( slotRegionGrabbed( const TQPixmap & ) ) );
+	    connect( rgnGrab, TQ_SIGNAL( regionGrabbed( const TQPixmap & ) ),
+		     TQ_SLOT( slotRegionGrabbed( const TQPixmap & ) ) );
 	}
 	else {
 	    grabber->show();
@@ -425,8 +425,8 @@ void KSnapshot::openWithExternalApp(const KService &service) {
 
     TDEProcess *externalApp = new TDEProcess;
     *externalApp << args;
-    connect(externalApp, SIGNAL(processExited(TDEProcess*)),
-            this, SLOT(slotExternalAppClosed(TDEProcess*)));
+    connect(externalApp, TQ_SIGNAL(processExited(TDEProcess*)),
+            this, TQ_SLOT(slotExternalAppClosed(TDEProcess*)));
 
     if (!externalApp->start(TDEProcess::OwnGroup)) {
         KMessageBox::error(this, i18n("Cannot start %1!").arg(service.name()));
@@ -535,8 +535,8 @@ void KSnapshot::grabTimerDone()
 {
     if ( mainWidget->mode() == Region ) {
         rgnGrab = new RegionGrabber();
-        connect( rgnGrab, TQT_SIGNAL( regionGrabbed( const TQPixmap & ) ),
-            TQT_SLOT( slotRegionGrabbed( const TQPixmap & ) ) );
+        connect( rgnGrab, TQ_SIGNAL( regionGrabbed( const TQPixmap & ) ),
+            TQ_SLOT( slotRegionGrabbed( const TQPixmap & ) ) );
     }
     else {
 	performGrab();
@@ -551,8 +551,8 @@ void KSnapshot::performGrab()
     grabTimer.stop();
     if ( mainWidget->mode() == ChildWindow ) {
 	WindowGrabber wndGrab;
-	connect( &wndGrab, TQT_SIGNAL( windowGrabbed( const TQPixmap & ) ),
-	    TQT_SLOT( slotWindowGrabbed( const TQPixmap & ) ) );
+	connect( &wndGrab, TQ_SIGNAL( windowGrabbed( const TQPixmap & ) ),
+	    TQ_SLOT( slotWindowGrabbed( const TQPixmap & ) ) );
 	wndGrab.exec();
 	}
     else if ( mainWidget->mode() == WindowUnderCursor ) {

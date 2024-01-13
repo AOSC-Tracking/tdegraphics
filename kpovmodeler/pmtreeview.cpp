@@ -79,12 +79,12 @@ PMTreeView::PMTreeView( PMPart* part, TQWidget* parent /*= 0*/,
    setFocusPolicy( TQWidget::WheelFocus );
    setAcceptDrops( true );
 
-   connect( part, TQT_SIGNAL( refresh( ) ), TQT_SLOT( slotRefresh( ) ) );
-   connect( part, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-                  TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
-   connect( part, TQT_SIGNAL( clear( ) ), TQT_SLOT( slotClear( ) ) );
-   connect( this, TQT_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
-            part, TQT_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQ_SIGNAL( refresh( ) ), TQ_SLOT( slotRefresh( ) ) );
+   connect( part, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+                  TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
+   connect( part, TQ_SIGNAL( clear( ) ), TQ_SLOT( slotClear( ) ) );
+   connect( this, TQ_SIGNAL( objectChanged( PMObject*, const int, TQObject* ) ),
+            part, TQ_SLOT( slotObjectChanged( PMObject*, const int, TQObject* ) ) );
 
    slotRefresh( );
 }

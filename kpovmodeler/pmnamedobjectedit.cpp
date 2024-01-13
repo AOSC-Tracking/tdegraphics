@@ -41,8 +41,8 @@ void PMNamedObjectEdit::createTopWidgets( )
    layout->addWidget( label );
    layout->addWidget( m_pNameEdit );
 
-   connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotNameChanged( const TQString& ) ) );
+   connect( m_pNameEdit, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotNameChanged( const TQString& ) ) );
 }
 
 void PMNamedObjectEdit::displayObject( PMObject* o )

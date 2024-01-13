@@ -87,12 +87,12 @@ Kooka::Kooka( const TQCString& deviceToUse)
     statusBar()->show();
 
     // allow the view to change the statusbar and caption
-    connect(m_view, TQT_SIGNAL(signalChangeStatusbar(const TQString&)),
-            this,   TQT_SLOT(changeStatusbar(const TQString&)));
-    connect(m_view, TQT_SIGNAL(signalCleanStatusbar(void)),
-            this, TQT_SLOT(cleanStatusbar()));
-    connect(m_view, TQT_SIGNAL(signalChangeCaption(const TQString&)),
-            this,   TQT_SLOT(changeCaption(const TQString&)));
+    connect(m_view, TQ_SIGNAL(signalChangeStatusbar(const TQString&)),
+            this,   TQ_SLOT(changeStatusbar(const TQString&)));
+    connect(m_view, TQ_SIGNAL(signalCleanStatusbar(void)),
+            this, TQ_SLOT(cleanStatusbar()));
+    connect(m_view, TQ_SIGNAL(signalChangeCaption(const TQString&)),
+            this,   TQ_SLOT(changeCaption(const TQString&)));
 
     changeCaption( i18n( "TDE Scanning" ));
 
@@ -125,39 +125,39 @@ void Kooka::startup( void )
 void Kooka::setupActions()
 {
 
-    KStdAction::print(this, TQT_SLOT(filePrint()), actionCollection());
-    KStdAction::quit(this , TQT_SLOT(close()), actionCollection());
+    KStdAction::print(this, TQ_SLOT(filePrint()), actionCollection());
+    KStdAction::quit(this , TQ_SLOT(close()), actionCollection());
 
-    KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
+    KStdAction::keyBindings(guiFactory(), TQ_SLOT(configureShortcuts()),
 actionCollection());
-    KStdAction::configureToolbars(this, TQT_SLOT(optionsConfigureToolbars()),
+    KStdAction::configureToolbars(this, TQ_SLOT(optionsConfigureToolbars()),
 				  actionCollection());
-    KStdAction::preferences(this, TQT_SLOT(optionsPreferences()), actionCollection());
+    KStdAction::preferences(this, TQ_SLOT(optionsPreferences()), actionCollection());
 
     m_view->createDockMenu(actionCollection(), this, "settings_show_docks" );
 
     /* Image Viewer action Toolbar - OCR, Scaling etc. */
     (void) new TDEAction(i18n("&OCR Image..."), "ocr", CTRL+Key_O,
-		       m_view, TQT_SLOT(doOCR()),
+		       m_view, TQ_SLOT(doOCR()),
 		       actionCollection(), "ocrImage" );
 
     (void) new TDEAction(i18n("O&CR on Selection..."), "ocr-select", CTRL+Key_C,
-		       m_view, TQT_SLOT(doOCRonSelection()),
+		       m_view, TQ_SLOT(doOCRonSelection()),
 		       actionCollection(), "ocrImageSelect" );
 
     TDEAction *act;
     act =  new TDEAction(i18n("Scale to W&idth"), "scaletowidth", CTRL+Key_I,
-		       m_view, TQT_SLOT( slIVScaleToWidth()),
+		       m_view, TQ_SLOT( slIVScaleToWidth()),
 		       actionCollection(), "scaleToWidth" );
     m_view->connectViewerAction( act );
 
     act = new TDEAction(i18n("Scale to &Height"), "scaletoheight", CTRL+Key_H,
-		       m_view, TQT_SLOT( slIVScaleToHeight()),
+		       m_view, TQ_SLOT( slIVScaleToHeight()),
 		       actionCollection(), "scaleToHeight" );
     m_view->connectViewerAction( act );
 
     act = new TDEAction(i18n("Original &Size"), "scaleorig", CTRL+Key_S,
-                      m_view, TQT_SLOT( slIVScaleOriginal()),
+                      m_view, TQ_SLOT( slIVScaleOriginal()),
                       actionCollection(), "scaleOriginal" );
     m_view->connectViewerAction( act );
 
@@ -173,100 +173,100 @@ actionCollection());
                              actionCollection(), "keepZoom" );
 #endif
 
-    connect( act, TQT_SIGNAL( toggled( bool ) ), m_view->getImageViewer(),
-             TQT_SLOT(setKeepZoom(bool)));
+    connect( act, TQ_SIGNAL( toggled( bool ) ), m_view->getImageViewer(),
+             TQ_SLOT(setKeepZoom(bool)));
 
     m_view->connectViewerAction( act );
 
     /* thumbview and gallery actions */
     act = new TDEAction(i18n("Set Zoom..."), "viewmag", 0,
-		       m_view, TQT_SLOT( slIVShowZoomDialog()),
+		       m_view, TQ_SLOT( slIVShowZoomDialog()),
 		       actionCollection(), "showZoomDialog" );
     m_view->connectViewerAction( act );
 
     (void) new TDEAction(i18n("Create From Selectio&n"), "crop", CTRL+Key_N,
-		       m_view, TQT_SLOT( slCreateNewImgFromSelection() ),
+		       m_view, TQ_SLOT( slCreateNewImgFromSelection() ),
 		       actionCollection(), "createFromSelection" );
 
     (void) new TDEAction(i18n("Mirror Image &Vertically"), "mirror-vert", CTRL+Key_V,
-		       this, TQT_SLOT( slMirrorVertical() ),
+		       this, TQ_SLOT( slMirrorVertical() ),
 		       actionCollection(), "mirrorVertical" );
 
     (void) new TDEAction(i18n("&Mirror Image Horizontally"), "mirror-horiz", CTRL+Key_M,
-		       this, TQT_SLOT( slMirrorHorizontal() ),
+		       this, TQ_SLOT( slMirrorHorizontal() ),
 		       actionCollection(), "mirrorHorizontal" );
 
     (void) new TDEAction(i18n("Mirror Image &Both Directions"), "mirror-both", CTRL+Key_B,
-		       this, TQT_SLOT( slMirrorBoth() ),
+		       this, TQ_SLOT( slMirrorBoth() ),
 		       actionCollection(), "mirrorBoth" );
 
     (void) new TDEAction(i18n("Open Image in &Graphic Application..."), "document-open", CTRL+Key_G,
-		       m_view, TQT_SLOT( slOpenCurrInGraphApp() ),
+		       m_view, TQ_SLOT( slOpenCurrInGraphApp() ),
 		       actionCollection(), "openInGraphApp" );
 
     act = new TDEAction(i18n("&Rotate Image Clockwise"), "object-rotate-right", CTRL+Key_R,
-		      this, TQT_SLOT( slRotateClockWise() ),
+		      this, TQ_SLOT( slRotateClockWise() ),
 		       actionCollection(), "rotateClockwise" );
     m_view->connectViewerAction( act );
 
     act = new TDEAction(i18n("Rotate Image Counter-Clock&wise"), "object-rotate-left", CTRL+Key_W,
-		       this, TQT_SLOT( slRotateCounterClockWise() ),
+		       this, TQ_SLOT( slRotateCounterClockWise() ),
 		       actionCollection(), "rotateCounterClockwise" );
     m_view->connectViewerAction( act );
 
     act = new TDEAction(i18n("Rotate Image 180 &Degrees"), "rotate", CTRL+Key_D,
-		       this, TQT_SLOT( slRotate180() ),
+		       this, TQ_SLOT( slRotate180() ),
 		       actionCollection(), "upsitedown" );
     m_view->connectViewerAction( act );
 
     /* Gallery actions */
     act = new TDEAction(i18n("&Create Folder..."), "folder-new", 0,
-		      m_view->gallery(),TQT_SLOT( slotCreateFolder() ),
+		      m_view->gallery(),TQ_SLOT( slotCreateFolder() ),
 		       actionCollection(), "foldernew" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Save Image..."), "document-save", 0,
-		      m_view->gallery(),TQT_SLOT( slotExportFile() ),
+		      m_view->gallery(),TQ_SLOT( slotExportFile() ),
 		       actionCollection(), "saveImage" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Import Image..."), "inline_image", 0,
-		      m_view->gallery(),TQT_SLOT( slotImportFile() ),
+		      m_view->gallery(),TQ_SLOT( slotImportFile() ),
 		       actionCollection(), "importImage" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Delete Image"), "edittrash", 0,
-		      m_view->gallery(),TQT_SLOT( slotDeleteItems() ),
+		      m_view->gallery(),TQ_SLOT( slotDeleteItems() ),
 		       actionCollection(), "deleteImage" );
     m_view->connectGalleryAction( act );
 
     act = new TDEAction(i18n("&Unload Image"), "window-close", 0,
-		      m_view->gallery(),TQT_SLOT( slotUnloadItems() ),
+		      m_view->gallery(),TQ_SLOT( slotUnloadItems() ),
 		       actionCollection(), "unloadImage" );
     m_view->connectGalleryAction( act );
 
 #if 0
     /* not yet supported actions - coming post 3.1 */
     (void) new TDEAction(i18n("&Load Scan Parameters"), "bookmark_add", CTRL+Key_L,
-                       m_view, TQT_SLOT(slLoadScanParams()),
+                       m_view, TQ_SLOT(slLoadScanParams()),
                        actionCollection(), "loadscanparam" );
 
     (void) new TDEAction(i18n("Save &Scan Parameters"), "bookmark_add", CTRL+Key_S,
-		       m_view, TQT_SLOT(slSaveScanParams()),
+		       m_view, TQ_SLOT(slSaveScanParams()),
 		       actionCollection(), "savescanparam" );
 #endif
 
     (void) new TDEAction(i18n("Select Scan Device"), "scanner", 0,
-		       m_view, TQT_SLOT( slSelectDevice()),
+		       m_view, TQ_SLOT( slSelectDevice()),
 		       actionCollection(), "selectsource" );
 
     (void) new TDEAction( i18n("Enable All Warnings && Messages"), 0,
-			this,  TQT_SLOT(slEnableWarnings()),
+			this,  TQ_SLOT(slEnableWarnings()),
 			actionCollection(), "enable_msgs");
 
 
     m_saveOCRTextAction = new TDEAction( i18n("Save OCR Res&ult Text"), "document-save-as", CTRL+Key_U,
-                                       m_view, TQT_SLOT(slSaveOCRResult()),
+                                       m_view, TQ_SLOT(slSaveOCRResult()),
                                        actionCollection(), "saveOCRResult");
 }
 
@@ -387,7 +387,7 @@ void Kooka::optionsConfigureToolbars()
     // use the standard toolbar editor
     saveMainWindowSettings(TDEGlobal::config(), autoSaveGroup());
     KEditToolbar dlg(factory());
-    connect(&dlg, TQT_SIGNAL(newToolbarConfig()), TQT_SLOT(newToolbarConfig()));
+    connect(&dlg, TQ_SIGNAL(newToolbarConfig()), TQ_SLOT(newToolbarConfig()));
     dlg.exec();
 }
 
@@ -402,7 +402,7 @@ void Kooka::optionsPreferences()
     // popup some sort of preference dialog, here
     KookaPreferences dlg;
     dlg.showPage( m_prefDialogIndex );
-    connect( &dlg, TQT_SIGNAL( dataSaved() ), m_view, TQT_SLOT(slFreshUpThumbView()));
+    connect( &dlg, TQ_SIGNAL( dataSaved() ), m_view, TQ_SLOT(slFreshUpThumbView()));
 
     if (dlg.exec())
     {

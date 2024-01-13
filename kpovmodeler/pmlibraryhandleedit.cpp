@@ -75,10 +75,10 @@ PMLibraryHandleEdit::PMLibraryHandleEdit( PMLibraryHandle* lib, TQWidget* parent
    m_pReadOnlyEdit->setChecked( !lib->isReadOnly( ) ); 
    
    // Setup the signals
-   connect( m_pNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotEditsChanged( const TQString& ) ) );
-   connect( m_pAuthorEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotEditsChanged( const TQString& ) ) );
-   connect( m_pDescriptionEdit, TQT_SIGNAL( textChanged( ) ), TQT_SLOT( slotDescriptionChanged( ) ) );
-   connect( m_pReadOnlyEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotReadOnlyChanged( ) ) );
+   connect( m_pNameEdit, TQ_SIGNAL( textChanged( const TQString& ) ), TQ_SLOT( slotEditsChanged( const TQString& ) ) );
+   connect( m_pAuthorEdit, TQ_SIGNAL( textChanged( const TQString& ) ), TQ_SLOT( slotEditsChanged( const TQString& ) ) );
+   connect( m_pDescriptionEdit, TQ_SIGNAL( textChanged( ) ), TQ_SLOT( slotDescriptionChanged( ) ) );
+   connect( m_pReadOnlyEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotReadOnlyChanged( ) ) );
 
    // On startup you can only cancel
    enableButtonOK( false );

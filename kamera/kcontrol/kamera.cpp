@@ -106,36 +106,36 @@ void KKameraConfig::displayGPSuccessDialogue(void)
 	// create list of devices
 	m_deviceSel = new TDEIconView(this);
 
-	connect(m_deviceSel, TQT_SIGNAL(rightButtonClicked(TQIconViewItem *, const TQPoint &)),
-		TQT_SLOT(slot_deviceMenu(TQIconViewItem *, const TQPoint &)));
-	connect(m_deviceSel, TQT_SIGNAL(doubleClicked(TQIconViewItem *)),
-		TQT_SLOT(slot_configureCamera()));
-	connect(m_deviceSel, TQT_SIGNAL(selectionChanged(TQIconViewItem *)),
-		TQT_SLOT(slot_deviceSelected(TQIconViewItem *)));
+	connect(m_deviceSel, TQ_SIGNAL(rightButtonClicked(TQIconViewItem *, const TQPoint &)),
+		TQ_SLOT(slot_deviceMenu(TQIconViewItem *, const TQPoint &)));
+	connect(m_deviceSel, TQ_SIGNAL(doubleClicked(TQIconViewItem *)),
+		TQ_SLOT(slot_configureCamera()));
+	connect(m_deviceSel, TQ_SIGNAL(selectionChanged(TQIconViewItem *)),
+		TQ_SLOT(slot_deviceSelected(TQIconViewItem *)));
 
 	m_deviceSel->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding));
 	
 	// create actions
 	TDEAction *act;
 	
-	act = new TDEAction(i18n("Add"), "camera-photo", 0, this, TQT_SLOT(slot_addCamera()), m_actions, "camera_add");
+	act = new TDEAction(i18n("Add"), "camera-photo", 0, this, TQ_SLOT(slot_addCamera()), m_actions, "camera_add");
 	act->setWhatsThis(i18n("Click this button to add a new camera."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new TDEAction(i18n("Test"), "button_ok", 0, this, TQT_SLOT(slot_testCamera()), m_actions, "camera_test");
+	act = new TDEAction(i18n("Test"), "button_ok", 0, this, TQ_SLOT(slot_testCamera()), m_actions, "camera_test");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new TDEAction(i18n("Remove"), "edittrash", 0, this, TQT_SLOT(slot_removeCamera()), m_actions, "camera_remove");
+	act = new TDEAction(i18n("Remove"), "edittrash", 0, this, TQ_SLOT(slot_removeCamera()), m_actions, "camera_remove");
 	act->setWhatsThis(i18n("Click this button to remove the selected camera from the list."));
 	act->plug(m_toolbar);
-	act = new TDEAction(i18n("Configure..."), "configure", 0, this, TQT_SLOT(slot_configureCamera()), m_actions, "camera_configure");
+	act = new TDEAction(i18n("Configure..."), "configure", 0, this, TQ_SLOT(slot_configureCamera()), m_actions, "camera_configure");
 	act->setWhatsThis(i18n("Click this button to change the configuration of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
-	act = new TDEAction(i18n("Information"), "hwinfo", 0, this, TQT_SLOT(slot_cameraSummary()), m_actions, "camera_summary");
+	act = new TDEAction(i18n("Information"), "hwinfo", 0, this, TQ_SLOT(slot_cameraSummary()), m_actions, "camera_summary");
 	act->setWhatsThis(i18n("Click this button to view a summary of the current status of the selected camera.<br><br>The availability of this feature and the contents of the Configuration dialog depend on the camera model."));
 	act->plug(m_toolbar);
 	m_toolbar->insertLineSeparator();
-	act = new TDEAction(i18n("Cancel"), "process-stop", 0, this, TQT_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
+	act = new TDEAction(i18n("Cancel"), "process-stop", 0, this, TQ_SLOT(slot_cancelOperation()), m_actions, "camera_cancel");
 	act->setWhatsThis(i18n("Click this button to cancel the current camera operation."));
 	act->setEnabled(false);
 	act->plug(m_toolbar);
@@ -188,8 +188,8 @@ void KKameraConfig::load(bool useDefaults )
 				continue;
 
 			kcamera = new KCamera(*it,m_config->readEntry("Path"));
-			connect(kcamera, TQT_SIGNAL(error(const TQString &)), TQT_SLOT(slot_error(const TQString &)));
-			connect(kcamera, TQT_SIGNAL(error(const TQString &, const TQString &)), TQT_SLOT(slot_error(const TQString &, const TQString &)));
+			connect(kcamera, TQ_SIGNAL(error(const TQString &)), TQ_SLOT(slot_error(const TQString &)));
+			connect(kcamera, TQ_SIGNAL(error(const TQString &, const TQString &)), TQ_SLOT(slot_error(const TQString &, const TQString &)));
 			kcamera->load(m_config);
 			m_devices[*it] = kcamera;
 		}
@@ -227,8 +227,8 @@ void KKameraConfig::load(bool useDefaults )
 		/* kdDebug() << "Adding USB camera: " << portit.data() << " at " << portit.key() << endl; */
 
 		kcamera = new KCamera(portit.data(),portit.key());
-		connect(kcamera, TQT_SIGNAL(error(const TQString &)), TQT_SLOT(slot_error(const TQString &)));
-		connect(kcamera, TQT_SIGNAL(error(const TQString &, const TQString &)), TQT_SLOT(slot_error(const TQString &, const TQString &)));
+		connect(kcamera, TQ_SIGNAL(error(const TQString &)), TQ_SLOT(slot_error(const TQString &)));
+		connect(kcamera, TQ_SIGNAL(error(const TQString &, const TQString &)), TQ_SLOT(slot_error(const TQString &, const TQString &)));
 		m_devices[portit.data()] = kcamera;
 	}
 	populateDeviceListView();
@@ -285,8 +285,8 @@ TQString KKameraConfig::suggestName(const TQString &name)
 void KKameraConfig::slot_addCamera()
 {
 	KCamera *m_device = new KCamera(TQString(),TQString());
-	connect(m_device, TQT_SIGNAL(error(const TQString &)), TQT_SLOT(slot_error(const TQString &)));
-	connect(m_device, TQT_SIGNAL(error(const TQString &, const TQString &)), TQT_SLOT(slot_error(const TQString &, const TQString &)));
+	connect(m_device, TQ_SIGNAL(error(const TQString &)), TQ_SLOT(slot_error(const TQString &)));
+	connect(m_device, TQ_SIGNAL(error(const TQString &, const TQString &)), TQ_SLOT(slot_error(const TQString &, const TQString &)));
 	KameraDeviceSelectDialog dialog(this, m_device);
 	if (dialog.exec() == TQDialog::Accepted) {
 		dialog.save();

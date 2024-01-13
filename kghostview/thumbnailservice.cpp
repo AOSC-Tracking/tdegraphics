@@ -37,8 +37,8 @@ ThumbnailService::ThumbnailService( KGVMiniWidget* parent, const char* name ) :
 {
 	_thumbnailDrawer = new KPSWidget( parent->_part->widget(), "thumbnail-drawer" );
 	_thumbnailDrawer->readSettings();
-	connect(  _thumbnailDrawer, TQT_SIGNAL(  newPageImage(  TQPixmap ) ), TQT_SLOT( slotDone( TQPixmap ) ) );
-	connect( timer_, TQT_SIGNAL( timeout() ), TQT_SLOT( processOne() ) );
+	connect(  _thumbnailDrawer, TQ_SIGNAL(  newPageImage(  TQPixmap ) ), TQ_SLOT( slotDone( TQPixmap ) ) );
+	connect( timer_, TQ_SIGNAL( timeout() ), TQ_SLOT( processOne() ) );
 	_thumbnailDrawer->hide();
 }
 
@@ -133,10 +133,10 @@ void ThumbnailService::processOne()
 	FILE* file = _mini->psFile();
 	Request req = *pending.begin();
 	kdDebug( 4500 ) << "ThumbnailService::processOne(): processing " << req.page << "(of " << pending.size() << " requests)" << endl;
-	disconnect( TQT_SIGNAL( relayPixmap( TQPixmap ) ) );
+	disconnect( TQ_SIGNAL( relayPixmap( TQPixmap ) ) );
 	while ( !pending.empty() && req.page == pending.begin()->page ) {
 		req = *pending.begin();
-		connect( this, TQT_SIGNAL( relayPixmap( TQPixmap ) ), req.receiver, req.slot );
+		connect( this, TQ_SIGNAL( relayPixmap( TQPixmap ) ), req.receiver, req.slot );
 		pending.erase( pending.begin() );
 	}
 	_thumbnailDrawer->setOrientation( _mini->orientation( req.page ) );

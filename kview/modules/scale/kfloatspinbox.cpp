@@ -42,7 +42,7 @@ KFloatSpinBox::KFloatSpinBox( float minValue, float maxValue, float step, unsign
 	, m_doselection( true )
 {
 	setRange( minValue, maxValue, step, precision );
-	connect( this, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotValueChanged( int ) ) );
+	connect( this, TQ_SIGNAL( valueChanged( int ) ), this, TQ_SLOT( slotValueChanged( int ) ) );
 }
 
 KFloatSpinBox::~KFloatSpinBox()

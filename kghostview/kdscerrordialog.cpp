@@ -76,10 +76,10 @@ KDSCErrorDialog::KDSCErrorDialog( TQWidget* parent ) :
     _ignoreAllButton = new TQPushButton( i18n("Ignore All"), this );
     hbox->addWidget( _ignoreAllButton );
 
-    connect( _okButton,     TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotOk()     ) );
-    connect( _cancelButton, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotCancel() ) );
-    connect( _ignoreAllButton, TQT_SIGNAL( clicked() ), 
-             this, TQT_SLOT( slotIgnoreAll() ) );
+    connect( _okButton,     TQ_SIGNAL( clicked() ), this, TQ_SLOT( slotOk()     ) );
+    connect( _cancelButton, TQ_SIGNAL( clicked() ), this, TQ_SLOT( slotCancel() ) );
+    connect( _ignoreAllButton, TQ_SIGNAL( clicked() ), 
+             this, TQ_SLOT( slotIgnoreAll() ) );
 }
 
 KDSCErrorHandler::Response KDSCErrorDialog::error( const KDSCError& err )

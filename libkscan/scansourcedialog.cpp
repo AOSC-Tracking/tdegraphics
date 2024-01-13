@@ -59,7 +59,7 @@ ScanSourceDialog::ScanSourceDialog( TQWidget *parent, const TQStrList list, ADF_
    sources = new KScanCombo( vbox,
 			     i18n("Select the Scanner document source:"),
 			     xx);
-   connect( sources, TQT_SIGNAL( activated(int)), this, TQT_SLOT( slChangeSource(int)));
+   connect( sources, TQ_SIGNAL( activated(int)), this, TQ_SLOT( slChangeSource(int)));
 
 
    /* Button Group for ADF-Behaviour */
@@ -70,7 +70,7 @@ ScanSourceDialog::ScanSourceDialog( TQWidget *parent, const TQStrList list, ADF_
    {
       bgroup = new TQVButtonGroup( i18n("Advanced ADF-Options"), vbox, "ADF_BGROUP" );
 
-      connect( bgroup, TQT_SIGNAL(clicked(int)), this, TQT_SLOT( slNotifyADF(int)));
+      connect( bgroup, TQ_SIGNAL(clicked(int)), this, TQ_SLOT( slNotifyADF(int)));
 
       /* Two buttons inside */
       TQRadioButton *rbADFTillEnd = new TQRadioButton( i18n("Scan until ADF reports out of paper"),

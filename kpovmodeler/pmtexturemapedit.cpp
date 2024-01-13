@@ -78,7 +78,7 @@ void PMTextureMapEdit::displayObject( PMObject* o )
             edit->setValue( *vit );
             edit->setValidation( true, 0.0, true, 1.0 );
             edit->setReadOnly( readOnly );
-            connect( edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+            connect( edit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
          }
          m_numValues++;
       }

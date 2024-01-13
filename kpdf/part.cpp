@@ -120,11 +120,11 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_actionsSearched(false), m_searchStarted(false)
 {
 	// connect the started signal to tell the job the mimetypes we like
-	connect(this, TQT_SIGNAL(started(TDEIO::Job *)), this, TQT_SLOT(setMimeTypes(TDEIO::Job *)));
+	connect(this, TQ_SIGNAL(started(TDEIO::Job *)), this, TQ_SLOT(setMimeTypes(TDEIO::Job *)));
 	
 	// connect the completed signal so we can put the window caption when loading remote files
-	connect(this, TQT_SIGNAL(completed()), this, TQT_SLOT(emitWindowCaption()));
-	connect(this, TQT_SIGNAL(canceled(const TQString &)), this, TQT_SLOT(emitWindowCaption()));
+	connect(this, TQ_SIGNAL(completed()), this, TQ_SLOT(emitWindowCaption()));
+	connect(this, TQ_SIGNAL(canceled(const TQString &)), this, TQ_SLOT(emitWindowCaption()));
 	
 	// load catalog for translation
 	TDEGlobal::locale()->insertCatalogue("kpdf");
@@ -144,17 +144,17 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 
 	// build the document
 	m_document = new KPDFDocument(widget());
-	connect( m_document, TQT_SIGNAL( linkFind() ), this, TQT_SLOT( slotFind() ) );
-	connect( m_document, TQT_SIGNAL( linkGoToPage() ), this, TQT_SLOT( slotGoToPage() ) );
-	connect( m_document, TQT_SIGNAL( linkPresentation() ), this, TQT_SLOT( slotShowPresentation() ) );
-	connect( m_document, TQT_SIGNAL( linkEndPresentation() ), this, TQT_SLOT( slotHidePresentation() ) );
-	connect( m_document, TQT_SIGNAL( openURL(const KURL &) ), this, TQT_SLOT( openURLFromDocument(const KURL &) ) );
-	connect( m_document, TQT_SIGNAL( close() ), this, TQT_SLOT( close() ) );
+	connect( m_document, TQ_SIGNAL( linkFind() ), this, TQ_SLOT( slotFind() ) );
+	connect( m_document, TQ_SIGNAL( linkGoToPage() ), this, TQ_SLOT( slotGoToPage() ) );
+	connect( m_document, TQ_SIGNAL( linkPresentation() ), this, TQ_SLOT( slotShowPresentation() ) );
+	connect( m_document, TQ_SIGNAL( linkEndPresentation() ), this, TQ_SLOT( slotHidePresentation() ) );
+	connect( m_document, TQ_SIGNAL( openURL(const KURL &) ), this, TQ_SLOT( openURLFromDocument(const KURL &) ) );
+	connect( m_document, TQ_SIGNAL( close() ), this, TQ_SLOT( close() ) );
 	
 	if (parent && parent->metaObject()->slotNames(true).contains("slotQuit()"))
-		connect( m_document, TQT_SIGNAL( quit() ), parent, TQT_SLOT( slotQuit() ) );
+		connect( m_document, TQ_SIGNAL( quit() ), parent, TQ_SLOT( slotQuit() ) );
 	else
-		connect( m_document, TQT_SIGNAL( quit() ), this, TQT_SLOT( cannotQuit() ) );
+		connect( m_document, TQ_SIGNAL( quit() ), this, TQ_SLOT( cannotQuit() ) );
 
 	// widgets: ^searchbar (toolbar containing label and SearchWidget)
 //	m_searchToolBar = new TDEToolBar( parentWidget, "searchBar" );
@@ -169,7 +169,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_splitter->setOpaqueResize( true );
 	setWidget( m_splitter );
 	
-	m_showLeftPanel = new TDEToggleAction( i18n( "Show &Navigation Panel"), "show_side_panel", 0, this, TQT_SLOT( slotShowLeftPanel() ), actionCollection(), "show_leftpanel" );
+	m_showLeftPanel = new TDEToggleAction( i18n( "Show &Navigation Panel"), "show_side_panel", 0, this, TQ_SLOT( slotShowLeftPanel() ), actionCollection(), "show_leftpanel" );
 	m_showLeftPanel->setCheckedState( i18n( "Hide &Navigation Panel") );
 	m_showLeftPanel->setShortcut( "CTRL+L" );
 	m_showLeftPanel->setChecked( KpdfSettings::showLeftPanel() );
@@ -191,7 +191,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	TQVBoxLayout *tocWrapperLayout = new TQVBoxLayout(tocWrapper);
 	m_tocFrame = new TOC( tocWrapper, m_document );
 	tocWrapperLayout->add(m_tocFrame);
-	connect(m_tocFrame, TQT_SIGNAL(hasTOC(bool)), this, TQT_SLOT(enableTOC(bool)));
+	connect(m_tocFrame, TQ_SIGNAL(hasTOC(bool)), this, TQ_SLOT(enableTOC(bool)));
 	index = m_toolBox->addItem( tocWrapper, TQIconSet(SmallIcon("format-text-direction-ltr")), i18n("Contents") );
 	m_toolBox->setItemToolTip(index, i18n("Contents"));
 	enableTOC( false );
@@ -201,8 +201,8 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_searchWidget = new SearchWidget( thumbsBox, m_document );
 	m_thumbnailList = new ThumbnailList( thumbsBox, m_document );
 //	ThumbnailController * m_tc = new ThumbnailController( thumbsBox, m_thumbnailList );
-	connect( m_thumbnailList, TQT_SIGNAL( urlDropped( const KURL& ) ), TQT_SLOT( openURLFromDocument( const KURL & )) );
-	connect( m_thumbnailList, TQT_SIGNAL( rightClick(const KPDFPage *, const TQPoint &) ), this, TQT_SLOT( slotShowMenu(const KPDFPage *, const TQPoint &) ) );
+	connect( m_thumbnailList, TQ_SIGNAL( urlDropped( const KURL& ) ), TQ_SLOT( openURLFromDocument( const KURL & )) );
+	connect( m_thumbnailList, TQ_SIGNAL( rightClick(const KPDFPage *, const TQPoint &) ), this, TQ_SLOT( slotShowMenu(const KPDFPage *, const TQPoint &) ) );
 	// shrink the bottom controller toolbar (too hackish..)
 	thumbsBox->setStretchFactor( m_searchWidget, 100 );
 	thumbsBox->setStretchFactor( m_thumbnailList, 100 );
@@ -234,8 +234,8 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_pageView = new PageView( m_splitter, m_document );
 	m_pageView->setFocus(); //usability setting
 	m_splitter->setFocusProxy(m_pageView);
-	connect( m_pageView, TQT_SIGNAL( urlDropped( const KURL& ) ), TQT_SLOT( openURLFromDocument( const KURL & )));
-	connect( m_pageView, TQT_SIGNAL( rightClick(const KPDFPage *, const TQPoint &) ), this, TQT_SLOT( slotShowMenu(const KPDFPage *, const TQPoint &) ) );
+	connect( m_pageView, TQ_SIGNAL( urlDropped( const KURL& ) ), TQ_SLOT( openURLFromDocument( const KURL & )));
+	connect( m_pageView, TQ_SIGNAL( rightClick(const KPDFPage *, const TQPoint &) ), this, TQ_SLOT( slotShowMenu(const KPDFPage *, const TQPoint &) ) );
 
 	// add document observers
 	m_document->addObserver( this );
@@ -248,53 +248,53 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	TDEActionCollection * ac = actionCollection();
 
 	// Page Traversal actions
-	m_gotoPage = KStdAction::gotoPage( this, TQT_SLOT( slotGoToPage() ), ac, "goto_page" );
+	m_gotoPage = KStdAction::gotoPage( this, TQ_SLOT( slotGoToPage() ), ac, "goto_page" );
 	m_gotoPage->setShortcut( "CTRL+G" );
 	// dirty way to activate gotopage when pressing miniBar's button
-	connect( m_miniBar, TQT_SIGNAL( gotoPage() ), m_gotoPage, TQT_SLOT( activate() ) );
+	connect( m_miniBar, TQ_SIGNAL( gotoPage() ), m_gotoPage, TQ_SLOT( activate() ) );
 
-	m_prevPage = KStdAction::prior(this, TQT_SLOT(slotPreviousPage()), ac, "previous_page");
+	m_prevPage = KStdAction::prior(this, TQ_SLOT(slotPreviousPage()), ac, "previous_page");
 	m_prevPage->setWhatsThis( i18n( "Moves to the previous page of the document" ) );
 	m_prevPage->setShortcut( 0 );
 	// dirty way to activate prev page when pressing miniBar's button
-	connect( m_miniBar, TQT_SIGNAL( prevPage() ), m_prevPage, TQT_SLOT( activate() ) );
+	connect( m_miniBar, TQ_SIGNAL( prevPage() ), m_prevPage, TQ_SLOT( activate() ) );
 
-	m_nextPage = KStdAction::next(this, TQT_SLOT(slotNextPage()), ac, "next_page" );
+	m_nextPage = KStdAction::next(this, TQ_SLOT(slotNextPage()), ac, "next_page" );
 	m_nextPage->setWhatsThis( i18n( "Moves to the next page of the document" ) );
 	m_nextPage->setShortcut( 0 );
 	// dirty way to activate next page when pressing miniBar's button
-	connect( m_miniBar, TQT_SIGNAL( nextPage() ), m_nextPage, TQT_SLOT( activate() ) );
+	connect( m_miniBar, TQ_SIGNAL( nextPage() ), m_nextPage, TQ_SLOT( activate() ) );
 
-	m_firstPage = KStdAction::firstPage( this, TQT_SLOT( slotGotoFirst() ), ac, "first_page" );
+	m_firstPage = KStdAction::firstPage( this, TQ_SLOT( slotGotoFirst() ), ac, "first_page" );
 	m_firstPage->setWhatsThis( i18n( "Moves to the first page of the document" ) );
 
-	m_lastPage = KStdAction::lastPage( this, TQT_SLOT( slotGotoLast() ), ac, "last_page" );
+	m_lastPage = KStdAction::lastPage( this, TQ_SLOT( slotGotoLast() ), ac, "last_page" );
 	m_lastPage->setWhatsThis( i18n( "Moves to the last page of the document" ) );
 
-	m_historyBack = KStdAction::back( this, TQT_SLOT( slotHistoryBack() ), ac, "history_back" );
+	m_historyBack = KStdAction::back( this, TQ_SLOT( slotHistoryBack() ), ac, "history_back" );
 	m_historyBack->setWhatsThis( i18n( "Go to the place you were before" ) );
 
-	m_historyNext = KStdAction::forward( this, TQT_SLOT( slotHistoryNext() ), ac, "history_forward" );
+	m_historyNext = KStdAction::forward( this, TQ_SLOT( slotHistoryNext() ), ac, "history_forward" );
 	m_historyNext->setWhatsThis( i18n( "Go to the place you were after" ) );
 
 	// Find and other actions
-	m_find = KStdAction::find( this, TQT_SLOT( slotFind() ), ac, "find" );
+	m_find = KStdAction::find( this, TQ_SLOT( slotFind() ), ac, "find" );
 	m_find->setEnabled( false );
 
-	m_findNext = KStdAction::findNext( this, TQT_SLOT( slotFindNext() ), ac, "find_next" );
+	m_findNext = KStdAction::findNext( this, TQ_SLOT( slotFindNext() ), ac, "find_next" );
 	m_findNext->setEnabled( false );
 
-	m_saveAs = KStdAction::saveAs( this, TQT_SLOT( slotSaveFileAs() ), ac, "save" );
+	m_saveAs = KStdAction::saveAs( this, TQ_SLOT( slotSaveFileAs() ), ac, "save" );
 	m_saveAs->setEnabled( false );
-	TDEAction * prefs = KStdAction::preferences( this, TQT_SLOT( slotPreferences() ), ac, "preferences" );
+	TDEAction * prefs = KStdAction::preferences( this, TQ_SLOT( slotPreferences() ), ac, "preferences" );
 	prefs->setText( i18n( "Configure KPDF..." ) );
-	m_printPreview = KStdAction::printPreview( this, TQT_SLOT( slotPrintPreview() ), ac );
+	m_printPreview = KStdAction::printPreview( this, TQ_SLOT( slotPrintPreview() ), ac );
 	m_printPreview->setEnabled( false );
 
-	m_showProperties = new TDEAction(i18n("&Properties"), "application-vnd.tde.info", 0, this, TQT_SLOT(slotShowProperties()), ac, "properties");
+	m_showProperties = new TDEAction(i18n("&Properties"), "application-vnd.tde.info", 0, this, TQ_SLOT(slotShowProperties()), ac, "properties");
 	m_showProperties->setEnabled( false );
 
-	m_showPresentation = new TDEAction( i18n("P&resentation"), "application-x-kpresenter", "Ctrl+Shift+P", this, TQT_SLOT(slotShowPresentation()), ac, "presentation");
+	m_showPresentation = new TDEAction( i18n("P&resentation"), "application-x-kpresenter", "Ctrl+Shift+P", this, TQ_SLOT(slotShowPresentation()), ac, "presentation");
 	m_showPresentation->setEnabled( false );
 
 	// attach the actions of the children widgets too
@@ -313,11 +313,11 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	// by connecting to TQt4::TQSplitter's sliderMoved())
 	m_pageView->installEventFilter( this );
 	m_watcher = new KDirWatch( this );
-	connect( m_watcher, TQT_SIGNAL( dirty( const TQString& ) ), this, TQT_SLOT( slotFileDirty( const TQString& ) ) );
+	connect( m_watcher, TQ_SIGNAL( dirty( const TQString& ) ), this, TQ_SLOT( slotFileDirty( const TQString& ) ) );
 	m_dirtyHandler = new TQTimer( this );
-	connect( m_dirtyHandler, TQT_SIGNAL( timeout() ),this, TQT_SLOT( slotDoFileDirty() ) );
+	connect( m_dirtyHandler, TQ_SIGNAL( timeout() ),this, TQ_SLOT( slotDoFileDirty() ) );
 	m_saveSplitterSizeTimer = new TQTimer( this );
-	connect( m_saveSplitterSizeTimer, TQT_SIGNAL( timeout() ),this, TQT_SLOT( saveSplitterSize() ) );
+	connect( m_saveSplitterSizeTimer, TQ_SIGNAL( timeout() ),this, TQ_SLOT( saveSplitterSize() ) );
 
 	slotNewConfig();
 
@@ -432,7 +432,7 @@ bool Part::openFile()
                     *p << app;
                     *p << m_file << m_temporaryLocalFile;
                     m_pageView->showText(i18n("Converting from ps to pdf..."), 0);
-                    connect(p, TQT_SIGNAL(processExited(TDEProcess *)), this, TQT_SLOT(psTransformEnded()));
+                    connect(p, TQ_SIGNAL(processExited(TDEProcess *)), this, TQ_SLOT(psTransformEnded()));
                     p -> start();
                     return true;
                 }
@@ -527,7 +527,7 @@ void Part::setMimeTypes(TDEIO::Job *job)
     if (job)
     {
         job->addMetaData("accept", "application/pdf, */*;q=0.5");
-        connect(job, TQT_SIGNAL(mimetype(TDEIO::Job*,const TQString&)), this, TQT_SLOT(readMimeType(TDEIO::Job*,const TQString&)));
+        connect(job, TQ_SIGNAL(mimetype(TDEIO::Job*,const TQString&)), this, TQ_SLOT(readMimeType(TDEIO::Job*,const TQString&)));
     }
 }
 
@@ -830,7 +830,7 @@ void Part::slotPreferences()
     // we didn't find an instance of this dialog, so lets create it
     PreferencesDialog * dialog = new PreferencesDialog( m_pageView, KpdfSettings::self() );
     // keep us informed when the user changes settings
-    connect( dialog, TQT_SIGNAL( settingsChanged() ), this, TQT_SLOT( slotNewConfig() ) );
+    connect( dialog, TQ_SIGNAL( settingsChanged() ), this, TQ_SLOT( slotNewConfig() ) );
 
     dialog->show();
 }

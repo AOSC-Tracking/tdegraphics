@@ -85,7 +85,7 @@ ThumbnailList::ThumbnailList( TQWidget *parent, KPDFDocument *document )
 	viewport()->setPaletteBackgroundColor( palette().active().base() );
 
 	setFrameStyle( StyledPanel | Raised );
-	connect( this, TQT_SIGNAL(contentsMoving(int, int)), this, TQT_SLOT(slotRequestVisiblePixmaps(int, int)) );
+	connect( this, TQ_SIGNAL(contentsMoving(int, int)), this, TQ_SLOT(slotRequestVisiblePixmaps(int, int)) );
 }
 
 ThumbnailList::~ThumbnailList()
@@ -444,7 +444,7 @@ void ThumbnailList::delayedRequestVisiblePixmaps( int delayMs )
 	if ( !m_delayTimer )
 	{
 		m_delayTimer = new TQTimer( this );
-		connect( m_delayTimer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotDelayTimeout() ) );
+		connect( m_delayTimer, TQ_SIGNAL( timeout() ), this, TQ_SLOT( slotDelayTimeout() ) );
 	}
 	m_delayTimer->start( delayMs, true );
 }
@@ -563,8 +563,8 @@ ThumbnailController::ThumbnailController( TQWidget * parent, ThumbnailList * lis
 
     // insert a togglebutton [show only bookmarked pages]
     //insertSeparator();
-    insertButton( "bookmark", FILTERB_ID, TQT_SIGNAL( toggled( bool ) ),
-                  list, TQT_SLOT( slotFilterBookmarks( bool ) ),
+    insertButton( "bookmark", FILTERB_ID, TQ_SIGNAL( toggled( bool ) ),
+                  list, TQ_SLOT( slotFilterBookmarks( bool ) ),
                   true, i18n( "Show bookmarked pages only" ) );
     setToggle( FILTERB_ID );
     setButton( FILTERB_ID, KpdfSettings::filterBookmarks() );

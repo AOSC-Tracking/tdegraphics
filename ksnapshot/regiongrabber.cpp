@@ -74,9 +74,9 @@ RegionGrabber::RegionGrabber()
   sizeTip = new SizeTip( ( TQWidget * )0L );
 
   tipTimer = new TQTimer( this );
-  connect( tipTimer, TQT_SIGNAL( timeout() ), TQT_SLOT( updateSizeTip() ) );
+  connect( tipTimer, TQ_SIGNAL( timeout() ), TQ_SLOT( updateSizeTip() ) );
 
-  TQTimer::singleShot( 200, this, TQT_SLOT( initGrabber() ) );
+  TQTimer::singleShot( 200, this, TQ_SLOT( initGrabber() ) );
 }
 
 RegionGrabber::~RegionGrabber()

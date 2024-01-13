@@ -370,11 +370,11 @@ void kpToolPolygon::begin ()
 
         if (m_toolWidgetFillStyle)
         {
-            connect (m_toolWidgetFillStyle, TQT_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
-                     this, TQT_SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
+            connect (m_toolWidgetFillStyle, TQ_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
+                     this, TQ_SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
         }
-        connect (m_toolWidgetLineWidth, TQT_SIGNAL (lineWidthChanged (int)),
-                 this, TQT_SLOT (slotLineWidthChanged (int)));
+        connect (m_toolWidgetLineWidth, TQ_SIGNAL (lineWidthChanged (int)),
+                 this, TQ_SLOT (slotLineWidthChanged (int)));
 
         if (m_toolWidgetFillStyle)
             m_toolWidgetFillStyle->show ();
@@ -404,15 +404,15 @@ void kpToolPolygon::end ()
 
     if (m_toolWidgetFillStyle)
     {
-        disconnect (m_toolWidgetFillStyle, TQT_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
-                    this, TQT_SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
+        disconnect (m_toolWidgetFillStyle, TQ_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
+                    this, TQ_SLOT (slotFillStyleChanged (kpToolWidgetFillStyle::FillStyle)));
         m_toolWidgetFillStyle = 0;
     }
 
     if (m_toolWidgetLineWidth)
     {
-        disconnect (m_toolWidgetLineWidth, TQT_SIGNAL (lineWidthChanged (int)),
-                    this, TQT_SLOT (slotLineWidthChanged (int)));
+        disconnect (m_toolWidgetLineWidth, TQ_SIGNAL (lineWidthChanged (int)),
+                    this, TQ_SLOT (slotLineWidthChanged (int)));
         m_toolWidgetLineWidth = 0;
     }
 

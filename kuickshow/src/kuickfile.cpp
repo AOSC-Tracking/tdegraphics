@@ -86,8 +86,8 @@ bool KuickFile::download()
 
     m_job = TDEIO::file_copy( m_url, destURL, -1, true, false, false ); // handling progress ourselves
     m_job->setAutoErrorHandlingEnabled( true );
-    connect( m_job, TQT_SIGNAL( result( TDEIO::Job * )), TQT_SLOT( slotResult( TDEIO::Job * ) ));
-    connect( m_job, TQT_SIGNAL( percent( TDEIO::Job *, unsigned long )), TQT_SLOT( slotProgress( TDEIO::Job *, unsigned long ) ));
+    connect( m_job, TQ_SIGNAL( result( TDEIO::Job * )), TQ_SLOT( slotResult( TDEIO::Job * ) ));
+    connect( m_job, TQ_SIGNAL( percent( TDEIO::Job *, unsigned long )), TQ_SLOT( slotProgress( TDEIO::Job *, unsigned long ) ));
 
     // TODO: generify background/foreground downloading?
 

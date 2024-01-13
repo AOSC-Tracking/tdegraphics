@@ -45,8 +45,8 @@ ImgScaleDialog::ImgScaleDialog( TQWidget *parent, int curr_sel,
    TQ_CHECK_PTR(radios);
    radios->setTitle( i18n("Select Image Zoom") );
 
-   connect( radios, TQT_SIGNAL( clicked( int )),
-	    this, TQT_SLOT( setSelValue( int )));
+   connect( radios, TQ_SIGNAL( clicked( int )),
+	    this, TQ_SLOT( setSelValue( int )));
 
    // left gap: smaller Image
    TQRadioButton *rb25 = new TQRadioButton (i18n ("25 %"), radios);
@@ -109,10 +109,10 @@ ImgScaleDialog::ImgScaleDialog( TQWidget *parent, int curr_sel,
    sn.setNum(curr_sel );
    leCust->setValidator( new KIntValidator( leCust ) );
    leCust->setText(sn );
-   connect( leCust, TQT_SIGNAL( textChanged( const TQString& )),
-	    this, TQT_SLOT( customChanged( const TQString& )));
-   connect( rbCust, TQT_SIGNAL( toggled( bool )),
-	    this, TQT_SLOT(enableAndFocus(bool)));
+   connect( leCust, TQ_SIGNAL( textChanged( const TQString& )),
+	    this, TQ_SLOT( customChanged( const TQString& )));
+   connect( rbCust, TQ_SIGNAL( toggled( bool )),
+	    this, TQ_SLOT(enableAndFocus(bool)));
    leCust->setEnabled( rbCust->isChecked());
 
 

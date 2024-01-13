@@ -103,25 +103,25 @@ void kpMainWindow::setupEditMenuActions ()
     }
 
 
-    m_actionCut = KStdAction::cut (this, TQT_SLOT (slotCut ()), ac);
-    m_actionCopy = KStdAction::copy (this, TQT_SLOT (slotCopy ()), ac);
-    m_actionPaste = KStdAction::paste (this, TQT_SLOT (slotPaste ()), ac);
+    m_actionCut = KStdAction::cut (this, TQ_SLOT (slotCut ()), ac);
+    m_actionCopy = KStdAction::copy (this, TQ_SLOT (slotCopy ()), ac);
+    m_actionPaste = KStdAction::paste (this, TQ_SLOT (slotPaste ()), ac);
     m_actionPasteInNewWindow = new TDEAction (i18n ("Paste in &New Window"),
         TQt::CTRL + TQt::SHIFT + TQt::Key_V,
-        this, TQT_SLOT (slotPasteInNewWindow ()), ac, "edit_paste_in_new_window");
+        this, TQ_SLOT (slotPasteInNewWindow ()), ac, "edit_paste_in_new_window");
 
-    //m_actionDelete = KStdAction::clear (this, TQT_SLOT (slotDelete ()), ac);
+    //m_actionDelete = KStdAction::clear (this, TQ_SLOT (slotDelete ()), ac);
     m_actionDelete = new TDEAction (i18n ("&Delete Selection"), 0,
-        this, TQT_SLOT (slotDelete ()), ac, "edit_clear");
+        this, TQ_SLOT (slotDelete ()), ac, "edit_clear");
 
-    m_actionSelectAll = KStdAction::selectAll (this, TQT_SLOT (slotSelectAll ()), ac);
-    m_actionDeselect = KStdAction::deselect (this, TQT_SLOT (slotDeselect ()), ac);
+    m_actionSelectAll = KStdAction::selectAll (this, TQ_SLOT (slotSelectAll ()), ac);
+    m_actionDeselect = KStdAction::deselect (this, TQ_SLOT (slotDeselect ()), ac);
 
 
     m_actionCopyToFile = new TDEAction (i18n ("C&opy to File..."), 0,
-        this, TQT_SLOT (slotCopyToFile ()), ac, "edit_copy_to_file");
+        this, TQ_SLOT (slotCopyToFile ()), ac, "edit_copy_to_file");
     m_actionPasteFromFile = new TDEAction (i18n ("Paste &From File..."), 0,
-        this, TQT_SLOT (slotPasteFromFile ()), ac, "edit_paste_from_file");
+        this, TQ_SLOT (slotPasteFromFile ()), ac, "edit_paste_from_file");
 
 
     m_editMenuDocumentActionsEnabled = false;
@@ -129,8 +129,8 @@ void kpMainWindow::setupEditMenuActions ()
 
     // Paste should always be enabled, as long as there is something paste
     // (independent of whether we have a document or not)
-    connect (TQApplication::clipboard (), TQT_SIGNAL (dataChanged ()),
-             this, TQT_SLOT (slotEnablePaste ()));
+    connect (TQApplication::clipboard (), TQ_SIGNAL (dataChanged ()),
+             this, TQ_SLOT (slotEnablePaste ()));
     slotEnablePaste ();
 }
 

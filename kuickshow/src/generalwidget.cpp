@@ -47,8 +47,8 @@ GeneralWidget::GeneralWidget( TQWidget *parent, const char *name )
   logo->setTipText( i18n( "Open KuickShow Website" ) );
   logo->setUseTips( true );
 
-  connect( logo, TQT_SIGNAL( leftClickedURL( const TQString & ) ),
-            TQT_SLOT( slotURLClicked( const TQString & ) ) );
+  connect( logo, TQ_SIGNAL( leftClickedURL( const TQString & ) ),
+            TQ_SLOT( slotURLClicked( const TQString & ) ) );
 
   layout->addWidget( logo, 0, AlignRight );
 
@@ -92,7 +92,7 @@ GeneralWidget::GeneralWidget( TQWidget *parent, const char *name )
 
   cbOwnPalette = new TQCheckBox( i18n("Use own color palette"),
                                 gbox2, "pal");
-  connect( cbOwnPalette, TQT_SIGNAL( clicked() ), this, TQT_SLOT( useOwnPalette() ) );
+  connect( cbOwnPalette, TQ_SIGNAL( clicked() ), this, TQ_SLOT( useOwnPalette() ) );
 
   cbFastRemap = new TQCheckBox( i18n("Fast palette remapping"), gbox2, "remap");
 

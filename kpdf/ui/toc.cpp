@@ -67,8 +67,8 @@ TOC::TOC(TQWidget *parent, KPDFDocument *document) : TDEListView(parent), m_docu
     // the next line causes bug:147233
 //    setResizeMode(AllColumns);
     setAllColumnsShowFocus(true);
-    connect(this, TQT_SIGNAL(clicked(TQListViewItem *)), this, TQT_SLOT(slotExecuted(TQListViewItem *)));
-    connect(this, TQT_SIGNAL(returnPressed(TQListViewItem *)), this, TQT_SLOT(slotExecuted(TQListViewItem *)));
+    connect(this, TQ_SIGNAL(clicked(TQListViewItem *)), this, TQ_SLOT(slotExecuted(TQListViewItem *)));
+    connect(this, TQ_SIGNAL(returnPressed(TQListViewItem *)), this, TQ_SLOT(slotExecuted(TQListViewItem *)));
 }
 
 TOC::~TOC()

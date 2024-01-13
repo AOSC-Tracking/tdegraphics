@@ -300,10 +300,10 @@ void kpToolRotateDialog::createDirectionGroupBox ()
     directionLayout->addWidget (m_clockwiseRadioButton, 1, 1, TQt::AlignCenter);
 
 
-    connect (m_antiClockwiseRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotUpdate ()));
-    connect (m_clockwiseRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotUpdate ()));
+    connect (m_antiClockwiseRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotUpdate ()));
+    connect (m_clockwiseRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotUpdate ()));
 }
 
 // private
@@ -351,20 +351,20 @@ void kpToolRotateDialog::createAngleGroupBox ()
     angleLayout->setColStretch (1, 2);  // Stretch Custom Angle Input
 
 
-    connect (m_angle90RadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotUpdate ()));
-    connect (m_angle180RadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotUpdate ()));
-    connect (m_angle270RadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotUpdate ()));
+    connect (m_angle90RadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotUpdate ()));
+    connect (m_angle180RadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotUpdate ()));
+    connect (m_angle270RadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotUpdate ()));
 
-    connect (m_angleCustomRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotAngleCustomRadioButtonToggled (bool)));
-    connect (m_angleCustomRadioButton, TQT_SIGNAL (toggled (bool)),
-             this, TQT_SLOT (slotUpdate ()));
+    connect (m_angleCustomRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotAngleCustomRadioButtonToggled (bool)));
+    connect (m_angleCustomRadioButton, TQ_SIGNAL (toggled (bool)),
+             this, TQ_SLOT (slotUpdate ()));
 
-    connect (m_angleCustomInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (slotUpdate ()));
+    connect (m_angleCustomInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (slotUpdate ()));
 }
 
 

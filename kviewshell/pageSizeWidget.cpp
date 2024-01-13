@@ -26,7 +26,7 @@
 pageSizeWidget::pageSizeWidget( TQWidget* parent,  const char* name, WFlags fl )
     : pageSizeWidget_base( parent,  name, fl )
 {
-  connect(&chosenSize, TQT_SIGNAL(sizeChanged(const SimplePageSize&)), previewer, TQT_SLOT(setSize(const SimplePageSize&)));
+  connect(&chosenSize, TQ_SIGNAL(sizeChanged(const SimplePageSize&)), previewer, TQ_SLOT(setSize(const SimplePageSize&)));
 
   // Set up the formatChoice TQComboBox
   formatChoice->insertItem(i18n("Custom Size"));
@@ -42,17 +42,17 @@ pageSizeWidget::pageSizeWidget( TQWidget* parent,  const char* name, WFlags fl )
   }
   paperSize(formatChoice->currentItem());
 
-  connect(formatChoice, TQT_SIGNAL(activated(int)), this, TQT_SLOT(paperSize(int)));
-  connect(orientationChoice, TQT_SIGNAL(activated(int)), this, TQT_SLOT(orientationChanged(int)));
+  connect(formatChoice, TQ_SIGNAL(activated(int)), this, TQ_SLOT(paperSize(int)));
+  connect(orientationChoice, TQ_SIGNAL(activated(int)), this, TQ_SLOT(orientationChanged(int)));
 
   // Update the text fields when the user switches to a new unit, and
   // when the "custom format" is NOT selected.
-  connect(widthUnits, TQT_SIGNAL(activated(int)), this, TQT_SLOT(unitsChanged(int)));
-  connect(heightUnits, TQT_SIGNAL(activated(int)), this, TQT_SLOT(unitsChanged(int)));
+  connect(widthUnits, TQ_SIGNAL(activated(int)), this, TQ_SLOT(unitsChanged(int)));
+  connect(heightUnits, TQ_SIGNAL(activated(int)), this, TQ_SLOT(unitsChanged(int)));
 
   // Upate the chosen size whenever the user edits the input field. 
-  connect(widthInput, TQT_SIGNAL(textChanged(const TQString &)), this, TQT_SLOT(input(const TQString &)));
-  connect(heightInput, TQT_SIGNAL(textChanged(const TQString &)), this, TQT_SLOT(input(const TQString &)));
+  connect(widthInput, TQ_SIGNAL(textChanged(const TQString &)), this, TQ_SLOT(input(const TQString &)));
+  connect(heightInput, TQ_SIGNAL(textChanged(const TQString &)), this, TQ_SLOT(input(const TQString &)));
 
   // Allow entries between 0 and 1200. More filtering is done by the
   // pageSize class, which silently ignores values which are out of

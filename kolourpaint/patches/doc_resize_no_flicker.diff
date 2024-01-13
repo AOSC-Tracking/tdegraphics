@@ -389,7 +389,7 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 +    //m_resizeLinesNeedErase = false;
 +
  
-     QTimer::singleShot (0, this, SLOT (slotContentsMoved ()));
+     QTimer::singleShot (0, this, TQ_SLOT (slotContentsMoved ()));
  }
 @@ -874,9 +982,27 @@ void kpViewScrollableContainer::slotCont
                 << " grip=" << grip << endl;
@@ -466,7 +466,7 @@ diff -u -p -r1.7 kpviewscrollablecontainer.cpp
 +    QScrollView::windowActivationChange (wasActive);
 +
 +    // Wait for m_view to update
-+    QTimer::singleShot (0, this, SLOT (windowActivationChanged ()));
++    QTimer::singleShot (0, this, TQ_SLOT (windowActivationChanged ()));
 +}
 +
 +

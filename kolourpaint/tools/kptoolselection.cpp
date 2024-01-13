@@ -68,10 +68,10 @@ kpToolSelection::kpToolSelection (Mode mode,
       m_createNOPTimer (new TQTimer (this)),
       m_RMBMoveUpdateGUITimer (new TQTimer (this))
 {
-    connect (m_createNOPTimer, TQT_SIGNAL (timeout ()),
-             this, TQT_SLOT (delayedDraw ()));
-    connect (m_RMBMoveUpdateGUITimer, TQT_SIGNAL (timeout ()),
-             this, TQT_SLOT (slotRMBMoveUpdateGUI ()));
+    connect (m_createNOPTimer, TQ_SIGNAL (timeout ()),
+             this, TQ_SLOT (delayedDraw ()));
+    connect (m_RMBMoveUpdateGUITimer, TQ_SIGNAL (timeout ()),
+             this, TQ_SLOT (slotRMBMoveUpdateGUI ()));
 }
 
 kpToolSelection::~kpToolSelection ()
@@ -180,8 +180,8 @@ void kpToolSelection::begin ()
 
         if (m_toolWidgetOpaqueOrTransparent)
         {
-            connect (m_toolWidgetOpaqueOrTransparent, TQT_SIGNAL (isOpaqueChanged (bool)),
-                     this, TQT_SLOT (slotIsOpaqueChanged ()));
+            connect (m_toolWidgetOpaqueOrTransparent, TQ_SIGNAL (isOpaqueChanged (bool)),
+                     this, TQ_SLOT (slotIsOpaqueChanged ()));
             m_toolWidgetOpaqueOrTransparent->show ();
         }
     }
@@ -225,8 +225,8 @@ void kpToolSelection::end ()
 
     if (m_toolWidgetOpaqueOrTransparent)
     {
-        disconnect (m_toolWidgetOpaqueOrTransparent, TQT_SIGNAL (isOpaqueChanged (bool)),
-                    this, TQT_SLOT (slotIsOpaqueChanged ()));
+        disconnect (m_toolWidgetOpaqueOrTransparent, TQ_SIGNAL (isOpaqueChanged (bool)),
+                    this, TQ_SLOT (slotIsOpaqueChanged ()));
         m_toolWidgetOpaqueOrTransparent = 0;
     }
 
@@ -2037,8 +2037,8 @@ kpToolSelectionResizeScaleCommand::kpToolSelectionResizeScaleCommand (
     m_newWidth = selection ()->width ();
     m_newHeight = selection ()->height ();
 
-    connect (m_smoothScaleTimer, TQT_SIGNAL (timeout ()),
-             this, TQT_SLOT (resizeScaleAndMove ()));
+    connect (m_smoothScaleTimer, TQ_SIGNAL (timeout ()),
+             this, TQ_SLOT (resizeScaleAndMove ()));
 }
 
 kpToolSelectionResizeScaleCommand::~kpToolSelectionResizeScaleCommand ()

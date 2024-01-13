@@ -59,7 +59,7 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* n
 
     m_scaleRadios = new TQButtonGroup( 2, TQt::Vertical, i18n("Image Print Size"), this );
     m_scaleRadios->setRadioButtonExclusive(true);
-    connect( m_scaleRadios, TQT_SIGNAL(clicked(int)), TQT_SLOT(slScaleChanged(int)));
+    connect( m_scaleRadios, TQ_SIGNAL(clicked(int)), TQ_SLOT(slScaleChanged(int)));
 
     m_rbScreen = new TQRadioButton( i18n("Scale to same size as on screen"),
                                        m_scaleRadios );
@@ -116,11 +116,11 @@ ImgPrintDialog::ImgPrintDialog( KookaImage *img, TQWidget *parent, const char* n
     m_sizeW = new KIntNumInput( group );
     m_sizeW->setLabel( i18n("Image width:"), AlignVCenter );
     m_sizeW->setSuffix( i18n(" mm"));
-    connect( m_sizeW, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slCustomWidthChanged(int)));
+    connect( m_sizeW, TQ_SIGNAL(valueChanged(int)), TQ_SLOT(slCustomWidthChanged(int)));
     m_sizeH = new KIntNumInput( m_sizeW, AlignVCenter, group  );
     m_sizeH->setLabel( i18n("Image height:"), AlignVCenter);
     m_sizeH->setSuffix( i18n(" mm"));
-    connect( m_sizeH, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(slCustomHeightChanged(int)));
+    connect( m_sizeH, TQ_SIGNAL(valueChanged(int)), TQ_SLOT(slCustomHeightChanged(int)));
 
     m_ratio = new TQCheckBox( i18n("Maintain aspect ratio"), group, "cbAspectRatio" );
     m_ratio->setChecked(true);

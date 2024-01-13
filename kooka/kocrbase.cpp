@@ -86,9 +86,9 @@ KOCRBase::KOCRBase( TQWidget *parent, KSpellConfig *spellConfig,
     m_userWantsSpellCheck = konf->readBoolEntry(CFG_WANT_TDESPELL, true);
 
     /* Connect signals which disable the fields and store the configuration */
-    connect( this, TQT_SIGNAL( user1Clicked()), this, TQT_SLOT( writeConfig()));
-    connect( this, TQT_SIGNAL( user1Clicked()), this, TQT_SLOT( startOCR() ));
-    connect( this, TQT_SIGNAL( user2Clicked()), this, TQT_SLOT( stopOCR() ));
+    connect( this, TQ_SIGNAL( user1Clicked()), this, TQ_SLOT( writeConfig()));
+    connect( this, TQ_SIGNAL( user1Clicked()), this, TQ_SLOT( startOCR() ));
+    connect( this, TQ_SIGNAL( user2Clicked()), this, TQ_SLOT( stopOCR() ));
     m_previewSize.setWidth(200);
     m_previewSize.setHeight(300);
 
@@ -191,13 +191,13 @@ void KOCRBase::spellCheckIntro()
     spaceEater->setSizePolicy( TQSizePolicy( TQSizePolicy::Ignored, TQSizePolicy::Ignored ));
 
     /* connect toggle button */
-    connect( m_cbWantCheck, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slWantSpellcheck(bool)));
+    connect( m_cbWantCheck, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slWantSpellcheck(bool)));
     m_cbWantCheck->setChecked( m_userWantsSpellCheck );
     m_gbSpellOpts->setEnabled( m_userWantsSpellCheck );
     m_spellConfig = sCfg;
 
-    connect( sCfg, TQT_SIGNAL(configChanged()),
-            this, TQT_SLOT(slSpellConfigChanged()));
+    connect( sCfg, TQ_SIGNAL(configChanged()),
+            this, TQ_SLOT(slSpellConfigChanged()));
 }
 
 void KOCRBase::slSpellConfigChanged()
@@ -242,10 +242,10 @@ void KOCRBase::introduceImage( KookaImage* img)
 
     if( m_job )
     {
-        connect( m_job, TQT_SIGNAL( result( TDEIO::Job * )),
-                 this, TQT_SLOT( slPreviewResult( TDEIO::Job * )));
-        connect( m_job, TQT_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
-                 TQT_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
+        connect( m_job, TQ_SIGNAL( result( TDEIO::Job * )),
+                 this, TQ_SLOT( slPreviewResult( TDEIO::Job * )));
+        connect( m_job, TQ_SIGNAL( gotPreview( const KFileItem*, const TQPixmap& )),
+                 TQ_SLOT( slGotPreview( const KFileItem*, const TQPixmap& ) ));
          /* TDEIO::Jo result is called in any way: Success, Failed, Error,
           * thus connecting the failed is not really necessary.
           */

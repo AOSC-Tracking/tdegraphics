@@ -1085,8 +1085,8 @@ TQWidget *KScanOption::createWidget( TQWidget *parent, const TQString& w_desc,
     case BOOL:
       /* Widget Type is ToggleButton */
       w = new  TQCheckBox( text, parent, "AUTO_TOGGLE_BUTTON" );
-      connect( w, TQT_SIGNAL(clicked()), this,
-	       TQT_SLOT(slWidgetChange()));
+      connect( w, TQ_SIGNAL(clicked()), this,
+	       TQ_SLOT(slWidgetChange()));
       break;
     case SINGLE_VAL:
       /* Widget Type is Entry-Field */
@@ -1120,8 +1120,8 @@ TQWidget *KScanOption::createWidget( TQWidget *parent, const TQString& w_desc,
   if( w )
     {
       internal_widget = w;
-      connect( this, TQT_SIGNAL( optionChanged( KScanOption*)),
-	       TQT_SLOT( slRedrawWidget( KScanOption* )));
+      connect( this, TQ_SIGNAL( optionChanged( KScanOption*)),
+	       TQ_SLOT( slRedrawWidget( KScanOption* )));
       TQString tt = tooltip;
       if( tt.isEmpty() && desc )
 	tt = TQString::fromLocal8Bit( desc->desc );
@@ -1143,8 +1143,8 @@ TQWidget *KScanOption::comboBox( TQWidget *parent, const TQString& text )
 
   KScanCombo *cb = new KScanCombo( parent, text, list);
 
-  connect( cb, TQT_SIGNAL( valueChanged( const TQCString& )), this,
-	   TQT_SLOT( slWidgetChange( const TQCString& )));
+  connect( cb, TQ_SIGNAL( valueChanged( const TQCString& )), this,
+	   TQ_SLOT( slWidgetChange( const TQCString& )));
 
   return( cb );
 }
@@ -1153,8 +1153,8 @@ TQWidget *KScanOption::comboBox( TQWidget *parent, const TQString& text )
 TQWidget *KScanOption::entryField( TQWidget *parent, const TQString& text )
 {
   KScanEntry *ent = new KScanEntry( parent, text );
-  connect( ent, TQT_SIGNAL( valueChanged( TQCString )), this,
-	   TQT_SLOT( slWidgetChange( TQCString )));
+  connect( ent, TQ_SIGNAL( valueChanged( TQCString )), this,
+	   TQ_SLOT( slWidgetChange( TQCString )));
 	
   return( ent );
 }
@@ -1167,8 +1167,8 @@ TQWidget *KScanOption::KSaneSlider( TQWidget *parent, const TQString& text )
 
   KScanSlider *slider = new KScanSlider( parent, text, min, max );
   /* Connect to the options change Slot */
-  connect( slider, TQT_SIGNAL( valueChanged(int)), this,
-	   TQT_SLOT( slWidgetChange(int)));
+  connect( slider, TQ_SIGNAL( valueChanged(int)), this,
+	   TQ_SLOT( slWidgetChange(int)));
 
   return( slider );
 }

@@ -68,13 +68,13 @@ void PMPhotonsEdit::createTopWidgets( )
    gl->addWidget( m_pPassThrough, 1, 1 );
    gl->addWidget( m_pAreaLight, 1, 0 );
 
-   connect( m_pTarget, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotTargetClicked( ) ) );
-   connect( m_pSpacingMulti, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pRefraction, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pReflection, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCollect, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pPassThrough, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pAreaLight, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pTarget, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotTargetClicked( ) ) );
+   connect( m_pSpacingMulti, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pRefraction, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pReflection, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCollect, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pPassThrough, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pAreaLight, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPhotonsEdit::displayObject( PMObject* o )

@@ -109,10 +109,10 @@ void kpThumbnail::setView (kpThumbnailView *view)
 
     if (m_view)
     {
-        disconnect (m_view, TQT_SIGNAL (destroyed ()),
-                    this, TQT_SLOT (slotViewDestroyed ()));
-        disconnect (m_view, TQT_SIGNAL (zoomLevelChanged (int, int)),
-                    this, TQT_SLOT (updateCaption ()));
+        disconnect (m_view, TQ_SIGNAL (destroyed ()),
+                    this, TQ_SLOT (slotViewDestroyed ()));
+        disconnect (m_view, TQ_SIGNAL (zoomLevelChanged (int, int)),
+                    this, TQ_SLOT (updateCaption ()));
 
         boxLayout ()->remove (m_view);
     }
@@ -121,10 +121,10 @@ void kpThumbnail::setView (kpThumbnailView *view)
 
     if (m_view)
     {
-        connect (m_view, TQT_SIGNAL (destroyed ()),
-                 this, TQT_SLOT (slotViewDestroyed ()));
-        connect (m_view, TQT_SIGNAL (zoomLevelChanged (int, int)),
-                 this, TQT_SLOT (updateCaption ()));
+        connect (m_view, TQ_SIGNAL (destroyed ()),
+                 this, TQ_SLOT (slotViewDestroyed ()));
+        connect (m_view, TQ_SIGNAL (zoomLevelChanged (int, int)),
+                 this, TQ_SLOT (updateCaption ()));
         updateCaption ();
 
         boxLayout ()->addWidget (m_view);

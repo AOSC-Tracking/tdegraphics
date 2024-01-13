@@ -67,41 +67,41 @@ void kpMainWindow::setupFileMenuActions ()
 #endif
     TDEActionCollection *ac = actionCollection ();
 
-    m_actionNew = KStdAction::openNew (this, TQT_SLOT (slotNew ()), ac);
-    m_actionOpen = KStdAction::open (this, TQT_SLOT (slotOpen ()), ac);
+    m_actionNew = KStdAction::openNew (this, TQ_SLOT (slotNew ()), ac);
+    m_actionOpen = KStdAction::open (this, TQ_SLOT (slotOpen ()), ac);
 
-    m_actionOpenRecent = KStdAction::openRecent (this, TQT_SLOT (slotOpenRecent (const KURL &)), ac);
+    m_actionOpenRecent = KStdAction::openRecent (this, TQ_SLOT (slotOpenRecent (const KURL &)), ac);
     m_actionOpenRecent->loadEntries (kapp->config ());
 #if DEBUG_KP_MAIN_WINDOW
     kdDebug () << "\trecent URLs=" << m_actionOpenRecent->items () << endl;
 #endif
 
-    m_actionSave = KStdAction::save (this, TQT_SLOT (slotSave ()), ac);
-    m_actionSaveAs = KStdAction::saveAs (this, TQT_SLOT (slotSaveAs ()), ac);
+    m_actionSave = KStdAction::save (this, TQ_SLOT (slotSave ()), ac);
+    m_actionSaveAs = KStdAction::saveAs (this, TQ_SLOT (slotSaveAs ()), ac);
 
     m_actionExport = new TDEAction (i18n ("E&xport..."), 0,
-        this, TQT_SLOT (slotExport ()), ac, "file_export");
+        this, TQ_SLOT (slotExport ()), ac, "file_export");
 
     m_actionScan = new TDEAction (i18n ("Scan..."), SmallIcon ("scanner"), 0,
-        this, TQT_SLOT (slotScan ()), ac, "file_scan");
+        this, TQ_SLOT (slotScan ()), ac, "file_scan");
 
-    //m_actionRevert = KStdAction::revert (this, TQT_SLOT (slotRevert ()), ac);
+    //m_actionRevert = KStdAction::revert (this, TQ_SLOT (slotRevert ()), ac);
     m_actionReload = new TDEAction (i18n ("Reloa&d"), TDEStdAccel::reload (),
-        this, TQT_SLOT (slotReload ()), ac, "file_revert");
+        this, TQ_SLOT (slotReload ()), ac, "file_revert");
     slotEnableReload ();
 
-    m_actionPrint = KStdAction::print (this, TQT_SLOT (slotPrint ()), ac);
-    m_actionPrintPreview = KStdAction::printPreview (this, TQT_SLOT (slotPrintPreview ()), ac);
+    m_actionPrint = KStdAction::print (this, TQ_SLOT (slotPrint ()), ac);
+    m_actionPrintPreview = KStdAction::printPreview (this, TQ_SLOT (slotPrintPreview ()), ac);
 
-    m_actionMail = KStdAction::mail (this, TQT_SLOT (slotMail ()), ac);
+    m_actionMail = KStdAction::mail (this, TQ_SLOT (slotMail ()), ac);
 
     m_actionSetAsWallpaperCentered = new TDEAction (i18n ("Set as Wa&llpaper (Centered)"), 0,
-        this, TQT_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
+        this, TQ_SLOT (slotSetAsWallpaperCentered ()), ac, "file_set_as_wallpaper_centered");
     m_actionSetAsWallpaperTiled = new TDEAction (i18n ("Set as Wallpaper (&Tiled)"), 0,
-        this, TQT_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
+        this, TQ_SLOT (slotSetAsWallpaperTiled ()), ac, "file_set_as_wallpaper_tiled");
 
-    m_actionClose = KStdAction::close (this, TQT_SLOT (slotClose ()), ac);
-    m_actionQuit = KStdAction::quit (this, TQT_SLOT (slotQuit ()), ac);
+    m_actionClose = KStdAction::close (this, TQ_SLOT (slotClose ()), ac);
+    m_actionQuit = KStdAction::quit (this, TQ_SLOT (slotQuit ()), ac);
 
     m_scanDialog = 0;
 
@@ -451,8 +451,8 @@ void kpMainWindow::slotScan ()
     #if DEBUG_KP_MAIN_WINDOW
         kdDebug () << "\tcreated scanDialog=" << m_scanDialog << endl;
     #endif
-        connect (m_scanDialog, TQT_SIGNAL (finalImage (const TQImage &, int)),
-                 TQT_SLOT (slotScanned (const TQImage &, int)));
+        connect (m_scanDialog, TQ_SIGNAL (finalImage (const TQImage &, int)),
+                 TQ_SLOT (slotScanned (const TQImage &, int)));
     }
 
 
@@ -704,8 +704,8 @@ KURL kpMainWindow::askForSaveURL (const TQString &caption,
     if (localOnly)
         fd.setMode (KFile::File | KFile::LocalOnly);
 
-    connect (&fd, TQT_SIGNAL (filterChanged (const TQString &)),
-             saveOptionsWidget, TQT_SLOT (setMimeType (const TQString &)));
+    connect (&fd, TQ_SIGNAL (filterChanged (const TQString &)),
+             saveOptionsWidget, TQ_SLOT (setMimeType (const TQString &)));
 
 
     if (fd.exec ())

@@ -327,28 +327,28 @@ kpEffectBalanceWidget::kpEffectBalanceWidget (bool actOnSelection,
 
 
     // (no need for settingsChangedDelayed() since BCG effect is so fast :))
-    connect (m_brightnessInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SIGNAL (settingsChangedNoWaitCursor ()));
-    connect (m_contrastInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SIGNAL (settingsChangedNoWaitCursor ()));
+    connect (m_brightnessInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SIGNAL (settingsChangedNoWaitCursor ()));
+    connect (m_contrastInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SIGNAL (settingsChangedNoWaitCursor ()));
 
-    connect (m_gammaInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (recalculateGammaLabel ()));
-    connect (m_gammaInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SIGNAL (settingsChangedNoWaitCursor ()));
+    connect (m_gammaInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (recalculateGammaLabel ()));
+    connect (m_gammaInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SIGNAL (settingsChangedNoWaitCursor ()));
 
-    connect (m_channelsComboBox, TQT_SIGNAL (activated (int)),
-             this, TQT_SIGNAL (settingsChanged ()));
+    connect (m_channelsComboBox, TQ_SIGNAL (activated (int)),
+             this, TQ_SIGNAL (settingsChanged ()));
 
-    connect (brightnessResetPushButton, TQT_SIGNAL (clicked ()),
-             this, TQT_SLOT (resetBrightness ()));
-    connect (contrastResetPushButton, TQT_SIGNAL (clicked ()),
-             this, TQT_SLOT (resetContrast ()));
-    connect (gammaResetPushButton, TQT_SIGNAL (clicked ()),
-             this, TQT_SLOT (resetGamma ()));
+    connect (brightnessResetPushButton, TQ_SIGNAL (clicked ()),
+             this, TQ_SLOT (resetBrightness ()));
+    connect (contrastResetPushButton, TQ_SIGNAL (clicked ()),
+             this, TQ_SLOT (resetContrast ()));
+    connect (gammaResetPushButton, TQ_SIGNAL (clicked ()),
+             this, TQ_SLOT (resetGamma ()));
 
-    connect (resetPushButton, TQT_SIGNAL (clicked ()),
-             this, TQT_SLOT (resetAll ()));
+    connect (resetPushButton, TQ_SIGNAL (clicked ()),
+             this, TQ_SLOT (resetAll ()));
 
 
     recalculateGammaLabel ();

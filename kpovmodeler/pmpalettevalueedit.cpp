@@ -55,8 +55,8 @@ PMPaletteValueEdit::PMPaletteValueEdit( TQWidget* parent, const char* name )
    layout->addSpacing( KDialog::spacingHint( ) );
    layout->addWidget( m_pValueEdit );
 
-   connect( m_pIndexEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pValueEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pIndexEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pValueEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPaletteValueEdit::setIndex( int idx )

@@ -29,8 +29,8 @@ GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWi
 	TQHBoxLayout* layout = new TQHBoxLayout(0);
 	layout->setMargin(3);
 	xyColorSelector = new KXYColorSelector(this);
-	connect(xyColorSelector, TQT_SIGNAL( valueChanged(int, int) ),
-		TQT_SLOT( slotXyColorSelectorPosChanged(int, int) ));
+	connect(xyColorSelector, TQ_SIGNAL( valueChanged(int, int) ),
+		TQ_SLOT( slotXyColorSelectorPosChanged(int, int) ));
 	layout->addWidget(xyColorSelector);
 	topLayout->addLayout(layout, 0, 0);
 	topLayout->setRowStretch(0, 10);
@@ -40,14 +40,14 @@ GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWi
 	checkBoxLayout->setMargin(0);
 	variableCheckBox = new TQCheckBox(i18n( "Variable" ), this);
 	variableGlobalComponent = false;
-	connect(variableCheckBox, TQT_SIGNAL( toggled(bool) ), TQT_SLOT( slotSetVariableGlobalComponent(bool) ));
+	connect(variableCheckBox, TQ_SIGNAL( toggled(bool) ), TQ_SLOT( slotSetVariableGlobalComponent(bool) ));
 	checkBoxLayout->addSpacing(2);
 	checkBoxLayout->addWidget(variableCheckBox);
 	xyColorSelectorLayout->addLayout(checkBoxLayout);
 	xyColorSelectorLayout->addStretch(10);
 	TQHBoxLayout* buttonsLayout = new TQHBoxLayout();
 	synchronizeColorButton = new TQPushButton(i18n( "Synchronize" ), this);
-	connect(synchronizeColorButton, TQT_SIGNAL( clicked() ), TQT_SLOT( slotSynchronizeColor() ));
+	connect(synchronizeColorButton, TQ_SIGNAL( clicked() ), TQ_SLOT( slotSynchronizeColor() ));
 	buttonsLayout->addSpacing(2);
 	buttonsLayout->addWidget(synchronizeColorButton);
 	buttonsLayout->addStretch(10);
@@ -55,12 +55,12 @@ GradientSelection::GradientSelection(TQWidget *parent, const char *name ) : TQWi
 	xyColorSelectorLayout->addSpacing(2);
 	topLayout->addLayout(xyColorSelectorLayout, 1, 0);
 	zColorSelector = new KZColorSelector(TQt::Vertical, this);
-	connect(zColorSelector, TQT_SIGNAL( valueChanged(int) ),
-		TQT_SLOT( slotZColorSelectorPosChanged(int) ));
+	connect(zColorSelector, TQ_SIGNAL( valueChanged(int) ),
+		TQ_SLOT( slotZColorSelectorPosChanged(int) ));
 	zColorSelector->setFixedWidth(36);
 	topLayout->addWidget(zColorSelector, 0, 1);
 	TQVBoxLayout* zColorSelectorLayout = new TQVBoxLayout(0);
-	connect(&hsvButtons, TQT_SIGNAL( clicked(int) ), TQT_SLOT( slotSetColorSelectionMode(int) ));
+	connect(&hsvButtons, TQ_SIGNAL( clicked(int) ), TQ_SLOT( slotSetColorSelectionMode(int) ));
 	TQRadioButton* hRadioButton = new TQRadioButton("H", this);
 	hsvButtons.insert(hRadioButton, H_COMPONENT);
 	zColorSelectorLayout->addWidget(hRadioButton);

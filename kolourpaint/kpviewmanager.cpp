@@ -229,8 +229,8 @@ void kpViewManager::setTextCursorEnabled (bool yes)
     if (yes)
     {
         m_textCursorBlinkTimer = new TQTimer (this);
-        connect (m_textCursorBlinkTimer, TQT_SIGNAL (timeout ()),
-                 this, TQT_SLOT (slotTextCursorBlink ()));
+        connect (m_textCursorBlinkTimer, TQ_SIGNAL (timeout ()),
+                 this, TQ_SLOT (slotTextCursorBlink ()));
         slotTextCursorBlink ();
     }
     // TODO: What if !yes - shouldn't it clear the cursor?

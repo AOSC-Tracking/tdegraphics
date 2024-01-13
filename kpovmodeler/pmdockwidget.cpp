@@ -171,10 +171,10 @@ void PMDockMainWindow::createGUI( Part * part )
 
     factory->removeClient( d->m_activePart );
 
-    disconnect( d->m_activePart, TQT_SIGNAL( setWindowCaption( const TQString & ) ),
-             this, TQT_SLOT( setCaption( const TQString & ) ) );
-    disconnect( d->m_activePart, TQT_SIGNAL( setStatusBarText( const TQString & ) ),
-             this, TQT_SLOT( slotSetStatusBarText( const TQString & ) ) );
+    disconnect( d->m_activePart, TQ_SIGNAL( setWindowCaption( const TQString & ) ),
+             this, TQ_SLOT( setCaption( const TQString & ) ) );
+    disconnect( d->m_activePart, TQ_SIGNAL( setStatusBarText( const TQString & ) ),
+             this, TQ_SLOT( slotSetStatusBarText( const TQString & ) ) );
   }
 
   if( !d->m_bShellGUIActivated )
@@ -187,10 +187,10 @@ void PMDockMainWindow::createGUI( Part * part )
   if ( part )
   {
     // do this before sending the activate event
-    connect( part, TQT_SIGNAL( setWindowCaption( const TQString & ) ),
-             this, TQT_SLOT( setCaption( const TQString & ) ) );
-    connect( part, TQT_SIGNAL( setStatusBarText( const TQString & ) ),
-             this, TQT_SLOT( slotSetStatusBarText( const TQString & ) ) );
+    connect( part, TQ_SIGNAL( setWindowCaption( const TQString & ) ),
+             this, TQ_SLOT( setCaption( const TQString & ) ) );
+    connect( part, TQ_SIGNAL( setStatusBarText( const TQString & ) ),
+             this, TQ_SLOT( slotSetStatusBarText( const TQString & ) ) );
 
     factory->addClient( part );
 
@@ -359,24 +359,24 @@ PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
   closeButton->setPixmap( const_cast< const char** >(close_xpm) );
   int buttonWidth = 9, buttonHeight = 9;
   closeButton->setFixedSize(buttonWidth,buttonHeight);
-  connect( closeButton, TQT_SIGNAL(clicked()), parent, TQT_SIGNAL(headerCloseButtonClicked()));
+  connect( closeButton, TQ_SIGNAL(clicked()), parent, TQ_SIGNAL(headerCloseButtonClicked()));
   // MODIFICATION (zehender)
   // The shell will delete the widget
   // undock is unnecessary
-  // connect( closeButton, TQT_SIGNAL(clicked()), parent, TQT_SLOT(undock()));
+  // connect( closeButton, TQ_SIGNAL(clicked()), parent, TQ_SLOT(undock()));
 
   stayButton = new PMDockButton_Private( this, "DockStayButton" );
   stayButton->setToggleButton( true );
   stayButton->setPixmap( const_cast< const char** >(not_close_xpm) );
   stayButton->setFixedSize(buttonWidth,buttonHeight);
-  connect( stayButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotStayClicked()));
+  connect( stayButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotStayClicked()));
   stayButton->hide( );
 
   dockbackButton = new PMDockButton_Private( this, "DockbackButton" );
   dockbackButton->setPixmap( const_cast< const char** >(dockback_xpm));
   dockbackButton->setFixedSize(buttonWidth,buttonHeight);
-  connect( dockbackButton, TQT_SIGNAL(clicked()), parent, TQT_SIGNAL(headerDockbackButtonClicked()));
-  connect( dockbackButton, TQT_SIGNAL(clicked()), parent, TQT_SLOT(dockBack()));
+  connect( dockbackButton, TQ_SIGNAL(clicked()), parent, TQ_SIGNAL(headerDockbackButtonClicked()));
+  connect( dockbackButton, TQ_SIGNAL(clicked()), parent, TQ_SLOT(dockBack()));
 
   // MODIFICATION (zehender)
   // Add a button to undock the widget and dock it as top level
@@ -384,7 +384,7 @@ PMDockWidgetHeader::PMDockWidgetHeader( PMDockWidget* parent, const char* name )
   toDesktopButton = new PMDockButton_Private( this, "ToDesktopButton" );
   toDesktopButton->setPixmap( const_cast< const char** >(todesktop_xpm));
   toDesktopButton->setFixedSize(buttonWidth,buttonHeight);
-  connect( toDesktopButton, TQT_SIGNAL(clicked()), parent, TQT_SLOT(toDesktop()));
+  connect( toDesktopButton, TQ_SIGNAL(clicked()), parent, TQ_SLOT(toDesktop()));
 
   layout->addWidget( drag );
   layout->addWidget( dockbackButton );
@@ -509,7 +509,7 @@ PMDockWidget::PMDockWidget( PMDockManager* dockManager, const char* name, const 
   setIcon( pixmap);
   widget = 0L;
 
-  TQObject::connect(this, TQT_SIGNAL(hasUndocked()), manager->main, TQT_SLOT(slotDockWidgetUndocked()) );
+  TQObject::connect(this, TQ_SIGNAL(hasUndocked()), manager->main, TQ_SLOT(slotDockWidgetUndocked()) );
   applyToWidget( parent, TQPoint(0,0) );
 }
 
@@ -837,8 +837,8 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
   if( target->formerBrotherDockWidget != 0L) {
     newDock->formerBrotherDockWidget = target->formerBrotherDockWidget;
     if( formerBrotherDockWidget != 0L)
-      TQObject::connect( newDock->formerBrotherDockWidget, TQT_SIGNAL(iMBeingClosed()),
-                        newDock, TQT_SLOT(loseFormerBrotherDockWidget()) );
+      TQObject::connect( newDock->formerBrotherDockWidget, TQ_SIGNAL(iMBeingClosed()),
+                        newDock, TQ_SLOT(loseFormerBrotherDockWidget()) );
       target->loseFormerBrotherDockWidget();
     }
   newDock->formerDockPos = target->formerDockPos;
@@ -846,7 +846,7 @@ PMDockWidget* PMDockWidget::manualDock( PMDockWidget* target, DockPosition dockP
   if ( dockPos == PMDockWidget::DockCenter )
   {
     PMDockTabGroup* tab = new PMDockTabGroup( newDock, "_dock_tab");
-    TQObject::connect(tab, TQT_SIGNAL(currentChanged(TQWidget*)), d, TQT_SLOT(slotFocusEmbeddedWidget(TQWidget*)));
+    TQObject::connect(tab, TQ_SIGNAL(currentChanged(TQWidget*)), d, TQ_SLOT(slotFocusEmbeddedWidget(TQWidget*)));
     newDock->setWidget( tab );
 
     target->applyToWidget( tab );
@@ -969,8 +969,8 @@ void PMDockWidget::undock()
     d->index = parentTab->indexOf( this); // memorize the page position in the tab widget
     parentTab->removePage( this );
     formerBrotherDockWidget = (PMDockWidget*)parentTab->page(0);
-    TQObject::connect( formerBrotherDockWidget, TQT_SIGNAL(iMBeingClosed()),
-                      this, TQT_SLOT(loseFormerBrotherDockWidget()) );
+    TQObject::connect( formerBrotherDockWidget, TQ_SIGNAL(iMBeingClosed()),
+                      this, TQ_SLOT(loseFormerBrotherDockWidget()) );
     applyToWidget( 0L );
     if ( parentTab->count() == 1 ){
 
@@ -1034,8 +1034,8 @@ void PMDockWidget::undock()
       group->hide();
 
       if( formerBrotherDockWidget != 0L)
-        TQObject::connect( formerBrotherDockWidget, TQT_SIGNAL(iMBeingClosed()),
-                          this, TQT_SLOT(loseFormerBrotherDockWidget()) );
+        TQObject::connect( formerBrotherDockWidget, TQ_SIGNAL(iMBeingClosed()),
+                          this, TQ_SLOT(loseFormerBrotherDockWidget()) );
 
       if ( !group->parentWidget() ){
         secondWidget->applyToWidget( 0L, group->frameGeometry().topLeft() );
@@ -1165,8 +1165,8 @@ void PMDockWidget::makeDockVisible()
 void PMDockWidget::loseFormerBrotherDockWidget()
 {
   if( formerBrotherDockWidget != 0L)
-    TQObject::disconnect( formerBrotherDockWidget, TQT_SIGNAL(iMBeingClosed()),
-                         this, TQT_SLOT(loseFormerBrotherDockWidget()) );
+    TQObject::disconnect( formerBrotherDockWidget, TQ_SIGNAL(iMBeingClosed()),
+                         this, TQ_SLOT(loseFormerBrotherDockWidget()) );
   formerBrotherDockWidget = 0L;
   repaint();
 }
@@ -1276,8 +1276,8 @@ PMDockManager::PMDockManager( TQWidget* mainWindow , const char* name )
   menu = new TQPopupMenu();
 #endif
 
-  connect( menu, TQT_SIGNAL(aboutToShow()), TQT_SLOT(slotMenuPopup()) );
-  connect( menu, TQT_SIGNAL(activated(int)), TQT_SLOT(slotMenuActivated(int)) );
+  connect( menu, TQ_SIGNAL(aboutToShow()), TQ_SLOT(slotMenuPopup()) );
+  connect( menu, TQ_SIGNAL(activated(int)), TQ_SLOT(slotMenuActivated(int)) );
 
   childDock = new TQObjectList();
   childDock->setAutoDelete( false );

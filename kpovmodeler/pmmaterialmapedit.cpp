@@ -100,12 +100,12 @@ void PMMaterialMapEdit::createTopWidgets( )
    hl->addWidget( m_pMapTypeEdit );
    hl->addStretch( 1 );
 
-   connect( m_pImageFileTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotImageFileTypeChanged( int ) ) );
-   connect( m_pMapTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotMapTypeChanged( int ) ) );
-   connect( m_pInterpolateTypeEdit, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotInterpolateTypeChanged( int ) ) );
-   connect( m_pImageFileNameBrowse, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotImageFileBrowseClicked( ) ) );
-   connect( m_pImageFileNameEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotImageFileNameChanged( const TQString& ) ) );
-   connect( m_pOnceEdit, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pImageFileTypeEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotImageFileTypeChanged( int ) ) );
+   connect( m_pMapTypeEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotMapTypeChanged( int ) ) );
+   connect( m_pInterpolateTypeEdit, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotInterpolateTypeChanged( int ) ) );
+   connect( m_pImageFileNameBrowse, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotImageFileBrowseClicked( ) ) );
+   connect( m_pImageFileNameEdit, TQ_SIGNAL( textChanged( const TQString& ) ), TQ_SLOT( slotImageFileNameChanged( const TQString& ) ) );
+   connect( m_pOnceEdit, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMMaterialMapEdit::displayObject( PMObject* o )

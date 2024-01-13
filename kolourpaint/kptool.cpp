@@ -151,13 +151,13 @@ void kpTool::createAction ()
 
 
     m_action = new kpToolAction (text (), iconName (), shortcutForKey (m_key),
-                                 this, TQT_SLOT (slotActionActivated ()),
+                                 this, TQ_SLOT (slotActionActivated ()),
                                  m_mainWindow->actionCollection (), name ());
     m_action->setExclusiveGroup (TQString::fromLatin1 ("Tool Box Actions"));
     m_action->setWhatsThis (description ());
 
-    connect (m_action, TQT_SIGNAL (toolTipChanged (const TQString &)),
-             this, TQT_SLOT (slotActionToolTipChanged (const TQString &)));
+    connect (m_action, TQ_SIGNAL (toolTipChanged (const TQString &)),
+             this, TQ_SLOT (slotActionToolTipChanged (const TQString &)));
 }
 
 

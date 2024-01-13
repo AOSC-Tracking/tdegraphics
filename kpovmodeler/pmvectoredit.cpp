@@ -39,8 +39,8 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
    for( i = 0; i < 2; i++ )
    {
       m_edits.insert( i, new TQLineEdit( this ) );
-      connect( m_edits[i], TQT_SIGNAL( textChanged( const TQString& ) ),
-               TQT_SLOT( slotTextChanged( const TQString& ) ) );
+      connect( m_edits[i], TQ_SIGNAL( textChanged( const TQString& ) ),
+               TQ_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
    layout = new TQHBoxLayout( this );
@@ -77,8 +77,8 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionX,
    for( i = 0; i < 3; i++ )
    {
       m_edits.insert( i, new TQLineEdit( this ) );
-      connect( m_edits[i], TQT_SIGNAL( textChanged( const TQString& ) ),
-               TQT_SLOT( slotTextChanged( const TQString& ) ) );
+      connect( m_edits[i], TQ_SIGNAL( textChanged( const TQString& ) ),
+               TQ_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
    layout = new TQHBoxLayout( this );
@@ -125,8 +125,8 @@ PMVectorEdit::PMVectorEdit( const TQString& descriptionA,
    for( i = 0; i < 4; i++ )
    {
       m_edits.insert( i, new TQLineEdit( this ) );
-      connect( m_edits[i], TQT_SIGNAL( textChanged( const TQString& ) ),
-               TQT_SLOT( slotTextChanged( const TQString& ) ) );
+      connect( m_edits[i], TQ_SIGNAL( textChanged( const TQString& ) ),
+               TQ_SLOT( slotTextChanged( const TQString& ) ) );
    }
 
    layout = new TQHBoxLayout( this );

@@ -323,16 +323,16 @@ void kpToolRectangle::begin ()
     if (tb)
     {
         m_toolWidgetLineWidth = tb->toolWidgetLineWidth ();
-        connect (m_toolWidgetLineWidth, TQT_SIGNAL (lineWidthChanged (int)),
-                 this, TQT_SLOT (slotLineWidthChanged ()));
+        connect (m_toolWidgetLineWidth, TQ_SIGNAL (lineWidthChanged (int)),
+                 this, TQ_SLOT (slotLineWidthChanged ()));
         m_toolWidgetLineWidth->show ();
 
         updatePens ();
 
 
         m_toolWidgetFillStyle = tb->toolWidgetFillStyle ();
-        connect (m_toolWidgetFillStyle, TQT_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
-                 this, TQT_SLOT (slotFillStyleChanged ()));
+        connect (m_toolWidgetFillStyle, TQ_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
+                 this, TQ_SLOT (slotFillStyleChanged ()));
         m_toolWidgetFillStyle->show ();
 
         updateBrushes ();
@@ -356,15 +356,15 @@ void kpToolRectangle::end ()
 
     if (m_toolWidgetLineWidth)
     {
-        disconnect (m_toolWidgetLineWidth, TQT_SIGNAL (lineWidthChanged (int)),
-                    this, TQT_SLOT (slotLineWidthChanged ()));
+        disconnect (m_toolWidgetLineWidth, TQ_SIGNAL (lineWidthChanged (int)),
+                    this, TQ_SLOT (slotLineWidthChanged ()));
         m_toolWidgetLineWidth = 0;
     }
 
     if (m_toolWidgetFillStyle)
     {
-        disconnect (m_toolWidgetFillStyle, TQT_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
-                   this, TQT_SLOT (slotFillStyleChanged ()));
+        disconnect (m_toolWidgetFillStyle, TQ_SIGNAL (fillStyleChanged (kpToolWidgetFillStyle::FillStyle)),
+                   this, TQ_SLOT (slotFillStyleChanged ()));
         m_toolWidgetFillStyle = 0;
     }
 

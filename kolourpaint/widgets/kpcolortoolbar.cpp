@@ -476,8 +476,8 @@ kpColorCells::kpColorCells (TQWidget *parent,
     setAcceptDrops (true);
     setAcceptDrags (true);
     
-    connect (this, TQT_SIGNAL (colorDoubleClicked (int)),
-             TQT_SLOT (slotColorDoubleClicked (int)));
+    connect (this, TQ_SIGNAL (colorDoubleClicked (int)),
+             TQ_SLOT (slotColorDoubleClicked (int)));
 
     if (!ownColorsInitialised)
     {
@@ -674,9 +674,9 @@ void kpColorCells::mouseReleaseEvent (TQMouseEvent *e)
             m_mouseButton = 1;
     }
 
-    connect (this, TQT_SIGNAL (colorSelected (int)), this, TQT_SLOT (slotColorSelected (int)));
+    connect (this, TQ_SIGNAL (colorSelected (int)), this, TQ_SLOT (slotColorSelected (int)));
     KColorCells::mouseReleaseEvent (e);
-    disconnect (this, TQT_SIGNAL (colorSelected (int)), this, TQT_SLOT (slotColorSelected (int)));
+    disconnect (this, TQ_SIGNAL (colorSelected (int)), this, TQ_SLOT (slotColorSelected (int)));
 
 #if DEBUG_KP_COLOR_TOOL_BAR
     kdDebug () << "kpColorCells::mouseReleaseEvent() setting m_mouseButton back to -1" << endl;
@@ -830,16 +830,16 @@ kpColorPalette::kpColorPalette (TQWidget *parent,
 
     m_transparentColorCell = new kpTransparentColorCell (this);
     m_transparentColorCell->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
-    connect (m_transparentColorCell, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
-             this, TQT_SIGNAL (foregroundColorChanged (const kpColor &)));
-    connect (m_transparentColorCell, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
-             this, TQT_SIGNAL (backgroundColorChanged (const kpColor &)));
+    connect (m_transparentColorCell, TQ_SIGNAL (foregroundColorChanged (const kpColor &)),
+             this, TQ_SIGNAL (foregroundColorChanged (const kpColor &)));
+    connect (m_transparentColorCell, TQ_SIGNAL (backgroundColorChanged (const kpColor &)),
+             this, TQ_SIGNAL (backgroundColorChanged (const kpColor &)));
 
     m_colorCells = new kpColorCells (this);
-    connect (m_colorCells, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
-             this, TQT_SIGNAL (foregroundColorChanged (const kpColor &)));
-    connect (m_colorCells, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
-             this, TQT_SIGNAL (backgroundColorChanged (const kpColor &)));
+    connect (m_colorCells, TQ_SIGNAL (foregroundColorChanged (const kpColor &)),
+             this, TQ_SIGNAL (foregroundColorChanged (const kpColor &)));
+    connect (m_colorCells, TQ_SIGNAL (backgroundColorChanged (const kpColor &)),
+             this, TQ_SIGNAL (backgroundColorChanged (const kpColor &)));
 
     setOrientation (o);
 }
@@ -965,25 +965,25 @@ kpColorToolBar::kpColorToolBar (const TQString &label, kpMainWindow *mainWindow,
 
     m_dualColorButton = new kpDualColorButton (mainWindow, base);
     m_dualColorButton->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
-    connect (m_dualColorButton, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
-             this, TQT_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)));
-    connect (m_dualColorButton, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
-             this, TQT_SIGNAL (foregroundColorChanged (const kpColor &)));
-    connect (m_dualColorButton, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
-             this, TQT_SIGNAL (backgroundColorChanged (const kpColor &)));
+    connect (m_dualColorButton, TQ_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)),
+             this, TQ_SIGNAL (colorsSwapped (const kpColor &, const kpColor &)));
+    connect (m_dualColorButton, TQ_SIGNAL (foregroundColorChanged (const kpColor &)),
+             this, TQ_SIGNAL (foregroundColorChanged (const kpColor &)));
+    connect (m_dualColorButton, TQ_SIGNAL (backgroundColorChanged (const kpColor &)),
+             this, TQ_SIGNAL (backgroundColorChanged (const kpColor &)));
     m_boxLayout->addWidget (m_dualColorButton, 0/*stretch*/);
 
     m_colorPalette = new kpColorPalette (base);
-    connect (m_colorPalette, TQT_SIGNAL (foregroundColorChanged (const kpColor &)),
-             m_dualColorButton, TQT_SLOT (setForegroundColor (const kpColor &)));
-    connect (m_colorPalette, TQT_SIGNAL (backgroundColorChanged (const kpColor &)),
-             m_dualColorButton, TQT_SLOT (setBackgroundColor (const kpColor &)));
+    connect (m_colorPalette, TQ_SIGNAL (foregroundColorChanged (const kpColor &)),
+             m_dualColorButton, TQ_SLOT (setForegroundColor (const kpColor &)));
+    connect (m_colorPalette, TQ_SIGNAL (backgroundColorChanged (const kpColor &)),
+             m_dualColorButton, TQ_SLOT (setBackgroundColor (const kpColor &)));
     m_boxLayout->addWidget (m_colorPalette, 0/*stretch*/);
 
     m_colorSimilarityToolBarItem = new kpColorSimilarityToolBarItem (mainWindow, base);
     m_colorSimilarityToolBarItem->setSizePolicy (TQSizePolicy::Fixed, TQSizePolicy::Fixed);
-    connect (m_colorSimilarityToolBarItem, TQT_SIGNAL (colorSimilarityChanged (double, int)),
-             this, TQT_SIGNAL (colorSimilarityChanged (double, int)));
+    connect (m_colorSimilarityToolBarItem, TQ_SIGNAL (colorSimilarityChanged (double, int)),
+             this, TQ_SIGNAL (colorSimilarityChanged (double, int)));
     m_boxLayout->addWidget (m_colorSimilarityToolBarItem, 0/*stretch*/);
 
     // HACK: couldn't get TQSpacerItem to work

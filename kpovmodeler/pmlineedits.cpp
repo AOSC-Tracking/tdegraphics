@@ -29,8 +29,8 @@ PMFloatEdit::PMFloatEdit( TQWidget* parent, const char* name /*= 0*/ )
    m_lowerOp = OpGreaterEqual;
    m_upperOp = OpLessEqual;
 
-   connect( this, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotEditTextChanged( const TQString& ) ) );
+   connect( this, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotEditTextChanged( const TQString& ) ) );
 }
 
 void PMFloatEdit::setValidation( bool checkLower, double lowerValue,
@@ -137,8 +137,8 @@ PMIntEdit::PMIntEdit( TQWidget* parent, const char* name /*= 0*/ )
    m_lowerValue = 0;
    m_upperValue = 0;
 
-   connect( this, TQT_SIGNAL( textChanged( const TQString& ) ),
-            TQT_SLOT( slotEditTextChanged( const TQString& ) ) );
+   connect( this, TQ_SIGNAL( textChanged( const TQString& ) ),
+            TQ_SLOT( slotEditTextChanged( const TQString& ) ) );
 }
 
 void PMIntEdit::setValidation( bool checkLower, int lowerValue,

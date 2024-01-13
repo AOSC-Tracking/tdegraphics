@@ -157,9 +157,9 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    (void) new KSeparator( KSeparator::HLine, this);
    KButtonBox *kbb = new KButtonBox( this );
    TQPushButton* pb = kbb->addButton( KGuiItem( i18n( "Final S&can" ), "scanner" ) );
-   connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slStartScan()) );
+   connect( pb, TQ_SIGNAL(clicked()), this, TQ_SLOT(slStartScan()) );
    pb = kbb->addButton( i18n( "&Preview Scan" ));
-   connect( pb, TQT_SIGNAL(clicked()), this, TQT_SLOT(slAcquirePreview()) );
+   connect( pb, TQ_SIGNAL(clicked()), this, TQ_SLOT(slAcquirePreview()) );
    kbb->layout();
 
    /* Initialise the progress dialog */
@@ -169,12 +169,12 @@ bool ScanParams::connectDevice( KScanDevice *newScanDevice )
    progressDialog->setAutoClose( true );
    progressDialog->setAutoReset( true );
 
-   connect( sane_device, TQT_SIGNAL(sigScanProgress(int)),
-	    progressDialog, TQT_SLOT(setProgress(int)));
+   connect( sane_device, TQ_SIGNAL(sigScanProgress(int)),
+	    progressDialog, TQ_SLOT(setProgress(int)));
 
    /* Connect the Progress Dialogs cancel-Button */
-   connect( progressDialog, TQT_SIGNAL( cancelled() ), sane_device,
-	    TQT_SLOT( slStopScanning() ) );
+   connect( progressDialog, TQ_SIGNAL( cancelled() ), sane_device,
+	    TQ_SLOT( slStopScanning() ) );
 
    return( true );
 }
@@ -260,8 +260,8 @@ TQScrollView *ScanParams::scannerParams( )
       hb->setStretchFactor( cb, 5 );
 
       initialise( so );
-      connect( so, TQT_SIGNAL(guiChange(KScanOption*)),
-	       this, TQT_SLOT(slReloadAllGui( KScanOption* )));
+      connect( so, TQ_SIGNAL(guiChange(KScanOption*)),
+	       this, TQ_SLOT(slReloadAllGui( KScanOption* )));
    }
 
    /* Add a button for Source-Selection */
@@ -277,7 +277,7 @@ TQScrollView *ScanParams::scannerParams( )
       if( l.count() > 1 )
       {
 	 pb_source_sel = new TQPushButton( i18n("Source..."), hb );
-	 connect( pb_source_sel, TQT_SIGNAL(clicked()), this, TQT_SLOT(slSourceSelect()));
+	 connect( pb_source_sel, TQ_SIGNAL(clicked()), this, TQ_SLOT(slSourceSelect()));
 	 initialise( &source );
 	 hb->setStretchFactor( pb_source_sel, 3 );
 
@@ -302,8 +302,8 @@ TQScrollView *ScanParams::scannerParams( )
       if( so )
       {
 	 initialise(so);
-	 connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
-		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
+	 connect( so,   TQ_SIGNAL(guiChange(KScanOption*)),
+		  this, TQ_SLOT(slReloadAllGui( KScanOption* )));
       }
    }
 
@@ -316,8 +316,8 @@ TQScrollView *ScanParams::scannerParams( )
       if( so )
       {
 	 initialise(so);
-	 connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
-		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
+	 connect( so,   TQ_SIGNAL(guiChange(KScanOption*)),
+		  this, TQ_SLOT(slReloadAllGui( KScanOption* )));
       }
    }
 
@@ -330,8 +330,8 @@ TQScrollView *ScanParams::scannerParams( )
       if( so )
       {
 	 initialise(so);
-	 connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
-		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
+	 connect( so,   TQ_SIGNAL(guiChange(KScanOption*)),
+		  this, TQ_SLOT(slReloadAllGui( KScanOption* )));
       }
    }
 
@@ -349,11 +349,11 @@ TQScrollView *ScanParams::scannerParams( )
       so->slRedrawWidget( so );
 
       /* connect to slot that passes the resolution to the previewer */
-      connect( so, TQT_SIGNAL(guiChange(KScanOption*)),
-	       this, TQT_SLOT( slNewXResolution(KScanOption*)));
+      connect( so, TQ_SIGNAL(guiChange(KScanOption*)),
+	       this, TQ_SLOT( slNewXResolution(KScanOption*)));
 
-      connect( so, TQT_SIGNAL(guiChange(KScanOption*)),
-	       this, TQT_SLOT(slReloadAllGui( KScanOption* )));
+      connect( so, TQ_SIGNAL(guiChange(KScanOption*)),
+	       this, TQ_SLOT(slReloadAllGui( KScanOption* )));
 
       xy_resolution_bind =
 	 sane_device->getGuiElement(SANE_NAME_RESOLUTION_BIND, pbox,
@@ -364,8 +364,8 @@ TQScrollView *ScanParams::scannerParams( )
 	 initialise( xy_resolution_bind );
 	 xy_resolution_bind->slRedrawWidget( xy_resolution_bind );
 	 /* Connect to Gui-change-Slot */
-	 connect( xy_resolution_bind, TQT_SIGNAL(guiChange(KScanOption*)),
-		  this, TQT_SLOT(slReloadAllGui( KScanOption* )));
+	 connect( xy_resolution_bind, TQ_SIGNAL(guiChange(KScanOption*)),
+		  this, TQ_SLOT(slReloadAllGui( KScanOption* )));
       }
 
       /* Resolution Setting -> Y-Resolution Setting */
@@ -451,8 +451,8 @@ TQScrollView *ScanParams::scannerParams( )
 				       SANE_TITLE_CUSTOM_GAMMA,
 				       SANE_DESC_CUSTOM_GAMMA );
       initialise( so );
-      connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
-	       this, TQT_SLOT(slReloadAllGui( KScanOption* )));
+      connect( so,   TQ_SIGNAL(guiChange(KScanOption*)),
+	       this, TQ_SLOT(slReloadAllGui( KScanOption* )));
    }
    else
    {
@@ -465,14 +465,14 @@ TQScrollView *ScanParams::scannerParams( )
    pb_edit_gtable = new TQPushButton( i18n("Edit..."), hb1 );
    TQ_CHECK_PTR(pb_edit_gtable);
 
-   connect( pb_edit_gtable, TQT_SIGNAL( clicked () ),
-	    this, TQT_SLOT( slEditCustGamma () ) );
+   connect( pb_edit_gtable, TQ_SIGNAL( clicked () ),
+	    this, TQ_SLOT( slEditCustGamma () ) );
    setEditCustomGammaTableState();
 
    /* This connection cares for enabling/disabling the edit-Button */
    if(so )
-	   connect( so,   TQT_SIGNAL(guiChange(KScanOption*)),
-		    this, TQT_SLOT(slOptionNotify(KScanOption*)));
+	   connect( so,   TQ_SIGNAL(guiChange(KScanOption*)),
+		    this, TQ_SLOT(slOptionNotify(KScanOption*)));
 
    /* my Epson Perfection backends offer a list of user defined gamma values */
 
@@ -664,8 +664,8 @@ void ScanParams::virtualScannerParams( void )
    /* Selection if virt. Scanner or SANE Debug */
    bg_virt_scan_mode = new TQButtonGroup( 2, TQt::Horizontal,
 					 this, "GroupBoxVirtScanner" );
-   connect( bg_virt_scan_mode, TQT_SIGNAL(clicked(int)),
-	    this, TQT_SLOT( slVirtScanModeSelect(int)));
+   connect( bg_virt_scan_mode, TQ_SIGNAL(clicked(int)),
+	    this, TQ_SLOT( slVirtScanModeSelect(int)));
 
    TQRadioButton *rb1 = new TQRadioButton( i18n("SANE debug (pnm only)"),
 					 bg_virt_scan_mode, "VirtScanSANEDebug" );
@@ -696,8 +696,8 @@ void ScanParams::virtualScannerParams( void )
       top->addLayout( hb );
       w = virt_filename->widget();
       w->setMinimumHeight( (w->sizeHint()).height());
-      connect( w, TQT_SIGNAL(returnPressed()), this,
-	       TQT_SLOT( slCheckGlob()));
+      connect( w, TQ_SIGNAL(returnPressed()), this,
+	       TQ_SLOT( slCheckGlob()));
 
       hb->addWidget( w, 12 );
 
@@ -705,7 +705,7 @@ void ScanParams::virtualScannerParams( void )
       pb_file_sel->setPixmap(miniFloppyPixmap);
       //hb->addStretch( 1 );
       hb->addWidget( pb_file_sel, 1 );
-      connect( pb_file_sel, TQT_SIGNAL(clicked()), this, TQT_SLOT(slFileSelect()));
+      connect( pb_file_sel, TQ_SIGNAL(clicked()), this, TQ_SLOT(slFileSelect()));
 
    }
 
@@ -863,8 +863,8 @@ void ScanParams::slEditCustGamma( void )
     kdDebug(29000) << "Old gamma table: " << old_gt.getGamma() << ", " << old_gt.getBrightness() << ", " << old_gt.getContrast() << endl;
 
     GammaDialog gdiag( this );
-    connect( &gdiag, TQT_SIGNAL( gammaToApply(KGammaTable*) ),
-	     this,     TQT_SLOT( slApplyGamma(KGammaTable*) ) );
+    connect( &gdiag, TQ_SIGNAL( gammaToApply(KGammaTable*) ),
+	     this,     TQ_SLOT( slApplyGamma(KGammaTable*) ) );
 
     gdiag.setGt( old_gt );
 

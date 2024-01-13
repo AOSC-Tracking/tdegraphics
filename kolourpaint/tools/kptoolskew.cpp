@@ -296,10 +296,10 @@ void kpToolSkewDialog::createAngleGroupBox ()
     angleLayout->addWidget (verticalSkewDegreesLabel, 1, 3);
 
 
-    connect (m_horizontalSkewInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (slotUpdate ()));
-    connect (m_verticalSkewInput, TQT_SIGNAL (valueChanged (int)),
-             this, TQT_SLOT (slotUpdate ()));
+    connect (m_horizontalSkewInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (slotUpdate ()));
+    connect (m_verticalSkewInput, TQ_SIGNAL (valueChanged (int)),
+             this, TQ_SLOT (slotUpdate ()));
 }
 
 

@@ -40,18 +40,18 @@ SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
 
     // a timer to ensure that we don't flood the document with requests to search
     m_inputDelayTimer = new TQTimer(this);
-    connect( m_inputDelayTimer, TQT_SIGNAL( timeout() ),
-             this, TQT_SLOT( startSearch() ) );
+    connect( m_inputDelayTimer, TQ_SIGNAL( timeout() ),
+             this, TQ_SLOT( startSearch() ) );
 
     // 1. text line
-    insertLined( TQString(), LEDIT_ID, TQT_SIGNAL( textChanged(const TQString &) ),
-                 this, TQT_SLOT( slotTextChanged(const TQString &) ), true,
+    insertLined( TQString(), LEDIT_ID, TQ_SIGNAL( textChanged(const TQString &) ),
+                 this, TQ_SLOT( slotTextChanged(const TQString &) ), true,
                  i18n( "Enter at least 3 letters to filter pages" ), 0/*size*/, 1 );
 
     // 2. clear button (uses a lineEdit slot, so it must be created after)
     insertButton( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase",
-                  CLEAR_ID, TQT_SIGNAL( clicked() ),
-                  getLined( LEDIT_ID ), TQT_SLOT( clear() ), true,
+                  CLEAR_ID, TQ_SIGNAL( clicked() ),
+                  getLined( LEDIT_ID ), TQ_SLOT( clear() ), true,
                   i18n( "Clear filter" ), 0/*index*/ );
 
     // 3.1. create the popup menu for changing filtering features
@@ -62,7 +62,7 @@ SearchWidget::SearchWidget( TQWidget * parent, KPDFDocument * document )
     m_menu->insertItem( i18n("Match All Words"), 4 );
     m_menu->insertItem( i18n("Match Any Word"), 5 );
     m_menu->setItemChecked( 3, true );
-    connect( m_menu, TQT_SIGNAL( activated(int) ), TQT_SLOT( slotMenuChaged(int) ) );
+    connect( m_menu, TQ_SIGNAL( activated(int) ), TQ_SLOT( slotMenuChaged(int) ) );
 
     // 3.2. create the toolbar button that spawns the popup menu
     insertButton( "kpdf", FIND_ID, m_menu, true, i18n( "Filter Options" ), 2/*index*/ );

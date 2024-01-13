@@ -65,13 +65,13 @@ KTemplateEditDlg::KTemplateEditDlg(TQWidget *parent)
   TQGridLayout *l = new TQGridLayout(grp->layout());
 
   ln_name = new TQLineEdit( grp );
-  connect( ln_name, TQT_SIGNAL( textChanged( const TQString & ) ), 
-      TQT_SLOT( slotTextChanged() ) );
+  connect( ln_name, TQ_SIGNAL( textChanged( const TQString & ) ), 
+      TQ_SLOT( slotTextChanged() ) );
   TQLabel* lb_name = new TQLabel( ln_name, i18n( "Description:" ), grp );
 
   ln_path = new KURLRequester(grp);
-  connect( ln_path, TQT_SIGNAL( textChanged( const TQString & ) ), 
-      TQT_SLOT( slotTextChanged() ) );
+  connect( ln_path, TQ_SIGNAL( textChanged( const TQString & ) ), 
+      TQ_SLOT( slotTextChanged() ) );
   TQLabel* lb_path = new TQLabel( ln_path, i18n( "Path:" ), grp );
 
   l->addWidget(lb_name, 0, 0);
@@ -122,10 +122,10 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
   grp->setColumnLayout( 0, TQt::Horizontal );
 
   templates = new TDEIconListBox( grp );
-  connect( templates, TQT_SIGNAL( highlighted( int ) ), 
-      TQT_SLOT( checkSelection( int ) ) );
-  connect( templates, TQT_SIGNAL(doubleClicked( TQListBoxItem * ) ), 
-      TQT_SLOT( edit() ) );
+  connect( templates, TQ_SIGNAL( highlighted( int ) ), 
+      TQ_SLOT( checkSelection( int ) ) );
+  connect( templates, TQ_SIGNAL(doubleClicked( TQListBoxItem * ) ), 
+      TQ_SLOT( edit() ) );
 
   TQVBoxLayout* ml = new TQVBoxLayout( this );
   ml->addWidget( grp );
@@ -139,14 +139,14 @@ KTemplateConfig::KTemplateConfig(TQWidget *parent) : TQWidget(parent)
   KButtonBox *bbox = new KButtonBox( grp );
 
   btadd = bbox->addButton( i18n( "&Add..." ) );
-  connect( btadd, TQT_SIGNAL( clicked() ), TQT_SLOT( add() ) );
+  connect( btadd, TQ_SIGNAL( clicked() ), TQ_SLOT( add() ) );
 
   btedit = bbox->addButton( i18n( "&Edit..." ) );
-  connect( btedit, TQT_SIGNAL( clicked() ), TQT_SLOT( edit() ) );
+  connect( btedit, TQ_SIGNAL( clicked() ), TQ_SLOT( edit() ) );
   btedit->setEnabled( false );
 
   btremove = bbox->addButton( i18n( "&Remove" ) );
-  connect( btremove, TQT_SIGNAL( clicked() ), TQT_SLOT( remove() ) );
+  connect( btremove, TQ_SIGNAL( clicked() ), TQ_SLOT( remove() ) );
   btremove->setEnabled( false );
 	
   bbox->addStretch( 1 );
@@ -255,7 +255,7 @@ KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
   TQButtonGroup* btngrp = new TQButtonGroup( grp1 );
   btngrp->setExclusive( true );
   btngrp->setFrameStyle( TQFrame::NoFrame );
-  connect( btngrp, TQT_SIGNAL( clicked( int ) ), TQT_SLOT( slotBackgroundMode( int ) ) );
+  connect( btngrp, TQ_SIGNAL( clicked( int ) ), TQ_SLOT( slotBackgroundMode( int ) ) );
   grp1Layout->addWidget( btngrp, 0, 0 );
 
   TQVBoxLayout *bgl = new TQVBoxLayout( btngrp, 5 );
@@ -274,11 +274,11 @@ KBackgroundConfig::KBackgroundConfig( TQWidget* parent )
   grp1Layout->addWidget( bbox, 0, 1 );
 
   btcolor = new KColorButton(props->bgColor(), bbox) ;
-  connect(btcolor, TQT_SIGNAL(changed(const TQColor &)), 
-      TQT_SLOT( selectColor(const TQColor &)));
+  connect(btcolor, TQ_SIGNAL(changed(const TQColor &)), 
+      TQ_SLOT( selectColor(const TQColor &)));
 
   btpix = new TQPushButton(i18n( "Choose..." ), bbox);
-  connect( btpix, TQT_SIGNAL( clicked() ), TQT_SLOT( selectPixmap() ) );
+  connect( btpix, TQ_SIGNAL( clicked() ), TQ_SLOT( selectPixmap() ) );
 
   TQGroupBox *grp2 = new TQGroupBox( i18n( "Preview" ), this );
   mainLayout->addWidget( grp2, 1 );
@@ -382,16 +382,16 @@ KMiscConfig::KMiscConfig(TQWidget *parent) : TQWidget(parent)
   TQBoxLayout *ml = new TQVBoxLayout( this, 0, 5 );
 
   TQCheckBox *cbp = new TQCheckBox( i18n( "Paste &transparent pixels" ), this );
-  connect( cbp, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( pasteMode( bool ) ) );
+  connect( cbp, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( pasteMode( bool ) ) );
   ml->addWidget(cbp);
 
   TQCheckBox *cbr = new TQCheckBox( i18n( "Show &rulers" ), this );
-  connect( cbr, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( showRulers( bool ) ) );
+  connect( cbr, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( showRulers( bool ) ) );
   ml->addWidget(cbr);
 
   TQButtonGroup* btngrp = new TQButtonGroup( i18n( "Transparency Display" ), this);
   btngrp->setExclusive( true );
-  connect( btngrp, TQT_SIGNAL( clicked( int ) ), TQT_SLOT( slotTransparencyDisplayType( int ) ) );
+  connect( btngrp, TQ_SIGNAL( clicked( int ) ), TQ_SLOT( slotTransparencyDisplayType( int ) ) );
   ml->addWidget( btngrp );
 
   TQVBoxLayout *tgl = new TQVBoxLayout( btngrp, KDialog::marginHint(), KDialog::spacingHint() );
@@ -406,8 +406,8 @@ KMiscConfig::KMiscConfig(TQWidget *parent) : TQWidget(parent)
   m_solidColorButton = new KColorButton(props->transparencySolidColor(), btngrp);
   btngrp->insert( m_solidColorButton, 2 );
   hl->addWidget(m_solidColorButton);
-  //connect(btcolor, TQT_SIGNAL(changed(const TQColor &)), 
-    //  TQT_SLOT( selectColor(const TQColor &)));
+  //connect(btcolor, TQ_SIGNAL(changed(const TQColor &)), 
+    //  TQ_SLOT( selectColor(const TQColor &)));
 
   TQRadioButton *checkerboardRButton = new TQRadioButton( i18n( "Checker&board" ), btngrp );
   btngrp->insert( checkerboardRButton, 1 );
@@ -535,7 +535,7 @@ TDEIconConfig::TDEIconConfig(TQWidget *parent)
 {
   setHelp(TQString());
   //KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
-  connect(this, TQT_SIGNAL(finished()), this, TQT_SLOT(finis()));
+  connect(this, TQ_SIGNAL(finished()), this, TQ_SLOT(finis()));
 
   TQVBox* page = addVBoxPage(i18n("Icon Templates"), TQString(), loadIcon("icons"));
   temps = new KTemplateConfig(page);

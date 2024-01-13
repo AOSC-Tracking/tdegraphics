@@ -157,7 +157,7 @@ NewSelect::NewSelect(TQWidget *parent) : TQWidget( parent )
 {
   wiz = (KWizard*) parent;
   grp = new TQButtonGroup( this );
-  connect( grp, TQT_SIGNAL( clicked( int ) ), TQT_SLOT( buttonClicked( int ) ) );
+  connect( grp, TQ_SIGNAL( clicked( int ) ), TQ_SLOT( buttonClicked( int ) ) );
   grp->setExclusive( true );
   
   TQVBoxLayout* ml = new TQVBoxLayout( this );
@@ -203,7 +203,7 @@ NewFromTemplate::NewFromTemplate( TQWidget* parent )
   TQHBoxLayout* l = new TQHBoxLayout( grp, 15 );
   
   templates = new TDEIconListBox( grp );
-  connect( templates, TQT_SIGNAL( highlighted( int ) ), TQT_SLOT( checkSelection( int ) ) );
+  connect( templates, TQ_SIGNAL( highlighted( int ) ), TQ_SLOT( checkSelection( int ) ) );
   l->addWidget( templates );
     
   for( int i = 0; i < (int) TDEIconTemplateContainer::self()->count(); i++ )
@@ -237,14 +237,14 @@ KNewIcon::KNewIcon( TQWidget* parent )
   nextButton()->setEnabled( false );
 
   select = new NewSelect( this );
-  connect( select, TQT_SIGNAL( iconopenstyle( int ) ), TQT_SLOT( iconOpenStyle( int ) ) );
+  connect( select, TQ_SIGNAL( iconopenstyle( int ) ), TQ_SLOT( iconOpenStyle( int ) ) );
 
   scratch = new KResizeWidget( this, 0, TQSize( 32, 32 ) );
   // this doesn't accept default valid size, besides spin buttons won't allow 
   // an invalid size to be set by the user - forces user to change valid default 
   // size to create the new icon object -
-  connect( scratch, TQT_SIGNAL( validSize( bool ) ), TQT_SLOT( checkPage( bool ) ) );
-  connect(this, TQT_SIGNAL(selected(const TQString &)), this, TQT_SLOT(checkPage(const TQString &)));
+  connect( scratch, TQ_SIGNAL( validSize( bool ) ), TQ_SLOT( checkPage( bool ) ) );
+  connect(this, TQ_SIGNAL(selected(const TQString &)), this, TQ_SLOT(checkPage(const TQString &)));
   templ = new NewFromTemplate(this);
   templ->hide();
 

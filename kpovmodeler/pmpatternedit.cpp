@@ -284,52 +284,52 @@ void PMPatternEdit::createTopWidgets( )
    topLayout( )->addWidget( m_pTurbulenceWidget );
 
    /* connect all signals to slots/signals */
-   connect( m_pTypeCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotComboChanged( int ) ) );
+   connect( m_pTypeCombo, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotComboChanged( int ) ) );
 
-   connect( m_pAgateTurbulenceEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pAgateTurbulenceEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pCrackleForm, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCrackleMetric, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCrackleOffset, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pCrackleSolid, TQT_SIGNAL( clicked( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleForm, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleMetric, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleOffset, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pCrackleSolid, TQ_SIGNAL( clicked( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pDensityInterpolate, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDensityFile, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDensityFileBrowse, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDensityFileBrowseClicked( ) ) );
+   connect( m_pDensityInterpolate, TQ_SIGNAL( activated( int ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDensityFile, TQ_SIGNAL( textChanged( const TQString& ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDensityFileBrowse, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDensityFileBrowseClicked( ) ) );
 
-   connect( m_pGradientEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pGradientEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pJuliaComplex, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalMagnet, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotFractalMagnetClicked( ) ) );
-   connect( m_pFractalMagnetType, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pMaxIterationsEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalExponent, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalExtType, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalExtFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalIntType, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pFractalIntFactor, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pJuliaComplex, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalMagnet, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotFractalMagnetClicked( ) ) );
+   connect( m_pFractalMagnetType, TQ_SIGNAL( activated( int ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pMaxIterationsEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalExponent, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalExtType, TQ_SIGNAL( activated( int ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalExtFactor, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalIntType, TQ_SIGNAL( activated( int ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pFractalIntFactor, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pQuiltControl0Edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pQuiltControl1Edit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pQuiltControl0Edit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pQuiltControl1Edit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pSlopeDirection, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeLoSlope, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeHiSlope, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeAltFlag, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotSlopeAltFlagClicked( ) ) );
-   connect( m_pSlopeAltitude, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeLoAlt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pSlopeHiAlt, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeDirection, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeLoSlope, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeHiSlope, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeAltFlag, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotSlopeAltFlagClicked( ) ) );
+   connect( m_pSlopeAltitude, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeLoAlt, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pSlopeHiAlt, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pSpiralNumberEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pSpiralNumberEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pNoiseGenerator, TQT_SIGNAL( activated( int ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pNoiseGenerator, TQ_SIGNAL( activated( int ) ), TQ_SIGNAL( dataChanged( ) ) );
 
-   connect( m_pEnableTurbulenceEdit, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotTurbulenceClicked( ) ) );
-   connect( m_pValueVectorEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pOctavesEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pOmegaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pLambdaEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
-   connect( m_pDepthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SIGNAL( dataChanged( ) ) );
+   connect( m_pEnableTurbulenceEdit, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotTurbulenceClicked( ) ) );
+   connect( m_pValueVectorEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pOctavesEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pOmegaEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pLambdaEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
+   connect( m_pDepthEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SIGNAL( dataChanged( ) ) );
 }
 
 void PMPatternEdit::displayObject( PMObject* o )

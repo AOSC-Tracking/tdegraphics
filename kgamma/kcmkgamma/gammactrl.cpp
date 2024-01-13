@@ -53,8 +53,8 @@ GammaCtrl::GammaCtrl(TQWidget *parent, XVidExtWrap *xvid, int channel, \
   slider->setRange(0, maxslider);
   slider->setTickInterval(2);
   slider->setValue(setslider);
-  connect(slider, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(setGamma(int)));
-  connect(slider, TQT_SIGNAL(sliderPressed()), TQT_SLOT(pressed()));
+  connect(slider, TQ_SIGNAL(valueChanged(int)), TQ_SLOT(setGamma(int)));
+  connect(slider, TQ_SIGNAL(sliderPressed()), TQ_SLOT(pressed()));
 
   textfield = new DisplayNumber(this, 4, 2);
   textfield->setText(setgamma);

@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
   dlg.setColor(TQt::blue); // Just a color
 
-  app.connect(&dlg, TQT_SIGNAL(finished()), TQT_SLOT(quit()));
+  app.connect(&dlg, TQ_SIGNAL(finished()), TQ_SLOT(quit()));
 
   dlg.show();
   app.exec();

@@ -117,8 +117,8 @@ void ImlibWidget::init()
     setBackgroundMode( PaletteBackground );
 
     imageCache = new ImageCache( id, 4 ); // cache 4 images (FIXME?)
-    connect( imageCache, TQT_SIGNAL( sigBusy() ), TQT_SLOT( setBusyCursor() ));
-    connect( imageCache, TQT_SIGNAL( sigIdle() ), TQT_SLOT( restoreCursor() ));
+    connect( imageCache, TQ_SIGNAL( sigBusy() ), TQ_SLOT( setBusyCursor() ));
+    connect( imageCache, TQ_SIGNAL( sigIdle() ), TQ_SLOT( restoreCursor() ));
 
     win = XCreateSimpleWindow(x11Display(), winId(), 0,0,w,h,0,0,0);
 }
@@ -206,7 +206,7 @@ bool ImlibWidget::cacheImage( const KURL& url )
         if ( !file->download() ) {
             return false;
         }
-        connect( file, TQT_SIGNAL( downloaded( KuickFile * )), TQT_SLOT( cacheImage( KuickFile * )) );
+        connect( file, TQ_SIGNAL( downloaded( KuickFile * )), TQ_SLOT( cacheImage( KuickFile * )) );
         return true; // optimistic
     }
 }
@@ -647,8 +647,8 @@ KuickImage * ImageCache::getKuimage( KuickFile * file,
 
 	Imlib_set_image_modifier( myId, im, &mod );
 	kuim = new KuickImage( file, im, myId );
-	connect( kuim, TQT_SIGNAL( startRendering() ),   TQT_SLOT( slotBusy() ));
-	connect( kuim, TQT_SIGNAL( stoppedRendering() ), TQT_SLOT( slotIdle() ));
+	connect( kuim, TQ_SIGNAL( startRendering() ),   TQ_SLOT( slotBusy() ));
+	connect( kuim, TQ_SIGNAL( stoppedRendering() ), TQ_SLOT( slotIdle() ));
 
 	kuickList.insert( 0, kuim );
 	fileList.prepend( file );

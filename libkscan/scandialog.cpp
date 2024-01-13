@@ -79,13 +79,13 @@ ScanDialog::ScanDialog( TQWidget *parent, const char *name, bool modal )
 
     m_scanParams = 0;
     m_device = new KScanDevice( this );
-    connect(m_device, TQT_SIGNAL(sigNewImage(TQImage *, ImgScanInfo*)),
-            this, TQT_SLOT(slotFinalImage(TQImage *, ImgScanInfo *)));
+    connect(m_device, TQ_SIGNAL(sigNewImage(TQImage *, ImgScanInfo*)),
+            this, TQ_SLOT(slotFinalImage(TQImage *, ImgScanInfo *)));
 
-    connect( m_device, TQT_SIGNAL(sigScanStart()), this, TQT_SLOT(slotScanStart()));
-    connect( m_device, TQT_SIGNAL(sigScanFinished(KScanStat)),
-	     this, TQT_SLOT(slotScanFinished(KScanStat)));
-    connect( m_device, TQT_SIGNAL(sigAcquireStart()), this, TQT_SLOT(slotAcquireStart()));
+    connect( m_device, TQ_SIGNAL(sigScanStart()), this, TQ_SLOT(slotScanStart()));
+    connect( m_device, TQ_SIGNAL(sigScanFinished(KScanStat)),
+	     this, TQ_SLOT(slotScanFinished(KScanStat)));
+    connect( m_device, TQ_SIGNAL(sigAcquireStart()), this, TQ_SLOT(slotAcquireStart()));
     /* Create a preview widget to the right side of the splitter */
     m_previewer = new Previewer( splitter );
     TQ_CHECK_PTR(m_previewer );
@@ -93,8 +93,8 @@ ScanDialog::ScanDialog( TQWidget *parent, const char *name, bool modal )
     /* ... and connect to the selector-slots. They communicate user's
      * selection to the scanner parameter engine */
     /* a new preview signal */
-    connect( m_device, TQT_SIGNAL( sigNewPreview( TQImage*, ImgScanInfo* )),
-             this, TQT_SLOT( slotNewPreview( TQImage* )));
+    connect( m_device, TQ_SIGNAL( sigNewPreview( TQImage*, ImgScanInfo* )),
+             this, TQ_SLOT( slotNewPreview( TQImage* )));
 
     m_previewer->setEnabled( false ); // will be enabled in setup()
 
@@ -136,10 +136,10 @@ void ScanDialog::createOptionsTab( void )
 
    /* Note: flag must be inverted because of question is 'the other way round' */
    cb_askOnStart->setChecked( !skipDialog );
-   connect( cb_askOnStart, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotAskOnStartToggle(bool)));
+   connect( cb_askOnStart, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotAskOnStartToggle(bool)));
 
    cb_network->setChecked( !onlyLocal );
-   connect( cb_network, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(slotNetworkToggle(bool)));
+   connect( cb_network, TQ_SIGNAL(toggled(bool)), this, TQ_SLOT(slotNetworkToggle(bool)));
 
 
    TQWidget *spaceEater = new TQWidget( page );
@@ -230,13 +230,13 @@ bool ScanDialog::setup()
    }
 
    m_scanParams = new ScanParams( splitter );
-   connect( m_previewer->getImageCanvas(), TQT_SIGNAL( newRect(TQRect)),
-	    m_scanParams, TQT_SLOT(slCustomScanSize(TQRect)));
-   connect( m_previewer->getImageCanvas(), TQT_SIGNAL( noRect()),
-	    m_scanParams, TQT_SLOT(slMaximalScanSize()));
+   connect( m_previewer->getImageCanvas(), TQ_SIGNAL( newRect(TQRect)),
+	    m_scanParams, TQ_SLOT(slCustomScanSize(TQRect)));
+   connect( m_previewer->getImageCanvas(), TQ_SIGNAL( noRect()),
+	    m_scanParams, TQ_SLOT(slMaximalScanSize()));
 
-   connect( m_scanParams, TQT_SIGNAL( scanResolutionChanged( int, int )),
-	    m_previewer, TQT_SLOT( slNewScanResolutions( int, int )));
+   connect( m_scanParams, TQ_SIGNAL( scanResolutionChanged( int, int )),
+	    m_previewer, TQ_SLOT( slNewScanResolutions( int, int )));
 
 
    /* continue to attach a real scanner */

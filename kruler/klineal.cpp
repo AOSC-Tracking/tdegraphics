@@ -146,25 +146,25 @@ KLineal::KLineal(TQWidget*parent,const char* name):TDEMainWindow(parent,name){
   mMenu = new TDEPopupMenu(this);
   mMenu->insertTitle(i18n("KRuler"));
   TDEPopupMenu *oriMenu = new TDEPopupMenu(this);
-  oriMenu->insertItem(UserIconSet("kruler-north"), i18n("&North"), this, TQT_SLOT(setNorth()), Key_N);
-  oriMenu->insertItem(UserIconSet("kruler-east"), i18n("&East"), this, TQT_SLOT(setEast()), Key_E);
-  oriMenu->insertItem(UserIconSet("kruler-south"), i18n("&South"), this, TQT_SLOT(setSouth()), Key_S);
-  oriMenu->insertItem(UserIconSet("kruler-west"), i18n("&West"), this, TQT_SLOT(setWest()), Key_W);
-  oriMenu->insertItem(i18n("&Turn Right"), this, TQT_SLOT(turnRight()), Key_R);
-  oriMenu->insertItem(i18n("Turn &Left"), this, TQT_SLOT(turnLeft()), Key_L);
+  oriMenu->insertItem(UserIconSet("kruler-north"), i18n("&North"), this, TQ_SLOT(setNorth()), Key_N);
+  oriMenu->insertItem(UserIconSet("kruler-east"), i18n("&East"), this, TQ_SLOT(setEast()), Key_E);
+  oriMenu->insertItem(UserIconSet("kruler-south"), i18n("&South"), this, TQ_SLOT(setSouth()), Key_S);
+  oriMenu->insertItem(UserIconSet("kruler-west"), i18n("&West"), this, TQ_SLOT(setWest()), Key_W);
+  oriMenu->insertItem(i18n("&Turn Right"), this, TQ_SLOT(turnRight()), Key_R);
+  oriMenu->insertItem(i18n("Turn &Left"), this, TQ_SLOT(turnLeft()), Key_L);
   mMenu->insertItem(i18n("&Orientation"), oriMenu);
   mLenMenu = new TDEPopupMenu(this);
-  mLenMenu->insertItem(i18n("&Short"), this, TQT_SLOT(setShortLength()), CTRL+Key_S);
-  mLenMenu->insertItem(i18n("&Medium"), this, TQT_SLOT(setMediumLength()), CTRL+Key_M);
-  mLenMenu->insertItem(i18n("&Tall"), this, TQT_SLOT(setTallLength()), CTRL+Key_T);
-  mLenMenu->insertItem(i18n("&Full Screen Width"), this, TQT_SLOT(setFullLength()), CTRL+Key_F, FULLSCREENID);
+  mLenMenu->insertItem(i18n("&Short"), this, TQ_SLOT(setShortLength()), CTRL+Key_S);
+  mLenMenu->insertItem(i18n("&Medium"), this, TQ_SLOT(setMediumLength()), CTRL+Key_M);
+  mLenMenu->insertItem(i18n("&Tall"), this, TQ_SLOT(setTallLength()), CTRL+Key_T);
+  mLenMenu->insertItem(i18n("&Full Screen Width"), this, TQ_SLOT(setFullLength()), CTRL+Key_F, FULLSCREENID);
   mMenu->insertItem(i18n("&Length"), mLenMenu);
-  mMenu->insertItem(SmallIcon("application-x-kcsrc"), i18n("&Choose Color..."), this, TQT_SLOT(choseColor()), CTRL+Key_C);
-  mMenu->insertItem(SmallIcon("font-x-generic"), i18n("Choose &Font..."), this, TQT_SLOT(choseFont()), Key_F);
+  mMenu->insertItem(SmallIcon("application-x-kcsrc"), i18n("&Choose Color..."), this, TQ_SLOT(choseColor()), CTRL+Key_C);
+  mMenu->insertItem(SmallIcon("font-x-generic"), i18n("Choose &Font..."), this, TQ_SLOT(choseFont()), Key_F);
   mMenu->insertSeparator();
   mMenu->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), helpMenu());
   mMenu->insertSeparator();
-  mMenu->insertItem(SmallIcon( "system-log-out" ), KStdGuiItem::quit().text(), kapp, TQT_SLOT(quit()), CTRL+Key_Q);
+  mMenu->insertItem(SmallIcon( "system-log-out" ), KStdGuiItem::quit().text(), kapp, TQ_SLOT(quit()), CTRL+Key_Q);
   mLastClickPos = geometry().topLeft()+TQPoint(width()/2, height()/2);
 }
 
@@ -366,14 +366,14 @@ void KLineal::choseColor() {
   mColorSelector.setDefaultColor( DEFAULT_RULER_COLOR );
   mColorSelector.show();
 
-  connect(&mColorSelector, TQT_SIGNAL(okClicked()), this, TQT_SLOT(setColor()));
-  connect(&mColorSelector, TQT_SIGNAL(yesClicked()), this, TQT_SLOT(setColor()));
-  connect(&mColorSelector, TQT_SIGNAL(closeClicked()), this, TQT_SLOT(setColor()));
-  connect(&mColorSelector, TQT_SIGNAL(defaultClicked()), this, TQT_SLOT(setColor()));
-  connect(&mColorSelector, TQT_SIGNAL(colorSelected(const TQColor&)), this, TQT_SLOT(setColor(const TQColor&)));
+  connect(&mColorSelector, TQ_SIGNAL(okClicked()), this, TQ_SLOT(setColor()));
+  connect(&mColorSelector, TQ_SIGNAL(yesClicked()), this, TQ_SLOT(setColor()));
+  connect(&mColorSelector, TQ_SIGNAL(closeClicked()), this, TQ_SLOT(setColor()));
+  connect(&mColorSelector, TQ_SIGNAL(defaultClicked()), this, TQ_SLOT(setColor()));
+  connect(&mColorSelector, TQ_SIGNAL(colorSelected(const TQColor&)), this, TQ_SLOT(setColor(const TQColor&)));
 	/*
-  connect(&mColorSelector, TQT_SIGNAL(cancelPressed()), this, TQT_SLOT(restoreColor()));
-  connect(&mColorSelector, TQT_SIGNAL(okPressed()), this, TQT_SLOT(saveColor()));
+  connect(&mColorSelector, TQ_SIGNAL(cancelPressed()), this, TQ_SLOT(restoreColor()));
+  connect(&mColorSelector, TQ_SIGNAL(okPressed()), this, TQ_SLOT(saveColor()));
   */
 }
 

@@ -50,20 +50,20 @@ PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, TQWidget* par
 
    TQVBox* mainPage = makeVBoxMainWidget( );
    m_pListBox = new TQListBox( mainPage );
-   connect( m_pListBox, TQT_SIGNAL( highlighted( int ) ), TQT_SLOT( slotModeSelected( int ) ) );
+   connect( m_pListBox, TQ_SIGNAL( highlighted( int ) ), TQ_SLOT( slotModeSelected( int ) ) );
 
    TQHBox* buttons = new TQHBox( mainPage );
    buttons->setSpacing( KDialog::spacingHint( ) );
    m_pAddButton = new TQPushButton( i18n( "Add" ), buttons );
-   connect( m_pAddButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotAdd( ) ) );
+   connect( m_pAddButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotAdd( ) ) );
    m_pRemoveButton = new TQPushButton( i18n( "Remove" ), buttons );
-   connect( m_pRemoveButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotRemove( ) ) );
+   connect( m_pRemoveButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotRemove( ) ) );
    m_pEditButton = new TQPushButton( i18n( "Edit..." ), buttons );
-   connect( m_pEditButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotEdit( ) ) );
+   connect( m_pEditButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotEdit( ) ) );
    m_pUpButton = new TQPushButton( i18n( "Up" ), buttons );
-   connect( m_pUpButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotUp( ) ) );
+   connect( m_pUpButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotUp( ) ) );
    m_pDownButton = new TQPushButton( i18n( "Down" ), buttons );
-   connect( m_pDownButton, TQT_SIGNAL( clicked( ) ), TQT_SLOT( slotDown( ) ) );
+   connect( m_pDownButton, TQ_SIGNAL( clicked( ) ), TQ_SLOT( slotDown( ) ) );
 
    m_pRemoveButton->setEnabled( false );
    m_pUpButton->setEnabled( false );
@@ -73,7 +73,7 @@ PMRenderModesDialog::PMRenderModesDialog( PMRenderModeList* modes, TQWidget* par
 
    resize( s_size );
    displayList( );
-   connect( m_pListBox,  TQT_SIGNAL( doubleClicked ( TQListBoxItem *) ), this, TQT_SLOT(slotEdit( ) ) );
+   connect( m_pListBox,  TQ_SIGNAL( doubleClicked ( TQListBoxItem *) ), this, TQ_SLOT(slotEdit( ) ) );
 }
 
 void PMRenderModesDialog::slotChanged( )
@@ -367,22 +367,22 @@ PMRenderModeDialog::PMRenderModeDialog( PMRenderMode* mode, TQWidget* parent, co
    enableButtonOK( false );
 
    // connect signals
-   connect( m_pDescriptionEdit, TQT_SIGNAL( textChanged( const TQString& ) ), TQT_SLOT( slotTextChanged( const TQString& ) ) );
-   connect( m_pHeightEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pWidthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pSubsectionBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotSubsectionToggled( bool ) ) );
-   connect( m_pStartRowEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pEndRowEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pStartColumnEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pEndColumnEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pQualityCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotActivated( int ) ) );
-   connect( m_pAntialiasingBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotAntialiasingToggled( bool ) ) );
-   connect( m_pSamplingCombo, TQT_SIGNAL( activated( int ) ), TQT_SLOT( slotActivated( int ) ) );
-   connect( m_pThresholdEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pJitterBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotJitterToggled( bool ) ) );
-   connect( m_pJitterAmountEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pAntialiasDepthEdit, TQT_SIGNAL( dataChanged( ) ), TQT_SLOT( slotChanged( ) ) );
-   connect( m_pAlphaBox, TQT_SIGNAL( toggled( bool ) ), TQT_SLOT( slotToggled( bool ) ) );
+   connect( m_pDescriptionEdit, TQ_SIGNAL( textChanged( const TQString& ) ), TQ_SLOT( slotTextChanged( const TQString& ) ) );
+   connect( m_pHeightEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pWidthEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pSubsectionBox, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotSubsectionToggled( bool ) ) );
+   connect( m_pStartRowEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pEndRowEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pStartColumnEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pEndColumnEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pQualityCombo, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotActivated( int ) ) );
+   connect( m_pAntialiasingBox, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotAntialiasingToggled( bool ) ) );
+   connect( m_pSamplingCombo, TQ_SIGNAL( activated( int ) ), TQ_SLOT( slotActivated( int ) ) );
+   connect( m_pThresholdEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pJitterBox, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotJitterToggled( bool ) ) );
+   connect( m_pJitterAmountEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pAntialiasDepthEdit, TQ_SIGNAL( dataChanged( ) ), TQ_SLOT( slotChanged( ) ) );
+   connect( m_pAlphaBox, TQ_SIGNAL( toggled( bool ) ), TQ_SLOT( slotToggled( bool ) ) );
 }
 
 void PMRenderModeDialog::saveConfig( TDEConfig* cfg )

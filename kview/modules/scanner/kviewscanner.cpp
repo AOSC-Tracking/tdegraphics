@@ -47,7 +47,7 @@ KViewScanner::KViewScanner( TQObject* parent, const char* name,
 	if( m_pViewer )
 	{
 		(void) new TDEAction( i18n( "&Scan Image..." ), "scanner", 0,
-							this, TQT_SLOT( slotScan() ),
+							this, TQ_SLOT( slotScan() ),
 							actionCollection(), "plugin_scan" );
 	}
 	else
@@ -67,8 +67,8 @@ void KViewScanner::slotScan()
 		{
 			m_pScandlg->setMinimumSize( 300, 300 );
 
-			connect( m_pScandlg, TQT_SIGNAL( finalImage( const TQImage &, int ) ),
-					this, TQT_SLOT( slotImgScanned( const TQImage & ) ) );
+			connect( m_pScandlg, TQ_SIGNAL( finalImage( const TQImage &, int ) ),
+					this, TQ_SLOT( slotImgScanned( const TQImage & ) ) );
 		}
 		else
 		{

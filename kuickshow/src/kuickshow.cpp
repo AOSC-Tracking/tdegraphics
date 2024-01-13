@@ -111,7 +111,7 @@ KuickShow::KuickShow( const char *name )
     resize( 400, 500 );
 
     m_slideTimer = new TQTimer( this );
-    connect( m_slideTimer, TQT_SIGNAL( timeout() ), TQT_SLOT( nextSlide() ));
+    connect( m_slideTimer, TQ_SIGNAL( timeout() ), TQ_SLOT( nextSlide() ));
 
 
     TDEConfig *kc = TDEGlobal::config();
@@ -231,39 +231,39 @@ void KuickShow::initGUI( const KURL& startDir )
 
     redirectDeleteAndTrashActions(coll);
 
-    connect( fileWidget, TQT_SIGNAL( fileSelected( const KFileItem * ) ),
-             this, TQT_SLOT( slotSelected( const KFileItem * ) ));
+    connect( fileWidget, TQ_SIGNAL( fileSelected( const KFileItem * ) ),
+             this, TQ_SLOT( slotSelected( const KFileItem * ) ));
 
-    connect( fileWidget, TQT_SIGNAL( fileHighlighted( const KFileItem * )),
-             this, TQT_SLOT( slotHighlighted( const KFileItem * ) ));
+    connect( fileWidget, TQ_SIGNAL( fileHighlighted( const KFileItem * )),
+             this, TQ_SLOT( slotHighlighted( const KFileItem * ) ));
 
-    connect( fileWidget, TQT_SIGNAL( urlEntered( const KURL&  )),
-             this, TQT_SLOT( dirSelected( const KURL& )) );
+    connect( fileWidget, TQ_SIGNAL( urlEntered( const KURL&  )),
+             this, TQ_SLOT( dirSelected( const KURL& )) );
 
 
     fileWidget->setAcceptDrops(true);
-    connect( fileWidget, TQT_SIGNAL( dropped( const KFileItem *, TQDropEvent *, const KURL::List & )),
-             this, TQT_SLOT( slotDropped( const KFileItem *, TQDropEvent *, const KURL::List &)) );
+    connect( fileWidget, TQ_SIGNAL( dropped( const KFileItem *, TQDropEvent *, const KURL::List & )),
+             this, TQ_SLOT( slotDropped( const KFileItem *, TQDropEvent *, const KURL::List &)) );
 
     // setup actions
-    TDEAction *open = KStdAction::open( this, TQT_SLOT( slotOpenURL() ),
+    TDEAction *open = KStdAction::open( this, TQ_SLOT( slotOpenURL() ),
                                       coll, "openURL" );
 
-    TDEAction *print = KStdAction::print( this, TQT_SLOT( slotPrint() ),
+    TDEAction *print = KStdAction::print( this, TQ_SLOT( slotPrint() ),
                                         coll, "kuick_print" );
     print->setText( i18n("Print Image...") );
 
     TDEAction *configure = new TDEAction( i18n("Configure %1...").arg( TDEGlobal::instance()->aboutData()->programName() ), "configure",
                                       TDEShortcut(),
-                                      this, TQT_SLOT( configuration() ),
+                                      this, TQ_SLOT( configuration() ),
                                       coll, "kuick_configure" );
     TDEAction *slide = new TDEAction( i18n("Start Slideshow" ), "ksslide",
                                   TDEShortcut( Key_F2 ),
-                                  this, TQT_SLOT( startSlideShow() ),
+                                  this, TQ_SLOT( startSlideShow() ),
                                   coll, "kuick_slideshow" );
     TDEAction *about = new TDEAction( i18n( "About KuickShow" ), "about",
                                   TDEShortcut(),
-                                  this, TQT_SLOT( about() ), coll, "about" );
+                                  this, TQ_SLOT( about() ), coll, "about" );
 
     oneWindowAction = new TDEToggleAction( i18n("Open Only One Image Window"),
                                          "window-new",
@@ -272,21 +272,21 @@ void KuickShow::initGUI( const KURL& startDir )
 
     m_toggleBrowserAction = new TDEToggleAction( i18n("Show File Browser"), TDEShortcut( Key_Space ), coll, "toggleBrowser" );
     m_toggleBrowserAction->setCheckedState(i18n("Hide File Browser"));
-    connect( m_toggleBrowserAction, TQT_SIGNAL( toggled( bool ) ),
-             TQT_SLOT( toggleBrowser() ));
+    connect( m_toggleBrowserAction, TQ_SIGNAL( toggled( bool ) ),
+             TQ_SLOT( toggleBrowser() ));
 
     TDEAction *showInOther = new TDEAction( i18n("Show Image"), TDEShortcut(),
-                                        this, TQT_SLOT( slotShowInOtherWindow() ),
+                                        this, TQ_SLOT( slotShowInOtherWindow() ),
                                         coll, "kuick_showInOtherWindow" );
     TDEAction *showInSame = new TDEAction( i18n("Show Image in Active Window"),
                                        TDEShortcut(),
-                                       this, TQT_SLOT( slotShowInSameWindow() ),
+                                       this, TQ_SLOT( slotShowInSameWindow() ),
                                        coll, "kuick_showInSameWindow" );
     TDEAction *showFullscreen = new TDEAction( i18n("Show Image in Fullscreen Mode"),
-					   TDEShortcut(), this, TQT_SLOT( slotShowFullscreen() ),
+					   TDEShortcut(), this, TQ_SLOT( slotShowFullscreen() ),
 					   coll, "kuick_showFullscreen" );
 
-    TDEAction *quit = KStdAction::quit( this, TQT_SLOT(slotQuit()), coll, "quit");
+    TDEAction *quit = KStdAction::quit( this, TQ_SLOT(slotQuit()), coll, "quit");
 
     // remove TQString() parameter -- ellis
     coll->readShortcutSettings( TQString() );
@@ -394,10 +394,10 @@ void KuickShow::initGUI( const KURL& startDir )
     addressToolBar->insertWidget( ID_ADDRESSBAR, 1, cmbPath);
     addressToolBar->setItemAutoSized( ID_ADDRESSBAR );
 
-    connect( cmbPath, TQT_SIGNAL( urlActivated( const KURL& )),
-             this, TQT_SLOT( slotSetURL( const KURL& )));
-    connect( cmbPath, TQT_SIGNAL( returnPressed()),
-             this, TQT_SLOT( slotURLComboReturnPressed()));
+    connect( cmbPath, TQ_SIGNAL( urlActivated( const KURL& )),
+             this, TQ_SLOT( slotSetURL( const KURL& )));
+    connect( cmbPath, TQ_SIGNAL( returnPressed()),
+             this, TQ_SLOT( slotURLComboReturnPressed()));
 
 
     fileWidget->initActions();
@@ -422,14 +422,14 @@ void KuickShow::redirectDeleteAndTrashActions(TDEActionCollection *coll)
     if (action)
     {
         action->disconnect(fileWidget);
-        connect(action, TQT_SIGNAL(activated()), this, TQT_SLOT(slotDeleteCurrentImage()));
+        connect(action, TQ_SIGNAL(activated()), this, TQ_SLOT(slotDeleteCurrentImage()));
     }
 
     action = coll->action("trash");
     if (action)
     {
         action->disconnect(fileWidget);
-        connect(action, TQT_SIGNAL(activated()), this, TQT_SLOT(slotTrashCurrentImage()));
+        connect(action, TQ_SIGNAL(activated()), this, TQ_SLOT(slotTrashCurrentImage()));
     }
 }
 
@@ -537,19 +537,19 @@ bool KuickShow::showImage( const KFileItem *fi,
             m_viewer->setFullscreen( fullscreen );
             s_viewers.append( m_viewer );
 
-            connect( m_viewer, TQT_SIGNAL( destroyed() ), TQT_SLOT( viewerDeleted() ));
-            connect( m_viewer, TQT_SIGNAL( sigFocusWindow( ImageWindow *) ),
-                     this, TQT_SLOT( slotSetActiveViewer( ImageWindow * ) ));
-            connect( m_viewer, TQT_SIGNAL( sigImageError(const KuickFile *, const TQString& ) ),
-                     this, TQT_SLOT( messageCantLoadImage(const KuickFile *, const TQString &) ));
-            connect( m_viewer, TQT_SIGNAL( requestImage( ImageWindow *, int )),
-                     this, TQT_SLOT( slotAdvanceImage( ImageWindow *, int )));
-	    connect( m_viewer, TQT_SIGNAL( pauseSlideShowSignal() ),
-		     this, TQT_SLOT( pauseSlideShow() ) );
-            connect( m_viewer, TQT_SIGNAL (deleteImage (ImageWindow *)),
-                     this, TQT_SLOT (slotDeleteCurrentImage (ImageWindow *)));
-            connect( m_viewer, TQT_SIGNAL (trashImage (ImageWindow *)),
-                     this, TQT_SLOT (slotTrashCurrentImage (ImageWindow *)));
+            connect( m_viewer, TQ_SIGNAL( destroyed() ), TQ_SLOT( viewerDeleted() ));
+            connect( m_viewer, TQ_SIGNAL( sigFocusWindow( ImageWindow *) ),
+                     this, TQ_SLOT( slotSetActiveViewer( ImageWindow * ) ));
+            connect( m_viewer, TQ_SIGNAL( sigImageError(const KuickFile *, const TQString& ) ),
+                     this, TQ_SLOT( messageCantLoadImage(const KuickFile *, const TQString &) ));
+            connect( m_viewer, TQ_SIGNAL( requestImage( ImageWindow *, int )),
+                     this, TQ_SLOT( slotAdvanceImage( ImageWindow *, int )));
+	    connect( m_viewer, TQ_SIGNAL( pauseSlideShowSignal() ),
+		     this, TQ_SLOT( pauseSlideShow() ) );
+            connect( m_viewer, TQ_SIGNAL (deleteImage (ImageWindow *)),
+                     this, TQ_SLOT (slotDeleteCurrentImage (ImageWindow *)));
+            connect( m_viewer, TQ_SIGNAL (trashImage (ImageWindow *)),
+                     this, TQ_SLOT (slotTrashCurrentImage (ImageWindow *)));
             if ( s_viewers.count() == 1 && moveToTopLeft ) {
                 // we have to move to 0x0 before showing _and_
                 // after showing, otherwise we get some bogus geometry()
@@ -698,7 +698,7 @@ void KuickShow::tryShowNextImage()
         if (!haveBrowser())
         {
             // ### when simply calling toggleBrowser(), this main window is completely messed up
-            TQTimer::singleShot(0, this, TQT_SLOT(toggleBrowser()));
+            TQTimer::singleShot(0, this, TQ_SLOT(toggleBrowser()));
         }
         m_viewer->deleteLater();
     }
@@ -952,7 +952,7 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
                         if ( fileWidget->dirLister()->rootItem() )
                         {
                             fileWidget->setCurrentItem( file->url().fileName() );
-                            TQTimer::singleShot( 0, this, TQT_SLOT( slotReplayEvent()));
+                            TQTimer::singleShot( 0, this, TQ_SLOT( slotReplayEvent()));
                         }
                         else // finished, but no root-item -- probably an error, kill repeat-item!
                         {
@@ -962,8 +962,8 @@ bool KuickShow::eventFilter( TQObject *o, TQEvent *e )
                     else // not finished yet
                     {
                         fileWidget->setInitialItem( file->url().fileName() );
-                        connect( fileWidget, TQT_SIGNAL( finished() ),
-                                 TQT_SLOT( slotReplayEvent() ));
+                        connect( fileWidget, TQ_SIGNAL( finished() ),
+                                 TQ_SLOT( slotReplayEvent() ));
                     }
 
                     return true;
@@ -1081,12 +1081,12 @@ void KuickShow::configuration()
     dialog->resize( 540, 510 );
     dialog->setIcon( kapp->miniIcon() );
 
-    connect( dialog, TQT_SIGNAL( okClicked() ),
-             this, TQT_SLOT( slotConfigApplied() ) );
-    connect( dialog, TQT_SIGNAL( applyClicked() ),
-             this, TQT_SLOT( slotConfigApplied() ) );
-    connect( dialog, TQT_SIGNAL( finished() ),
-             this, TQT_SLOT( slotConfigClosed() ) );
+    connect( dialog, TQ_SIGNAL( okClicked() ),
+             this, TQ_SLOT( slotConfigApplied() ) );
+    connect( dialog, TQ_SIGNAL( applyClicked() ),
+             this, TQ_SLOT( slotConfigApplied() ) );
+    connect( dialog, TQ_SIGNAL( finished() ),
+             this, TQ_SLOT( slotConfigClosed() ) );
 
     fileWidget->actionCollection()->action( "kuick_configure" )->setEnabled( false );
     dialog->show();
@@ -1294,8 +1294,8 @@ void KuickShow::abortDelayedEvent()
 
 void KuickShow::slotReplayEvent()
 {
-    disconnect( fileWidget, TQT_SIGNAL( finished() ),
-                this, TQT_SLOT( slotReplayEvent() ));
+    disconnect( fileWidget, TQ_SIGNAL( finished() ),
+                this, TQ_SLOT( slotReplayEvent() ));
 
     DelayedRepeatEvent *e = m_delayedRepeatItem;
     m_delayedRepeatItem = 0L; // otherwise, eventFilter aborts
@@ -1346,13 +1346,13 @@ void KuickShow::delayAction(DelayedRepeatEvent *event)
          fileWidget->dirLister()->rootItem() )
     {
         fileWidget->setCurrentItem( url.fileName() );
-        TQTimer::singleShot( 0, this, TQT_SLOT( doReplay()));
+        TQTimer::singleShot( 0, this, TQ_SLOT( doReplay()));
     }
     else
     {
         fileWidget->setInitialItem( url.fileName() );
-        connect( fileWidget, TQT_SIGNAL( finished() ),
-                 TQT_SLOT( doReplay() ));
+        connect( fileWidget, TQ_SIGNAL( finished() ),
+                 TQ_SLOT( doReplay() ));
     }
 }
 
@@ -1361,8 +1361,8 @@ void KuickShow::doReplay()
     if (!m_delayedRepeatItem)
         return;
 
-    disconnect( fileWidget, TQT_SIGNAL( finished() ),
-                this, TQT_SLOT( doReplay() ));
+    disconnect( fileWidget, TQ_SIGNAL( finished() ),
+                this, TQ_SLOT( doReplay() ));
 
     switch (m_delayedRepeatItem->action)
     {
@@ -1424,7 +1424,7 @@ void KuickShow::deleteAllViewers()
 {
     TQValueListIterator<ImageWindow*> it = s_viewers.begin();
     for ( ; it != s_viewers.end(); ++it ) {
-        (*it)->disconnect( TQT_SIGNAL( destroyed() ), this, TQT_SLOT( viewerDeleted() ));
+        (*it)->disconnect( TQ_SIGNAL( destroyed() ), this, TQ_SLOT( viewerDeleted() ));
         (*it)->close( true );
     }
 

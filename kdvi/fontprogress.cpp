@@ -61,7 +61,7 @@ fontProgressDialog::fontProgressDialog(const TQString& helpIndex, const TQString
 
   progress = 0;
   procIO = 0;
-  tqApp->connect(this, TQT_SIGNAL(finished()), this, TQT_SLOT(killProcIO()));
+  tqApp->connect(this, TQ_SIGNAL(finished()), this, TQ_SLOT(killProcIO()));
 }
 
 

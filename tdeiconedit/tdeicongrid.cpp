@@ -127,12 +127,12 @@ KGridView::KGridView(TQImage *image, KCommandHistory* history, TQWidget *parent,
   TQWhatsThis::add( _hruler, str );
   TQWhatsThis::add( _vruler, str );
 
-  connect(_grid, TQT_SIGNAL(scalingchanged(int)), TQT_SLOT(scalingChange(int)));
-  connect(_grid, TQT_SIGNAL(sizechanged(int, int)), TQT_SLOT(sizeChange(int, int)));
-  connect(_grid, TQT_SIGNAL(needPainting()), TQT_SLOT(paintGrid()));
-  connect( _grid, TQT_SIGNAL(xposchanged(int)), _hruler, TQT_SLOT(slotNewValue(int)) );
-  connect( _grid, TQT_SIGNAL(yposchanged(int)), _vruler, TQT_SLOT(slotNewValue(int)) );
-  connect(viewport, TQT_SIGNAL(contentsMoving(int, int)), TQT_SLOT(moving(int, int)));
+  connect(_grid, TQ_SIGNAL(scalingchanged(int)), TQ_SLOT(scalingChange(int)));
+  connect(_grid, TQ_SIGNAL(sizechanged(int, int)), TQ_SLOT(sizeChange(int, int)));
+  connect(_grid, TQ_SIGNAL(needPainting()), TQ_SLOT(paintGrid()));
+  connect( _grid, TQ_SIGNAL(xposchanged(int)), _hruler, TQ_SLOT(slotNewValue(int)) );
+  connect( _grid, TQ_SIGNAL(yposchanged(int)), _vruler, TQ_SLOT(slotNewValue(int)) );
+  connect(viewport, TQ_SIGNAL(contentsMoving(int, int)), TQ_SLOT(moving(int, int)));
   
   setSizes();
   TQResizeEvent e(size(), size());
@@ -319,8 +319,8 @@ TDEIconEditGrid::TDEIconEditGrid(TQImage *image, KCommandHistory* h, TQWidget *p
     setNumCols(32);
     fill(TRANSPARENT);
 
-    connect( kapp->clipboard(), TQT_SIGNAL(dataChanged()), TQT_SLOT(checkClipboard()));
-    connect( h, TQT_SIGNAL(commandExecuted()), this, TQT_SLOT(updatePreviewPixmap() ));    
+    connect( kapp->clipboard(), TQ_SIGNAL(dataChanged()), TQ_SLOT(checkClipboard()));
+    connect( h, TQ_SIGNAL(commandExecuted()), this, TQ_SLOT(updatePreviewPixmap() ));    
     createCursors();
 
     TDEIconEditProperties *props = TDEIconEditProperties::self();

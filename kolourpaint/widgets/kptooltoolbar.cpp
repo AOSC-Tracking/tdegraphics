@@ -131,8 +131,8 @@ kpToolToolBar::kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, i
          it != m_toolWidgets.end ();
          it++)
     {
-        connect (*it, TQT_SIGNAL (optionSelected (int, int)),
-                 this, TQT_SIGNAL (toolWidgetOptionSelected ()));
+        connect (*it, TQ_SIGNAL (optionSelected (int, int)),
+                 this, TQ_SIGNAL (toolWidgetOptionSelected ()));
     }
 
 #if DEBUG_KP_TOOL_TOOL_BAR
@@ -151,7 +151,7 @@ kpToolToolBar::kpToolToolBar (const TQString &label, kpMainWindow *mainWindow, i
     m_buttonGroup = new TQButtonGroup ();  // invisible
     m_buttonGroup->setExclusive (true);
 
-    connect (m_buttonGroup, TQT_SIGNAL (clicked (int)), TQT_SLOT (slotToolButtonClicked ()));
+    connect (m_buttonGroup, TQ_SIGNAL (clicked (int)), TQ_SLOT (slotToolButtonClicked ()));
 
     hideAllToolWidgets ();
 }
@@ -247,10 +247,10 @@ void kpToolToolBar::registerTool (kpTool *tool)
     m_buttonToolPairs.append (kpButtonToolPair (b, tool));
 
 
-    connect (tool, TQT_SIGNAL (actionActivated ()),
-             this, TQT_SLOT (slotToolActionActivated ()));
-    connect (tool, TQT_SIGNAL (actionToolTipChanged (const TQString &)),
-             this, TQT_SLOT (slotToolActionToolTipChanged ()));
+    connect (tool, TQ_SIGNAL (actionActivated ()),
+             this, TQ_SLOT (slotToolActionActivated ()));
+    connect (tool, TQ_SIGNAL (actionToolTipChanged (const TQString &)),
+             this, TQ_SLOT (slotToolActionToolTipChanged ()));
 }
 
 // public
@@ -265,10 +265,10 @@ void kpToolToolBar::unregisterTool (kpTool *tool)
             delete ((*it).m_button);
             m_buttonToolPairs.erase (it);
 
-            disconnect (tool, TQT_SIGNAL (actionActivated ()),
-                        this, TQT_SLOT (slotToolActionActivated ()));
-            disconnect (tool, TQT_SIGNAL (actionToolTipChanged (const TQString &)),
-                        this, TQT_SLOT (slotToolActionToolTipChanged ()));
+            disconnect (tool, TQ_SIGNAL (actionActivated ()),
+                        this, TQ_SLOT (slotToolActionActivated ()));
+            disconnect (tool, TQ_SIGNAL (actionToolTipChanged (const TQString &)),
+                        this, TQ_SLOT (slotToolActionToolTipChanged ()));
             break;
         }
     }

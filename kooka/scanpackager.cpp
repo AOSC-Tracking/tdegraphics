@@ -90,8 +90,8 @@ ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
    setDropVisualizer(true);
    setAcceptDrops(true);
 
-   connect( this, TQT_SIGNAL(dropped( TQWidget*, TQDropEvent*, KURL::List&, KURL& )),
-	    this, TQT_SLOT( slotUrlsDropped( TQWidget*, TQDropEvent*, KURL::List&, KURL& )));
+   connect( this, TQ_SIGNAL(dropped( TQWidget*, TQDropEvent*, KURL::List&, KURL& )),
+	    this, TQ_SLOT( slotUrlsDropped( TQWidget*, TQDropEvent*, KURL::List&, KURL& )));
 
    kdDebug(28000) << "connected Drop-Signal" << endl;
    setRenameable ( 0, true );
@@ -101,14 +101,14 @@ ScanPackager::ScanPackager( TQWidget *parent ) : KFileTreeView( parent )
 
    setRootIsDecorated( false );
 
-   connect( this, TQT_SIGNAL( clicked( TQListViewItem*)),
-	    TQT_SLOT( slClicked(TQListViewItem*)));
+   connect( this, TQ_SIGNAL( clicked( TQListViewItem*)),
+	    TQ_SLOT( slClicked(TQListViewItem*)));
 
-   connect( this, TQT_SIGNAL( rightButtonPressed( TQListViewItem *, const TQPoint &, int )),
-	    TQT_SLOT( slShowContextMenue(TQListViewItem *, const TQPoint &, int )));
+   connect( this, TQ_SIGNAL( rightButtonPressed( TQListViewItem *, const TQPoint &, int )),
+	    TQ_SLOT( slShowContextMenue(TQListViewItem *, const TQPoint &, int )));
 
-   connect( this, TQT_SIGNAL(itemRenamed (TQListViewItem*, const TQString &, int ) ), this,
-	    TQT_SLOT(slFileRename( TQListViewItem*, const TQString&, int)));
+   connect( this, TQ_SIGNAL(itemRenamed (TQListViewItem*, const TQString &, int ) ), this,
+	    TQ_SLOT(slFileRename( TQListViewItem*, const TQString&, int)));
 
 
    img_counter = 1;
@@ -158,17 +158,17 @@ KFileTreeBranch* ScanPackager::openRoot( const KURL& root, bool  )
    setDirOnlyMode( m_defaultBranch, false );
    m_defaultBranch->setShowExtensions( true ); // false );
 
-   connect( m_defaultBranch, TQT_SIGNAL( newTreeViewItems( KFileTreeBranch*, const KFileTreeViewItemList& )),
-	    this, TQT_SLOT( slotDecorate(KFileTreeBranch*, const KFileTreeViewItemList& )));
+   connect( m_defaultBranch, TQ_SIGNAL( newTreeViewItems( KFileTreeBranch*, const KFileTreeViewItemList& )),
+	    this, TQ_SLOT( slotDecorate(KFileTreeBranch*, const KFileTreeViewItemList& )));
 
-   connect( m_defaultBranch, TQT_SIGNAL( directoryChildCount( KFileTreeViewItem* , int )),
-	    this, TQT_SLOT( slotDirCount( KFileTreeViewItem *, int )));
+   connect( m_defaultBranch, TQ_SIGNAL( directoryChildCount( KFileTreeViewItem* , int )),
+	    this, TQ_SLOT( slotDirCount( KFileTreeViewItem *, int )));
 
-   connect( m_defaultBranch, TQT_SIGNAL( deleteItem( KFileItem* )),
-	    this, TQT_SLOT( slotDeleteFromBranch(KFileItem*)));
+   connect( m_defaultBranch, TQ_SIGNAL( deleteItem( KFileItem* )),
+	    this, TQ_SLOT( slotDeleteFromBranch(KFileItem*)));
 
-   connect( m_defaultBranch, TQT_SIGNAL( populateFinished( KFileTreeViewItem * )),
-	    this, TQT_SLOT( slotStartupFinished( KFileTreeViewItem * )));
+   connect( m_defaultBranch, TQ_SIGNAL( populateFinished( KFileTreeViewItem * )),
+	    this, TQ_SLOT( slotStartupFinished( KFileTreeViewItem * )));
 
 
    return( m_defaultBranch );

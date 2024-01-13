@@ -65,12 +65,12 @@ LoadPaletteDlg::LoadPaletteDlg(TQWidget *parent, const char *name)
 		else
 			paletteBox->insertItem(paletteName);
 	}
-	connect(paletteBox, TQT_SIGNAL( activated(int) ), TQT_SLOT( setFileName(int) ));
+	connect(paletteBox, TQ_SIGNAL( activated(int) ), TQ_SLOT( setFileName(int) ));
 	topLayout->addWidget(paletteBox);
 	TQHBoxLayout* browseLayout = new TQHBoxLayout( mainWidget );
 	TQPushButton* browseButton = new TQPushButton(i18n( "Browse..." ), 
         mainWidget);
-	connect(browseButton, TQT_SIGNAL( clicked() ), TQT_SLOT( browseFileNames() ));
+	connect(browseButton, TQ_SIGNAL( clicked() ), TQ_SLOT( browseFileNames() ));
 	browseLayout->addWidget(browseButton);
 	browseLayout->addStretch(10);
 	topLayout->addLayout(browseLayout);
