@@ -265,11 +265,11 @@
     <include location="global" impldecl="in implementation">kiconloader.h</include>
     <include location="local" impldecl="in implementation">dlgperformance.ui.h</include>
 </includes>
-<Q_SLOTS>
+<slots>
     <slot>lowRadio_toggled( bool on )</slot>
     <slot>normalRadio_toggled( bool on )</slot>
     <slot>aggressiveRadio_toggled( bool on )</slot>
-</Q_SLOTS>
+</slots>
 <functions>
     <function access="private">init()</function>
 </functions>

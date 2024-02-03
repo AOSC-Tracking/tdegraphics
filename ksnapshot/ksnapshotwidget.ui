@@ -357,15 +357,15 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
     <include location="global" impldecl="in implementation">tdeglobalsettings.h</include>
     <include location="local" impldecl="in implementation">ksnapshotwidget.ui.h</include>
 </includes>
-<Q_SIGNALS>
+<signals>
     <signal>newClicked()</signal>
     <signal>saveClicked()</signal>
     <signal>copyClicked()</signal>
     <signal>printClicked()</signal>
     <signal>openWithKPClicked()</signal>
     <signal>startImageDrag()</signal>
-</Q_SIGNALS>
-<Q_SLOTS>
+</signals>
+<slots>
     <slot access="protected" specifier="non virtual">slotModeChanged( int mode )</slot>
     <slot access="protected" specifier="non virtual">slotNewClicked()</slot>
     <slot access="protected" specifier="non virtual">slotSaveClicked()</slot>
@@ -375,7 +375,7 @@ If &lt;i&gt;no delay&lt;/i&gt; is set, the program will wait for a mouse click b
     <slot access="protected" specifier="non virtual">slotOpenWithKPClicked()</slot>
     <slot specifier="non virtual" returnType="int">previewWidth()</slot>
     <slot specifier="non virtual" returnType="int">previewHeight()</slot>
-</Q_SLOTS>
+</slots>
 <functions>
     <function specifier="non virtual">setPreview( const TQPixmap &amp; pm )</function>
     <function specifier="non virtual">setDelay( int i )</function>

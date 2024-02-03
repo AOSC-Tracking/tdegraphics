@@ -519,7 +519,7 @@ diff -u -p -r1.3 kpviewscrollablecontainer.h
      virtual void viewportPaintEvent (QPaintEvent *e);
      virtual void paintEvent (QPaintEvent *e);
  
-+protected Q_SLOTS:
++protected slots:
 +    void windowActivationChanged ();
 +protected:
 +    virtual void windowActivationChange (bool wasActive);

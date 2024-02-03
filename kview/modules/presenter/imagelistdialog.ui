@@ -270,10 +270,10 @@
 <forwards>
     <forward>class KURL</forward>
 </forwards>
-<Q_SLOTS>
+<slots>
     <slot access="private" specifier="non virtual">init()</slot>
     <slot specifier="non virtual">noSort()</slot>
-</Q_SLOTS>
+</slots>
 <layoutdefaults spacing="6" margin="11"/>
 <layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 </UI>

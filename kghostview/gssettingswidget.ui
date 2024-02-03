@@ -142,12 +142,12 @@
     <include location="global" impldecl="in implementation">kpushbutton.h</include>
     <include location="global" impldecl="in implementation">kurlrequester.h</include>
 </includes>
-<Q_SIGNALS>
+<signals>
     <signal>configClicked()</signal>
-</Q_SIGNALS>
-<Q_SLOTS>
+</signals>
+<slots>
     <slot specifier="non virtual">setDetectedVersion( TQString v )</slot>
-</Q_SLOTS>
+</slots>
 <layoutdefaults spacing="6" margin="11"/>
 <layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 </UI>
