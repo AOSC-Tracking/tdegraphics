@@ -101,9 +101,15 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, O
 
         // 1. create element using outlineItem's title as tagName
         TQString name;
+#ifdef HAVE_POPPLER_2402
+        const std::vector<Unicode> &uVec = outlineItem->getTitle();
+        name = unicodeToTQString( uVec.data(), uVec.size() );
+#else
         CONST_064 Unicode * uniChar = outlineItem->getTitle();
         int titleLength = outlineItem->getTitleLength();
         name = unicodeToTQString(uniChar, titleLength);
+#endif
+
         if ( name.isEmpty() )
             continue;
 
