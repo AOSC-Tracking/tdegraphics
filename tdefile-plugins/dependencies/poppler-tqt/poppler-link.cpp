@@ -35,7 +35,7 @@ namespace Poppler {
 		if ( data.namedDest && !ld )
 		{
 			deleteDest = true;
-#			if defined(HAVE_POPPLER_086)
+#			if (POPPLER_VERSION_C >= 86000)
 			ld = data.doc->doc.findDest( data.namedDest ).get();
 #			else
 			ld = data.doc->doc.findDest( data.namedDest );
@@ -81,7 +81,7 @@ namespace Poppler {
 		m_right = rightAux;
 		m_bottom = bottomAux;
 		
-#		if !defined(HAVE_POPPLER_086)
+#		if (POPPLER_VERSION_C < 86000)
 		if (deleteDest) delete ld;
 #		endif
 	}

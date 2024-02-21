@@ -33,7 +33,7 @@
 #include <DateInfo.h>
 #include "poppler-private.h"
 
-#if !defined(HAVE_POPPLER_071)
+#if (POPPLER_VERSION_C < 71000)
 #undef bool
 #endif
 
@@ -43,14 +43,14 @@ Document *Document::load(const TQString &filePath)
 {
   if (!globalParams) {
     globalParams =
-#if defined(HAVE_POPPLER_083)
+#if (POPPLER_VERSION_C >= 83000)
       std::make_unique<GlobalParams>();
 #else
       new GlobalParams();
 #endif
   }
 
-# if defined(HAVE_POPPLER_2203)
+# if (POPPLER_VERSION_C >= 22003000)
   DocumentData *doc = new DocumentData(std::make_unique<GooString>(TQFile::encodeName(filePath)), {});
 # else
   DocumentData *doc = new DocumentData(new GooString(TQFile::encodeName(filePath)), NULL);
@@ -88,7 +88,7 @@ bool Document::unlock(const TQCString &password)
 {
   if (data->locked) {
     /* racier then it needs to be */
-#   if defined(HAVE_POPPLER_2203)
+#   if (POPPLER_VERSION_C >= 22003000)
     DocumentData *doc2 = new DocumentData(std::make_unique<GooString>(data->doc.getFileName()),
                                           GooString(password.data()));
 #   else
@@ -143,15 +143,13 @@ bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) con
 {
   FONTS_LIST_TYPE items = data->m_fontInfoScanner->scan( numPages );
 
-#if !defined(HAVE_POPPLER_082)
+#if (POPPLER_VERSION_C < 82000)
   if ( NULL == items )
     return false;
 #endif
-#if !defined(HAVE_POPPLER_076)
+#if (POPPLER_VERSION_C < 76000)
   if ( FONTS_LIST_IS_EMPTY(items) ) {
-#  if !defined(HAVE_POPPLER_082)
     delete items;
-#  endif
     return false;
   }
 #endif
@@ -168,16 +166,16 @@ bool Document::scanForFonts( int numPages, TQValueList<FontInfo> *fontList ) con
                   (Poppler::FontInfo::Type)(fontInfo->getType()));
     fontList->append(font);
   }
-# if defined(HAVE_POPPLER_082)
+# if (POPPLER_VERSION_C >= 82000)
   for (auto entry : items) {
     delete entry;
   }
-# elif defined(HAVE_POPPLER_076)
+# elif (POPPLER_VERSION_C >= 76000)
   for (auto entry : *items) {
     delete entry;
   }
   delete items;
-# elif defined(HAVE_POPPLER_070)
+# elif (POPPLER_VERSION_C >= 70000)
   deleteGooList<::FontInfo>(items);
 # else
   deleteGooList(items, ::FontInfo);
@@ -193,7 +191,7 @@ TQString Document::getInfo( const TQString & type ) const
   if ( data->locked )
     return NULL;
 
-# if defined(HAVE_POPPLER_058)
+# if (POPPLER_VERSION_C >= 58000)
   info = data->doc.getDocInfo();
 # else
   data->doc.getDocInfo( &info );
@@ -209,7 +207,7 @@ TQString Document::getInfo( const TQString & type ) const
   int i;
   Dict *infoDict = info.getDict();
 
-#if defined(HAVE_POPPLER_058)
+#if (POPPLER_VERSION_C >= 58000)
   obj = infoDict->lookup( (char*)type.latin1() );
 #else
   infoDict->lookup( (char*)type.latin1(), &obj );
@@ -241,13 +239,13 @@ TQString Document::getInfo( const TQString & type ) const
       }
       result += unicodeToTQString( &u, 1 );
     }
-#   if !defined(HAVE_POPPLER_058)
+#   if (POPPLER_VERSION_C < 58000)
     obj.free();
     info.free();
 #   endif
     return result;
   }
-# if !defined(HAVE_POPPLER_058)
+# if (POPPLER_VERSION_C < 58000)
   obj.free();
   info.free();
 # endif
@@ -262,13 +260,13 @@ TQDateTime Document::getDate( const TQString & type ) const
     return TQDateTime();
 
   Object info;
-# if defined(HAVE_POPPLER_058)
+# if (POPPLER_VERSION_C >= 58000)
   info = data->doc.getDocInfo();
 # else
   data->doc.getDocInfo( &info );
 # endif
   if ( !info.isDict() ) {
-#   if !defined(HAVE_POPPLER_058)
+#   if (POPPLER_VERSION_C < 58000)
     info.free();
 #   endif
     return TQDateTime();
@@ -280,14 +278,14 @@ TQDateTime Document::getDate( const TQString & type ) const
   Dict *infoDict = info.getDict();
   TQString result;
 
-#if defined(HAVE_POPPLER_058)
+#if (POPPLER_VERSION_C >= 58000)
   obj = infoDict->lookup( (char*)type.latin1() );
 #else
   infoDict->lookup( (char*)type.latin1(), &obj );
 #endif
   if (!obj.isNull() && obj.isString())
   {
-#   if defined(HAVE_POPPLER_2108)
+#   if (POPPLER_VERSION_C >= 21008000)
     const GooString *s = obj.getString();
 #   else
     TQString tqs = UnicodeParsedString(obj.getString());
@@ -299,7 +297,7 @@ TQDateTime Document::getDate( const TQString & type ) const
       TQDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
       TQTime t( hour, min, sec );
       if ( d.isValid() && t.isValid() ) {
-#	if !defined(HAVE_POPPLER_058)
+#	if (POPPLER_VERSION_C < 58000)
 	obj.free();
 	info.free();
 #	endif
@@ -307,7 +305,7 @@ TQDateTime Document::getDate( const TQString & type ) const
       }
     }
   }
-# if !defined(HAVE_POPPLER_058)
+# if (POPPLER_VERSION_C < 58000)
   obj.free();
   info.free();
 # endif
@@ -390,16 +388,16 @@ bool Document::print(const TQString &fileName, TQValueList<int> pageList, double
 
 bool Document::print(const TQString &file, TQValueList<int> pageList, double hDPI, double vDPI, int rotate, int paperWidth, int paperHeight)
 {
-#if defined(HAVE_POPPLER_058) || defined(HAVE_POPPLER_030)
+#if (POPPLER_VERSION_C >= 30000)
   std::vector<int> pages;
   TQValueList<int>::iterator it;
   for (it = pageList.begin();  it != pageList.end();  ++it ) {
 	pages.push_back(*it);
   }
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), &(data->doc), NULL, pages, psModePS, paperWidth, paperHeight);
-#elif defined(HAVE_POPPLER_020)
+#elif (POPPLER_VERSION_C >= 20000)
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), &(data->doc), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);
-#elif defined(HAVE_POPPLER_016)
+#elif (POPPLER_VERSION_C >= 16000)
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), &(data->doc), data->doc.getXRef(), data->doc.getCatalog(), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);
 #else
   PSOutputDev *psOut = new PSOutputDev(file.latin1(), data->doc.getXRef(), data->doc.getCatalog(), NULL, 1, data->doc.getNumPages(), psModePS, paperWidth, paperHeight);

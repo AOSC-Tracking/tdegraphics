@@ -129,7 +129,7 @@ TQString Page::getText(const Rectangle &r) const
   TQString result;
   ::Page *p;
 
-#if defined(HAVE_POPPLER_058) || defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
+#if (POPPLER_VERSION_C >= 20000)
   output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
 #else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
@@ -164,7 +164,7 @@ TQValueList<TextBox*> Page::textList() const
 
   TQValueList<TextBox*> output_list;
 
-#if defined(HAVE_POPPLER_058) || defined(HAVE_POPPLER_030) || defined(HAVE_POPPLER_020)
+#if (POPPLER_VERSION_C >= 20000)
   output_dev = new TextOutputDev(0, gFalse, 0, gFalse, gFalse);
 #else
   output_dev = new TextOutputDev(0, gFalse, gFalse, gFalse);
@@ -173,7 +173,7 @@ TQValueList<TextBox*> Page::textList() const
   data->doc->data->doc.displayPageSlice(output_dev, data->index + 1, 72, 72,
       0, false, false, false, -1, -1, -1, -1);
 
-# if defined(HAVE_POPPLER_2111)
+# if (POPPLER_VERSION_C >= 21011000)
   std::unique_ptr<TextWordList> word_list = output_dev->makeWordList();
 # else
   TextWordList *word_list = output_dev->makeWordList();
@@ -197,7 +197,7 @@ TQValueList<TextBox*> Page::textList() const
     output_list.append(text_box);
   }
 
-# if !defined(HAVE_POPPLER_2111)
+# if (POPPLER_VERSION_C < 21011000)
   delete word_list;
 # endif
   delete output_dev;
@@ -211,14 +211,14 @@ PageTransition *Page::getTransition() const
   {
     Object o;
     PageTransitionParams params;
-#   if defined(HAVE_POPPLER_058)
+#   if (POPPLER_VERSION_C >= 58000)
     o = data->doc->data->doc.getCatalog()->getPage(data->index + 1)->getTrans();
 #   else
     data->doc->data->doc.getCatalog()->getPage(data->index + 1)->getTrans(&o);
 #   endif
     params.dictObj = &o;
     data->transition = new PageTransition(params);
-#   if !defined(HAVE_POPPLER_058)
+#   if (POPPLER_VERSION_C < 58000)
     o.free();
 #   endif
   }

@@ -93,7 +93,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, O
     {
         // iterate over every object in 'items'
         OutlineItem * outlineItem =
-#ifdef HAVE_POPPLER_076
+#if (POPPLER_VERSION_C >= 76000)
 		(*items)[i];
 #else
 		(OutlineItem *)items->get( i );
@@ -101,7 +101,7 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, O
 
         // 1. create element using outlineItem's title as tagName
         TQString name;
-#ifdef HAVE_POPPLER_2402
+#if (POPPLER_VERSION_C >= 24002000)
         const std::vector<Unicode> &uVec = outlineItem->getTitle();
         name = unicodeToTQString( uVec.data(), uVec.size() );
 #else

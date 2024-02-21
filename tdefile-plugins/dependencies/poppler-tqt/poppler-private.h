@@ -39,27 +39,27 @@
 #else
 class SplashOutputDev;
 #endif
-#if defined(HAVE_POPPLER_064)
+#if (POPPLER_VERSION_C >= 64000)
 #define CONST_064 const
 #else
 #define CONST_064
 #endif
-#if defined(HAVE_POPPLER_071)
+#if (POPPLER_VERSION_C >= 71000)
 #define GBool  bool
 #define gTrue  true
 #define gFalse false
 #endif
-#if defined(HAVE_POPPLER_072)
+#if (POPPLER_VERSION_C >= 72000)
 #define GOO_GET_CSTR c_str
 #else
 #define GOO_GET_CSTR getCString
 #endif
-#if defined(HAVE_POPPLER_076)
+#if (POPPLER_VERSION_C >= 76000)
 #include <vector>
 class OutlineItem;
 #define OUTLINE_ITEMS_TYPE const std::vector<OutlineItem*>
 #define OUTLINE_ITEMS_LENGTH(goo) goo->size()
-#  if defined(HAVE_POPPLER_082)
+#  if (POPPLER_VERSION_C >= 82000)
 #define FONTS_LIST_TYPE std::vector<::FontInfo*>
 #define FONTS_LIST_LENGTH(goo) goo.size()
 #define FONTS_LIST_IS_EMPTY(goo) goo.empty()
@@ -104,7 +104,7 @@ class LinkDestinationData {
 
 class DocumentData {
   public:
-#   if defined(HAVE_POPPLER_2203)
+#   if (POPPLER_VERSION_C >= 22003000)
     DocumentData(std::unique_ptr<GooString> &&filePath, const std::optional<GooString> &password) : doc(std::move(filePath), password), m_fontInfoScanner(0), m_outputDev(0) {}
 #   else
     DocumentData(GooString *filePath, GooString *password) : doc(filePath,password), m_fontInfoScanner(0), m_outputDev(0) {}

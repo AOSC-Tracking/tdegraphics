@@ -1,23 +1,7 @@
 #cmakedefine VERSION "@VERSION@"
 
 // poppler-tqt
-#cmakedefine HAVE_POPPLER_2402
-#cmakedefine HAVE_POPPLER_2203
-#cmakedefine HAVE_POPPLER_2112
-#cmakedefine HAVE_POPPLER_2111
-#cmakedefine HAVE_POPPLER_2108
-#cmakedefine HAVE_POPPLER_086
-#cmakedefine HAVE_POPPLER_083
-#cmakedefine HAVE_POPPLER_082
-#cmakedefine HAVE_POPPLER_076
-#cmakedefine HAVE_POPPLER_072
-#cmakedefine HAVE_POPPLER_071
-#cmakedefine HAVE_POPPLER_070
-#cmakedefine HAVE_POPPLER_064
-#cmakedefine HAVE_POPPLER_058
-#cmakedefine HAVE_POPPLER_030
-#cmakedefine HAVE_POPPLER_020
-#cmakedefine HAVE_POPPLER_016
+#cmakedefine POPPLER_VERSION_C @POPPLER_VERSION_C@
 
 // kpdf, kdvi
 #cmakedefine HAVE_FREETYPE 1
