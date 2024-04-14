@@ -618,7 +618,7 @@ bool KGVDocument::savePages( const TQString& saveFileName,
 	PageList normedPageList;
 	transform( pageList.begin(), pageList.end(),
 	           back_inserter( normedPageList ),
-	           bind2nd( minus<int>(), minPage - 1 ) );
+	           bind( minus<int>(), std::placeholders::_1, minPage - 1 ) );
 	
 	// Finally select the desired pages from the converted file.
 	psCopyDoc( psSaveFile.name(), saveFileName, normedPageList );
