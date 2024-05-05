@@ -77,7 +77,7 @@ public:
      */
     virtual bool closeURL();
 
-    KDE_EXPORT static TDEAboutData* createAboutData();
+    TDE_EXPORT static TDEAboutData* createAboutData();
 
 public slots:
     /**

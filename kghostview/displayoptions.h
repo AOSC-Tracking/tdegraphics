@@ -24,7 +24,7 @@
 class TDECmdLineArgs;
 class TDEConfig;
 
-class KDE_EXPORT DisplayOptions 
+class TDE_EXPORT DisplayOptions 
 {
 	public:
 	DisplayOptions();

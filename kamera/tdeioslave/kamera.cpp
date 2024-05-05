@@ -53,7 +53,7 @@ using namespace TDEIO;
 
 extern "C"
 {
-	KDE_EXPORT int kdemain(int argc, char **argv);
+	TDE_EXPORT int kdemain(int argc, char **argv);
 
 #ifdef HAVE_GPHOTO2_5
 	static void frontendCameraStatus(GPContext *context, const char *status, void *data);

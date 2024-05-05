@@ -36,7 +36,7 @@ static TDECmdLineOptions options[] =
     TDECmdLineLastOption
 };
 
-extern "C" KDE_EXPORT int kdemain(int argc, char **argv)
+extern "C" TDE_EXPORT int kdemain(int argc, char **argv)
 {
     TDEAboutData about(
 	  "kuickshow", I18N_NOOP( "KuickShow" ), KUICKSHOWVERSION,

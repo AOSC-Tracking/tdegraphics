@@ -31,7 +31,7 @@ static TDECmdLineOptions options[] =
 	TDECmdLineLastOption
 };
 
-extern "C" KDE_EXPORT int kdemain( int argc, char ** argv )
+extern "C" TDE_EXPORT int kdemain( int argc, char ** argv )
 {
 	TDEAboutData about( "kview", I18N_NOOP( "KView" ),
 			KVIEW_VERSION, description,

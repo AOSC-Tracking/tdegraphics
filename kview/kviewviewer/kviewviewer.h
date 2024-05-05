@@ -42,7 +42,7 @@ class KDirWatch;
 template<class T>
 class TQCache;
 
-class KDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIface
+class TDE_EXPORT KViewViewer : public KImageViewer::Viewer, public KViewViewerIface
 {
 	TQ_OBJECT
   

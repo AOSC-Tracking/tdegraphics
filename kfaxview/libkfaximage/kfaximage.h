@@ -50,7 +50,7 @@ class pagenode;
 #define KFAX_DPI_SUPERFINE	TQPoint(406,392)
 
 
-class KDE_EXPORT KFaxImage : public TQObject
+class TDE_EXPORT KFaxImage : public TQObject
 {
     TQ_OBJECT
   

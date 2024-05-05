@@ -25,7 +25,7 @@
 class TDEInstance;
 class TDEAboutData;
 
-class KDE_EXPORT KGVFactory : public KParts::Factory
+class TDE_EXPORT KGVFactory : public KParts::Factory
 {
     public:
         KGVFactory();

@@ -39,7 +39,7 @@ class KPixmap;
  * @author Matthias Kretz <kretz@kde.org>
  * @version $Id$
  */
-class KDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
+class TDE_EXPORT KImageCanvas : public TQScrollView, public KImageViewer::Canvas
 {
 	TQ_OBJECT
   

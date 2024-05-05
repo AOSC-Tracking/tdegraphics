@@ -45,7 +45,7 @@ namespace KImageViewer
  * until it's finished. So if you're using this interface please get in contact
  * with me.
  */
-class KDE_EXPORT Viewer : public KParts::ReadWritePart
+class TDE_EXPORT Viewer : public KParts::ReadWritePart
 {
 	TQ_OBJECT
   

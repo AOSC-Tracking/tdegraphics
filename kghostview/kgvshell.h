@@ -35,7 +35,7 @@ class TDEPopupMenu;
 class DisplayOptions;
 class FullScreenFilter;
 
-class KDE_EXPORT KGVShell : public KParts::MainWindow
+class TDE_EXPORT KGVShell : public KParts::MainWindow
 {
     TQ_OBJECT
   

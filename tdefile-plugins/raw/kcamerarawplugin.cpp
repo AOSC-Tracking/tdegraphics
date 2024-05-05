@@ -38,8 +38,8 @@ typedef KGenericFactory<KCameraRawPlugin> RawFactory;
 
 K_EXPORT_COMPONENT_FACTORY(tdefile_raw, RawFactory("tdefile_raw"))
 
-#ifndef KDE_EXPORT
-# define KDE_EXPORT
+#ifndef TDE_EXPORT
+# define TDE_EXPORT
 #endif
 
 /* Main entry point into raw parser */

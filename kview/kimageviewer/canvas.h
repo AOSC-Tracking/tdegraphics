@@ -67,7 +67,7 @@ namespace KImageViewer
  * until it's finished. So if you're using this interface please get in contact
  * with me.
  */
-class KDE_EXPORT Canvas
+class TDE_EXPORT Canvas
 {
 	public:
 		/**
