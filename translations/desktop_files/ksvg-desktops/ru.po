@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # This file is put in the public domain.
-# Andrei Stepanov <adem4ik@gmail.com>, 2023.
+# Andrei Stepanov <adem4ik@gmail.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-08 23:58+0200\n"
-"PO-Revision-Date: 2023-12-03 17:55+0000\n"
+"PO-Revision-Date: 2024-05-11 01:02+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian <https://mirror.git.trinitydesktop.org/weblate/"
 "projects/tdegraphics/ksvg-desktop-files/ru/>\n"
@@ -26,22 +26,22 @@ msgstr "Движок прорисовки KSVG"
 #. Name
 #: plugin/backends/agg/ksvgaggcanvas.desktop:6
 msgid "KSVG Rendering Backend - Anti Grain Geometry"
-msgstr "Движок отрисовки KSVG - противозернистая геометрия"
+msgstr "Движок отрисовки KSVG — противозернистая геометрия"
 
 #. Comment
 #: plugin/backends/agg/ksvgaggcanvas.desktop:7
 msgid "New, unstable ksvg rendering backend"
-msgstr "Новый, нестабильный движок прорисовки ksvg"
+msgstr "Новый, нестабильный движок прорисовки KSVG"
 
 #. Name
 #: plugin/backends/libart/ksvglibartcanvas.desktop:6
 msgid "KSVG Rendering Backend - Libart"
-msgstr "Движок отрисовки KSVG - Libart"
+msgstr "Движок отрисовки KSVG — Libart"
 
 #. Comment
 #: plugin/backends/libart/ksvglibartcanvas.desktop:7
 msgid "Mature ksvg rendering backend"
-msgstr "Старый движок отрисовки ksvg"
+msgstr "Старый движок отрисовки KSVG"
 
 #. Name
 #: plugin/ksvgplugin.desktop:2
