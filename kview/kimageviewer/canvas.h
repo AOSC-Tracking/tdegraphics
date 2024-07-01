@@ -30,7 +30,7 @@ class TQWidget;
 
 #include <tqstring.h>
 #include <tqobjectdefs.h>
-#include <kdemacros.h>
+#include <tdemacros.h>
 namespace KImageViewer
 {
 

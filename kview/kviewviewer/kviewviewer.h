@@ -25,7 +25,7 @@
 
 #include <tqvaluevector.h>
 #include "kviewvieweriface.h"
-#include <kdemacros.h>
+#include <tdemacros.h>
 
 namespace KImageViewer { class Canvas; }
 namespace TDEIO { class Job; }

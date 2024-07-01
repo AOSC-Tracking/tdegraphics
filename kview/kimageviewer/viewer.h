@@ -22,7 +22,7 @@
 #define KIMAGEVIEWER_VIEWER_H
 
 #include <tdeparts/part.h>
-#include <kdemacros.h>
+#include <tdemacros.h>
 namespace KParts
 {
 	class BrowserExtension;

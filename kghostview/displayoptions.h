@@ -20,7 +20,7 @@
 #include <tqstring.h>
 #include <tqvaluelist.h>
 #include "dscparse_adapter.h"
-#include <kdemacros.h>
+#include <tdemacros.h>
 class TDECmdLineArgs;
 class TDEConfig;
 

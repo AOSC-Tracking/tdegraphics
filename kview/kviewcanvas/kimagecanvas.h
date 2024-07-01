@@ -27,7 +27,7 @@
 #include <tqcursor.h>
 #include <tqrect.h>
 
-#include <kdemacros.h>
+#include <tdemacros.h>
 
 class KImageHolder;
 class TQColor;

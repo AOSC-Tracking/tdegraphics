@@ -67,7 +67,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <errno.h>
-#include <kdemacros.h>
+#include <tdemacros.h>
 
 #include <tqcolor.h>
 #include <tqfile.h>
