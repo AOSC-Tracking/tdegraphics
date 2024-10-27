@@ -84,7 +84,7 @@
 // popen
 //------------------------------------------------------------------------
 
-#if defined(_MSC_VER) || defined(__BORLANDC__)
+#if defined(_MSC_VER)
 #define popen _popen
 #define pclose _pclose
 #endif
@@ -103,7 +103,7 @@
 #undef CDECL
 #endif
 
-#if defined(_MSC_VER) || defined(__BORLANDC__)
+#if defined(_MSC_VER)
 #define CDECL __cdecl
 #else
 #define CDECL
