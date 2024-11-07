@@ -27,7 +27,7 @@
 #include <tqfileinfo.h>
 #include <tqimage.h>
 #include <tqpainter.h>
-#include <kapp.h>
+#include <tdeapplication.h>
 
 #include "GBitmap.h"
 #include "BSByteStream.h"
