@@ -96,8 +96,6 @@ namespace DJVU {
 #define GCONTAINER_NO_MEMBER_TEMPLATES 1
 #elif defined(_MSC_VER) && !defined(__ICL)
 #define GCONTAINER_NO_MEMBER_TEMPLATES 1
-#elif defined(__MWERKS__)
-#define GCONTAINER_NO_MEMBER_TEMPLATES 1
 #else
 #define GCONTAINER_NO_MEMBER_TEMPLATES 0
 #endif

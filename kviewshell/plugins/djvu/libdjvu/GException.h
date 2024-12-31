@@ -229,9 +229,6 @@ private:
 #if defined(_MSC_VER)
 #define CPP_SUPPORTS_EXCEPTIONS
 #endif
-#if defined(__MWERKS__)
-#define CPP_SUPPORTS_EXCEPTIONS
-#endif
 #if defined(__EXCEPTIONS)
 #define CPP_SUPPORTS_EXCEPTIONS
 #endif

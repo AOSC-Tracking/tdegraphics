@@ -478,10 +478,8 @@ public:
        subscript range, you must stop using the pointers returned by prior
        invocation of this conversion operator. */
    operator const TYPE* () const;
-   
-#ifndef __MWERKS__ //MCW can't compile
    operator const TYPE* ();
-#endif  
+
    /** Insert new elements into an array. This function inserts
        #howmany# elements at position #n# into the array. The initial value #val#
        is copied into the new elements. All array elements previously located at subscripts
@@ -528,14 +526,12 @@ ArrayBaseT<TYPE>::operator TYPE* ()
    return &((TYPE *) rep->data)[-rep->minlo];
 }
 
-#ifndef __MWERKS__ //MCW can't compile
 template <class TYPE> inline
 ArrayBaseT<TYPE>::operator const TYPE* ()
 {
    const ArrayRep * rep=(const ArrayRep *) get();
    return &((const TYPE *) rep->data)[-rep->minlo];
 }
-#endif
 
 template <class TYPE> inline
 ArrayBaseT<TYPE>::operator const TYPE* () const
@@ -903,11 +899,7 @@ public:
   const GP<TYPE>& operator[](int n) const;
   // -- CONVERSION
   operator GP<TYPE>* ();
-  
-#ifndef __MWERKS__ //MCW can't compile
   operator const GP<TYPE>* ();
-#endif 
- 
   operator const GP<TYPE>* () const;
   // -- ALTERATION
   void ins(int n, const GP<TYPE> &val, unsigned int howmany=1);
@@ -952,13 +944,11 @@ inline DPArray<TYPE>::operator GP<TYPE>* ()
    return (GP<TYPE> *) DArray<GPBase>::operator GPBase*();
 }
 
-#ifndef __MWERKS__ //MCW can't compile
 template<class TYPE>
 inline DPArray<TYPE>::operator const GP<TYPE>* ()
 {
    return (const GP<TYPE> *) DArray<GPBase>::operator const GPBase*();
 }
-#endif
 
 template<class TYPE>
 inline DPArray<TYPE>::operator const GP<TYPE>* () const
