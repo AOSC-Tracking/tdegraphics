@@ -32,12 +32,7 @@
 #include <tqfile.h>
 #include <tqdatetime.h>
 
-#if !defined(__osf__)
 #include <inttypes.h>
-#else
-typedef unsigned long uint32_t;
-typedef unsigned short uint16_t;
-#endif
 
 typedef KGenericFactory<KBmpPlugin> BmpFactory;
 

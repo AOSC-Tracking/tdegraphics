@@ -32,11 +32,7 @@
 #include <tqfile.h>
 #include <tqdatetime.h>
 
-#if !defined(__osf__)
 #include <inttypes.h>
-#else
-typedef unsigned short uint32_t;
-#endif
 
 typedef KGenericFactory<KXbmPlugin> XbmFactory;
 
