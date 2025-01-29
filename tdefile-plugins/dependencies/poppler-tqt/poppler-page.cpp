@@ -124,7 +124,11 @@ TQImage Page::renderToImage(double xres, double yres, bool doLinks) const
 TQString Page::getText(const Rectangle &r) const
 {
   TextOutputDev *output_dev;
+# if (POPPLER_VERSION_C >= 25001000)
+  GooString s;
+# else
   GooString *s;
+# endif
   const PDFRectangle *rect;
   TQString result;
   ::Page *p;
@@ -151,10 +155,16 @@ TQString Page::getText(const Rectangle &r) const
     s = output_dev->getText(r.m_x1, y1, r.m_x2, y2);
   }
 
+# if (POPPLER_VERSION_C >= 25001000)
+  result = TQString::fromUtf8(s.GOO_GET_CSTR());
+# else
   result = TQString::fromUtf8(s->GOO_GET_CSTR());
+# endif
 
   delete output_dev;
+# if (POPPLER_VERSION_C < 25001000)
   delete s;
+# endif
   return result;
 }
 
