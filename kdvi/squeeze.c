@@ -35,7 +35,9 @@
  *   as a constant string.
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
 #define LINELENGTH (72)
 #define BUFLENGTH (1000)
 #undef putchar
@@ -107,7 +109,6 @@ int main(int argc, char *argv[])
    int c ;
    char *b ;
    char seeking ;
-   extern void exit() ;
 
    if (argc > 3 || (in=(argc < 2 ? stdin : fopen(argv[1], "r")))==NULL ||
                     (out=(argc < 3 ? stdout : fopen(argv[2], "w")))==NULL) {
