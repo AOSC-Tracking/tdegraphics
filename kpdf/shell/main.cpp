@@ -60,19 +60,12 @@ int main(int argc, char** argv)
         // no session.. just start up normally
         TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs();
 
-        if (args->count() == 0)
+        KPDF::Shell* widget = new KPDF::Shell;
+        for (int i = 0; i < args->count(); ++i)
         {
-            KPDF::Shell* widget = new KPDF::Shell;
-            widget->show();
+          widget->openURL(args->url(i));
         }
-        else
-        {
-            for (int i = 0; i < args->count(); ++i)
-            {
-                KPDF::Shell* widget = new KPDF::Shell(args->url(i));
-                widget->show();
-            }
-        }
+        widget->show();
         args->clear();
     }
 

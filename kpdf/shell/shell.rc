@@ -1,13 +1,19 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="7" name="kpdf_shell" >
+<kpartgui version="8" name="kpdf_shell" >
  <MenuBar>
   <Menu name="file" >
    <DefineGroup append="save_merge" name="file_save" />
    <DefineGroup append="print_merge" name="file_print" />
   </Menu>
-  <!--Menu name="view" >
-   <Action name="fullscreen" />
-  </Menu-->
+  <Menu name="view" >
+   <Action name="newtab" />
+   <Action name="duplicatecurrenttab" />
+   <Action name="breakoffcurrenttab" />
+   <Separator />
+   <Action name="removecurrenttab" />
+   <Action name="removeothertabs" />
+   <Separator />
+  </Menu>
   <Menu name="settings" >
    <DefineGroup append="show_merge" name="show_merge" />
   </Menu>

@@ -20,18 +20,23 @@
 // qt/kde includes
 #include <tqcursor.h>
 #include <tqtimer.h>
+#include <tqtoolbutton.h>
+#include <ktabwidget.h>
+#include <tqptrlist.h>
 #include <tdeaction.h>
 #include <tdeapplication.h>
 #include <kedittoolbar.h>
 #include <tdefiledialog.h>
 #include <klibloader.h>
 #include <tdemessagebox.h>
+#include <kiconloader.h>
 #include <kstdaction.h>
 #include <kurl.h>
 #include <kdebug.h>
 #include <tdelocale.h>
 #include <tdemenubar.h>
 #include <tdeparts/componentfactory.h>
+#include <tdeparts/partmanager.h>
 #include <tdeio/netaccess.h>
 #include <tdemainwindowiface.h>
 
@@ -41,13 +46,25 @@
 using namespace KPDF;
 
 Shell::Shell()
-  : KParts::MainWindow(0, "KPDF::Shell"), m_menuBarWasShown(true), m_toolBarWasShown(true)
+  : KParts::MainWindow(0, "KPDF::Shell"),
+    m_menuBarWasShown(true),
+    m_toolBarWasShown(true),
+    m_tabs(nullptr),
+    m_tabsContextMenu(nullptr),
+    m_manager(nullptr),
+    m_workingTab(-1)
 {
   init();
 }
 
 Shell::Shell(const KURL &url)
- : KParts::MainWindow(0, "KPDF::Shell"), m_menuBarWasShown(true), m_toolBarWasShown(true)
+  : KParts::MainWindow(0, "KPDF::Shell"),
+    m_menuBarWasShown(true),
+    m_toolBarWasShown(true),
+    m_tabs(nullptr),
+    m_tabsContextMenu(nullptr),
+    m_manager(nullptr),
+    m_workingTab(-1)
 {
   m_openUrl = url;
   init();
@@ -55,42 +72,38 @@ Shell::Shell(const KURL &url)
 
 void Shell::init()
 {
-  // set the shell's ui resource file
-  setXMLFile("shell.rc");
-
   // this routine will find and load our Part.  it finds the Part by
   // name which is a bad idea usually.. but it's alright in this
   // case since our Part is made for this Shell
-  KParts::Factory *factory = (KParts::Factory *) KLibLoader::self()->factory("libkpdfpart");
-  if (factory)
-  {
-    // now that the Part is loaded, we cast it to a Part to get
-    // our hands on it
-    m_part = (KParts::ReadOnlyPart*) factory->createPart(this, "kpdf_part", this, 0, "KParts::ReadOnlyPart");
-    if (m_part)
-    {
-      // then, setup our actions
-      setupActions();
-      // tell the KParts::MainWindow that this is indeed the main widget
-      setCentralWidget(m_part->widget());
-      // and integrate the part's GUI with the shell's
-      setupGUI(Keys | Save);
-      createGUI(m_part);
-      m_showToolBarAction = static_cast<TDEToggleAction*>(toolBarMenuAction());
-    }
-  }
-  else
+  m_factory = (KParts::Factory *) KLibLoader::self()->factory("libkpdfpart");
+  if (!m_factory)
   {
     // if we couldn't find our Part, we exit since the Shell by
     // itself can't do anything useful
     KMessageBox::error(this, i18n("Unable to find kpdf part."));
-    m_part = 0;
+    TQTimer::singleShot(0, tdeApp, TQ_SLOT(quit()));
     return;
   }
-  connect( this, TQ_SIGNAL( restoreDocument(TDEConfig*) ),m_part, TQ_SLOT( restoreDocument(TDEConfig*)));
-  connect( this, TQ_SIGNAL( saveDocumentRestoreInfo(TDEConfig*) ), m_part, TQ_SLOT( saveDocumentRestoreInfo(TDEConfig*)));
-  connect( m_part, TQ_SIGNAL( enablePrintAction(bool) ), m_printAction, TQ_SLOT( setEnabled(bool)));
-  
+
+  m_tabs = new KTabWidget(this);
+  connect(m_tabs, TQ_SIGNAL(contextMenu(const TQPoint &)),
+          this, TQ_SLOT(slotTabContextMenu(const TQPoint &)));
+  connect(m_tabs, TQ_SIGNAL(contextMenu(TQWidget*, const TQPoint &)),
+          TQ_SLOT(slotTabContextMenu(TQWidget*, const TQPoint &)));
+
+  m_manager = new KParts::PartManager(this, "kpdf part manager");
+  connect(m_manager, TQ_SIGNAL(activePartChanged(KParts::Part*)),
+          this, TQ_SLOT(createGUI(KParts::Part*)));
+  connect(m_manager, TQ_SIGNAL(activePartChanged(KParts::Part*)),
+          this, TQ_SLOT(slotChangeTab(KParts::Part*)));
+
+  setCentralWidget(m_tabs);
+  setXMLFile("shell.rc");
+
+  setupActions();
+  setupGUI(Keys | Save);
+  m_showToolBarAction = static_cast<TDEToggleAction*>(toolBarMenuAction());
+
   readSettings();
   if (!TDEGlobal::config()->hasGroup("MainWindow"))
   {
@@ -98,67 +111,128 @@ void Shell::init()
     kmwi.maximize();
   }
   setAutoSaveSettings();
-  
-  if (m_openUrl.isValid()) TQTimer::singleShot(0, this, TQ_SLOT(delayedOpen()));
+
+  slotAddTab();
+  if (m_openUrl.isValid())
+  {
+    TQTimer::singleShot(0, this, TQ_SLOT(delayedOpen()));
+  }
 }
 
 void Shell::delayedOpen()
 {
-   openURL(m_openUrl);
+  openURL(m_openUrl);
 }
 
 Shell::~Shell()
 {
-    if(m_part) writeSettings();
+  if (m_tabs)
+  {
+    writeSettings();
+  }
 }
 
 void Shell::openURL( const KURL & url )
 {
-    if ( m_part )
-    {
-        bool openOk = m_part->openURL( url );
-        if ( openOk )
-          m_recent->addURL( url );
-        else
-          m_recent->removeURL( url );
-    }
-}
+  // if the current part has no url, reuse part
+  KParts::ReadOnlyPart *part = static_cast<KParts::ReadOnlyPart*>(m_manager->activePart());
+  if (!part || !part->url().isEmpty())
+  {
+    part = createTab();
+  }
 
+  if (part)
+  {
+    if (url.isValid())
+    {
+      m_tabs->changeTab(part->widget(), url.filename());
+      bool openOk = part->openURL(url);
+      if (openOk)
+      {
+          m_recent->addURL(url);
+      }
+      else
+      {
+          m_recent->removeURL(url);
+      }
+    }
+  }
+}
 
 void Shell::readSettings()
 {
-    m_recent->loadEntries( TDEGlobal::config() );
-    m_recent->setEnabled( true ); // force enabling
-    m_recent->setToolTip( i18n("Click to open a file\nClick and hold to open a recent file") );
+  m_recent->loadEntries( TDEGlobal::config() );
+  m_recent->setEnabled( true ); // force enabling
+  m_recent->setToolTip( i18n("Click to open a file\nClick and hold to open a recent file") );
 
-    TDEGlobal::config()->setDesktopGroup();
-    bool fullScreen = TDEGlobal::config()->readBoolEntry( "FullScreen", false );
-    setFullScreen( fullScreen );
+  TDEGlobal::config()->setDesktopGroup();
+  bool fullScreen = TDEGlobal::config()->readBoolEntry( "FullScreen", false );
+  setFullScreen( fullScreen );
 }
 
 void Shell::writeSettings()
 {
-    m_recent->saveEntries( TDEGlobal::config() );
-    TDEGlobal::config()->setDesktopGroup();
-    TDEGlobal::config()->writeEntry( "FullScreen", m_fullScreenAction->isChecked());
-    TDEGlobal::config()->sync();
+  m_recent->saveEntries( TDEGlobal::config() );
+  TDEGlobal::config()->setDesktopGroup();
+  TDEGlobal::config()->writeEntry( "FullScreen", m_fullScreenAction->isChecked());
+  TDEGlobal::config()->sync();
 }
 
 void Shell::setupActions()
 {
-  TDEAction * openAction = KStdAction::open(this, TQ_SLOT(fileOpen()), actionCollection());
-  m_recent = KStdAction::openRecent( this, TQ_SLOT( openURL( const KURL& ) ), actionCollection() );
-  connect( m_recent, TQ_SIGNAL( activated() ), openAction, TQ_SLOT( activate() ) );
-  m_recent->setWhatsThis( i18n( "<b>Click</b> to open a file or <b>Click and hold</b> to select a recent file" ) );
-  m_printAction = KStdAction::print( m_part, TQ_SLOT( slotPrint() ), actionCollection() );
-  m_printAction->setEnabled( false );
+  TDEAction *openAction = KStdAction::open(this, TQ_SLOT(fileOpen()), actionCollection());
+  m_recent = KStdAction::openRecent( this, TQ_SLOT(openURL(const KURL&)), actionCollection());
+  connect(m_recent, TQ_SIGNAL(activated()), openAction, TQ_SLOT( activate()));
+  m_recent->setWhatsThis(i18n("<b>Click</b> to open a file or <b>Click and hold</b> to select a recent file"));
+  m_printAction = KStdAction::print(m_manager->activePart(), TQ_SLOT(slotPrint()), actionCollection());
+  m_printAction->setEnabled(false);
   KStdAction::quit(this, TQ_SLOT(slotQuit()), actionCollection());
 
   setStandardToolBarMenuEnabled(true);
 
-  m_showMenuBarAction = KStdAction::showMenubar( this, TQ_SLOT( slotShowMenubar() ), actionCollection());
+  m_showMenuBarAction = KStdAction::showMenubar(this, TQ_SLOT(slotShowMenubar()), actionCollection());
   KStdAction::configureToolbars(this, TQ_SLOT(optionsConfigureToolbars()), actionCollection());
-  m_fullScreenAction = KStdAction::fullScreen( this, TQ_SLOT( slotUpdateFullScreen() ), actionCollection(), this );
+  m_fullScreenAction = KStdAction::fullScreen(this, TQ_SLOT(slotUpdateFullScreen()), actionCollection(), this);
+
+  TDEAction *addTab = new TDEAction(i18n("&New Tab"), SmallIcon("tab_new"), "Ctrl+Shift+N;Ctrl+T",
+                                          this, TQ_SLOT(slotAddTab()), actionCollection(),
+                                          "newtab");
+
+  m_addTabButton = new TQToolButton(m_tabs);
+  m_addTabButton->setIconSet(SmallIconSet("tab_new"));
+  m_tabs->setCornerWidget(m_addTabButton, TQt::TopLeft);
+  connect(m_addTabButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotAddTab()));
+  m_addTabButton->show();
+
+  TDEAction *removeTab = new TDEAction(i18n("&Close Tab"), SmallIcon("tab_remove"), "Ctrl+W",
+                                             this, TQ_SLOT(slotRemoveTab()), actionCollection(),
+                                             "removecurrenttab");
+
+  m_removeTabButton = new TQToolButton(m_tabs);
+  m_removeTabButton->setIconSet(SmallIconSet("tab_remove"));
+  m_tabs->setCornerWidget(m_removeTabButton, TQt::TopRight);
+  connect(m_removeTabButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotRemoveTab()));
+  m_removeTabButton->show();
+
+  TDEAction *duplicateTab = new TDEAction(i18n("&Duplicate Tab"), SmallIcon("tab_duplicate"), "Ctrl+Shift+D",
+                                          this, TQ_SLOT(slotDuplicateTab()), actionCollection(),
+                                          "duplicatecurrenttab");
+
+  TDEAction *breakOffTab = new TDEAction(i18n("D&etach Tab"), SmallIcon("tab_breakoff"), TQString::null,
+                                         this, TQ_SLOT(slotBreakOffTab()), actionCollection(),
+                                         "breakoffcurrenttab");
+
+  TDEAction *moveTabLeft = new TDEAction(i18n("Move Tab &Left"), SmallIcon("tab_move_left"), "Ctrl+Shift+Left",
+                                         this, TQ_SLOT(slotMoveTabLeft()), actionCollection(),
+                                         "tab_move_left");
+
+  TDEAction *moveTabRight = new TDEAction(i18n("Move Tab &Right"), SmallIcon("tab_move_right"), "Ctrl+Shift+Right",
+                                          this, TQ_SLOT(slotMoveTabRight()), actionCollection(),
+                                          "tab_move_right");
+
+  TDEAction *removeOtherTabs = new TDEAction(i18n("Close &Other Tabs"), SmallIcon("tab_remove_other"), "Ctrl+Alt+W",
+                                          this, TQ_SLOT(slotRemoveOtherTabs()), actionCollection(),
+                                          "removeothertabs");
 }
 
 void Shell::saveProperties(TDEConfig* config)
@@ -166,7 +240,7 @@ void Shell::saveProperties(TDEConfig* config)
   // the 'config' object points to the session managed
   // config file.  anything you write here will be available
   // later when this app is restored
-    emit saveDocumentRestoreInfo(config);
+  emit saveDocumentRestoreInfo(config);
 }
 
 void Shell::readProperties(TDEConfig* config)
@@ -175,14 +249,13 @@ void Shell::readProperties(TDEConfig* config)
   // config file.  this function is automatically called whenever
   // the app is being restored.  read in here whatever you wrote
   // in 'saveProperties'
-  if(m_part)
+  if (m_manager->parts()->count() > 0)
   {
     emit restoreDocument(config);
   }
 }
 
-  void
-Shell::fileOpen()
+void Shell::fileOpen()
 {
   // this slot is called whenever the File->Open menu is selected,
   // the Open shortcut is pressed (usually CTRL+O) or the Open toolbar
@@ -190,19 +263,19 @@ Shell::fileOpen()
     KURL url = KFileDialog::getOpenURL( TQString(), "application/pdf application/postscript" );//getOpenFileName();
 
   if (!url.isEmpty())
+  {
     openURL(url);
+  }
 }
 
-  void
-Shell::optionsConfigureToolbars()
+void Shell::optionsConfigureToolbars()
 {
   KEditToolbar dlg(factory());
   connect(&dlg, TQ_SIGNAL(newToolbarConfig()), this, TQ_SLOT(applyNewToolbarConfig()));
   dlg.exec();
 }
 
-  void
-Shell::applyNewToolbarConfig()
+void Shell::applyNewToolbarConfig()
 {
   applyMainWindowSettings(TDEGlobal::config(), "MainWindow");
 }
@@ -223,40 +296,316 @@ void Shell::setFullScreen( bool useFullScreen )
 
 void Shell::slotUpdateFullScreen()
 {
-    if(m_fullScreenAction->isChecked())
+  if(m_fullScreenAction->isChecked())
+  {
+    m_menuBarWasShown = m_showMenuBarAction->isChecked();
+    m_showMenuBarAction->setChecked(false);
+    menuBar()->hide();
+
+    m_toolBarWasShown = m_showToolBarAction->isChecked();
+    m_showToolBarAction->setChecked(false);
+    toolBar()->hide();
+
+    showFullScreen();
+  }
+  else
+  {
+    if (m_menuBarWasShown)
     {
-      m_menuBarWasShown = m_showMenuBarAction->isChecked();
-      m_showMenuBarAction->setChecked(false);
-      menuBar()->hide();
-      
-      m_toolBarWasShown = m_showToolBarAction->isChecked();
-      m_showToolBarAction->setChecked(false);
-      toolBar()->hide();
-      
-      showFullScreen();
+      m_showMenuBarAction->setChecked(true);
+      menuBar()->show();
     }
-    else
+    if (m_toolBarWasShown)
     {
-      if (m_menuBarWasShown)
-      {
-        m_showMenuBarAction->setChecked(true);
-        menuBar()->show();
-      }
-      if (m_toolBarWasShown)
-      {
-        m_showToolBarAction->setChecked(true);
-        toolBar()->show();
-      }
-      showNormal();
+      m_showToolBarAction->setChecked(true);
+      toolBar()->show();
     }
+    showNormal();
+  }
 }
 
 void Shell::slotShowMenubar()
 {
-    if ( m_showMenuBarAction->isChecked() )
-        menuBar()->show();
-    else
-        menuBar()->hide();
+  if ( m_showMenuBarAction->isChecked() )
+      menuBar()->show();
+  else
+      menuBar()->hide();
+}
+
+KParts::ReadOnlyPart* Shell::createTab()
+{
+  KParts::ReadOnlyPart *part =
+    (KParts::ReadOnlyPart*)m_factory->createPart(m_tabs, "kpdf_part",
+                                                 m_tabs, nullptr,
+                                                 "KParts::ReadOnlyPart");
+  m_tabs->addTab(part->widget(), i18n("No file"));
+
+  connect(this, TQ_SIGNAL(restoreDocument(TDEConfig*)),
+          part, TQ_SLOT(restoreDocument(TDEConfig*)));
+  connect(this, TQ_SIGNAL(saveDocumentRestoreInfo(TDEConfig*)),
+          part, TQ_SLOT(saveDocumentRestoreInfo(TDEConfig*)));
+  connect(part, TQ_SIGNAL(enablePrintAction(bool)),
+          m_printAction, TQ_SLOT(setEnabled(bool)));
+
+  part->widget()->show();
+  m_manager->addPart(part, true);
+  return part;
+}
+
+void Shell::slotAddTab()
+{
+  createTab();
+}
+
+void Shell::slotRemoveTab()
+{
+  if (m_workingTab == -1)
+  {
+    m_workingTab = m_tabs->currentPageIndex();
+  }
+
+  KParts::ReadOnlyPart *part = findPartForTab(m_workingTab);
+  if (part)
+  {
+    m_tabs->removePage(part->widget());
+    part->deleteLater();
+  }
+
+  m_workingTab = -1;
+}
+
+void Shell::slotChangeTab(KParts::Part *part)
+{
+  if (!part)
+  {
+    part = createTab();
+  }
+
+  m_tabs->showPage(part->widget());
+}
+
+void Shell::initTabContextMenu()
+{
+  if (m_tabsContextMenu) return;
+
+  m_tabsContextMenu = new TQPopupMenu(this);
+  m_tabsContextMenu->insertItem(SmallIcon("tab_new"),
+                                i18n("&New Tab"),
+                                this, TQ_SLOT(slotAddTab()),
+                                action("newtab")->shortcut());
+  m_tabsContextMenu->insertItem(SmallIconSet("tab_duplicate"),
+                                i18n("&Duplicate Tab"),
+                                this, TQ_SLOT(slotDuplicateTab()),
+                                action("duplicatecurrenttab")->shortcut(),
+                                TabContextMenuItem::TabDuplicate);
+  m_tabsContextMenu->insertItem(SmallIconSet("tab_breakoff"),
+                                i18n("D&etach Tab"),
+                                this, TQ_SLOT(slotBreakOffTab()),
+                                action("breakoffcurrenttab")->shortcut(),
+                                TabContextMenuItem::TabBreakOff);
+  m_tabsContextMenu->insertSeparator();
+  m_tabsContextMenu->insertItem(SmallIconSet("1leftarrow"),
+                                i18n("Move Tab &Left"),
+                                this, TQ_SLOT(slotMoveTabLeft()),
+                                action("tab_move_left")->shortcut(),
+                                TabContextMenuItem::TabMoveLeft);
+  m_tabsContextMenu->insertItem(SmallIconSet("1rightarrow"),
+                                i18n("Move Tab &Right"),
+                                this, TQ_SLOT(slotMoveTabRight()),
+                                action("tab_move_right")->shortcut(),
+                                TabContextMenuItem::TabMoveRight);
+  m_tabsContextMenu->insertSeparator();
+  m_tabsContextMenu->insertItem(SmallIconSet("tab_remove"),
+                                i18n("&Close Tab"),
+                                this, TQ_SLOT(slotRemoveTab()),
+                                action("removecurrenttab")->shortcut(),
+                                TabContextMenuItem::TabRemove);
+  m_tabsContextMenu->insertItem(SmallIconSet("tab_remove_other"),
+                                i18n("Close &Other Tabs"),
+                                this, TQ_SLOT(slotRemoveOtherTabs()),
+                                action("removeothertabs")->shortcut(),
+                                TabContextMenuItem::TabRemoveOther);
+}
+
+void Shell::slotTabContextMenu(const TQPoint &pos)
+{
+  if (!m_tabsContextMenu)
+  {
+    initTabContextMenu();
+  }
+
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabDuplicate, false);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabBreakOff, false);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabMoveLeft, false);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabMoveRight, false);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabRemove, false);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabRemoveOther, false);
+
+
+  m_tabsContextMenu->popup(pos);
+}
+void Shell::slotTabContextMenu(TQWidget *w, const TQPoint &pos)
+{
+  if (!m_tabsContextMenu)
+  {
+    initTabContextMenu();
+  }
+
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabDuplicate, true);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabBreakOff, m_tabs->count() > 1);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabRemove, true);
+  m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabRemoveOther, true);
+
+  int idx = m_tabs->indexOf(w);
+  if (idx > -1)
+  {
+    m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabMoveLeft, idx > 0);
+    m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabMoveRight, idx + 1 < m_tabs->count());
+  }
+  else
+  {
+    m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabMoveLeft, false);
+    m_tabsContextMenu->setItemEnabled(TabContextMenuItem::TabMoveRight, false);
+  }
+
+  m_workingTab = m_tabs->indexOf(w);
+  m_tabsContextMenu->popup(pos);
+}
+
+KParts::ReadOnlyPart* Shell::findPartForTab(int tabIndex)
+{
+  if (tabIndex == -1) return nullptr;
+
+  TQWidget *page = m_tabs->page(tabIndex);
+  if (!page) return nullptr;
+
+  TQPtrList<KParts::Part> *parts = const_cast<TQPtrList<KParts::Part>*>(m_manager->parts());
+  KParts::Part *part;
+  for (part = parts->first(); part; part = parts->next())
+  {
+    if (part->widget() == page)
+    {
+      return static_cast<KParts::ReadOnlyPart*>(part);
+    }
+  }
+  return nullptr;
+}
+
+void Shell::moveTabForward(int tabIndex)
+{
+  if (tabIndex < m_tabs->count() - 1)
+  {
+    m_tabs->moveTab(tabIndex, tabIndex + 1);
+  }
+}
+
+void Shell::moveTabBackward(int tabIndex)
+{
+  if (tabIndex > 0)
+  {
+    m_tabs->moveTab(tabIndex, tabIndex - 1);
+  }
+}
+
+void Shell::slotDuplicateTab()
+{
+  if (m_workingTab == -1)
+  {
+    m_workingTab = m_tabs->currentPageIndex();
+  }
+
+  KParts::ReadOnlyPart *currentTab = findPartForTab(m_workingTab);
+  if (currentTab)
+  {
+    openURL(currentTab->url());
+  }
+
+  m_workingTab = -1;
+}
+
+void Shell::slotBreakOffTab()
+{
+  if (m_workingTab == -1)
+  {
+    m_workingTab = m_tabs->currentPageIndex();
+  }
+
+  KParts::ReadOnlyPart *currentTab = findPartForTab(m_workingTab);
+  if (currentTab)
+  {
+    KPDF::Shell* widget = new KPDF::Shell(currentTab->url());
+    widget->show();
+  }
+  slotRemoveTab();
+  m_workingTab = -1;
+}
+
+void Shell::slotMoveTabLeft()
+{
+  if (m_workingTab == -1)
+  {
+    m_workingTab = m_tabs->currentPageIndex();
+  }
+
+  if (TQApplication::reverseLayout())
+  {
+    moveTabForward(m_workingTab);
+  }
+  else
+  {
+    moveTabBackward(m_workingTab);
+  }
+
+  m_workingTab = -1;
+}
+
+void Shell::slotMoveTabRight()
+{
+  if (m_workingTab == -1)
+  {
+    m_workingTab = m_tabs->currentPageIndex();
+  }
+
+  if (TQApplication::reverseLayout())
+  {
+    moveTabBackward(m_workingTab);
+  }
+  else
+  {
+    moveTabForward(m_workingTab);
+  }
+
+  m_workingTab = -1;
+}
+
+void Shell::slotRemoveOtherTabs()
+{
+  if (m_workingTab == -1)
+  {
+    m_workingTab = m_tabs->currentPageIndex();
+  }
+
+  if (KMessageBox::warningContinueCancel(this,
+        i18n("Do you really want to close all other tabs?"),
+        i18n("Close Other Tabs Confirmation"),
+        KGuiItem(i18n("Close &Other Tabs"), "tab_remove_other"),
+        "CloseOtherTabConfirm") != KMessageBox::Continue)
+  {
+    m_workingTab = -1;
+    return;
+  }
+
+  KParts::ReadOnlyPart *currentPart = findPartForTab(m_workingTab);
+  if (!currentPart) return;
+
+  TQPtrList<KParts::Part> *parts = const_cast<TQPtrList<KParts::Part>*>(m_manager->parts());
+  KParts::Part *part;
+  for (part = parts->first(); part; part = parts->next())
+  {
+    if (part == currentPart) continue;
+    m_tabs->removePage(part->widget());
+    part->deleteLater();
+  }
 }
 
 #include "shell.moc"

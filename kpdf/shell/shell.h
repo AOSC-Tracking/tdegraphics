@@ -22,6 +22,16 @@
 
 #include <tdeparts/mainwindow.h>
 
+class TQToolButton;
+class TQPopupMenu;
+class KTabWidget;
+
+namespace KParts
+{
+  class Factory;
+  class PartManager;
+}
+
 namespace KPDF
 {
     class Part;
@@ -36,7 +46,7 @@ namespace KPDF
   class Shell : public KParts::MainWindow
   {
     TQ_OBJECT
-  
+
 
   public:
     /**
@@ -53,6 +63,16 @@ namespace KPDF
      * Default Destructor
      */
     virtual ~Shell();
+
+    enum TabContextMenuItem
+    {
+      TabDuplicate = 100,
+      TabBreakOff,
+      TabMoveLeft,
+      TabMoveRight,
+      TabRemove,
+      TabRemoveOther
+    };
 
   protected:
     /**
@@ -72,6 +92,9 @@ namespace KPDF
     void setFullScreen( bool );
 
   public slots:
+    void openURL(const KURL & url);
+    void slotAddTab();
+    void slotRemoveTab();
     void slotQuit();
 
   private slots:
@@ -81,29 +104,45 @@ namespace KPDF
     void applyNewToolbarConfig();
     void slotUpdateFullScreen();
     void slotShowMenubar();
-
-    void openURL( const KURL & url );
     void delayedOpen();
 
+    void slotChangeTab(KParts::Part *part);
+    void slotTabContextMenu(const TQPoint &pos);
+    void slotTabContextMenu(TQWidget *w, const TQPoint &pos);
+
+    void slotDuplicateTab();
+    void slotBreakOffTab();
+    void slotMoveTabLeft();
+    void slotMoveTabRight();
+    void slotRemoveOtherTabs();
+
   signals:
-      void restoreDocument(TDEConfig* config);
-      void saveDocumentRestoreInfo(TDEConfig* config);
-     
-     
+    void restoreDocument(TDEConfig* config);
+    void saveDocumentRestoreInfo(TDEConfig* config);
+
+
   private:
     void setupAccel();
     void setupActions();
     void init();
+    void initTabContextMenu();
+    KParts::ReadOnlyPart *createTab();
+    KParts::ReadOnlyPart *findPartForTab(int tabIndex);
+    void moveTabForward(int tabIndex);
+    void moveTabBackward(int tabIndex);
 
   private:
-      KParts::ReadOnlyPart* m_part;
-      TDERecentFilesAction* m_recent;
-      TDEAction* m_printAction;
-      TDEToggleAction* m_fullScreenAction;
-      TDEToggleAction* m_showMenuBarAction;
-      TDEToggleAction* m_showToolBarAction;
-      bool m_menuBarWasShown, m_toolBarWasShown;
-      KURL m_openUrl;
+    KTabWidget *m_tabs;
+    KParts::Factory *m_factory;
+    KParts::PartManager *m_manager;
+    TDERecentFilesAction* m_recent;
+    TDEAction *m_printAction, *m_addTabAction, *m_closeTabAction;
+    TDEToggleAction *m_fullScreenAction, *m_showMenuBarAction, *m_showToolBarAction;
+    TQToolButton *m_addTabButton, *m_removeTabButton;
+    TQPopupMenu *m_tabsContextMenu;
+    bool m_menuBarWasShown, m_toolBarWasShown;
+    KURL m_openUrl; // delayed open
+    int m_workingTab;
   };
 
 }
