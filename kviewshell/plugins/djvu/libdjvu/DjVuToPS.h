@@ -121,11 +121,11 @@ public:
              \item[Mode] ({\em COLOR}, {\em FORE}, {\em BACK}, or {\em BW})
                 Specifies how the \Ref{DjVuImage}s will be rendered (all layers,
                 foreground layer, background layer, and the mask respectively)
-             \item[Color] ({\em TRUE} or {\em FALSE}). Choosing {\em FALSE}
+             \item[Color] ({\em true} or {\em false}). Choosing {\em false}
                 converts color images to gray scale.
              \item[Gamma] Printer color correction. 
                 This parameter ranges from #0.3# to #5.0#. 
-             \item[sRGB] ({\em TRUE} or {\em FALSE}).  Choosing {\em TRUE}
+             \item[sRGB] ({\em true} or {\em false}).  Choosing {\em true}
                 enables accurate sRGB color calibration.  This option
                 only works with language level 2.  When this is set,
                 gamma correction is clamped to #2.2#.
@@ -228,13 +228,13 @@ public:
         This parameter does {\bf not} affect the size of output file */
     int get_copies(void) const {
       return copies; }
-    /** Returns #TRUE# if there will be a gray frame */
+    /** Returns #true# if there will be a gray frame */
     bool get_frame(void) const {
       return frame; }
-    /** Returns #TRUE# if there will be a gray frame */
+    /** Returns #true# if there will be a gray frame */
     bool get_cropmarks(void) const {
       return cropmarks; }
-    /** Returns #TRUE# if there will be a shadow text printed */
+    /** Returns #true# if there will be a shadow text printed */
     bool get_text(void) const {
       return text; }
     /** Returns the booklet mode */

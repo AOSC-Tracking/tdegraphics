@@ -482,23 +482,23 @@ static bool correctDVI(const TQString& filename)
 {
   TQFile f(filename);
   if (!f.open(IO_ReadOnly))
-    return FALSE;
+    return false;
 
   unsigned char test[4];
   if ( f.readBlock( (char *)test,2)<2 || test[0] != 247 || test[1] != 2  )
-    return FALSE;
+    return false;
 
   int n = f.size();
   if ( n < 134 ) // Too short for a dvi file
-    return FALSE;
+    return false;
   f.at( n-4 );
 
   unsigned char trailer[4] = { 0xdf,0xdf,0xdf,0xdf };
 
   if ( f.readBlock( (char *)test, 4 )<4 || strncmp( (char *)test, (char*) trailer, 4 ) )
-    return FALSE;
+    return false;
   // We suppose now that the dvi file is complete and OK
-  return TRUE;
+  return true;
 }
 
 bool GSCreator::getEPSIPreview(const TQString &path, long start, long

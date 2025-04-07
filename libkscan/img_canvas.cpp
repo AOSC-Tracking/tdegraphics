@@ -121,7 +121,7 @@ ImageCanvas::ImageCanvas(TQWidget *parent,
     viewport()->setCursor( crossCursor );
     cr1 = 0;
     cr2 = 0;
-    viewport()->setMouseTracking(TRUE);
+    viewport()->setMouseTracking(true);
     viewport()->setBackgroundMode(PaletteBackground);
     show();
 
@@ -401,7 +401,7 @@ void ImageCanvas::newRectSlot( TQRect newSel )
 {
    TQRect to_map;
    TQPainter p(viewport());
-   drawAreaBorder(&p,TRUE);
+   drawAreaBorder(&p,true);
    selected->setWidth(0);
    selected->setHeight(0);
 
@@ -470,7 +470,7 @@ void ImageCanvas::viewportMousePressEvent(TQMouseEvent *ev)
      	if( moving == MOVE_NONE )
      	{
 		TQPainter p( viewport());
-		drawAreaBorder(&p,TRUE);
+		drawAreaBorder(&p,true);
 		moving = classifyPoint( x+cx ,y+cy);
 
 		if(moving == MOVE_NONE)
@@ -491,7 +491,7 @@ void ImageCanvas::viewportMouseReleaseEvent(TQMouseEvent *ev)
   //// debug( "Mouse Release at %d/%d", ev->x(), ev->y());
   if(moving!=MOVE_NONE) {
     TQPainter p(viewport());
-    drawAreaBorder(&p,TRUE);
+    drawAreaBorder(&p,true);
     moving = MOVE_NONE;
     *selected = selected->normalize();
 
@@ -581,7 +581,7 @@ void ImageCanvas::viewportMouseMoveEvent(TQMouseEvent *ev)
   if( moving!=MOVE_NONE ) {
   	 int mx, my;
     TQPainter p(viewport());
-    drawAreaBorder(&p,TRUE);
+    drawAreaBorder(&p,true);
     switch(moving) {
     case MOVE_NONE: //Just to make compiler happy
       break;

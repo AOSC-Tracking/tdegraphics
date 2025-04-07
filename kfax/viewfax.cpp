@@ -114,7 +114,7 @@ int verbose = 0;
 
 int abell = 1;			/* audio bell */
 int vbell = 0;			/* visual bell */
-bool have_cmd_opt = FALSE;
+bool have_cmd_opt = false;
 
 size_t Memused = 0;		/* image memory usage */
 static size_t Memlimit = 8*1024*1024;	/* try not to exceed */
@@ -160,7 +160,7 @@ int viewfaxmain()
 
     bo.i = 1;
     defaultpage.vres = -1;
-    have_no_fax = TRUE;
+    have_no_fax = true;
 
     /* TODO Do I need to know this: */
     defaultpage.expander = g31expand;

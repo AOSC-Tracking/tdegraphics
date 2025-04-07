@@ -276,10 +276,10 @@ public:
 //   GURL		operator+(const GUTF8String &name) const;
       //@}
 
-      /// Returns TRUE if #gurl1# and #gurl2# are the same
+      /// Returns true if #gurl1# and #gurl2# are the same
    bool	operator==(const GURL & gurl2) const;
 
-      /// Returns TRUE if #gurl1# and #gurl2# are different
+      /// Returns true if #gurl1# and #gurl2# are different
    bool	operator!=(const GURL & gurl2) const;
 
       /// Assignment operator

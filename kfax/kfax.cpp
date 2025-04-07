@@ -147,8 +147,8 @@ Window  qtwin;    // the qt window
 Window 	Win;
 int 	qwindow_height;
 int 	qwindow_width;
-bool 	have_no_fax = TRUE;
-bool	display_is_setup = FALSE;
+bool 	have_no_fax = true;
+bool	display_is_setup = false;
 struct 	optionsinfo fop;   // contains the fax options
 
 extern 	struct pagenode *firstpage, *lastpage, *thispage;
@@ -161,7 +161,7 @@ bool buttondown;
 bool MyApp::x11EventFilter( XEvent * ev)
 {
   if (TDEApplication::x11EventFilter(ev))
-    return TRUE;
+    return true;
 
   if (ev->type  ==  ButtonRelease){
     /* this is so that the cursor goes back to normal on leaving the fax window
@@ -177,14 +177,14 @@ bool MyApp::x11EventFilter( XEvent * ev)
        ev->xany.window == Win){
 
     if(startingup || have_no_fax)
-      return FALSE;
+      return false;
 
     toplevel->handle_X_event(*ev);
     ev->xany.window = qtwin;
 
   }
 
-  return FALSE;
+  return false;
 
 }
 
@@ -890,7 +890,7 @@ void SetupDisplay(){
     return;
   }
 
-  display_is_setup = TRUE;
+  display_is_setup = true;
 
   xpos = ypos = ox = oy = 0;
   ExpectConfNotify = 1;
@@ -957,7 +957,7 @@ void TopLevel::handle_X_event(XEvent Event)
 	if(!Image)
 	  break;
 
-	putimage = TRUE;
+	putimage = true;
       }
     break;
 
@@ -983,19 +983,19 @@ void TopLevel::handle_X_event(XEvent Event)
 
       case XK_Up:
 	ypos-= qwindow_height / 3;
-	putimage = TRUE;
+	putimage = true;
 	break;
       case XK_Down:
 	ypos+= qwindow_height / 3;
-	putimage = TRUE;
+	putimage = true;
 	break;
       case XK_Left:
 	xpos-= qwindow_width / 4;
-	putimage = TRUE;
+	putimage = true;
 	break;
       case XK_Right:
 	xpos+= qwindow_width / 4;
-	putimage = TRUE;
+	putimage = true;
 	break;
       case XK_Home:
       case XK_R7:
@@ -1117,7 +1117,7 @@ void TopLevel::handle_X_event(XEvent Event)
       offx = nx;
       offy = ny;
 
-      putimage = TRUE;
+      putimage = true;
 
       break;
 
@@ -1134,7 +1134,7 @@ void TopLevel::handle_X_event(XEvent Event)
 
   } while (XCheckWindowEvent(qtdisplay, Win, KeyPressMask|ButtonPressMask, &Event));
 
-  if(putimage == TRUE) {
+  if(putimage) {
     Refresh = Resize = 1;
     putImage();
   }

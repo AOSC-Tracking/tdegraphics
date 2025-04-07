@@ -1268,7 +1268,7 @@ DataPool::get_data(void * buffer, int offset, int sz, int level)
        
        // This call to get_data() should return immediately as there MUST
        // be data in the buffer after wait_for_data(reader) returns
-       // or eof_flag should be TRUE
+       // or eof_flag should be true
        return get_data(buffer, reader->offset, reader->size, level);
      }
    return 0;

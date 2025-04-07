@@ -916,8 +916,8 @@ void TDEIconEditGrid::mouseReleaseEvent( TQMouseEvent *e )
         selected = cell;
         update((prevSel%numCols())*cellsize,(prevSel/numCols())*cellsize, cellsize, cellsize);
         update(col*cellsize,row*cellsize, cellsize, cellsize);
-        //updateCell( prevSel/numCols(), prevSel%numCols(), FALSE );
-        //updateCell( row, col, FALSE );
+        //updateCell( prevSel/numCols(), prevSel%numCols(), false );
+        //updateCell( row, col, false );
         *((uint*)img->scanLine(row) + col) = colorAt(cell);
         p = *img;
       //}
@@ -973,8 +973,8 @@ void TDEIconEditGrid::mouseReleaseEvent( TQMouseEvent *e )
         update((prevSel%numCols())*cellsize,(prevSel/numCols())*cellsize, cellsize, cellsize);
         update(col*cellsize,row*cellsize, cellsize, cellsize);
         emit colorSelected(currentcolor);
-        //updateCell( prevSel/numCols(), prevSel%numCols(), FALSE );
-        //updateCell( row, col, FALSE );
+        //updateCell( prevSel/numCols(), prevSel%numCols(), false );
+        //updateCell( row, col, false );
       }
 
       break;
@@ -1922,7 +1922,7 @@ void TDEIconEditGrid::drawPointArray(TQPointArray a, DrawAction action)
                     //int cell = y * numCols() + x;
                     //setColor( cell, currentcolor, false );
                     doupdate = true;
-                    //updateCell( y, x, FALSE );
+                    //updateCell( y, x, false );
 		    macro->addCommand( dc );
                     break;
                 }
@@ -1993,7 +1993,7 @@ static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
 
     if ( !dst->create(src->width(), src->height(), 8, 256) ) {
 		kdWarning() << "OImage: destination image not valid" << endl;
-		return FALSE;
+		return false;
 	}
 
     int ncols = 256;
@@ -2153,7 +2153,7 @@ static bool kdither_32_to_8( const TQImage *src, TQImage *dst )
 #undef MAX_B
 #undef INDEXOF
 
-    return TRUE;
+    return true;
 }
 
 // this doesn't work the way it should but the way KPixmap does.

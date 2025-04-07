@@ -100,12 +100,6 @@
 # include <unistd.h>
 #endif
 
-// -- TRUE FALSE
-#undef TRUE
-#undef FALSE
-#define TRUE 1
-#define FALSE 0
-
 // -- MAXPATHLEN
 #ifndef MAXPATHLEN
 # ifdef _MAX_PATH

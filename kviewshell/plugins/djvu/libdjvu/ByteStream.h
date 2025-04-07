@@ -186,7 +186,7 @@ public:
 
       {\bf Error reporting}:
       If #seek()# succeeds, #0# is returned. Otherwise it either returns
-      #-1# (if #nothrow# is set to #FALSE#) or throws the \Ref{GException}
+      #-1# (if #nothrow# is set to #false#) or throws the \Ref{GException}
       exception. */
   virtual int seek(long offset, int whence = SEEK_SET, bool nothrow=false);
   /** Flushes all buffers in the ByteStream.  Calling this function

@@ -339,21 +339,21 @@ public:
 		   \Ref{get_included_files}() is OK.
 	  \end{itemize} */
    long		get_flags(void) const;
-      /// Returns #TRUE# if the file is being decoded.
+      /// Returns #true# if the file is being decoded.
    bool		is_decoding(void) const;
-      /// Returns #TRUE# if decoding of the file has finished successfully.
+      /// Returns #true# if decoding of the file has finished successfully.
    bool		is_decode_ok(void) const;
-      /// Returns #TRUE# if decoding of the file has failed.
+      /// Returns #true# if decoding of the file has failed.
    bool		is_decode_failed(void) const;
-      /** Returns #TRUE# if decoding of the file has been stopped by
+      /** Returns #true# if decoding of the file has been stopped by
 	  \Ref{stop_decode}() function. */
    bool		is_decode_stopped(void) const;
-      /// Returns #TRUE# if this file has received all data.
+      /// Returns #true# if this file has received all data.
    bool		is_data_present(void) const;
-      /** Returns #TRUE# if this file {\bf and} all included files have
+      /** Returns #true# if this file {\bf and} all included files have
 	  received all data. */
    bool		is_all_data_present(void) const;
-      /** Returns #TRUE# if all included files have been created. Only when
+      /** Returns #true# if all included files have been created. Only when
 	  this function returns 1, the \Ref{get_included_files}() returns
 	  the correct information. */
    bool		are_incl_files_created(void) const;
@@ -388,11 +388,11 @@ public:
 
 	  Depending on the value of #only_blocked# flag this works as follows:
 	  \begin{itemize}
-	     \item If #only_blocked# is #TRUE#, the function will make sure,
+	     \item If #only_blocked# is #true#, the function will make sure,
 	           that any further access to the file's data will result
 		   in a #STOP# exception if the desired data is not available
 		   (and the thread would normally block).
-	     \item If #only_blocked# is #FALSE#, then {\bf any} further
+	     \item If #only_blocked# is #false#, then {\bf any} further
 	           access to the file's data will result in immediate
 		   #STOP# exception.
 	  \end{itemize}
@@ -440,11 +440,11 @@ public:
 	  
 	  {\bf Warning.} Included files are normally created during decoding.
 	  Before that they do not exist.   If you call this function at
-	  that time and set #only_created# to #FALSE# then it will have to
+	  that time and set #only_created# to #false# then it will have to
 	  read all the data from this file in order to find #INCL# chunks,
 	  which may block your application, if not all data is available.
 
-	  @param only_created If #TRUE#, the file will not try to process
+	  @param only_created If #true#, the file will not try to process
 	         #INCL# chunks and load referenced files. It will return
 		 just those files, which have already been created during
 		 the decoding procedure. */
@@ -485,7 +485,7 @@ public:
 	  page file.
 
 	  {\bf Summary:} This function will return complete annotations only
-	  when the \Ref{is_all_data_present}() returns #TRUE#. */
+	  when the \Ref{is_all_data_present}() returns #true#. */
    GP<ByteStream>	get_merged_anno(int * max_level_ptr=0);
 
       /** Returns the annotation chunks (#"ANTa"# and #"ANTz"#).  This
@@ -495,7 +495,7 @@ public:
           been found, #ZERO# will be returned.
 
 	  {\bf Summary:} This function will return complete annotations
-	  only when the \Ref{is_all_data_present}() returns #TRUE#. */
+	  only when the \Ref{is_all_data_present}() returns #true#. */
    GP<ByteStream>	get_anno(void);
 
       /** Returns the text chunks (#"TXTa"# and #"TXTz"#).  This function may
@@ -505,7 +505,7 @@ public:
           #ZERO# will be returned.
 
 	  {\bf Summary:} This function will return complete hidden text layers
-	  only when the \Ref{is_all_data_present}() returns #TRUE#. */
+	  only when the \Ref{is_all_data_present}() returns #true#. */
    GP<ByteStream>	get_text(void);
 
       /** Returns the meta chunks (#"METa"# and #"METz"#).  This function may
@@ -515,7 +515,7 @@ public:
           will be returned.
 
 	  {\bf Summary:} This function will return complete meta data only
-	  when the \Ref{is_all_data_present}() returns #TRUE#. */
+	  when the \Ref{is_all_data_present}() returns #true#. */
    GP<ByteStream>	get_meta(void);
 
       /** Goes down the hierarchy of #DjVuFile#s and merges their annotations.
@@ -537,17 +537,17 @@ public:
       /// Clears the meta data.
    void remove_meta(void);
 
-      /** Returns #TRUE# if the file contains annotation chunks.
+      /** Returns #true# if the file contains annotation chunks.
 	  Known annotation chunks at the time of writing this help are:
 	  {\bf ANTa}, {\bf ANTz}, {\bf FORM:ANNO}. */
    bool		contains_anno(void);
 
-      /** Returns #TRUE# if the file contains hiddentext chunks.
+      /** Returns #true# if the file contains hiddentext chunks.
 	  Known hiddentext chunks at the time of writing this help are:
 	  {\bf TXTa}, and {\bf TXTz}. */
    bool		contains_text(void);
 
-      /** Returns #TRUE# if the file contains metadata chunks.
+      /** Returns #true# if the file contains metadata chunks.
 	  Known metadata chunks at the time of writing this help are:
 	  {\bf METa}, and {\bf METz}. */
    bool		contains_meta(void);

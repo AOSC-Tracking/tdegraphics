@@ -510,9 +510,9 @@ public:
       character of a string is numbered zero.  Negative positions
       represent characters relative to the end of the string. */
   char operator[] (int n) const;
-  /// Returns #TRUE# if the string contains an integer number.
+  /// Returns #true# if the string contains an integer number.
   bool is_int(void) const;
-  /// Returns #TRUE# if the string contains a float number.
+  /// Returns #true# if the string contains a float number.
   bool is_float(void) const;
 
   /** Converts strings between native & UTF8 **/

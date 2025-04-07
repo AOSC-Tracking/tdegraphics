@@ -519,8 +519,8 @@ DjVuDocEditor::insert_file(const GURL &file_url, const GUTF8String &parent_id,
       //
       // Also, if a name is in name2id, we will not insert that file again.
       //
-      // Will return TRUE if the file has been successfully inserted.
-      // FALSE, if the file contains NDIR chunk and has been skipped.
+      // Will return true if the file has been successfully inserted.
+      // false, if the file contains NDIR chunk and has been skipped.
 bool
 DjVuDocEditor::insert_file(const GURL &file_url, bool is_page,
   int & file_pos, GMap<GUTF8String, GUTF8String> & name2id,
@@ -968,7 +968,7 @@ DjVuDocEditor::remove_file(const GUTF8String &id, bool remove_unref,
       // If will also remove all INCL chunks in parent files pointing
       // to this one
       //
-      // Finally, if remove_unref is TRUE, we will go down the files
+      // Finally, if remove_unref is true, we will go down the files
       // hierarchy removing every file, which becomes unreferenced.
       //
       // ref_map will be used to find out list of parents referencing

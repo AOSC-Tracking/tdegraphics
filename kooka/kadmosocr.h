@@ -103,12 +103,12 @@ namespace Kadmos {
 
         void analyseLine(int, TQPixmap* );
         /** Enable/disable noise reduction
-          @param TRUE(enable)/FALSE(disable) noise reduction
+          @param true(enable)/false(disable) noise reduction
         */
         void SetNoiseReduction(bool bNoiseReduction);
 
         /** Enable/disable scaling (size normalization)
-             @param TRUE(enable)/FALSE(disable) scaling (size normalization)
+             @param true(enable)/false(disable) scaling (size normalization)
         */
         void SetScaling(bool bScaling);
 

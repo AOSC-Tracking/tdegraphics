@@ -151,12 +151,12 @@ public:
    int		get_max_size(void) const;
 
       /** Enables or disables the cache. See \Ref{is_enabled}() for details
-	  @param en - If {\em en} is TRUE, the cache will be enabled.
+	  @param en - If {\em en} is true, the cache will be enabled.
 	         Otherwise it will be disabled.
 	*/
    void		enable(bool en);
 
-      /** Returns #TRUE# if the cache is enabled, #FALSE# otherwise.
+      /** Returns #true# if the cache is enabled, #false# otherwise.
 	  When a cache is disabled, \Ref{add_file}(), and
 	  \Ref{del_file}() do nothing. But the {\em maximum size} is preserved
 	  inside the class so that next time the cache is enabled, it will

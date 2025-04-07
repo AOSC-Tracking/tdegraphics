@@ -525,8 +525,8 @@ public:
       /** If all bits mentioned in #set_mask# are set in the flags and all
 	  bits mentioned in #clr_mask# are cleared in the flags, it sets all
 	  bits from #set_mask1# in the flags, clears all flags from
-	  #clr_mask1# in the flags and returns #TRUE#. Otherwise returns
-	  #FALSE#. */
+	  #clr_mask1# in the flags and returns #true#. Otherwise returns
+	  #false#. */
    bool	test_and_modify(long set_mask, long clr_mask,
 			long set_mask1, long clr_mask1);
 

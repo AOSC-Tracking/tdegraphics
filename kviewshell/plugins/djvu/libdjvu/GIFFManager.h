@@ -127,13 +127,13 @@ public:
    GUTF8String	get_full_name(void) const;
       /// Returns the chunk type, like #CAT# for chunk #CAT:DJVU#
    GUTF8String	get_type(void) const;
-      /// Returns TRUE if the chunk may contain other chunks or FALSE otherwise
+      /// Returns true if the chunk may contain other chunks or false otherwise
    bool		is_container(void) const;
       /** Sets the chunk name. The {\em name} may not contain dots or brackets,
 	  but {\bf may} contain colons. */
    void		set_name(GUTF8String name);
       /** Parses the {\em name} probably containing colon and compares it
-	  with its own name returning TRUE if they are the same */
+	  with its own name returning true if they are the same */
    bool		check_name(GUTF8String name);
 
       /** Adds the {\em chunk} to the chunks list at position {\em order}.

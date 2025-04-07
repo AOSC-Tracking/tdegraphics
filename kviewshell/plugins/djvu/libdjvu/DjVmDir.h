@@ -300,14 +300,14 @@ public:
     return (flags & TYPE_MASK)==PAGE;
   }
 
-  /** Returns #TRUE# if this file is included into some other files of
+  /** Returns #true# if this file is included into some other files of
       this document. */
   bool is_include(void) const
   {
     return (flags & TYPE_MASK)==INCLUDE;
   }
 
-  /** Returns #TRUE# if this file contains thumbnails for the document pages. */
+  /** Returns #true# if this file contains thumbnails for the document pages. */
   bool is_thumbnails(void) const
   {
     return (flags & TYPE_MASK)==THUMBNAILS;

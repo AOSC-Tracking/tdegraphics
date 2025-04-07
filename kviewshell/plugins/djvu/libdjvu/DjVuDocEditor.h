@@ -141,7 +141,7 @@ public:
 	  learn the original format of the document being edited. */
    int		get_orig_doc_type(void) const;
 
-      /** Returns #TRUE# if the document can be "saved" (sometimes
+      /** Returns #true# if the document can be "saved" (sometimes
 	  the only possibility is to do a "save as"). The reason why
 	  we have this function is that #DjVuDocEditor# can save
 	  documents in new formats only (#BUNDLED# and #INDIRECT#).
@@ -178,7 +178,7 @@ public:
 	  is "bundled" into one file and this file is written into the
 	  passed stream.
 
-	  If #force_djvm# is #TRUE# then even one page documents will be
+	  If #force_djvm# is #true# then even one page documents will be
 	  saved in the #DJVM BUNDLED# format (inside a #FORM:DJVM#);
 
 	  {\bf Plugin Warning}. This function will read contents of the whole
@@ -257,11 +257,11 @@ public:
    void		insert_group(const GList<GURL> & furl_list, int page_num=-1,
 			     void (* refresh_cb)(void *)=0, void * cl_data=0);
       /** Removes the specified page from the document. If #remove_unref#
-	  is #TRUE#, the function will also remove from the document any file,
+	  is #true#, the function will also remove from the document any file,
 	  which became unreferenced due to the page's removal */
    void		remove_page(int page_num, bool remove_unref=true);
       /** Removes the specified pages from the document. If #remove_unref#
-	  is #TRUE#, the function will also remove from the document any file,
+	  is #true#, the function will also remove from the document any file,
 	  which became unreferenced due to the pages' removal */
    void		remove_pages(const GList<int> & page_list, bool remove_unref=true);
       /** Removes a DjVu file with the specified #id#.
@@ -269,7 +269,7 @@ public:
 	  If some other files include this file, the corresponding #INCL#
 	  chunks will be removed to avoid dead links.
 
-	  If #remove_unref# is #TRUE#, the function will also remove every
+	  If #remove_unref# is #true#, the function will also remove every
 	  file, which will become unreferenced after the removal of this file. */
    void		remove_file(const GUTF8String &id, bool remove_unref=true);
       /** Makes page number #page_num# to be #new_page_num#. If #new_page_num#
@@ -351,8 +351,8 @@ public:
 		 the document already has thumbnail images for some of its
 		 pages, the callback will be called #pages_num# times, where
 		 #pages_num# is the total number of pages in the document.
-		 The callback should return #FALSE# if thumbnails generating
-		 should proceed. #TRUE# will stop it. */
+		 The callback should return #false# if thumbnails generating
+		 should proceed. #true# will stop it. */
    void	generate_thumbnails(int thumb_size,
                             bool (* cb)(int page_num, void *)=0,
                             void * cl_data=0);
@@ -386,7 +386,7 @@ public:
 
    GURL               get_doc_url(void) const;
                                                                               
-      /** Returns TRUE if #class_name# is #"DjVuDocEditor"#,
+      /** Returns true if #class_name# is #"DjVuDocEditor"#,
 	  #"DjVuDocument"# or #"DjVuPort"# */
    virtual bool		inherits(const GUTF8String &class_name) const;
    virtual GP<DataPool>	request_data(const DjVuPort * source, const GURL & url);

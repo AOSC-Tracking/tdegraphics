@@ -134,7 +134,7 @@ void KColorGrid::paintEvent(TQPaintEvent *e)
       p.setWorldMatrix( matrix );
       //p.setClipRect(j*cellsize, i*cellsize, cellsize, cellsize);
       paintCell(&p, i, j);
-      //p.setClipping(FALSE);
+      //p.setClipping(false);
       matrix.reset();
       p.setWorldMatrix( matrix );
     }

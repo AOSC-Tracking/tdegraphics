@@ -135,7 +135,7 @@ public:
 
       /** Creates a new file record with name #name# at offset
 	  #offset# and size #size#, which is in IFF format if
-	  #iff_file# is #TRUE#. */
+	  #iff_file# is #true#. */
    void		add_file(const GUTF8String &name, bool iff_file,
 			 int offset=-1, int size=-1);
 

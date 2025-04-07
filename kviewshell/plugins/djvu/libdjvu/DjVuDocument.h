@@ -376,7 +376,7 @@ public:
    void		init(const GURL & url, GP<DjVuPort> port=0,
 		     DjVuFileCache * cache=0);
 
-      /** Returns #TRUE# if the initialization thread finished (does not
+      /** Returns #true# if the initialization thread finished (does not
 	  matter successfully or not). As soon as it happens, the document
 	  becomes completely initialized and its every function should work
 	  properly. Please refer to the description of \Ref{init}() function
@@ -395,21 +395,21 @@ public:
 	  completes before the \Ref{init}() function returns. */
    bool		is_init_complete(void) const;
 
-      /** Returns #TRUE# is the initialization thread finished successfully.
+      /** Returns #true# is the initialization thread finished successfully.
 
 	  See \Ref{is_init_complete}() and \Ref{wait_for_complete_init}()
 	  for more details. */
    bool		is_init_ok(void) const;
       /** Forces compression with the next save_as function. */
    void		set_needs_compression(void);
-      /** Returns #TRUE# if there are uncompressed pages in this document. */
+      /** Returns #true# if there are uncompressed pages in this document. */
    bool		needs_compression(void) const;
-      /** Returns #TRUE# if this file must be renamed before saving. */
+      /** Returns #true# if this file must be renamed before saving. */
    bool		needs_rename(void) const;
-      /** Returns #TRUE# if this file must be renamed before saving. */
+      /** Returns #true# if this file must be renamed before saving. */
    bool		can_compress(void) const;
 
-      /** Returns #TRUE# is the initialization thread failed.
+      /** Returns #true# is the initialization thread failed.
 
 	  See \Ref{is_init_complete}() and \Ref{wait_for_complete_init}()
 	  for more details. */
@@ -441,7 +441,7 @@ public:
 	  returns. */
    long		get_doc_flags(void) const;
 
-      /** Returns #TRUE# if the document is in bundled format (either in
+      /** Returns #true# if the document is in bundled format (either in
 	  #DjVuDocument::OLD_BUNDLED# or #DjVuDocument::BUNDLED# formats). */
    bool		is_bundled(void) const;
 
@@ -560,7 +560,7 @@ public:
           #page_num#. If caching is enabled, and there is a {\em fully decoded}
 	  \Ref{DjVuFile} in the cache, the image will be reused and will
 	  be returned fully decoded. Otherwise, if multi-threaded behavior
-	  is allowed, and #sync# is set to #FALSE#, the decoding will be
+	  is allowed, and #sync# is set to #false#, the decoding will be
 	  started in a separate thread, which enables to do progressive
 	  redisplay. Thus, in this case the image returned may be partially
 	  decoded.
@@ -592,7 +592,7 @@ public:
 	  returns.
 
 	  @param page_num Number of the page to be decoded
-	  @param sync When set to #TRUE# the function will not return
+	  @param sync When set to #true# the function will not return
 	  	      until the page is completely decoded. Otherwise,
 		      in a multi-threaded program, this function will
 		      start decoding in a new thread and will return
@@ -635,7 +635,7 @@ public:
 	  \Ref{page_to_url}(), \Ref{id_to_url}() functions start working
 	  properly.
 
-	  If #dont_create# is #FALSE# the function will return the file
+	  If #dont_create# is #false# the function will return the file
 	  only if it already exists.
 
 	  {\bf Note:} To wait for the initialization to complete use
@@ -657,7 +657,7 @@ public:
 	  If so, it just calls the #get_djvu_file()# function above. If ID is
 	  #ZERO# or just empty, page number #-1# is assumed.
 
-	  If #dont_create# is #FALSE# the function will return the file
+	  If #dont_create# is #false# the function will return the file
 	  only if it already exists. */
    GP<DjVuFile>	get_djvu_file(const GUTF8String &id, bool dont_create=false);
    GP<DjVuFile>	get_djvu_file(const GURL &url, bool dont_create=false);
@@ -714,7 +714,7 @@ public:
 	  is "bundled" into one file and this file is written into the
 	  passed stream.
 
-	  If #force_djvm# is #TRUE# then even one page documents will be
+	  If #force_djvm# is #true# then even one page documents will be
 	  saved in the #DJVM BUNDLED# format (inside a #FORM:DJVM#);
 
 	  {\bf Plugin Warning}. This function will read contents of the whole
@@ -791,7 +791,7 @@ public:
    /// Create a complete DjVuXML file.
    void writeDjVuXML(const GP<ByteStream> &gstr_out,int flags) const;
 
-      /// Returns TRUE if #class_name# is #"DjVuDocument"# or #"DjVuPort"#
+      /// Returns true if #class_name# is #"DjVuDocument"# or #"DjVuPort"#
    virtual bool		inherits(const GUTF8String &class_name) const;
 
       /// Converts the specified id to a URL.

@@ -50,7 +50,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 	grid->setColStretch(1,10);
 
 
-	magComboBox = new TQComboBox( FALSE, vcGroupBox );
+	magComboBox = new TQComboBox( false, vcGroupBox );
 	magComboBox->setFixedHeight( magComboBox->sizeHint().height() );
 
 
@@ -62,7 +62,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 
 
 
-	mediaComboBox = new TQComboBox( FALSE, vcGroupBox );
+	mediaComboBox = new TQComboBox( false, vcGroupBox );
 	mediaComboBox->setFixedHeight( magComboBox->sizeHint().height() );
 
 	connect ( mediaComboBox, TQ_SIGNAL (activated (int)),
@@ -70,7 +70,7 @@ ViewControl::ViewControl( TQWidget *parent, const char *name )
 
 	grid->addWidget( mediaComboBox, 1, 1 );
 
-	orientComboBox = new TQComboBox( FALSE, vcGroupBox );
+	orientComboBox = new TQComboBox( false, vcGroupBox );
 	orientComboBox->insertItem(i18n("Portrait"));
 	orientComboBox->insertItem(i18n("Landscape"));
 	orientComboBox->insertItem(i18n("Seascape"));

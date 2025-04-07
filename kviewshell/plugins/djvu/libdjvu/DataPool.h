@@ -139,10 +139,10 @@ class ByteStream;
 
 	     Functions like \Ref{get_data}() or \Ref{get_stream}() can
 	     be used to obtain direct or sequential access to the data. As
-	     long as \Ref{is_eof}() is #FALSE#, #DataPool# will block every
+	     long as \Ref{is_eof}() is #false#, #DataPool# will block every
 	     reader, which is trying to read unavailable data until it
 	     really becomes available. But as soon as \Ref{is_eof}() is
-	     #TRUE#, any attempt to read non-existing data will read #0# bytes.
+	     #true#, any attempt to read non-existing data will read #0# bytes.
 
 	     Taking into account the fact, that #DataPool# was designed to
 	     store DjVu files, which are in IFF formats, it becomes possible
@@ -205,7 +205,7 @@ class ByteStream;
 	     The usage of \Ref{add_data}() functions is meaningless and
 	     is prohibited.
 
-	     \Ref{is_eof}() function always returns #TRUE#. Thus \Ref{set_eof}()
+	     \Ref{is_eof}() function always returns #true#. Thus \Ref{set_eof}()
 	     us meaningless and does nothing.
 
 	     \Ref{get_length}() function always returns the file size.
@@ -300,12 +300,12 @@ public:
 
       /** Tells the #DataPool# to stop serving readers.
 
-	  If #only_blocked# flag is #TRUE# then only those requests will
+	  If #only_blocked# flag is #true# then only those requests will
 	  be processed, which would not block. Any attempt to get non-existing
 	  data would result in a #STOP# exception (instead of blocking until
 	  data is available).
 
-	  If #only_blocked# flag is #FALSE# then any further attempt to read
+	  If #only_blocked# flag is #false# then any further attempt to read
 	  from this #DataPool# (as well as from any #DataPool# connected
 	  to this one) will result in a #STOP# exception. */
    void		stop(bool only_blocked=false);
@@ -388,11 +388,11 @@ public:
 		   immediately.
 
 		   If there is no data available, and \Ref{is_eof}() returns
-		   #FALSE#, the reader (and the thread) will be {\bf blocked}
+		   #false#, the reader (and the thread) will be {\bf blocked}
 		   until the data actually arrives. Please note, that since
 		   the reader is blocked, it should run in a separate thread
 		   so that other threads have a chance to call \Ref{add_data}().
-		   If there is no data available, but \Ref{is_eof}() is #TRUE#
+		   If there is no data available, but \Ref{is_eof}() is #true#
 		   the behavior is different and depends on the #DataPool#'s
 		   estimate of the file size:
 		   \begin{itemize}
@@ -430,22 +430,22 @@ public:
 
       /** @name State querying functions. */
       //@{
-      /** Returns #TRUE# if this #DataPool# is connected to another #DataPool#
+      /** Returns #true# if this #DataPool# is connected to another #DataPool#
 	  or to a file. */
    bool		is_connected(void) const;
    
-      /** Returns #TRUE# if all data available for offsets from
+      /** Returns #true# if all data available for offsets from
 	  #start# till #start+length-1#. If #length# is negative, the
           range is assumed to extend up to the end of the #DataPool#.
 	  This function works both for connected and not connected #DataPool#s.
-	  Once it returned #TRUE# for some offsets range, you can be
+	  Once it returned #true# for some offsets range, you can be
 	  sure that the subsequent \Ref{get_data}() request will not block.
       */
    bool		has_data(int start, int length);
 
-      /* Returns #TRUE# if no more data is planned to be added.
+      /* Returns #true# if no more data is planned to be added.
 
-	 {\bf Note:} This function always returns #TRUE# when the #DataPool#
+	 {\bf Note:} This function always returns #true# when the #DataPool#
 	 has been initialized with a file name. */
    bool		is_eof(void) const {return eof_flag;}
 
@@ -495,7 +495,7 @@ public:
 	  given data range.
 
 	  {\bf Note:} The callback may be called immediately if all
-	  data for the given range is already available or #EOF# is #TRUE#.
+	  data for the given range is already available or #EOF# is #true#.
 
 	  @param start The beginning of the range for which all data
 	         should be available

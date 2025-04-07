@@ -208,9 +208,9 @@ private:
     bool 	 acquired;
 
     /* private functions for the running ant */
-    void drawHAreaBorder(TQPainter &p,int x1,int x2,int y,int r = FALSE);
-    void drawVAreaBorder(TQPainter &p,int x,int y1,int y2,int r = FALSE);
-    void drawAreaBorder(TQPainter *p,int r = FALSE);
+    void drawHAreaBorder(TQPainter &p,int x1,int x2,int y,int r = false);
+    void drawVAreaBorder(TQPainter &p,int x,int y1,int y2,int r = false);
+    void drawAreaBorder(TQPainter *p,int r = false);
     void update_scaled_pixmap( void );
 
     preview_state classifyPoint(int x,int y);

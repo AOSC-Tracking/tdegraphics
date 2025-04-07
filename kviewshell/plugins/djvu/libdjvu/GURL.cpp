@@ -212,7 +212,7 @@ hexval(char c)
 
 static bool
 is_argument(const char * start)
-      // Returns TRUE if 'start' points to the beginning of an argument
+      // Returns true if 'start' points to the beginning of an argument
       // (either hash or CGI)
 {
    // return (*start=='#' || *start=='?' || *start=='&' || *start==';');
@@ -221,7 +221,7 @@ is_argument(const char * start)
 
 static bool
 is_argument_sep(const char * start)
-      // Returns TRUE if 'start' points to the beginning of an argument
+      // Returns true if 'start' points to the beginning of an argument
       // (either hash or CGI)
 {
    return (*start=='&')||(*start == ';');

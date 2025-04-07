@@ -162,7 +162,7 @@ public:
 	  to help to identify the source of the request. For example,
 	  \Ref{DjVuFile} is also derived from #DjVuPort#. In order for
 	  the receiver to recognize the sender, the \Ref{DjVuFile} should
-	  override this function to return #TRUE# when the #class_name#
+	  override this function to return #true# when the #class_name#
 	  is either #DjVuPort# or #DjVuFile# */
    virtual bool		inherits(const GUTF8String &class_name) const;
 

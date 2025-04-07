@@ -332,10 +332,10 @@ DjVuFile::wait_for_chunk(void)
 
 bool
 DjVuFile::wait_for_finish(bool self)
-// if self==TRUE, will block until decoding of this file is over
-// if self==FALSE, will block until decoding of a child (direct
+// if self==true, will block until decoding of this file is over
+// if self==false, will block until decoding of a child (direct
 // or indirect) is over.
-// Will return FALSE if there is nothing to wait for. TRUE otherwise
+// Will return false if there is nothing to wait for. true otherwise
 {
   DEBUG_MSG("DjVuFile::wait_for_finish():  self=" << self <<"\n");
   DEBUG_MAKE_INDENT(3);

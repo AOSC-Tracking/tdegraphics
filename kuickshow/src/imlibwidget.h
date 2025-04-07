@@ -121,7 +121,7 @@ public:
 
   ImlibData*	getImlibData() const 	       { return id; 		  }
 
-  virtual void  reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt = FALSE );
+  virtual void  reparent( TQWidget* parent, WFlags f, const TQPoint& p, bool showIt = false );
 
 public slots:
   void	        rotate90();

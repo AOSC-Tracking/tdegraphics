@@ -255,64 +255,64 @@ void OptionsDialog::setWidgets(struct optionsinfo* newoi ){
   }
   else{
     if(newoi->fine == 1){
-      resauto->setChecked(FALSE);
-      fine->setChecked(TRUE);
-      normal->setChecked(FALSE);
+      resauto->setChecked(false);
+      fine->setChecked(true);
+      normal->setChecked(false);
     }
     else{
-      resauto->setChecked(FALSE);
-      fine->setChecked(FALSE);
-      normal->setChecked(TRUE);
+      resauto->setChecked(false);
+      fine->setChecked(false);
+      normal->setChecked(true);
     }
   }
 
   if(newoi->landscape == 1)
-    landscape->setChecked(TRUE);
+    landscape->setChecked(true);
   else
-    landscape->setChecked(FALSE);
+    landscape->setChecked(false);
 
   if(newoi->flip == 1)
-    flip->setChecked(TRUE);
+    flip->setChecked(true);
   else
-    flip->setChecked(FALSE);
+    flip->setChecked(false);
 
   if(newoi->invert == 1)
-    invert->setChecked(TRUE);
+    invert->setChecked(true);
   else
-    invert->setChecked(FALSE);
+    invert->setChecked(false);
 
   if(newoi->lsbfirst == 1)
-    lsb->setChecked(TRUE);
+    lsb->setChecked(true);
   else
-    lsb->setChecked(FALSE);
+    lsb->setChecked(false);
 
   if(newoi->raw == 3){
-    geomauto->setEnabled(TRUE);
-    g3->setChecked(TRUE);
+    geomauto->setEnabled(true);
+    g3->setChecked(true);
   }
 
   if(newoi->raw == 2){
-    geomauto->setEnabled(FALSE);
-    g32d->setChecked(TRUE);
+    geomauto->setEnabled(false);
+    g32d->setChecked(true);
   }
 
   if(newoi->raw == 4){
-    geomauto->setEnabled(FALSE);
-    g4->setChecked(TRUE);
+    geomauto->setEnabled(false);
+    g4->setChecked(true);
   }
   widthedit->setValue(newoi->width);
   heightedit->setValue(newoi->height);
 
   // auto height and width can only work with g3 faxes
   if(newoi->geomauto == 1 && newoi->raw != 4 && newoi->raw != 2){
-    geomauto->setChecked(TRUE);
-    widthedit->setEnabled(FALSE);
-    heightedit->setEnabled(FALSE);
+    geomauto->setChecked(true);
+    widthedit->setEnabled(false);
+    heightedit->setEnabled(false);
   }
   else{
-    geomauto->setChecked(FALSE);
-    widthedit->setEnabled(TRUE);
-    heightedit->setEnabled(TRUE);
+    geomauto->setChecked(false);
+    widthedit->setEnabled(true);
+    heightedit->setEnabled(true);
 
   }
 
@@ -321,19 +321,19 @@ void OptionsDialog::setWidgets(struct optionsinfo* newoi ){
 
 void OptionsDialog::g32toggled(){
 
-  geomauto->setChecked(FALSE);
-  geomauto->setEnabled(FALSE);
-  widthedit->setEnabled(TRUE);
-  heightedit->setEnabled(TRUE);
+  geomauto->setChecked(false);
+  geomauto->setEnabled(false);
+  widthedit->setEnabled(true);
+  heightedit->setEnabled(true);
 
 }
 
 void OptionsDialog::g4toggled(){
 
-  geomauto->setChecked(FALSE);
-  geomauto->setEnabled(FALSE);
-  widthedit->setEnabled(TRUE);
-  heightedit->setEnabled(TRUE);
+  geomauto->setChecked(false);
+  geomauto->setEnabled(false);
+  widthedit->setEnabled(true);
+  heightedit->setEnabled(true);
 
 
 }
@@ -341,10 +341,10 @@ void OptionsDialog::g4toggled(){
 
 void OptionsDialog::g3toggled(){
 
-  geomauto->setEnabled(TRUE);
-  geomauto->setChecked(TRUE);
-  widthedit->setEnabled(FALSE);
-  heightedit->setEnabled(FALSE);
+  geomauto->setEnabled(true);
+  geomauto->setChecked(true);
+  widthedit->setEnabled(false);
+  heightedit->setEnabled(false);
 
 
 }
@@ -353,14 +353,14 @@ void OptionsDialog::geomtoggled(){
 
   if(geomauto->isChecked()){
 
-    widthedit->setEnabled(FALSE);
-    heightedit->setEnabled(FALSE);
+    widthedit->setEnabled(false);
+    heightedit->setEnabled(false);
 
   }
   else{
 
-    widthedit->setEnabled(TRUE);
-    heightedit->setEnabled(TRUE);
+    widthedit->setEnabled(true);
+    heightedit->setEnabled(true);
 
   }
 

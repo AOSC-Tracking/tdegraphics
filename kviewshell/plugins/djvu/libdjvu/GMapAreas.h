@@ -198,7 +198,7 @@ public:
 	     \item #SHADOW_EOUT_BORDER# - The opposite of #SHADOW_EIN_BORDER#.
 	  \end{itemize} */
    BorderType	border_type;
-      /** If #TRUE#, the border will be made always visible. Otherwise
+      /** If #true#, the border will be made always visible. Otherwise
 	  it will be drawn when the mouse moves over the map area. */
    bool		border_always_visible;
       /// Border color (when relevant) in #0x00RRGGBB# format

@@ -137,8 +137,8 @@ KLineal::KLineal(TQWidget*parent,const char* name):TDEMainWindow(parent,name){
   	));
 
   resize(TQSize(mLongEdgeLen, mShortEdgeLen));
-  setMouseTracking(TRUE);
-  mDragging = FALSE;
+  setMouseTracking(true);
+  mDragging = false;
   mOrientation = South;
   _clicked = false;
   setOrientation(South);
@@ -578,7 +578,7 @@ void KLineal::mousePressEvent(TQMouseEvent *inEvent) {
   if (inEvent->button() == TQt::LeftButton) {
     if (!mDragging) {
       grabMouse(KCursor::sizeAllCursor());
-      mDragging = TRUE;
+      mDragging = true;
     }
   } else if (inEvent->button() == TQt::MidButton) {
 		_clicked = true;
@@ -592,7 +592,7 @@ void KLineal::mousePressEvent(TQMouseEvent *inEvent) {
 */
 void KLineal::mouseReleaseEvent(TQMouseEvent * /*inEvent*/) {
   if (mDragging) {
-    mDragging = FALSE;
+    mDragging = false;
     releaseMouse();
   }
   showLabel();

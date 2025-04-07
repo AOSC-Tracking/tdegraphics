@@ -217,7 +217,7 @@ public:
   /** The decoder is now started when the image is created
       by function \Ref{DjVuDocument::get_page} in \Ref{DjVuDocument}. 
       This function waits until the decoding thread terminates
-      and returns TRUE if the image has been successfully decoded. */
+      and returns true if the image has been successfully decoded. */
   bool wait_for_complete_decode(void);
   //@}
   

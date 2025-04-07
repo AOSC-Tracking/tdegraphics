@@ -58,8 +58,8 @@ void KDrawColors::mouseReleaseEvent( TQMouseEvent *e )
   {
     int prevSel = selected;
     selected = cell;
-    updateCell( prevSel/numCols(), prevSel%numCols(), FALSE );
-    updateCell( row, col, FALSE );
+    updateCell( prevSel/numCols(), prevSel%numCols(), false );
+    updateCell( row, col, false );
   }
 
   emit newColor(colorAt(cell)|OPAQUE_MASK);

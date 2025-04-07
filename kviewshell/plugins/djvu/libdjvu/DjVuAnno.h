@@ -165,7 +165,7 @@ public:
       /** Metainformations like title, author ... */
    GMap<GUTF8String,GUTF8String> metadata;
 #endif
-      /** Returns TRUE if no features are specified or specified features
+      /** Returns true if no features are specified or specified features
 	  are not different from default ones */
    bool		is_empty(void) const;
 

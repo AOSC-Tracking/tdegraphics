@@ -153,7 +153,7 @@ private:
    bool isFalse( ) const;
    /**
     * Returns true if the next token is no bool value or one of the
-    * ON, TRUE or YES tokens
+    * ON, true or YES tokens
     */
    bool parseBool( );
 

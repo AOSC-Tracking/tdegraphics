@@ -183,7 +183,7 @@ void KameraConfigDialog::appendWidget(TQWidget *parent, CameraWidget *widget)
 		{
 			gp_widget_get_value(widget, &widget_value_string);
 	
-			TQComboBox *comboBox = new TQComboBox(FALSE, parent);
+			TQComboBox *comboBox = new TQComboBox(false, parent);
 			comboBox->clear();
 			for(int i = 0; i < gp_widget_count_choices(widget); ++i) {
 				const char *widget_choice;

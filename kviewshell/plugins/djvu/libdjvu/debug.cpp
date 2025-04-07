@@ -233,7 +233,7 @@ DjVuDebug& DjVuDebug::operator<<(type arg)\
 
 DjVuDebug& DjVuDebug::operator<<(bool arg)
 {
-   format("%s", arg ? "TRUE" : "FALSE"); return *this;
+   format("%s", arg ? "true" : "false"); return *this;
 }
 
 OP(char, "%c")

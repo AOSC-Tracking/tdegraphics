@@ -326,7 +326,7 @@ KameraDeviceSelectDialog::KameraDeviceSelectDialog(TQWidget *parent, KCamera *de
 	TQGrid *grid = new TQGrid(2, m_settingsStack);
 	grid->setSpacing(KDialog::spacingHint());
 	new TQLabel(i18n("Port:"), grid);
-	m_serialPortCombo = new TQComboBox(TRUE, grid);
+	m_serialPortCombo = new TQComboBox(true, grid);
 	TQWhatsThis::add(m_serialPortCombo, i18n("Here you should choose the serial port you connect the camera to."));
 	m_settingsStack->addWidget(grid, INDEX_SERIAL);
 

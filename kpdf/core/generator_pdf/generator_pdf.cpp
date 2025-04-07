@@ -1216,7 +1216,7 @@ void PDFPixmapGeneratorThread::run()
 
     // 1. set OutputDev parameters and Generate contents
     d->generator->kpdfOutputDev->setParams( width, height, 
-                                            genObjectRects, genObjectRects, TRUE /*thread safety*/ );
+                                            genObjectRects, genObjectRects, true /*thread safety*/ );
     d->generator->pdfdoc->displayPage( d->generator->kpdfOutputDev, page->number() + 1,
                                        fakeDpiX, fakeDpiY, d->currentRequest->rotation, false, true, false );
     if ( genObjectRects )
