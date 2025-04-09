@@ -17,6 +17,7 @@
 #define _KPDF_PART_H_
 
 #include <tdeparts/browserextension.h>
+#include <tdeparts/event.h>
 #include <tdeparts/part.h>
 #include <tqguardedptr.h>
 #include "core/document.h"
@@ -89,8 +90,9 @@ protected:
 	bool openFile();
 	bool openURL(const KURL &url);
 	bool closeURL();
-  // filter that watches for splitter size changes
-  bool eventFilter( TQObject * watched, TQEvent * e );
+	void guiActivateEvent(KParts::GUIActivateEvent *e);
+	// filter that watches for splitter size changes
+	bool eventFilter( TQObject * watched, TQEvent * e );
 
 protected slots:
 	void openURLFromDocument(const KURL &url);

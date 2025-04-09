@@ -115,6 +115,7 @@ namespace KPDF
     void slotMoveTabLeft();
     void slotMoveTabRight();
     void slotRemoveOtherTabs();
+    void slotSetTabCaption(const TQString &caption);
 
   signals:
     void restoreDocument(TDEConfig* config);

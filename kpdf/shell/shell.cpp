@@ -146,6 +146,7 @@ void Shell::openURL( const KURL & url )
     if (url.isValid())
     {
       m_tabs->changeTab(part->widget(), url.filename());
+      m_tabs->setTabToolTip(part->widget(), url.prettyURL());
       bool openOk = part->openURL(url);
       if (openOk)
       {
@@ -346,6 +347,8 @@ KParts::ReadOnlyPart* Shell::createTab()
           part, TQ_SLOT(saveDocumentRestoreInfo(TDEConfig*)));
   connect(part, TQ_SIGNAL(enablePrintAction(bool)),
           m_printAction, TQ_SLOT(setEnabled(bool)));
+  connect(part, TQ_SIGNAL(setWindowCaption(const TQString&)),
+          this, TQ_SLOT(slotSetTabCaption(const TQString&)));
 
   part->widget()->show();
   m_manager->addPart(part, true);
@@ -605,6 +608,23 @@ void Shell::slotRemoveOtherTabs()
     if (part == currentPart) continue;
     m_tabs->removePage(part->widget());
     part->deleteLater();
+  }
+}
+
+void Shell::slotSetTabCaption(const TQString &caption)
+{
+  KParts::ReadOnlyPart *part = const_cast<KParts::ReadOnlyPart*>
+    (static_cast<const KParts::ReadOnlyPart*>(TQObject::sender()));
+  if (!part) return;
+
+  m_tabs->changeTab(part->widget(), caption.isEmpty() ? i18n("No file") : caption);
+  if (caption.isEmpty())
+  {
+    m_tabs->removeTabToolTip(part->widget());
+  }
+  else
+  {
+    m_tabs->setTabToolTip(part->widget(), part->url().pathOrURL());
   }
 }
 

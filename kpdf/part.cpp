@@ -536,6 +536,14 @@ void Part::readMimeType(TDEIO::Job *, const TQString &mime)
 	m_jobMime = mime;
 }
 
+void Part::guiActivateEvent(KParts::GUIActivateEvent *e)
+{
+	if (e->activated())
+	{
+		emitWindowCaption();
+	}
+}
+
 void Part::emitWindowCaption()
 {
     // these setWindowCaption call only works for remote files
