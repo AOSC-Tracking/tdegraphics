@@ -78,6 +78,14 @@
                         </widget>
                         <widget class="TQCheckBox">
                             <property name="name">
+                                <cstring>kcfg_TabsHoverCloseButton</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Show &amp;close button on tabs when mouse is hovering over them</string>
+                            </property>
+                        </widget>
+                        <widget class="TQCheckBox">
+                            <property name="name">
                                 <cstring>kcfg_ObeyDRM</cstring>
                             </property>
                             <property name="text">

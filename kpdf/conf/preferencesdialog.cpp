@@ -8,6 +8,7 @@
  ***************************************************************************/
 
 #include <tdelocale.h>
+#include <tqcheckbox.h>
 
 // single config pages
 #include "dlggeneral.h"
@@ -19,16 +20,25 @@
 #include "preferencesdialog.h"
 
 PreferencesDialog::PreferencesDialog( TQWidget * parent, TDEConfigSkeleton * skeleton )
-    : TDEConfigDialog( parent, "preferences", skeleton )
+  : TDEConfigDialog( parent, "preferences", skeleton ),
+    m_shellMode(false)
 {
-    m_general = new DlgGeneral(0);
-    m_performance = new DlgPerformance(0);
-    m_accessibility = new DlgAccessibility(0);
-    m_presentation = new DlgPresentation(0);
+  m_general = new DlgGeneral(nullptr);
+  m_performance = new DlgPerformance(nullptr);
+  m_accessibility = new DlgAccessibility(nullptr);
+  m_presentation = new DlgPresentation(nullptr);
 
-    addPage( m_general, i18n("General"), "kpdf", i18n("General Options") );
-    addPage( m_accessibility, i18n("Accessibility"), "access", i18n("Reading Aids") );
-    addPage( m_performance, i18n("Performance"), "launch", i18n("Performance Tuning") );
-    addPage( m_presentation, i18n("Presentation"), "application-x-kpresenter",
-             i18n("Options for Presentation Mode") );
+  addPage(m_general, i18n("General"), "kpdf", i18n("General Options"));
+  addPage(m_accessibility, i18n("Accessibility"), "access", i18n("Reading Aids"));
+  addPage(m_performance, i18n("Performance"), "launch", i18n("Performance Tuning"));
+  addPage(m_presentation, i18n("Presentation"), "application-x-kpresenter",
+          i18n("Options for Presentation Mode"));
+
+  setShellMode(m_shellMode);
+}
+
+void PreferencesDialog::setShellMode(bool on)
+{
+  m_shellMode = on;
+  m_general->kcfg_TabsHoverCloseButton->setHidden(!m_shellMode);
 }

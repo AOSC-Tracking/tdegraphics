@@ -27,6 +27,9 @@ class PreferencesDialog : public TDEConfigDialog
     public:
         PreferencesDialog( TQWidget * parent, TDEConfigSkeleton * config );
 
+        bool shellMode() { return m_shellMode; }
+        void setShellMode(bool on);
+
     protected:
 //      void updateSettings(); // Called when OK/Apply is pressed.
 //      void updateWidgets(); // Called upon construction or when Reset is pressed
@@ -39,6 +42,7 @@ class PreferencesDialog : public TDEConfigDialog
         DlgPerformance * m_performance;
         DlgAccessibility * m_accessibility;
         DlgPresentation * m_presentation;
+        bool m_shellMode;
 };
 
 #endif

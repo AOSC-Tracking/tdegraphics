@@ -24,6 +24,7 @@
 #include <ktabwidget.h>
 #include <tqptrlist.h>
 #include <tdeaction.h>
+#include <tdeconfig.h>
 #include <tdeapplication.h>
 #include <kedittoolbar.h>
 #include <tdefiledialog.h>
@@ -87,9 +88,11 @@ void Shell::init()
 
   m_tabs = new KTabWidget(this);
   connect(m_tabs, TQ_SIGNAL(contextMenu(const TQPoint &)),
-          this, TQ_SLOT(slotTabContextMenu(const TQPoint &)));
+          TQ_SLOT(slotTabContextMenu(const TQPoint &)));
   connect(m_tabs, TQ_SIGNAL(contextMenu(TQWidget*, const TQPoint &)),
           TQ_SLOT(slotTabContextMenu(TQWidget*, const TQPoint &)));
+  connect(m_tabs, TQ_SIGNAL(closeRequest(TQWidget*)),
+          TQ_SLOT(slotCloseTabRequest(TQWidget*)));
 
   m_manager = new KParts::PartManager(this, "kpdf part manager");
   connect(m_manager, TQ_SIGNAL(activePartChanged(KParts::Part*)),
@@ -117,6 +120,8 @@ void Shell::init()
   {
     TQTimer::singleShot(0, this, TQ_SLOT(delayedOpen()));
   }
+
+  reconfigure();
 }
 
 void Shell::delayedOpen()
@@ -130,6 +135,13 @@ Shell::~Shell()
   {
     writeSettings();
   }
+}
+
+void Shell::reconfigure()
+{
+  TDEConfig cfg("kpdfpartrc");
+  cfg.setGroup("General");
+  m_tabs->setHoverCloseButton(cfg.readBoolEntry("TabsHoverCloseButton", false));
 }
 
 void Shell::openURL( const KURL & url )
@@ -339,7 +351,7 @@ KParts::ReadOnlyPart* Shell::createTab()
     (KParts::ReadOnlyPart*)m_factory->createPart(m_tabs, "kpdf_part",
                                                  m_tabs, nullptr,
                                                  "KParts::ReadOnlyPart");
-  m_tabs->addTab(part->widget(), i18n("No file"));
+  m_tabs->addTab(part->widget(), SmallIcon("application-pdf"), i18n("No file"));
 
   connect(this, TQ_SIGNAL(restoreDocument(TDEConfig*)),
           part, TQ_SLOT(restoreDocument(TDEConfig*)));
@@ -626,6 +638,13 @@ void Shell::slotSetTabCaption(const TQString &caption)
   {
     m_tabs->setTabToolTip(part->widget(), part->url().pathOrURL());
   }
+}
+
+void Shell::slotCloseTabRequest(TQWidget *w)
+{
+  m_workingTab = m_tabs->indexOf(w);
+  if (m_workingTab == -1) return;
+  removeTab();
 }
 
 #include "shell.moc"

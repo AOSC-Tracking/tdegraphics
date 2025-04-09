@@ -121,11 +121,11 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 {
 	// connect the started signal to tell the job the mimetypes we like
 	connect(this, TQ_SIGNAL(started(TDEIO::Job *)), this, TQ_SLOT(setMimeTypes(TDEIO::Job *)));
-	
+
 	// connect the completed signal so we can put the window caption when loading remote files
 	connect(this, TQ_SIGNAL(completed()), this, TQ_SLOT(emitWindowCaption()));
 	connect(this, TQ_SIGNAL(canceled(const TQString &)), this, TQ_SLOT(emitWindowCaption()));
-	
+
 	// load catalog for translation
 	TDEGlobal::locale()->insertCatalogue("kpdf");
 
@@ -150,7 +150,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	connect( m_document, TQ_SIGNAL( linkEndPresentation() ), this, TQ_SLOT( slotHidePresentation() ) );
 	connect( m_document, TQ_SIGNAL( openURL(const KURL &) ), this, TQ_SLOT( openURLFromDocument(const KURL &) ) );
 	connect( m_document, TQ_SIGNAL( close() ), this, TQ_SLOT( close() ) );
-	
+
 	if (parent && parent->metaObject()->slotNames(true).contains("slotQuit()"))
 		connect( m_document, TQ_SIGNAL( quit() ), parent, TQ_SLOT( slotQuit() ) );
 	else
@@ -168,7 +168,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
 	m_splitter = new TQSplitter( parentWidget, widgetName );
 	m_splitter->setOpaqueResize( true );
 	setWidget( m_splitter );
-	
+
 	m_showLeftPanel = new TDEToggleAction( i18n( "Show &Navigation Panel"), "show_side_panel", 0, this, TQ_SLOT( slotShowLeftPanel() ), actionCollection(), "show_leftpanel" );
 	m_showLeftPanel->setCheckedState( i18n( "Hide &Navigation Panel") );
 	m_showLeftPanel->setShortcut( "CTRL+L" );
@@ -343,6 +343,12 @@ Part::~Part()
         delete globalParams;
 }
 
+bool Part::isKPDFShell()
+{
+  return parent() && parent()->parent() &&
+         strcmp(parent()->parent()->name(), "KPDF::Shell") == 0;
+}
+
 void Part::notifyViewportChanged( bool /*smoothMove*/ )
 {
     // update actions if the page is changed
@@ -379,7 +385,7 @@ uint Part::currentPage()
 
 KURL Part::currentDocument()
 {
-	return m_document->currentDocument();	
+	return m_document->currentDocument();
 }
 
 //this don't go anywhere but is required by genericfactory.h
@@ -642,7 +648,7 @@ void Part::slotDoFileDirty()
 
 void Part::close()
 {
-  if (parent() && strcmp(parent()->name(), "KPDF::Shell") == 0)
+  if (isKPDFShell())
   {
     closeURL();
   }
@@ -701,7 +707,7 @@ void Part::saveSplitterSize()
 {
     KpdfSettings::setSplitterSizes( m_splitter->sizes() );
     KpdfSettings::writeConfig();
-} 
+}
 
 //BEGIN go to page dialog
 class KPDFGotoPageDialog : public KDialogBase
@@ -840,6 +846,12 @@ void Part::slotPreferences()
     // keep us informed when the user changes settings
     connect( dialog, TQ_SIGNAL( settingsChanged() ), this, TQ_SLOT( slotNewConfig() ) );
 
+    if (isKPDFShell())
+    {
+      connect(dialog, TQ_SIGNAL( settingsChanged() ),
+              parent()->parent(), TQ_SLOT( reconfigure() ) );
+    }
+    dialog->setShellMode(isKPDFShell());
     dialog->show();
 }
 
@@ -849,7 +861,7 @@ void Part::slotNewConfig()
     // changed before applying changes.
 
     // Watch File
-    bool watchFile = KpdfSettings::watchFile();  
+    bool watchFile = KpdfSettings::watchFile();
     if ( watchFile && m_watcher->isStopped() )
         m_watcher->startScan();
     if ( !watchFile && !m_watcher->isStopped() )
@@ -921,7 +933,7 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 		TDEActionCollection *ac;
 		TDEActionPtrList::const_iterator it, end, begin;
 		TDEActionPtrList actions;
-		
+
 		if (factory())
 		{
 			TQPtrList<KXMLGUIClient> clients(factory()->clients());
@@ -942,8 +954,8 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 		}
 		m_actionsSearched = true;
 	}
-	
-	
+
+
 	TDEPopupMenu *popup = new TDEPopupMenu( widget(), "rmb popup" );
 	if (page)
 	{
@@ -965,16 +977,16 @@ void Part::slotShowMenu(const KPDFPage *page, const TQPoint &point)
 		m_popup->insertItem( SmallIcon("document-save"), i18n("Save Image..."), 4 );
 		m_popup->setItemEnabled( 4, false );
 }*/
-	
+
 	if ((m_showMenuBarAction && !m_showMenuBarAction->isChecked()) || (m_showFullScreenAction && m_showFullScreenAction->isChecked()))
 	{
 		popup->insertTitle( i18n( "Tools" ) );
 		if (m_showMenuBarAction && !m_showMenuBarAction->isChecked()) m_showMenuBarAction->plug(popup);
 		if (m_showFullScreenAction && m_showFullScreenAction->isChecked()) m_showFullScreenAction->plug(popup);
 		reallyShow = true;
-		
+
 	}
-	
+
 	if (reallyShow)
 	{
 		switch ( popup->exec(point) )
@@ -1069,7 +1081,7 @@ void Part::doPrint(KPrinter &printer)
 
     if (!m_document->print(printer))
     {
-        KMessageBox::error(widget(), i18n("Could not print the document. Please report to bugs.trinitydesktop.org"));	
+        KMessageBox::error(widget(), i18n("Could not print the document. Please report to bugs.trinitydesktop.org"));
     }
 }
 

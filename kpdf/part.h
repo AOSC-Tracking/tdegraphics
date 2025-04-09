@@ -60,7 +60,7 @@ class BrowserExtension;
 class Part : public KParts::ReadOnlyPart, public DocumentObserver, virtual public kpdf_dcop
 {
 TQ_OBJECT
-  
+
 
 public:
 	// Default constructor
@@ -81,6 +81,8 @@ public:
 	uint pages();
 	uint currentPage();
 	KURL currentDocument();
+
+	bool isKPDFShell();
 
 signals:
 	void enablePrintAction(bool enable);
@@ -166,10 +168,10 @@ private:
 	DocumentViewport m_viewportDirty;
 	bool m_wasPresentationOpen;
 	int m_dirtyToolboxIndex;
-	
+
 	// Remember the search history
 	TQStringList m_searchHistory;
-	
+
 	// mimetype got from the job
 	TQString m_jobMime;
 
@@ -199,7 +201,7 @@ private:
 class BrowserExtension : public KParts::BrowserExtension
 {
 TQ_OBJECT
-  
+
 
 public:
 	BrowserExtension(Part*);

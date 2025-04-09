@@ -92,6 +92,8 @@ namespace KPDF
     void setFullScreen( bool );
 
   public slots:
+    void reconfigure();
+
     void openURL(const KURL & url);
     void slotAddTab();
     void slotRemoveTab();
@@ -106,6 +108,7 @@ namespace KPDF
     void slotShowMenubar();
     void delayedOpen();
 
+    void slotCloseTabRequest(TQWidget *w);
     void slotChangeTab(KParts::Part *part);
     void slotTabContextMenu(const TQPoint &pos);
     void slotTabContextMenu(TQWidget *w, const TQPoint &pos);
