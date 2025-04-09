@@ -16,7 +16,11 @@
 #include <tdeapplication.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
+#include <tdeconfig.h>
 #include <tdelocale.h>
+#include <dcopclient.h>
+#include <dcopref.h>
+#include <kdebug.h>
 
 static const char description[] =
 I18N_NOOP("KPDF, a TDE PDF viewer based on XPDF");
@@ -25,6 +29,7 @@ static const char version[] = "0.5.10";
 
 static TDECmdLineOptions options[] =
 {
+    { "new-instance", I18N_NOOP("Don't reuse existing instance"), 0 },
     { "+[URL]", I18N_NOOP("Document to open"), 0 },
     TDECmdLineLastOption
 };
@@ -60,12 +65,61 @@ int main(int argc, char** argv)
         // no session.. just start up normally
         TDECmdLineArgs* args = TDECmdLineArgs::parsedArgs();
 
-        KPDF::Shell* widget = new KPDF::Shell;
-        for (int i = 0; i < args->count(); ++i)
+        DCOPClient *client = kapp->dcopClient();
+        if (!client->attach())
         {
-          widget->openURL(args->url(i));
+          kdError() << "KPDF::Shell cannot attach DCOP client" << endl;
+          return 2;
         }
-        widget->show();
+
+        bool reuseKPDF;
+
+        if (args->isSet("new-instance"))
+        {
+          reuseKPDF = false;
+        }
+        else
+        {
+          TDEConfig cfg("kpdfpartrc");
+          cfg.setGroup("General");
+          reuseKPDF = cfg.readBoolEntry("OpenInExistingKPDF", false);
+        }
+
+        TQCString kpdfInstance = "";
+        TQCString regName = client->registerAs(kapp->name(), true);
+
+        if (reuseKPDF && args->count())
+        {
+          QCStringList allClients = client->registeredApplications();
+          for (int c = 0; c < allClients.count(); ++c)
+          {
+            if (allClients[c].left(5) == "kpdf-" && allClients[c] != regName)
+            {
+              kpdfInstance = allClients[c];
+            }
+          }
+        }
+
+        if (kpdfInstance.isEmpty())
+        {
+          KPDF::Shell* widget = new KPDF::Shell;
+          for (int i = 0; i < args->count(); ++i)
+          {
+              widget->openURL(args->url(i));
+          }
+          widget->show();
+        }
+        else
+        {
+          for (int i = 0; i < args->count(); ++i)
+          {
+            DCOPRef ref(kpdfInstance, "KPDFShellDCOPIface");
+            ref.call("openURL", args->url(i));
+          }
+          DCOPRef ref(kpdfInstance, "KPDF::Shell");
+          ref.call("raise");
+          return 1;
+        }
         args->clear();
     }
 

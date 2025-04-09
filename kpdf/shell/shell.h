@@ -21,6 +21,7 @@
 #endif
 
 #include <tdeparts/mainwindow.h>
+#include "dcop.h"
 
 class TQToolButton;
 class TQPopupMenu;
@@ -43,10 +44,9 @@ namespace KPDF
    * @author Wilco Greven <greven@kde.org>
    * @version 0.1
    */
-  class Shell : public KParts::MainWindow
+  class Shell : public KParts::MainWindow,  virtual public KPDFShellDCOPIface
   {
     TQ_OBJECT
-
 
   public:
     /**
@@ -74,6 +74,8 @@ namespace KPDF
       TabRemoveOther
     };
 
+    const KURL currentTabURL();
+
   protected:
     /**
      * This method is called when it is time for the app to save its
@@ -95,8 +97,9 @@ namespace KPDF
     void reconfigure();
 
     void openURL(const KURL & url);
-    void slotAddTab();
-    void slotRemoveTab();
+    void addTab();
+    void removeTab();
+
     void slotQuit();
 
   private slots:

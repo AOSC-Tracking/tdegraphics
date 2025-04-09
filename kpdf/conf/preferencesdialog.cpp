@@ -41,4 +41,5 @@ void PreferencesDialog::setShellMode(bool on)
 {
   m_shellMode = on;
   m_general->kcfg_TabsHoverCloseButton->setHidden(!m_shellMode);
+  m_general->kcfg_OpenInExistingKPDF->setHidden(!m_shellMode);
 }

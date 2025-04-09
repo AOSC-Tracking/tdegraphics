@@ -47,7 +47,7 @@
 using namespace KPDF;
 
 Shell::Shell()
-  : KParts::MainWindow(0, "KPDF::Shell"),
+  : DCOPObject("KPDFShellDCOPIface"), KParts::MainWindow(0, "KPDF::Shell"),
     m_menuBarWasShown(true),
     m_toolBarWasShown(true),
     m_tabs(nullptr),
@@ -59,7 +59,7 @@ Shell::Shell()
 }
 
 Shell::Shell(const KURL &url)
-  : KParts::MainWindow(0, "KPDF::Shell"),
+  : DCOPObject("KPDFShellDCOPIface"), KParts::MainWindow(0, "KPDF::Shell"),
     m_menuBarWasShown(true),
     m_toolBarWasShown(true),
     m_tabs(nullptr),
@@ -115,7 +115,7 @@ void Shell::init()
   }
   setAutoSaveSettings();
 
-  slotAddTab();
+  addTab();
   if (m_openUrl.isValid())
   {
     TQTimer::singleShot(0, this, TQ_SLOT(delayedOpen()));
@@ -172,6 +172,12 @@ void Shell::openURL( const KURL & url )
   }
 }
 
+const KURL Shell::currentTabURL()
+{
+  KParts::ReadOnlyPart *part = static_cast<KParts::ReadOnlyPart*>(m_manager->activePart());
+  return part->url();
+}
+
 void Shell::readSettings()
 {
   m_recent->loadEntries( TDEGlobal::config() );
@@ -208,23 +214,23 @@ void Shell::setupActions()
   m_fullScreenAction = KStdAction::fullScreen(this, TQ_SLOT(slotUpdateFullScreen()), actionCollection(), this);
 
   TDEAction *addTab = new TDEAction(i18n("&New Tab"), SmallIcon("tab_new"), "Ctrl+Shift+N;Ctrl+T",
-                                          this, TQ_SLOT(slotAddTab()), actionCollection(),
+                                          this, TQ_SLOT(addTab()), actionCollection(),
                                           "newtab");
 
   m_addTabButton = new TQToolButton(m_tabs);
   m_addTabButton->setIconSet(SmallIconSet("tab_new"));
   m_tabs->setCornerWidget(m_addTabButton, TQt::TopLeft);
-  connect(m_addTabButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotAddTab()));
+  connect(m_addTabButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(addTab()));
   m_addTabButton->show();
 
   TDEAction *removeTab = new TDEAction(i18n("&Close Tab"), SmallIcon("tab_remove"), "Ctrl+W",
-                                             this, TQ_SLOT(slotRemoveTab()), actionCollection(),
+                                             this, TQ_SLOT(removeTab()), actionCollection(),
                                              "removecurrenttab");
 
   m_removeTabButton = new TQToolButton(m_tabs);
   m_removeTabButton->setIconSet(SmallIconSet("tab_remove"));
   m_tabs->setCornerWidget(m_removeTabButton, TQt::TopRight);
-  connect(m_removeTabButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(slotRemoveTab()));
+  connect(m_removeTabButton, TQ_SIGNAL(clicked()), this, TQ_SLOT(removeTab()));
   m_removeTabButton->show();
 
   TDEAction *duplicateTab = new TDEAction(i18n("&Duplicate Tab"), SmallIcon("tab_duplicate"), "Ctrl+Shift+D",
@@ -367,12 +373,12 @@ KParts::ReadOnlyPart* Shell::createTab()
   return part;
 }
 
-void Shell::slotAddTab()
+void Shell::addTab()
 {
   createTab();
 }
 
-void Shell::slotRemoveTab()
+void Shell::removeTab()
 {
   if (m_workingTab == -1)
   {
@@ -406,7 +412,7 @@ void Shell::initTabContextMenu()
   m_tabsContextMenu = new TQPopupMenu(this);
   m_tabsContextMenu->insertItem(SmallIcon("tab_new"),
                                 i18n("&New Tab"),
-                                this, TQ_SLOT(slotAddTab()),
+                                this, TQ_SLOT(addTab()),
                                 action("newtab")->shortcut());
   m_tabsContextMenu->insertItem(SmallIconSet("tab_duplicate"),
                                 i18n("&Duplicate Tab"),
@@ -432,7 +438,7 @@ void Shell::initTabContextMenu()
   m_tabsContextMenu->insertSeparator();
   m_tabsContextMenu->insertItem(SmallIconSet("tab_remove"),
                                 i18n("&Close Tab"),
-                                this, TQ_SLOT(slotRemoveTab()),
+                                this, TQ_SLOT(removeTab()),
                                 action("removecurrenttab")->shortcut(),
                                 TabContextMenuItem::TabRemove);
   m_tabsContextMenu->insertItem(SmallIconSet("tab_remove_other"),
@@ -548,10 +554,20 @@ void Shell::slotBreakOffTab()
   KParts::ReadOnlyPart *currentTab = findPartForTab(m_workingTab);
   if (currentTab)
   {
-    KPDF::Shell* widget = new KPDF::Shell(currentTab->url());
-    widget->show();
+    TQString e;
+    TQStringList args;
+    args << "--new-instance";
+    if (currentTab->url().isValid())
+    {
+        args << currentTab->url().url();
+    }
+    int s = kapp->tdeinitExec("kpdf", args, &e, nullptr, "0");
+    if (s != 0)
+    {
+      kdWarning() << "Unable to start new KPDF instance: " << e << endl;
+    }
   }
-  slotRemoveTab();
+  removeTab();
   m_workingTab = -1;
 }
 

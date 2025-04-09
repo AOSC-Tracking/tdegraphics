@@ -78,6 +78,14 @@
                         </widget>
                         <widget class="TQCheckBox">
                             <property name="name">
+                                <cstring>kcfg_OpenInExistingKPDF</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Open documents in &amp;new tab instead of new window</string>
+                            </property>
+                        </widget>
+                        <widget class="TQCheckBox">
+                            <property name="name">
                                 <cstring>kcfg_TabsHoverCloseButton</cstring>
                             </property>
                             <property name="text">
