@@ -100,6 +100,7 @@ namespace KPDF
     void addTab();
     void removeTab();
 
+    void slotPrint();
     void slotQuit();
 
   private slots:
@@ -122,6 +123,7 @@ namespace KPDF
     void slotMoveTabRight();
     void slotRemoveOtherTabs();
     void slotSetTabCaption(const TQString &caption);
+    void slotSetPrintActionEnabled(bool enabled);
 
   signals:
     void restoreDocument(TDEConfig* config);

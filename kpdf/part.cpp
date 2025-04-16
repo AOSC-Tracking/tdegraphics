@@ -117,7 +117,7 @@ Part::Part(TQWidget *parentWidget, const char *widgetName,
            TQObject *parent, const char *name,
            const TQStringList & /*args*/ )
 	: DCOPObject("kpdf"), KParts::ReadOnlyPart(parent, name), m_showMenuBarAction(0), m_showFullScreenAction(0),
-	m_actionsSearched(false), m_searchStarted(false)
+	m_actionsSearched(false), m_searchStarted(false), m_printable(false)
 {
 	// connect the started signal to tell the job the mimetypes we like
 	connect(this, TQ_SIGNAL(started(TDEIO::Job *)), this, TQ_SLOT(setMimeTypes(TDEIO::Job *)));
@@ -524,7 +524,7 @@ bool Part::openURL(const KURL &url)
         m_viewportDirty.pageNumber = -1;
         emit setWindowCaption(url.filename());
     }
-    emit enablePrintAction(b);
+    setPrintable(b);
     return b;
 }
 
@@ -539,15 +539,16 @@ void Part::setMimeTypes(TDEIO::Job *job)
 
 void Part::readMimeType(TDEIO::Job *, const TQString &mime)
 {
-	m_jobMime = mime;
+    m_jobMime = mime;
 }
 
 void Part::guiActivateEvent(KParts::GUIActivateEvent *e)
 {
-	if (e->activated())
-	{
-		emitWindowCaption();
-	}
+    if (e->activated())
+    {
+        emitWindowCaption();
+        emit enablePrintAction(m_printable);
+    }
 }
 
 void Part::emitWindowCaption()
@@ -573,7 +574,7 @@ bool Part::closeURL()
     m_showProperties->setEnabled( false );
     m_showPresentation->setEnabled( false );
     emit setWindowCaption("");
-    emit enablePrintAction(false);
+    setPrintable(false);
     m_searchStarted = false;
     if (!m_file.isEmpty()) m_watcher->removeFile(m_file);
     m_document->closeDocument();
@@ -636,7 +637,7 @@ void Part::slotDoFileDirty()
       m_toolBox->setCurrentIndex( m_dirtyToolboxIndex );
     }
     if (m_wasPresentationOpen) slotShowPresentation();
-    emit enablePrintAction(true);
+    setPrintable(true);
     emit setWindowCaption(url().filename());
   }
   else
@@ -653,6 +654,17 @@ void Part::close()
     closeURL();
   }
   else KMessageBox::information(widget(), i18n("This link points to a close document action that does not work when using the embedded viewer."), TQString(), "warnNoCloseIfNotInKPDF");
+}
+
+void Part::setPrintable(bool printable)
+{
+    m_printable = printable;
+    emit enablePrintAction(printable);
+}
+
+bool Part::printable()
+{
+    return m_printable;
 }
 
 void Part::updateViewActions()

@@ -203,7 +203,7 @@ void Shell::setupActions()
   m_recent = KStdAction::openRecent( this, TQ_SLOT(openURL(const KURL&)), actionCollection());
   connect(m_recent, TQ_SIGNAL(activated()), openAction, TQ_SLOT( activate()));
   m_recent->setWhatsThis(i18n("<b>Click</b> to open a file or <b>Click and hold</b> to select a recent file"));
-  m_printAction = KStdAction::print(m_manager->activePart(), TQ_SLOT(slotPrint()), actionCollection());
+  m_printAction = KStdAction::print(this, TQ_SLOT(slotPrint()), actionCollection());
   m_printAction->setEnabled(false);
   KStdAction::quit(this, TQ_SLOT(slotQuit()), actionCollection());
 
@@ -299,6 +299,20 @@ void Shell::applyNewToolbarConfig()
   applyMainWindowSettings(TDEGlobal::config(), "MainWindow");
 }
 
+void Shell::slotSetPrintActionEnabled(bool enabled)
+{
+    const KParts::Part *part = static_cast<const KParts::Part*>(TQObject::sender());
+    if (part == m_manager->activePart())
+    {
+        m_printAction->setEnabled(enabled);
+    }
+}
+
+void Shell::slotPrint()
+{
+    TQTimer::singleShot(0, m_manager->activePart(), TQ_SLOT(slotPrint()));
+}
+
 void Shell::slotQuit()
 {
     kapp->closeAllWindows();
@@ -364,7 +378,7 @@ KParts::ReadOnlyPart* Shell::createTab()
   connect(this, TQ_SIGNAL(saveDocumentRestoreInfo(TDEConfig*)),
           part, TQ_SLOT(saveDocumentRestoreInfo(TDEConfig*)));
   connect(part, TQ_SIGNAL(enablePrintAction(bool)),
-          m_printAction, TQ_SLOT(setEnabled(bool)));
+          this, TQ_SLOT(slotSetPrintActionEnabled(bool)));
   connect(part, TQ_SIGNAL(setWindowCaption(const TQString&)),
           this, TQ_SLOT(slotSetTabCaption(const TQString&)));
 

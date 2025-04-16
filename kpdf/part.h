@@ -83,6 +83,7 @@ public:
 	KURL currentDocument();
 
 	bool isKPDFShell();
+	bool printable();
 
 signals:
 	void enablePrintAction(bool enable);
@@ -127,6 +128,7 @@ protected slots:
 	void saveSplitterSize();
 	void setMimeTypes(TDEIO::Job *job);
 	void readMimeType(TDEIO::Job *job, const TQString &mime);
+	void setPrintable(bool printable);
 	void emitWindowCaption();
 
 public slots:
@@ -194,6 +196,7 @@ private:
 	TDEToggleAction* m_showFullScreenAction;
 	bool m_actionsSearched;
 	bool m_searchStarted;
+	bool m_printable;
 	BrowserExtension *m_bExtension;
 };
 
