@@ -497,7 +497,7 @@ void kpToolResizeScaleCommand::unexecute ()
 
 // private static
 kpToolResizeScaleCommand::Type kpToolResizeScaleDialog::s_lastType =
-    kpToolResizeScaleCommand::Resize;
+    kpToolResizeScaleCommand::SmoothScale;
 
 // private static
 double kpToolResizeScaleDialog::s_lastPercentWidth = 100,
@@ -662,40 +662,28 @@ void kpToolResizeScaleDialog::createOperationGroupBox (TQWidget *baseWidget)
               "</ul>"
               "</qt>"));
 
-    // TODO: ALT+R doesn't select the button.
-    m_resizeButton = new TQToolButton (m_operationGroupBox);
-    toolButtonSetLook (m_resizeButton,
-                       TQString::fromLatin1 ("resize"),
-                       i18n ("&Resize"));
+    m_smoothScaleButton = new TQToolButton (m_operationGroupBox);
+    toolButtonSetLook (m_smoothScaleButton,
+                       TQString::fromLatin1 ("smooth_scale"),
+                       i18n ("S&mooth Scale"));
 
     m_scaleButton = new TQToolButton (m_operationGroupBox);
     toolButtonSetLook (m_scaleButton,
                        TQString::fromLatin1 ("scale"),
                        i18n ("&Scale"));
 
-    m_smoothScaleButton = new TQToolButton (m_operationGroupBox);
-    toolButtonSetLook (m_smoothScaleButton,
-                       TQString::fromLatin1 ("smooth_scale"),
-                       i18n ("S&mooth Scale"));
-
-
-    //m_resizeLabel = new TQLabel (i18n ("&Resize"), m_operationGroupBox);
-    //m_scaleLabel = new TQLabel (i18n ("&Scale"), m_operationGroupBox);
-    //m_smoothScaleLabel = new TQLabel (i18n ("S&mooth scale"), m_operationGroupBox);
-
-
-    //m_resizeLabel->setAlignment (m_resizeLabel->alignment () | TQt::ShowPrefix);
-    //m_scaleLabel->setAlignment (m_scaleLabel->alignment () | TQt::ShowPrefix);
-    //m_smoothScaleLabel->setAlignment (m_smoothScaleLabel->alignment () | TQt::ShowPrefix);
-
+    m_resizeButton = new TQToolButton (m_operationGroupBox);
+    toolButtonSetLook (m_resizeButton,
+                       TQString::fromLatin1 ("resize"),
+                       i18n ("&Resize"));
 
     TQButtonGroup *resizeScaleButtonGroup = new TQButtonGroup (baseWidget);
     resizeScaleButtonGroup->setExclusive (true);
     resizeScaleButtonGroup->hide ();
 
-    resizeScaleButtonGroup->insert (m_resizeButton);
-    resizeScaleButtonGroup->insert (m_scaleButton);
     resizeScaleButtonGroup->insert (m_smoothScaleButton);
+    resizeScaleButtonGroup->insert (m_scaleButton);
+    resizeScaleButtonGroup->insert (m_resizeButton);
 
 
     TQGridLayout *operationLayout = new TQGridLayout (m_operationGroupBox,
@@ -703,14 +691,9 @@ void kpToolResizeScaleDialog::createOperationGroupBox (TQWidget *baseWidget)
                                                     marginHint () * 2/*don't overlap groupbox title*/,
                                                     spacingHint ());
 
-    operationLayout->addWidget (m_resizeButton, 0, 0, TQt::AlignCenter);
-    //operationLayout->addWidget (m_resizeLabel, 1, 0, TQt::AlignCenter);
-
+    operationLayout->addWidget (m_smoothScaleButton, 0, 0, TQt::AlignCenter);
     operationLayout->addWidget (m_scaleButton, 0, 1, TQt::AlignCenter);
-    //operationLayout->addWidget (m_scaleLabel, 1, 1, TQt::AlignCenter);
-
-    operationLayout->addWidget (m_smoothScaleButton, 0, 2, TQt::AlignCenter);
-    //operationLayout->addWidget (m_smoothScaleLabel, 1, 2, TQt::AlignCenter);
+    operationLayout->addWidget (m_resizeButton, 0, 2, TQt::AlignCenter);
 
 
     connect (m_resizeButton, TQ_SIGNAL (toggled (bool)),
