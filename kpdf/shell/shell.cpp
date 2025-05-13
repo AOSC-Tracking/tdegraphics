@@ -105,7 +105,6 @@ void Shell::init()
 
   setupActions();
   setupGUI(Keys | Save);
-  m_showToolBarAction = static_cast<TDEToggleAction*>(toolBarMenuAction());
 
   readSettings();
   if (!TDEGlobal::config()->hasGroup("MainWindow"))
@@ -384,6 +383,10 @@ KParts::ReadOnlyPart* Shell::createTab()
 
   part->widget()->show();
   m_manager->addPart(part, true);
+  if (!m_showToolBarAction)
+  {
+    m_showToolBarAction = static_cast<TDEToggleAction*>(toolBarMenuAction());
+  }
   return part;
 }
 
