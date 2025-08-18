@@ -17,7 +17,7 @@
 
 
 #include <tdelocale.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdeaboutdata.h>
 
 #include "pmfactory.h"

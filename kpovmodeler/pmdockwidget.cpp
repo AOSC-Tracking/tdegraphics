@@ -53,7 +53,7 @@
 #include <tdeaccel.h>
 #include <tdeparts/plugin.h>
 #include <kstatusbar.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <khelpmenu.h>
 #include <kstandarddirs.h>
 #include <tqapplication.h>

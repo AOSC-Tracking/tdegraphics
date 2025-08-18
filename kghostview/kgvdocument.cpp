@@ -25,7 +25,7 @@
 #include <tdeconfig.h>
 #include <tdefiledialog.h>
 #include <kfilterdev.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdemessagebox.h>
 #include <kmimetype.h>
 #include <kprinter.h>

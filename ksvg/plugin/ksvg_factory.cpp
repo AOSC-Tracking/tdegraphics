@@ -19,7 +19,7 @@
 */
 
 #include <tdeaboutdata.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdelocale.h>
 #include <tdeglobal.h>
 #include <kstandarddirs.h>

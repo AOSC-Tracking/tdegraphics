@@ -25,7 +25,7 @@
 #include <kdebug.h>
 #include <tdeglobal.h>
 #include <kiconloader.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdelocale.h>
 #include <tdemessagebox.h>
 #include <kprocess.h>

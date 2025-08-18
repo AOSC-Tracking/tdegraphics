@@ -24,7 +24,7 @@
 #include <tqobjectlist.h>
 
 #include <tdeaction.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdelocale.h>
 #include <kgenericfactory.h>
 #include <kscan.h>

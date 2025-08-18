@@ -33,7 +33,7 @@
 #include <tqtextstream.h>
 
 #include <kdebug.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
 #include <ksimpleconfig.h>

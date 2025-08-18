@@ -20,7 +20,7 @@
 #include <kfilterbase.h>
 #include <kfilterdev.h>
 #include <tdeglobal.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdeio/job.h>
 #include <tdelocale.h>
 #include <kiconloader.h>

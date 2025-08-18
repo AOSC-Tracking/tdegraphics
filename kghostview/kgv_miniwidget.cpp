@@ -23,7 +23,7 @@
 #include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdeversion.h>
 #include <tdelocale.h>
 #include <tdemessagebox.h>

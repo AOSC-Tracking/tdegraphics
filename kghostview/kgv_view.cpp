@@ -30,7 +30,7 @@
 #include <kdirwatch.h>
 #include <tdeglobalsettings.h>
 #include <kiconloader.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdelocale.h>
 #include <tdepopupmenu.h>
 #include <kstdaction.h>

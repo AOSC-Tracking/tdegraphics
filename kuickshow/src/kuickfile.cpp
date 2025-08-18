@@ -2,7 +2,7 @@
 
 #include <kdebug.h>
 #include <tdeversion.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdelocale.h>
 #include <kprogress.h>
 #include <tdeio/job.h>

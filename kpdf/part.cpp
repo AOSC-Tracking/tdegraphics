@@ -37,7 +37,7 @@
 #include <tdeapplication.h>
 #include <tdeaction.h>
 #include <kdirwatch.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <kprinter.h>
 #include <tdeprint/kprintdialogpage.h>
 #include <kstdaction.h>
