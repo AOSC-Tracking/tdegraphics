@@ -34,7 +34,7 @@
 #include <tqstring.h>
 #include <tdeconfig.h>
 #include <tdeglobal.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <kurl.h>
 
 #include <kmrml_config.h>

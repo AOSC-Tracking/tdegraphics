@@ -36,7 +36,7 @@
 #include <tdeglobal.h>
 #include <tdelocale.h>
 #include <kiconloader.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdeio/job.h>
 #include <tdeio/jobclasses.h>
 #include <tdemessagebox.h>

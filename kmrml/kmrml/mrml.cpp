@@ -28,7 +28,7 @@
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <tdeglobal.h>
-#include <kinstance.h>
+#include <tdeinstance.h>
 #include <tdelocale.h>
 
 #include <mrml_utils.h>
