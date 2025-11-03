@@ -57,7 +57,14 @@ TQString UnicodeParsedString(CONST_064 GooString *s1)
         isUnicode = gFalse;
         i = 0;
     }
-    while ( i < s1->getLength() )
+    while
+    (
+#       if (POPPLER_VERSION_C >= 25010000)
+        i < s1->size()
+#       else
+        i < s1->getLength()
+#       endif
+    )
     {
         if ( isUnicode )
         {
@@ -129,23 +136,31 @@ void DocumentData::addTocChildren( TQDomDocument * docSyn, TQDomNode * parent, O
                 // get the destination for the page now, but it's VERY time consuming,
                 // so better storing the reference and provide the viewport on demand
                 CONST_064 GooString *s = g->getNamedDest();
-                TQChar *charArray = new TQChar[s->getLength()];
-                for (int i = 0; i < s->getLength(); ++i) charArray[i] = TQChar(s->GOO_GET_CSTR()[i]);
-                    TQString aux(charArray, s->getLength());
-                    item.setAttribute( "DestinationName", aux );
-                    delete[] charArray;
-                }
-                else if ( destination && destination->isOk() )
+#               if (POPPLER_VERSION_C >= 25010000)
+                int sLen = s->size();
+#               else
+                int sLen = s->getLength();
+#               endif
+                TQChar *charArray = new TQChar[sLen];
+                for (int i = 0; i < sLen; ++i)
                 {
-                    LinkDestinationData ldd(destination, NULL, this);
-                    item.setAttribute( "Destination", LinkDestination(ldd).toString() );
+                    charArray[i] = TQChar(s->GOO_GET_CSTR()[i]);
                 }
-                if ( a->getKind() == actionGoToR )
-                {
-                    CONST_064 LinkGoToR * g2 = static_cast< CONST_064 LinkGoToR * >( a );
-                    item.setAttribute( "ExternalFileName", g2->getFileName()->GOO_GET_CSTR() );
-                }
+                TQString aux(charArray, sLen);
+                item.setAttribute( "DestinationName", aux );
+                delete[] charArray;
             }
+            else if ( destination && destination->isOk() )
+            {
+                LinkDestinationData ldd(destination, NULL, this);
+                item.setAttribute( "Destination", LinkDestination(ldd).toString() );
+            }
+            if ( a->getKind() == actionGoToR )
+            {
+                CONST_064 LinkGoToR * g2 = static_cast< CONST_064 LinkGoToR * >( a );
+                item.setAttribute( "ExternalFileName", g2->getFileName()->GOO_GET_CSTR() );
+            }
+        }
 
         // 3. recursively descend over children
         outlineItem->open();

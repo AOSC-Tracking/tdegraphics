@@ -88,7 +88,10 @@ bool Document::unlock(const TQCString &password)
 {
   if (data->locked) {
     /* racier then it needs to be */
-#   if (POPPLER_VERSION_C >= 22003000)
+#   if (POPPLER_VERSION_C >= 25010000)
+    DocumentData *doc2 = new DocumentData(data->doc.getFileName()->copy(),
+                                          GooString(password.data()));
+#   elif (POPPLER_VERSION_C >= 22003000)
     DocumentData *doc2 = new DocumentData(std::make_unique<GooString>(data->doc.getFileName()),
                                           GooString(password.data()));
 #   else
@@ -225,7 +228,14 @@ TQString Document::getInfo( const TQString & type ) const
       isUnicode = gFalse;
       i = 0;
     }
-    while ( i < obj.getString()->getLength() )
+    while
+    (
+#       if (POPPLER_VERSION_C >= 25010000)
+        i < obj.getString()->size()
+#       else
+        i < obj.getString()->getLength()
+#       endif
+    )
     {
       if ( isUnicode )
       {
