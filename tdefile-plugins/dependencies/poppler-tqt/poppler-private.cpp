@@ -25,6 +25,8 @@
 
 #include <tqstring.h>
 
+#include <goo/gmem.h>
+
 #include <Outline.h>
 #include <Link.h>
 

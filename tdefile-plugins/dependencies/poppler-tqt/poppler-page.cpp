@@ -144,7 +144,11 @@ TQString Page::getText(const Rectangle &r) const
   if (r.isNull())
   {
     rect = p->getCropBox();
+#if (POPPLER_VERSION_C >= 26001000)
+    s = output_dev->getText(PDFRectangle(rect->x1, rect->y1, rect->x2, rect->y2));
+#else
     s = output_dev->getText(rect->x1, rect->y1, rect->x2, rect->y2);
+#endif
   }
   else
   {
@@ -152,7 +156,11 @@ TQString Page::getText(const Rectangle &r) const
     height = p->getCropHeight();
     y1 = height - r.m_y2;
     y2 = height - r.m_y1;
+#if (POPPLER_VERSION_C >= 26001000)
+    s = output_dev->getText(PDFRectangle(r.m_x1, y1, r.m_x2, y2));
+#else
     s = output_dev->getText(r.m_x1, y1, r.m_x2, y2);
+#endif
   }
 
 # if (POPPLER_VERSION_C >= 25001000)
@@ -200,9 +208,13 @@ TQValueList<TextBox*> Page::textList() const
   for (int i = 0; i < word_list->getLength(); i++) {
     TextWord *word = word_list->get(i);
 # endif
+# if (POPPLER_VERSION_C >= 26001000)
+    TQString string = TQString::fromUtf8(word->getText()->c_str());
+# else
     GooString *word_str = word->getText();
     TQString string = TQString::fromUtf8(word_str->GOO_GET_CSTR());
     delete word_str;
+# endif
     double xMin, yMin, xMax, yMax;
     word->getBBox(&xMin, &yMin, &xMax, &yMax);
 
