@@ -194,8 +194,12 @@ TQValueList<TextBox*> Page::textList() const
     return output_list;
   }
 
+# if (POPPLER_VERSION_C >= 25012000)
+  for (TextWord *word: word_list->getWords()) {
+# else
   for (int i = 0; i < word_list->getLength(); i++) {
     TextWord *word = word_list->get(i);
+# endif
     GooString *word_str = word->getText();
     TQString string = TQString::fromUtf8(word_str->GOO_GET_CSTR());
     delete word_str;
