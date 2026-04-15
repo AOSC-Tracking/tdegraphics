@@ -204,7 +204,6 @@ TQString Document::getInfo( const TQString & type ) const
 
   TQString result;
   Object obj;
-  CONST_064 GooString *s1;
   GBool isUnicode;
   Unicode u;
   int i;
@@ -217,8 +216,13 @@ TQString Document::getInfo( const TQString & type ) const
 #endif
   if (!obj.isNull() && obj.isString())
   {
-    s1 = obj.getString();
-    if ( ( s1->getChar(0) & 0xff ) == 0xfe && ( s1->getChar(1) & 0xff ) == 0xff )
+#   if (POPPLER_VERSION_C >= 26004000)
+#   define GETCHAR(s,n) (s)[n]
+#   else
+#   define GETCHAR(s,n) (s)->getChar(n)
+#   endif
+    auto s1 = obj.getString();
+    if ( ( GETCHAR(s1, 0) & 0xff ) == 0xfe && ( GETCHAR(s1, 1) & 0xff ) == 0xff )
     {
       isUnicode = gTrue;
       i = 2;
@@ -230,7 +234,9 @@ TQString Document::getInfo( const TQString & type ) const
     }
     while
     (
-#       if (POPPLER_VERSION_C >= 25010000)
+#       if (POPPLER_VERSION_C >= 26004000)
+        i < obj.getString().size()
+#       elif (POPPLER_VERSION_C >= 25010000)
         i < obj.getString()->size()
 #       else
         i < obj.getString()->getLength()
@@ -239,12 +245,12 @@ TQString Document::getInfo( const TQString & type ) const
     {
       if ( isUnicode )
       {
-	u = ( ( s1->getChar(i) & 0xff ) << 8 ) | ( s1->getChar(i+1) & 0xff );
+	u = ( ( GETCHAR(s1, i) & 0xff ) << 8 ) | ( GETCHAR(s1, i+1) & 0xff );
 	i += 2;
       }
       else
       {
-	u = s1->getChar(i) & 0xff;
+	u = GETCHAR(s1, i) & 0xff;
 	++i;
       }
       result += unicodeToTQString( &u, 1 );
@@ -254,6 +260,7 @@ TQString Document::getInfo( const TQString & type ) const
     info.free();
 #   endif
     return result;
+#   undef GETCHAR
   }
 # if (POPPLER_VERSION_C < 58000)
   obj.free();
@@ -295,7 +302,9 @@ TQDateTime Document::getDate( const TQString & type ) const
 #endif
   if (!obj.isNull() && obj.isString())
   {
-#   if (POPPLER_VERSION_C >= 21008000)
+#   if (POPPLER_VERSION_C >= 26004000)
+    const std::string &s = obj.getString();
+#   elif (POPPLER_VERSION_C >= 21008000)
     const GooString *s = obj.getString();
 #   else
     TQString tqs = UnicodeParsedString(obj.getString());
