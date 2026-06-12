@@ -30,6 +30,10 @@
 #include <PDFDoc.h>
 #include <FontInfo.h>
 
+#if (POPPLER_VERSION_C >= 26006000)
+#include <CharTypes.h>
+#endif
+
 #if defined(HAVE_SPLASH)
 # undef HAVE_SPLASH
 #endif

@@ -129,7 +129,11 @@ TQString Page::getText(const Rectangle &r) const
 # else
   GooString *s;
 # endif
+# if (POPPLER_VERSION_C >= 26006000)
+  PDFRectangle rect;
+# else
   const PDFRectangle *rect;
+# endif
   TQString result;
   ::Page *p;
 
@@ -144,7 +148,9 @@ TQString Page::getText(const Rectangle &r) const
   if (r.isNull())
   {
     rect = p->getCropBox();
-#if (POPPLER_VERSION_C >= 26001000)
+#if (POPPLER_VERSION_C >= 26006000)
+    s = output_dev->getText(PDFRectangle(rect.x1, rect.y1, rect.x2, rect.y2));
+#elif (POPPLER_VERSION_C >= 26001000)
     s = output_dev->getText(PDFRectangle(rect->x1, rect->y1, rect->x2, rect->y2));
 #else
     s = output_dev->getText(rect->x1, rect->y1, rect->x2, rect->y2);
